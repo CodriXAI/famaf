@@ -1,0 +1,8 @@
+Const x, y : Int;
+Var q, r : Int;
+{P : x ≥ 0 ∧ y > 0} (precondicion)
+S
+{Q : x = q ∗ y + r ∧ 0 ≤ r ∧ r < y} (postcondicion)
+
+
+

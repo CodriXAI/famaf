@@ -1,0 +1,77 @@
+Ejercicio 1:
+Dadas las siguientes sentencias en C:
+a - f = g + h + i + j;
+b - f = g + (h + 5);
+c - f = (g + h) + (g + h);
+1.1 - Escribir la secuencia minima de codigo assembler LEGv8 asumiendo que f, g, h, i y
+j se asignan en los registros X0, X1, X2, X3 y X4 respectivamente.
+1.2 - Dar el valor de cada variable en cada instruccion assembler si f, g, h, i y j se
+inicializan con valores de 1, 2, 3, 4, 5, en base 10, respectivamente.
+
+Ejercicio 1b - Practico 6:
+
+f = g + (h+5)
+Para empezar tengo que arrancar por los parentesis:
+Si es con variables, van en registro, si es una constante es un valor literal (inmediato), esta "hardcodeado"
+Puedo sumar h+5?
+Si, con ADDI de la Greencard (Tenemos un 5 que es un inmediato y una variable), los inmediatos NO pueden ser negativos
+(h+5) = ADDI x9, x2, #5
+- Syntaxis: #5 es que el 5 es un literal
+Porque x9? Porq es una convencion que tiene un estandar para usar los registros en el procesador, todos los compiladores tienen desde x9 a x15 como "registros temporales"
+Ver Greencard en "Call Convetion"
+
+Luego f = g + (h+5)
+ADD x0, x1, x9
+
+- Aclaracion: No importa el orden del segundo y tercer argumento, pues la suma es conmutativa, el primero si importa el orden - 
+
+Si quiero sumar 0:
+ADD x0, x1, xzr => Donde lo que ocurre es que directamente el valor de x1 es corrido a x0
+Si quiero tener numeros negativos:
+SUB Xzr, Xzr, X1 => Quedara el valor de -X1 
+Generalmente el Xzr se utiliza para no guardar una operacion pero quiero hacerla igualmente
+
+Si queres que un registro sea 8 por ejemplo:
+ADDI X0, Xzr, #8
+
+Ejercicio 2:
+Luego, dadas las siguientes sentencias en assembler LEGv8:
+a - ADD X0, X1, X2
+b - ADDI X0, X0, #1
+    ADD X0, X1, X2
+2.1 - Escribir la secuencia minima de codigo C asumiendo que los registros X0, X1 y X2
+contienen las variables f, g y h respectivamente.
+2.2 -  Dar el valor de cada variable en cada instruccion assembler si f, g y h se inicializan
+con valores de 1, 2, 3, en base 10, respectivamente.
+
+2.1 a - f = g + h;
+
+2.1 b - f++; 
+        f = g + h;
+
+Ejercicio 3:
+Dadas las siguientes sentencias en C:
+a : f = -g - f;
+b: f = g + (-f - 5);
+3.1 -  Escribir la secuencia minima de codigo assembler LEGv8 asumiendo que f y g se
+asignan en los registros X0 y X1 respectivamente.
+3.2 - Dar el valor de cada variable en cada instruccion assembler si f y g se inicializan con
+valores de 4 y 5, en base 10, respectivamente.
+
+3.1 b: f = g + (-f - 5);
+Dividir el problema en varias partes 
+
+g - (f+5)
+ADDI X0, X0, #5
+
+f = g - (f+5)
+
+SUB X0, X1, X9
+
+Resultado:
+ADDI X0, X0, #5
+SUB X0, X1, X9
+
+
+CON MEMORIA:
+

@@ -1,0 +1,9 @@
+//TAIL
+//Apunto con a_node a my_list
+a_node := my_list
+//Paso al siguiente elemento con my_list apuntando al siguiente
+my_list := my_list->next
+//Libero el puntero que apuntaba al primer elemento (libero memoria y pierdo el primer elemento)
+free(a_node)
+//No hago apuntar a nada a a_node
+a_node := null

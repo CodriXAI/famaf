@@ -1,0 +1,23 @@
+Instrucciones que no estan en GreenCard pero estan incluidas en ARMv8:
+
+CMP : Hace un SUB y afecta a las banderas, no almacena en registros //No esta presente en la GreenCard, se puede utilizar en el practico
+Ejemplo:
+CMP x1, x3
+b.eq .....
+
+CSET : Conditional Set, dependiendo la etiqueta que se coloque, y la condicion, se va a fijar en las flags y si eran iguales, en el registro dado va a colocar un 1
+
+Ejemplo:
+CMP x1, x0 // Compara si x1 == x0
+CSET w0, eq //Si x1 == x0 => w0 = 1
+AND w1, w0, 255 // (w1 = w0) and 0xff
+
+
+
+Para el compilador gcc tenemos una opcion llamada -o0 
+/*
+    Nivel de compilacion, no optimiza absolutamente nada.
+    Y si vamos aumentando el nivel podemos hacer que el codigo quede con menos sentencias
+*/
+
+

@@ -1,0 +1,14 @@
+a. Lo que tienen en comun es que le asignan el mismo valor a las variables
+x,y, tanto en precondicion como en el programa en si.
+Sus diferencias se basan en el orden de ejecucion de sus asignaciones:
+'b' y 'c' estan invertidas, lo que da lugar a diferentes valores. 
+'d' utiliza la asignacion multiple.
+
+b. No es posible, puesto que si lo tomamos con asignacion multiple, las variables
+x e y, tendran valores diferentes.
+
+c. No entraria en el condicional if asi que lo ignoraria
+
+d. Los valores que puede tomar i son desde el 0 hasta el menos infinito, el problema
+radica en que se forma un loop infinito de forma descendente, por lo que seria imposible
+abarcarlos a todos salvo que se refiera a todos los elementos enteros menores a 0. hasta el menos infinito

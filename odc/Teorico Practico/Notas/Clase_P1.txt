@@ -1,0 +1,22 @@
+Tips/Notas:
+    * Números con más peso: Numeros que tienen un alto nivel de significancia.
+    * Dato: Aveces un numero al transformarlo en decimal a binario puede ser periodico.
+    * Registro: Es una memoria del procesador que puede almacenar una cierta cantidad de bits, por ejemplo si le decimos un registro de 8 bits,
+    es el tamaño máximo y disponible para poder representar cierto número.
+    * Cada vez que saco un bit, divide a la mitad la capacitación
+    * Cada vez que agrego un bit, se duplica la capacitacion
+    * Con respecto a los negativos, se utiliza el complemento a 2 y el proceso de las filminas. Solo utilizado para representar los numeros SIGNADOS Y NEGATIVOS.
+    * SIGNADO Y NEGATIVO no son la misma cosa, solo identifica el número, y el primer dígito nos dirá el signo, 0 es + y 1 es -
+        Ejemplo: 0011 = 3 y nos dicen que es signado. Luego el primer 0 me dice que es positivo
+        Si quiero ver 1101 y es signado, sabemos que por el 1 es negativo, luego le saco el complemento a 2 y le sumo 1
+        1101 -> 0010 + 1 = 0011 => Entonces el número original era el -3
+        
+En página 9:
+        00101101 = 45
+        11010010
+    +
+            1
+    -------------
+        11010011 = -45
+
+

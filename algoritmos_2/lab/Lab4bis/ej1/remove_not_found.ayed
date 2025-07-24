@@ -1,0 +1,31 @@
+// REMOVE FIRST OCCURRENCE OF NODE WITH A GIVEN DATA
+
+//Declaro dos variables, una que tendrá el valor a remover y el otro un puntero auxiliar
+var to_remove: int
+var aux: pointer of node
+
+//El dato a remover será el 77, el puntero a_node apunta a my_list
+to_remove := 77
+a_node := my_list
+
+// Travel the list until a node with matching data is
+// found.
+while (a_node != null) && (a_node->data != to_remove) do
+    // LOOK, MA! I'm doing Lazy Evaluation ^^^
+    aux := a_node // prev node stored
+    a_node := a_node->next
+od
+//Va buscando si encuentra el dato a remover
+
+// Two options. A) a_node needs to be removed, or
+// B) it's a null pointer and data to remove was
+// not found
+if (a_node != null) then
+    aux->next := a_node->next
+    free(a_node)
+    a_node := null
+fi
+skip  // just to draw that program ended
+
+//EJEMPLO: En este ejemplo no hará nada porque no va a encontrar el elemento 77
+// 40 -> 30 -> 20 -> 10 -> 0, no lo encuentra entonces la lista queda como está

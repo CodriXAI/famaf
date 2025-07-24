@@ -1,0 +1,19 @@
+Boxplots:
+
+Mediana y bigotes iguales: Simétrico
+
+Mediana limite inferior, Bigote superior mas grande:  sesgados a la derecha
+
+Mediana limite superior, Bigote inferior mas grande:  sesgados a la izquierda
+
+Mediana limite superior, Bigote superior mas grande: sesgados a la derecha
+
+Mediana limite inferior, Bigote Inferior mas grande: sesgados a la izquierda
+
+Mediana límite superior, Bigotes simétricos: Sesgado Levemente a la izquierda
+
+Mediana límite inferior, Bigotes simétricos: Sesgado Levemente a la derecha
+
+Mediana centrada, Bigote inferior mas largo: Sesgado Levemente a la izquierda
+
+Mediana centrada, Bigote superior mas largo: Sesgado Levemente a la derecha

@@ -1,0 +1,40 @@
+a := [7,1,10,3,4,9,5]
+
+quick_sort_rec (a,1,7)
+    partition (a,1,7,ppiv)
+        -> [4,1,5,3,7,9,10]
+        -> ppiv = 5 
+    
+    quick_sort_rec (a,1,4)
+        partition (a,1,4,ppiv)
+            -> [3,1,4,5]
+            -> ppiv = 3 
+
+        quick_sort_rec (a,1,2)
+            partition(a,1,2,ppiv)
+                -> [1,3]
+                -> ppiv = 2 
+                
+            quick_sort_rec (a,1,1) -> No se cumple la guarda rgt > lft
+
+            quick_sort_rec (a,3,2) -> No se cumple la guarda rgt > lft
+
+        quick_sort_rec (a,4,4) -> No se cumple la guarda rgt > lft
+    
+    ->[1,3,4,5,7]
+
+    quick_sort_rec (a,6,7)
+        partition (a,6,7,ppiv)
+            -> [9,10]
+            -> ppiv = 6
+
+        quick_sort_rec (a,6,6) -> No se cumple la guarda rgt > lft
+
+        quick_sort_rec (a,7,7) -> No se cumple la guarda rgt > lft
+    
+    -> [9,10]
+
+-> [1,3,4,5,7,9,10] -> El arreglo está ordenado
+
+        
+    
