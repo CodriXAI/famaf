@@ -1,0 +1,39 @@
+Tips:
+    Si estamos utilizando números unsigned, el carry nos dice que está mal el resultado si hicimos las cosas bien
+    En cambio si utilizamos numeros signed, el carry no me interesa para verificar, en este caso lo que me interesa es el overflow
+    Esto implica que Carry no siempre significa overflow, sino que overflow es un tipo de carry
+    Siempre que sumemos dos números a lo sumo tendremos un bit extra de carry, en el ejemplo de 8 bits se podrá pasar a lo sumo de 9 bits
+    El overflow pasa cuando tenemos solo números signados (para ver los distintos casos de overflow)
+
+¿Qué ocurre tanto en el overflow como carry?
+    A modo de "memoria" o "registro" lo que hace es una vez que llega la capacidad máxima del microprocesador, vuelve a empezar lo cuál es incorrecto y significa que
+    lo que quisimos representar en un cierto número de bits, no se puede, y es porque se ha pasado.
+    Supongamos que el registro va de -128 a 127, si da 135 va a llegar al 127 y luego dará una vuelta empezando desde el -128 de nuevo
+
+Punto fijo vs Punto flotante
+    Punto Fijo: 
+        Se asume que la coma está en cierta posición y a medida que se hacen las operaciones
+        da igual lo que se haga, la coma debe permaneceer en la misma posición
+        Desventaja: Está limitado a la cantidad de bits y precisión que yo pueda representar el número
+    Punto Flotante: 
+        La coma puede estar en cualquier parte del registro, sin embargo se debe guardar la posición de la misma
+        Utilizando el estándar IEEE754 (Todos los procesadores utilizan dicho estandar) que nos ayuda utilizando una notación científica (Producto de un número y 10 elevado a la -algo)
+        Ejemplo de notación cientifica en base 2 (binario): 101101,10 * 2^0, de aquí necesito almacenar:
+            * El signo, el número y el exponente (se asume que está en base 2, no es necesario almacenar eso)
+        Pasos para llevarlo a punto Flotante:
+            Normalizar: 
+                Siempre llevar la coma al primer 1 principal de forma que quede algo como 1.*******, importante que al mover la coma movamos el exponente también
+                Si me muevo a la izq el exponente es positivo, si me muevo a la der el exponente es negativo
+            Almacenamiento: 
+                Una vez normalizado, almacenamos el signo, la parte del número SIN contar el 1 (es trivial) y el exponente modificado
+        Importante recalcar que 0's a la izquierda en la parte entera y 0's a la derecha en la parte fraccionaria se pueden omitir y no almacenar
+        Utilizaremos la variación de "precisión simple" que por default tiene un registro de 32 bits: 1 bit para el signo, 8 bits para el exponente y 23 para la parte fraccionaria, en ese orden
+        El Bias (Sesgo) es parte del estandar cuya función es poder tener valores positivos y negativos para no dificultar el proceso de conversión
+        Dicho Bias es la mitad del registro total que podría almacenar sin contar exponentes negativos, por eso el Bias por default de este Estandar es el 127 pues es aproximadamente la mitad del rango de 8 bits
+        lo cuál permite representar núnmeros negativos y positivos en igual cantidades.
+        (Pasos para conversión de decimal a binario con punto flotante y viceversa en la 1er filminas de clase práctica)
+        
+
+
+
+

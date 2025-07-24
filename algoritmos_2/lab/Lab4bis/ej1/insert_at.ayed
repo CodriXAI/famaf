@@ -1,0 +1,71 @@
+// INSERTS NEW NODE AT THE GIVEN POSITION
+// Notes:
+//  - Inserting at negative position does nothing
+//  - Inserting at position 0 is equal to prepend
+//  - If list has length N
+//      - inserting at N is equal to append
+//      - inserting at N+1 does nothing
+
+//Inicializa 4 variables, nueva data en entero, posicion donde irá es entero, prev es un puntero al anterior a esa ubicacion
+//New es un puntero donde apuntará al nuevo elemento (tendremos la referencia)
+var new_data: int
+var position: int
+var prev: pointer of node
+var new: pointer of node
+
+//El nuevo nodo a meter tendrá como dato el 77
+new_data := 77
+//Tendremos que pasarle la posición (dada por el position) en getenv
+position := getenv("POSITION":int)
+
+//A i la inicializo en 0
+i := 0
+//Apuntamos con a_node a my_list
+a_node := my_list
+
+// Travel the list until a the #position-node is found
+// found.
+
+//Voy buscando la posición a donde tengo que almacenar el nuevo nodo:
+//Intercalando entre a_node que avanza y prev va guardando la posición para evitar perder las direcciones:
+prev := null
+while (a_node != null) && (i < position) do
+    prev := a_node // prev node stored
+    a_node := a_node->next
+    i := i + 1
+od
+
+//Si llegamos a la posición, entonces lo que tenemos que hacer es:
+//  Reservar memoria para el elemento a agregar
+//  Al nuevo nodo le asigno la nueva data (77 en este caso)
+//  Y conecto el puntero del nuevo nodo al siguiente
+if i == position then
+    alloc(new)
+    new->data := new_data
+    new->next := a_node
+    //Esto significa que no sería el primer elemento
+    if prev != null then
+        prev->next := new
+    else // was the first elem
+        my_list := new
+    fi
+fi
+//Todo lo que no esté utilizando lo coloco en Null para evitar direccionamientos erróneos
+a_node := null
+prev := null
+new := null
+
+//CONCLUSION: Inserta en la posición N-esima (dada por la terminal con export) el elemento que hayamos asignado
+//Por ejemplo en la lista:
+// 40 -> 30 -> 20 -> 10 -> 0
+//Y hago un export con la posición 3 el elemento 77 eso implicaria que la lista quedaria en plan:
+// 40 -> 30 -> 77 -> 10 -> 0 (ver video)
+//EN EL VIDEO QUEDARIA TAL QUE ASI:
+// 40 apunta a 30
+// 30 apunta a 77
+// 20 apunta a 10
+// 10 apunta a 0
+// 0  NULL
+// 77 apunta a 20
+//
+//

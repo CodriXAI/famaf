@@ -1,0 +1,13 @@
+a. 
+Const N: Int;
+do N >= 0 ->
+    N := N * N-1;
+od
+
+b.
+Const N: Int;
+var n : Int;
+n := 1;
+do n <= N ->
+    n := n * n+1;
+od

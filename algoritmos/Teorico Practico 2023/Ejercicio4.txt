@@ -1,0 +1,40 @@
+a. 
+¿Como modificaria el programa del item 3a para que calcule el promedio de los valores en el arreglo
+A?
+
+Const A : array(0,4) of Int;
+Var i,s : Int;
+Var prom : Float;
+[a0 : (i -> 3, s -> 5, A -> [2,10,10,-1])]
+i,s := 0,0;
+[a0']
+do i < 4 ->
+    [a1*0,...,a1*3]
+    s,i := s + A.i, i + 1
+    [a2*0,...,a2*3]
+od
+[a3]
+prom := s / i
+
+b.
+¿Como modificaria el programa del item 3b para que solo tenga en cuenta las posiciones pares del
+arreglo A?
+
+Const A: array(0,4) of Int;
+Var i,c : Int;
+[a0: (i -> 3, c -> 12, A -> [12,-9,10,-1])]
+i,c = 0,0;
+[a0']
+do i<4 ->
+    [a1*0,...,a1*3]
+    if A.i % 2 == 0 ->
+        c:=c+1
+    ■ A.i % 2 != 0 ->
+        skip
+    fi
+    [a2*0,...,a2*3]
+    i := i + 1
+    [a3*0,...,a3*3]
+od
+[a4]
+

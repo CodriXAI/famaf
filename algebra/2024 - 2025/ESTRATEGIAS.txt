@@ -1,0 +1,22 @@
+Temas tomados en primer parcial:
+
+Rectas y Planos (Con ecuaciones implícitas)
+Y operaciones con los mismos
+
+Resolución de sistemas de ecuaciones lineales
+
+Operación con matrices
+
+Determinante
+
+Propiedades
+
+Autovalores, Autovectores y Autoespacios
+
+Temas tomados en el segundo parcial:
+
+Espacios Vectoriales (Demostraciones, propiedades)
+Bases
+T.L's (Nucleos, e imagen)
+
+Inscripción Explícita e implícita las 

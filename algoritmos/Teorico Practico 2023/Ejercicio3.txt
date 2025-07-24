@@ -1,0 +1,68 @@
+//EJERCICIO A:
+Const A : array(0,4) of Int;
+Var i,s : Int;
+[a0 : (i -> 3, s -> 5, A -> [2,10,10,-1])]
+i,s := 0,0;
+[a0']
+do i < 4 ->
+    [a1*0,...,a1*3]
+    s,i := s + A.i, i + 1
+    [a2*0,...,a2*3]
+od
+[a3]
+
+Tabla:
+Estado  i  s
+a0      3  5
+a0'     0  0
+a1*0    0  0
+a2*0    1  2
+a1*1    1  2
+a2*1    2  12
+a1*2    2  12
+a2*2    3  22
+a1*3    3  22
+a2*3    4  21
+a3      4  21
+
+Este programa lo que hace es sumar todos los elementos del array
+
+//EJERCICIO B:
+
+Const A: array(0,4) of Int;
+Var i,c : Int;
+[a0: (i -> 3, c -> 12, A -> [12,-9,10,-1])]
+i,c = 0,0;
+[a0']
+do i<4 ->
+    [a1*0,...,a1*3]
+    if A.i > 0 ->
+        c:=c+1
+    ■ A.i <= 0 ->
+        skip
+    fi
+    [a2*0,...,a2*3]
+    i := i + 1
+    [a3*0,...,a3*3]
+od
+[a4]
+    
+Tabla:
+Estado  i  A.i  c
+a0      3  -1   12
+a0'     0  12   0
+a1*0    0  12   0
+a2*0    0  12   1
+a3*0    1  -9   1
+a1*1    1  -9   1
+a2*1    1  -9   1
+a3*1    2  10   1
+a1*2    2  10   1
+a2*2    2  10   2
+a3*2    3  -1   2
+a1*3    3  -1   2
+a2*3    3  -1   2
+a3*3    4  -1   2
+a4      4  -1   2
+
+Suma todos los elementos del array que sean mayores a 0

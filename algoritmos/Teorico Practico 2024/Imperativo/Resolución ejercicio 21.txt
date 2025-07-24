@@ -1,0 +1,250 @@
+Utilizo el método de reemplazo de constante por variable para proponer un invariante.
+Propongo { INV: ( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M }
+y { B : m ≠ M }
+
+Probemos que se cumple que INV^ ¬ B ⇒ Q
+
+( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M ^ m=M 
+⇒  r = ⟨ N i : 0 ≤ i < M : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩
+
+≡ { Leibniz }
+
+( r = ⟨ N i : 0 ≤ i < M : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ M ≤ M 
+⇒  r = ⟨ N i : 0 ≤ i < M : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩
+
+≡ { Debilitamiento }
+
+True
+
+Inicializamos las variables, para eso necesitamos un S’ tal que {P} S’ {INV}, es decir un programa que haga que se cumpla el invariante antes de entrar al ciclo
+
+Propongo m,r := 0, E ahora supongamos P y veamos wp.S’.INV
+
+wp.(m,r := 0).(( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M)
+
+≡ { Def de wp para la asignación }
+
+( E = ⟨ N i : 0 ≤ i < 0 : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ 0 ≤ M
+
+≡ { Lógica }
+
+( E = ⟨ N i : 0 ≤ i < 0 : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ 0 ^ 0 ≤ M
+
+≡ { Lógica 1 Por P }
+
+E = ⟨ N i : 0 ≤ i < 0 : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩
+
+≡ { Rango vacío de N }
+
+E = 0
+
+≡ { Elijo E = 0 , por reflexividad se cumple 0=0}
+
+True
+
+Quedaría: { S’: m,r := 0, 0 }
+
+2) Ahora elijo mi función cota como t = M-m y pruebo que INV ^ t ≤ 0 ⇒ ¬ B, así nos aseguramos que la guarda sea falsa en algún punto y por lo tanto que el ciclo va a terminar.
+
+( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M ^ M-m ≤ 0 ⇒ m=M
+
+≡ { Aritmética }
+
+( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M ^ M ≤ m ⇒ m=M
+
+≡ { Lógica }
+
+( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ^ m ≤ M ^ M ≤ m ⇒ m=M
+
+≡ { Lógica }
+
+( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ^ m=M ⇒ m=M
+
+≡ { Debilitamiento }
+
+True
+
+Listo, ya tenemos nuestra función cota.
+
+4) Ahora derivamos el cuerpo del ciclo, que debe mantener el invariante y decrecer la cota.
+
+Propongo m,r := m+1, E 
+
+Ahora supongamos INV^B y veamos wp.(m,r := m+1, E ).INV
+
+wp.(m,r := m+1, E ).(( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M )
+
+≡{Def de wp para la asignación }
+
+( E = ⟨ N i : 0 ≤ i < m+1 : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m+1 ≤ M 
+
+≡{ Lógica }
+
+( E = ⟨ N i : 0 ≤ i < m+1 : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m+1 ^ m+1 ≤ M 
+
+≡ { Por invariante 0 ≤ m ⇒ 0 ≤ m+1 | Por invariante y cota , m ≤ M ⇒ m+1 < M ⇒ m+1 ≠ M }
+
+E = ⟨ N i : 0 ≤ i < m+1 : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩
+
+≡ { Lógica }
+
+E = ⟨ N i : 0 ≤ i < m V i=m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩
+
+≡ { Partición de rango }
+
+E = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ + ⟨ N i : i=m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩
+
+≡ { Por Invariante }
+
+E = r + ⟨ N i : i=m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩	
+
+≡ { Como el rango unitario de N es análisis por casos, analicemos por casos }
+
+Caso 1: ⟨ ∑ j : 0 ≤ j < m : A.j ⟩ ≤ m*A.m ⟩
+E = r + 1
+≡ { Elijo E = r+1 }
+True
+Caso 2: ⟨ ∑ j : 0 ≤ j < m : A.j ⟩ > m*A.m ⟩
+E = r + 0
+≡ { Elijo E = r}
+True
+Luego de hacer análisis por casos nos damos cuenta que nos aparece una expresión no programable, por lo tanto tenemos que fortalecer el invariante. Elijo s=⟨ ∑ j : 0 ≤ j < m : A.j ⟩, y propongo { I0: s=⟨ ∑ j : 0 ≤ j < m : A.j ⟩ }
+
+Ahora, tenemos:
+
+E = r + ⟨ N i : i=m : s ≤ i*A.i ⟩	
+
+≡ { Como el rango unitario de N es análisis por casos, analicemos por casos }
+
+Caso 1: s ≤ m*A.m ⟩
+E = r + 1
+≡ { Elijo E = r+1 }
+True
+Caso 2: s > m*A.m ⟩
+E = r + 0
+≡ { Elijo E = r}
+True
+Como nuestro invariante cambió, debemos hacer algunas pruebas de nuevo, en principio debemos ver que INV^I0^¬ B ⇒ Q, pero como ya vimos que INV^¬ B ⇒ Q, por debilitamiento  INV^I0^¬ B ⇒ Q también se cumple. Lo mismo pasa con la función cota, la cual no depende de I0 y por lo ya demostrado vale.
+Ahora tenemos que volver a inicializar, ya que se nos agregó una variable s.
+Propongo n,r,s := 0,0,0
+Supongamos P y veamos la wp.(n,r,s := 0,0,0).INV^I0
+
+wp.(n,r,s := 0,0,0).(( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M ^ (s=⟨ ∑ j : 0 ≤ j < m : A.j ⟩))
+
+≡ { def de wp para la asignación }
+
+( 0 = ⟨ N i : 0 ≤ i < 0 : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ 0 ≤ M ^ (0=⟨ ∑ j : 0 ≤ j < 0 : A.j ⟩)
+
+≡ { Rango vacío }
+
+( 0 = 0 ) ^ 0 ≤ 0 ≤ M ^ (0=0)
+
+≡ { Lógica }
+
+True ^ 0 ≤ 0 ^ 0 ≤ M ^ True
+
+≡ { Lógica | Por P }
+
+True ^True ^True ^True
+
+≡ { Def de ^ }
+
+True
+
+Listo, ya probamos que nuestra suposición vale. 
+Tenemos entonces { S’ : m,r,s := 0,0,0 }
+
+Ahora tenemos que ver que I ^ I0 es invariante, es decir I ^ I0 ^B ⇒wp.S.I ^ I0
+Pero  I ^ I0 ^B ⇒wp.S.I ^ wp.S.I0
+≡ { Distributividad a derecha }
+
+( I ^ I0 ^B ⇒wp.S.I) ^  (I ^ I0 ^B ⇒ wp.S.I0)
+
+Como el término de la izquierda ya lo probamos, basta con ver el de la derecha.
+
+I ^ I0 ^B ⇒ wp.S.I0 , para ver esto, suponemos I ^ I0 ^B y 
+vemos wp.(m,s:= m+1,E).I0 Como r no interfiere en la demostración, podemos no incluirlo.
+
+wp.(m,s:= m+1,E).(s=⟨ ∑ j : 0 ≤ j < m : A.j ⟩)
+
+≡ { Def de wp para la asignación }
+
+E = ⟨ ∑ j : 0 ≤ j < m+1 : A.j⟩
+
+≡ { Lógica }
+
+E = ⟨ ∑ j : 0 ≤ j < m V j=m : A.j⟩
+
+≡ { Partición de rango }
+
+E = ⟨ ∑ j : 0 ≤ j < m : A.j⟩ + ⟨ ∑ j : j=m : A.j⟩ 
+
+≡ { Por I0 }
+
+E = s + ⟨ ∑ j : j=m : A.j⟩ 
+
+≡ {Rango unitario }
+
+E = s + A.m
+
+≡ { Elijo E = s + A.m }
+
+True
+
+El cuerpo del ciclo quedaría: 
+
+if s ≤ m*A.m →
+	m,r,s:=m+1,r+1,s+A.m
+[]  s > m*A.m
+	m,s:=m+1,s+A.m
+fi
+
+Por ultimo, veamos {I^B ^ t=T} S {t<T}
+
+Supongamos I^I0^B ^ t=T y veamos que implica wp.S.(t<T)
+T es una constante con valor M-m
+Como t solo implica a m y M, no necesitamos la declaración de r ni de s
+
+wp.(m:=m+1).(N-n<T)
+
+≡ { Def de wp para la asignación }
+
+M-(m+1)<T
+
+≡ { Def de T }
+
+M-(m+1)<M-m
+
+≡ { Aritmética }
+
+M-m-1 < M-m
+
+≡ { Aritmética }
+
+-1 < 0
+
+≡ { Lógica }
+
+True
+
+Listo, terminamos de derivar, el programa quedaría:
+
+Const M : Int, A : array [0,M) of Int;
+Var r,m,s : Int;
+
+{P : M ≥ 0 }
+
+m,r,s := 0,0,0
+
+{ INV: ( r = ⟨ N i : 0 ≤ i < m : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ ) ^ 0 ≤ m ≤ M ^ s=⟨ ∑ j : 0 ≤ j < m : A.j ⟩ }
+
+do m ≠ M → 
+	
+if s ≤ m*A.m →
+	m,r,s:=m+1,r+1,s+A.m
+[]  s > m*A.m
+	m,s:=m+1,s+A.m
+fi
+od
+
+{ Q:  r = ⟨ N i : 0 ≤ i < M : ⟨ ∑ j : 0 ≤ j < i : A.j ⟩ ≤ i*A.i ⟩ 

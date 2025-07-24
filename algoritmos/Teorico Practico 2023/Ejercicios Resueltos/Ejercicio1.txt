@@ -1,0 +1,82 @@
+1. Anotar los valores de las variables a medida que se ejecutan:
+
+a. var x: Int:
+[a0: (x -> 1)]
+x:=5
+[a1:(x->5)]
+
+b. var x,y: Int:
+[a0: (x -> 2, y -> 5)]
+x:= x + y
+[a1:(x->7, y -> 5)]
+y:= y + y
+[a1:(x->7, y -> 10)]
+
+c. var x,y: Int:
+[a0: (x -> 2, y -> 5)]
+y:= y + y
+[a1:(x -> 2, y -> 10)]
+x:= x + y
+[a1:(x -> 12, y -> 10)]
+
+d. var x,y: Int:
+[a0: (x -> 2, y -> 5)]
+y,x:= y + y, x+y
+[a1:(x -> 7, y -> 10)]
+
+e. var x,y: Int;
+[a0: (x -> 3, y -> 1)]
+if x>=y ->
+    [a1: x -> 3, y -> 1]
+    x:=0
+    [a2: x -> 0, y -> 1]
+■ x<= y ->
+    [a1': -]
+    x:=2
+    [a2': -]
+fi
+[a3: x -> 0, y -> 1]
+
+f. var x,y: Int;
+[a0: (x -> -100, y -> 1)]
+if x>=y ->
+    [a1: -]
+    x:=0
+    [a2: -]
+■ x<= y ->
+    [a1': (x -> -100, y -> 1)]
+    x:=2
+    [a2': (x -> 2, y -> 1)]
+fi
+[a3: x -> 2, y -> 1]
+
+g. var x,y: Int;
+[a0: (x -> 1, y -> 1)]
+if x>=y ->
+    [a1: (x -> 1, y -> 1)]
+    x:=0
+    [a2: (x -> 0, y -> 1)]
+■ x<= y ->
+    [a1': (x -> 1, y -> 1)]
+    x:=2
+    [a2': (x -> 2, y -> 1)]
+fi
+[a3: (x -> 0, y -> 1), a3': (x -> 2, y -> 1)]
+
+h. var i : Int;
+[a0: (i -> 4)]
+do i != 0 ->
+    [a1*1: i -> 4,a1*2: i -> 3,a1*3: i -> 2,a1*4: i -> 1]
+    i := i - 1
+    [a2*1: i -> 3,a2*2: i -> 2,a2*3: i -> 1]
+od
+[a3: i -> 1]
+
+i. var i : Int;
+[a0 : (i -> 400)]
+do i != 0
+    [a1*1: (i -> 400)]
+    i := 0
+    [a2*2: (i -> 0)]
+od
+[a3: (i -> 0)]

@@ -1,0 +1,28 @@
+a) Por orden alfabetico (fstring_less_eq)
+
+4
+hola chau casa perro
+lft := 1
+rgt := 4
+
+quick_sort_rec(a,1,4)
+	partition(a,1,4)
+	casa chau hola perro
+	ppiv = 2
+	quick_sort_rec (a,1,1) -> no cumple guarda
+	 
+	quick_sort_rec (a,3,4)
+		partition(a,3,4)
+		hola perro
+		ppiv = 3
+		quick_sort_rec (a,3,2) -> no se cumple la guarda
+		quick_sort_rec (a,4,4) -> no se cumple guarda
+
+Resultado final:
+casa chau hola perro
+
+Conclusión:
+Debe hacer el swap entre 'casa' y 'hola' (goes_before("hola","casa") -> False) -> Hace el swap
+Y luego querer hacer el swap entre 'hola' y 'hola' (goes_before("hola","hola") -> True) -> No hace swap
+
+

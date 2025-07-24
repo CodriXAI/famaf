@@ -1,0 +1,33 @@
+// REMOVE FIRST OCCURRENCE OF NODE WITH A GIVEN DATA
+
+//Declara dos variables, una que indica el dato a remover, un puntero auxiliar que usaremos mas adelante
+var to_remove: int
+var aux: pointer of node
+
+//Pide mediante un export el archivo a remover
+to_remove := getenv("TO_REMOVE":int)
+//Apuntamos con a_node al inicio de la lista my_list
+a_node := my_list
+
+// Travel the list until a node with matching data is
+// found.
+while (a_node != null) && (a_node->data != to_remove) do
+    aux := a_node // prev node stored
+    a_node := a_node->next
+od
+//En este while va recorriendo la lista para ver si encuentra el elemento a remover, y con el puntero auxiliar va recorriendo la lista
+
+// Two options. A) a_node needs to be removed, or
+// B) it's a null pointer and data to remove was
+// not found
+if (a_node != null) then
+    aux->next := a_node->next
+    free(a_node)
+    a_node := null
+fi
+//Acá se fija si hace falta remover el elemento o si es un puntero nulo y eso implica que no tiene data que remover (osea llego al final y no lo encontro)
+skip  // just to draw that program ended
+
+//CONCLUSION: Este programa lo que hace es dado un dato exportado desde terminal, se fija si lo encuentra
+//En la lista, en caso que lo encuentre lo elimina, en caso contrario no hace nada
+//EJEMPLO: Le damos el export a TO_REMOVE

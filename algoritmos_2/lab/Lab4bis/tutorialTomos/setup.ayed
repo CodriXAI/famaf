@@ -1,0 +1,45 @@
+//Se define el nodo como una tupla con dos elementos, un elemento data de tipo entero
+//Otro elemento next de tipo puntero que apunta a un nodo mismo
+type node = tuple
+    data: int
+    next: pointer of node
+end tuple
+//Se define la lista como un puntero que apunta a un nodo (ver la definición de nodo)
+type list = pointer of node
+
+//Declaro 3 variables: i que es de tipo entero, my_list de tipo lista, y un nodo "a"
+var i: int
+var my_list: list
+var a_node: pointer of node
+
+//Toma el largo de la lista desde "LINKED_LIST_LENGTH" y lo pasa como entero:
+i := getenv("LINKED_LIST_LENGTH":int)
+
+
+//Reserva memoria en my_list con alloc, el puntero a_node apunta a la lista y a i (que es la longitud) le resta 1 
+//Crea el primer nodo de la lista basicamente
+alloc(my_list)
+a_node := my_list
+i := i - 1 // first node built 
+
+//Mientras no haya llegado al final de la lista (o no me haya quedado sin largo de lista)
+//Va a ir escribiendo en el data a donde apunta a_node el valor de i*10
+//Reserva memoria para el siguiente nodo
+//Ahora a_node apunta al siguiente nodo
+//Restamos uno al length, básicamente hemos almacenado un valor en el nodo actual y pasamos al siguiente
+while i > 0 do
+    a_node->data := i*10
+    alloc(a_node->next)
+    a_node := a_node->next
+    i := i - 1
+od
+
+//Cuando hemos llegado al final de la lista, colocamos todo en null y se acabó el problema
+a_node->data := 0
+a_node->next := null
+a_node := null
+
+//CONCLUSIÓN: Lo que hace este ejemplo es hacer una lista donde, dado un length
+//Lo que hace es multiplicar por 10 ese length e ir guardando en cada nodo de 10 en 10 hasta llegar a 0
+//Ejemplo: Length 4
+// 40 -> 30 -> 20 -> 10 -> 0 .NULL

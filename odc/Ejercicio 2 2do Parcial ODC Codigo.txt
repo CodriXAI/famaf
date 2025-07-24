@@ -1,0 +1,262 @@
+Dado el siguiente codigo assembler LEGV8 - El procesador esta en little endian:
+
+0X00        MOV     X10 #0              //X10 = 0
+0X04        MOV     X11 #0              //X11 = 0
+0X08 LO:    CMPI    X10 #5              //Etiqueta L0: Compara x10 con 5
+0X0C        B.GE    L1                  //Si X10 >= 5 => Salto a L1
+0x10        LSL     X12, X10, #1        //X12 = X10 * 2
+0X14        ADD     X13, X27, X12       //X13 = X27 + X12
+0X18        LDURH   X1, [X13, #0]       //Trae 2 bytes extendidos a 64bits de los datos del registro X13 con offset 0 en X1 
+0X1C        MOV     XO, X13             //X0 = X13
+0X20        MOV     X2, X20             //X2 = X20
+0X24        BL      L2                  //Salta con enlace a L2
+0X28        ADD     X11, X11, X0        //X11 = X11 + X0
+0X2C        ADDI    X10, X10, #1        //X10++
+0X30        B       L0                  //Salta a L0
+0X34 L1:    B       L1                  //Etiqueta L1: Salta a L1 (Loop infinito)
+0X38 L2:    CMP     X1, X2              //Etiqueta L2: Compara X1 con X2 
+0X3C        B.GE    L3                  //Si X1 >= X2 => Salta a L3
+0X40        STURH   X2, [X0, #0]        //Almacena 2 bytes, sin extender de los datos del registro X2 en la direccion de X0 con offset 0
+0X44        MOV     X0, #1              //X0 = 1
+0X48        BR      X30                 //Return
+0X4C L3:    MOV     X0, #0              //Etiqueta L3: X0 = 0
+0X50        BR      X30                 //Return
+
+Considerando que:
+X2O = -5  y X27 = 0x2328
+
+Completar la tabla - Seccion Salida:
+
+Direccion           Entrada             Salida
+0x2327              0x01                
+0x2328              0x0A
+0x2329              0x00
+0x232A              0xF1
+0x232B              0xFF
+0x232C              0xFB
+0x232E              0x00
+0x232F              0x00
+0x2330              0xFE
+0x2331              0XFF
+0x2332              0XFF
+
+
+1 - Que hace el programa:
+Sobreescribe la memoria cuando la direccion que tenemos es menor que -5
+
+2 - Implementacion:
+Tenemos una direccion base de memoria x27 = 0x2328
+Un valor a comparar x20 = -5
+Tomamos de a 2 bytes, (los menos significativos) y los tomaremos como un valor signado (aunque LDURH no lo haga), es para comparar
+Luego guarda los datos, y mientras no sea menor a -5, no sobreescribe la memoria, en caso que sea menor a -5, sobreescribe y coloca -5 (0xFFFB en hexa)
+En la direccion dada. El bucle se sigue ejecutando mientras un registro x10 sea menor que 5 (arranca en 0) Y se ejecuta un total de 5 veces.
+
+3 - Corriendo el programa con la tabla dada (teniendo en cuenta el little endian):
+
+----------------------------------------------------------Primer Iteracion (De ejemplo):-------------------------------------------------
+
+x10 = 0
+x11 = 0
+
+comparamos x10 con 5:
+0 >= 5 ? NO (no salto a L1)
+
+x12 = 0 * 2 = 0 => x12 = 0
+x13 = x27 + x12 => 0x2328 + 0 => x13 = 0x2328 
+
+Traigo los 2 bytes menos significativos y los ordeno por little endian:
+0x2328: 0x0A
+0x2329: 0x00
+Total: x1 = 0x000A 2 bytes
+Pasado a decimal => x1 = 10
+
+X0 = x13 => x0 = 0x2328
+
+x2 = x20 => x2 = -5
+
+Salta con BL a L2 (guarda en X30 la posicion del PC: 0x24)
+
+Comparamos x1 con x2:
+10 >= -5 ? SI (Entonces saltamos a L3)
+
+Dejamos X0 = 0 (no hay cambios)
+Volvemos a la posicion original del PC (0x24)
+
+0x28: x11 = x11 + x0 => x11 = 0 + 0 => x11 = 0 (Aun no se modifico ninguna direccion)
+x10++ => x10 = 1
+
+------------------------------------------------------------FIN PRIMERA ITERACION---------------------------------------------------------
+
+----------------------------------------------------------Segunda Iteracion (De ejemplo):-------------------------------------------------
+Desde L0:
+Comparamos x10 con 5:
+1 >= 5 ? NO (No saltamos a L1)
+
+x12 = 1 * 2 = 2 => x12 = 2
+x13 = x27 + x12 => x13 = 0x2328 + 2 => x13 = 0x232A
+
+Traemos desde x13 2 bytes menos significativos a x1 (little endian):
+0x232A: 0xF1
+0x232B: 0xFF
+
+A little endian: x1 = 0XFFF1 => x1 = -15 (Signado)
+
+x0 = 0x232A
+x2 = -5
+
+Salta con enlace a L2 (guarda la posicion al registro x30 del PC 0x24)
+
+Comparamos X1 con X2:
+-15 >= -5 NO (NO Salto a L3)
+
+Guarda entonces en x0 = 0x232A, los 2 bytes menos significativos de x2 = -5 = 0xFFFB (little endian):
+0x232A: 0xFB
+0x232B: 0xFF
+
+x0 = 1 (HUBO modificacion)
+
+Retorna a la direccion de x30 (PC) = 0x24
+
+0x24:
+x11 = x11 + x0 => x11 = 0 + 1 => x11 = 1 (Un cambio)
+x10++ => x10 = 2
+
+-------------------------------------------------------FIN DE LA SEGUNDA ITERACION-----------------------------------------------------
+
+----------------------------------------------------------Tercera Iteracion (De ejemplo):-------------------------------------------------
+Desde L0:
+Comparamos x10 con 5:
+
+2 >= 5 ? NO (No saltamos a L1)
+
+x12 = x10 * 2 => x12 = 2 * 2 => x12 = 4
+
+x13 = x27 + x12 => x13 = 0x2328 + 4 => x13 = 0x232C
+
+Cargamos los 2 bytes menos significativos en x1 (little endian):
+0x232C: 0xFB
+0x232D: 0x00
+Little Endian: x1 = 0x00FB => x1 = -5
+
+x0 = 0x232C
+x2 = -5
+
+Salto a L2 (Se guarda en X30 la direccion del PC 0x24)
+Comparamos x1 con x2:
+-5 >= -5 SI (Saltamos a L3)
+
+x0 = 0 (no se efectua cambio)
+Volvemos a x30 (0x24)
+
+0x28:
+x11 = 0 + 1 = 1 (Un cambio)
+x10++ = 2 + 1 = 3
+
+Salto nuevamente a L0
+
+------------------------------------------------------FIN DE TERCERA ITERACION-----------------------------------------------------------
+
+------------------------------------------------------INICIO DE CUARTA ITERACION-----------------------------------------------------------
+
+Desde L0:
+Comparamos x10 con 5:
+
+3 >= 5 ? NO (No saltamos a L1)
+
+x12 = x10 * 2 => x12 = 3 * 2 => x12 = 6
+
+x13 = x27 + x12 => x13 = 0x2328 + 6 => x13 = 0x232E
+
+Cargamos los 2 bytes menos significativos en x1 (little endian):
+0x232E: 0x00
+0x232F: 0x00
+Little Endian: x1 = 0x0000 => x1 = 0
+
+x0 = 0x232E
+x2 = -5
+
+Salto a L2 (Se guarda en X30 la direccion del PC 0x24)
+Comparamos x1 con x2:
+0 >= -5 SI (Saltamos a L3)
+
+x0 = 0 (no se efectua cambio)
+Volvemos a x30 (0x24)
+
+0x28:
+x11 = 0 + 1 = 1 (Un cambio)
+x10++ = 3 + 1 = 4
+
+Salto nuevamente a L0
+
+------------------------------------------------------FIN DE CUARTA ITERACION-----------------------------------------------------------
+
+------------------------------------------------------INICIO DE ULTIMA (quinta) ITERACION-----------------------------------------------------------
+Desde L0:
+Comparamos x10 con 5:
+
+4 >= 5 ? NO (No saltamos a L1)
+
+x12 = x10 * 2 => x12 = 4 * 2 => x12 = 8
+
+x13 = x27 + x12 => x13 = 0x2328 + 8 => x13 = 0x2331
+
+Cargamos los 2 bytes menos significativos en x1 (little endian):
+0x2331: 0xFF
+0x2332: 0xFF
+Little Endian: x1 = 0xFFFF => x1 = -1
+
+x0 = 0x2331
+x2 = -5
+
+Salto a L2 (Se guarda en X30 la direccion del PC 0x24)
+Comparamos x1 con x2:
+-1 >= -5 SI (Saltamos a L3)
+
+x0 = 0 (no se efectua cambio)
+Volvemos a x30 (0x24)
+
+0x28:
+x11 = 0 + 1 = 1 (Un cambio)
+x10++ = 4 + 1 = 5
+
+Salto nuevamente a L0
+
+------------------------------------------------------FIN DE ULTIMA (QUINTA) ITERACION-----------------------------------------------------------
+
+Desde L0:
+Comparamos x10 con 5:
+5 >= 5 ? SI, Salto a L1
+
+Bucle infinito en L1
+
+-------------------------------------------------------------FIN DEL PROGRAMA--------------------------------------------------------------
+Total de iteraciones: 5 
+Total de modificaciones: 1
+Modificacion:
+0x232A: 0xFB
+0x232B: 0xFF
+
+Finalmente la Tabla queda en:
+
+Direccion           Entrada             Salida
+0x2327              0x01                0x01
+0x2328              0x0A                0x0A
+0x2329              0x00                0x00
+0x232A              0xF1                0xFB  **MODIFICACION
+0x232B              0xFF                0xFF
+0x232C              0xFB                0xFB
+0x232E              0x00                0x00
+0x232F              0x00                0x00
+0x2330              0xFE                0xFE
+0x2331              0XFF                0xFF
+0x2332              0XFF                0xFF
+
+
+Cuantas instrucciones se ejecutan:
+SI NO CONTAMOS EL BUCLE INFINITO EN L1, ENTONCES
+Total de instrucciones: 21
+Cant total de Bucles: 5 (21 * 5 = 105 instrucciones aprox)
+
+Mas las otras 2 = 107 instrucciones
+
+La posicion final del PC: 0x34
