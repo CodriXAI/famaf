@@ -1,0 +1,11 @@
+El Aprendizaje de Conceptos y el Ordenamiento de General a Específico es un tema fundamental en el aprendizaje automático. El aprendizaje de conceptos se puede definir como la inferencia de una función booleana a partir de ejemplos de entrenamiento de sus entradas y salidas.
+ Su objetivo es adquirir la definición de una categoría general a partir de ejemplos positivos y negativos específicos.
+ Este proceso se puede formular como una búsqueda en un espacio de hipótesis para encontrar la hipótesis que mejor se ajuste a los ejemplos de entrenamiento.
+
+El espacio de hipótesis se organiza mediante un ordenamiento de general a específico, una estructura que permite una búsqueda eficiente. Este ordenamiento se basa en la relación "más general que o igual a" entre hipótesis.
+ Una hipótesis h_j es más general que o igual a h_k si cualquier instancia que satisface h_k también satisface h_j.
+ Este ordenamiento es parcial, lo que significa que no todas las hipótesis son comparables; por ejemplo, algunas hipótesis pueden ser más generales en ciertos aspectos pero más específicas en otros.
+
+Este ordenamiento estructurado es crucial porque permite a los algoritmos de aprendizaje, como FIND-S, organizar la búsqueda de manera eficiente, evitando la enumeración exhaustiva de todas las hipótesis posibles, lo cual sería inviable en espacios de hipótesis grandes o infinitos.
+ FIND-S, por ejemplo, busca la hipótesis más específica que es consistente con todos los ejemplos positivos.
+ Otro algoritmo, el algoritmo de eliminación de candidatos (CANDIDATE-ELIMINATION), utiliza este ordenamiento para mantener un espacio de versiones (version space) que representa todas las hipótesis consistentes con los ejemplos de entrenamiento, caracterizadas por sus fronteras más específicas (S) y más generales (G).

@@ -1,0 +1,81 @@
+SUMMARY - Video "AI Snake Oil: What Artificial Intelligence Can Do, What It Can’t, and How to Tell the Difference"
+
+    El video nos muestra la postura del Computer Science "Arvind Narayanan", en el cuál podemos discutir sobre
+    el impacto a nivel sociedad que podemos tener al interiorizar frecuentemente la IA tanto de manera correcta como incorrecta
+    éticamente.
+
+    Arvind trata sobre dos tipos de Inteligencias Artificiales en específico:
+
+    IA predictiva - La cuál en base a datos del pasado, trata de dar una predicción para lo que puede ocurrir
+
+    IA generativa - Una bastante popular que a partir de promting puede generar texto, imágenes, audio, dependiendo de una descripción o tema
+
+    Hace una fuerte crítica respecto a la IA predictiva, donde nos dice que en ciertos campos sensibles (como menciona de criminología, o asuntos legales)
+    puede ser fácil caer en falsas predicciones, prejuicios, o cuestiones éticas más complejas.
+    Por ende, no está tan de acuerdo en el uso de la misma cuando peligra la integridad de una persona, siendo juzgada o filtrando su privacidad
+
+    En cuanto a IA generativa, si sostiene que puede tener un mejor uso, con fines educativos, como él menciona, para que los niños puedan aprender matemáticas, o cosas similares
+
+    Y también nos menciona sobre lo que la gente desde fuera ve y cree que "el avance es exponencialmente veloz", cuando la realidad otra. Y si bien se registran avances
+    a día de hoy, estamos lejos de espectativas utópicas generadas por la misma sociedad
+
+    Por último sugiere que la IA se utilice de forma responsable y más frecuentemente en sectores donde se disponga de abundante información
+    datos para el entrenamiento y especialistas; Áreas como la medicina, educación, computación misma, entre otras.
+
+
+1 ¿Cómo distingue el autor entre “IA predictiva” y “IA generativa”? 
+
+-> Digamos que Arvind las diferencia entre:
+    Predictiva como aquella que en base a datos del pasado y presente, genera una predicción de lo que puede ocurrir 
+    Generativa como aquella que mediante el promting puede generar multimedia tales como: Texto, imágenes, videos, etc.
+
+2 ¿Qué riesgos asocia con la inteligencia artificial predictiva? 
+
+-> Meterse en asuntos legales, prejuicios, violación a la integridad de los individuos, data falsa
+
+3 Imagina que una empresa ha desarrollado un modelo para predecir el riesgo de que una persona tenga conductas delictivas en el futuro.
+
+    1. ¿Qué señales plausibles podría estar usando la IA?
+
+    2. ¿Qué normas, leyes o principios éticos deberían regir este tipo de investigaciones y su uso?
+
+    3. ¿Hay alguna forma ética en la que un sistema así podría ser útil, o debería rechazarse completamente que se aplique en sociedad?
+
+->
+1. Antecedentes, Lugar de residencia, posición socioeconómica, Contactos (En especial esta)
+2. Privacidad de la persona, No discriminación / Prejuicio (derechos humanos), transparencia, y cualquier otro concepto ético-legal
+3. Diría que sería bastante problemático a nivel sociedad, sobre todo si le dejamos todo el trabajo a la misma.
+
+4. ¿Qué es la “escalera de generalidad” (Ladder of Generality) y cómo se relaciona con el progreso real de la IA? 
+    
+    1. Para seguir ahondando en este tema, pueden ver lo relacionado al premio ARC (The General Intelligence Benchmark) y el trabajo de Subbarao Kambhampati, en particular su keynote en la ACL 2024, Can LLMs reason and plan? o su paper Chain of Thoughtlessness? An analysis of CoT in Planning. Pero si no tienen tiempo para cosas tan extensas, siempre pueden leer su sátira Forest of Jumbled Thoughts Prompting.
+
+-> Consultando a GPT:
+    Es una idea que explica cómo subimos niveles en IA:
+
+    - Especializada (ej: modelo que reconoce caras).
+
+    - Más general (ej: modelo que entiende lenguaje en distintos dominios).
+
+    - Inteligencia general (IA capaz de razonar en cualquier situación).
+
+Según la postura de Arvind dice que no se sube tanto escalonadamente como la sociedad está creyendo hoy en día, sino que es toda una curva de aprendizaje
+
+5. ¿Cómo critica la presentación mediática y visual de la IA y qué alternativas sugiere? 
+
+-> Critica sobre todo a la exageración de la imágen que tienen sobre IA (como algo hyperfuturista, a lo ciencia ficción)
+    Lo que sugiere Arvind es que podamos ser más realistas y mostrar aplicaciones reales de hoy en día.
+
+6. Menciona un ejemplo que ilustre claramente un caso de “IA que funciona bien” y otro de “IA snake oil”
+-> IA que puede funcionar bien: Un detector de spam en gmail 
+    Snake OIL: Podría ser esto mismo de una IA que predice si alguien puede cometer un crimen o no
+
+7. ¿Qué propone el autor como enfoques más realistas y útiles para integrar IA en la sociedad de manera responsable? 
+
+-> Que podamos bajar a tierra lo que realmente puede y no puede hacer la IA, dsp de todo, no es magia
+Por ejemplo, poder tener aplicaciones en ámbitos más controlados, con más información y profesionales disponibles.
+
+8. ¿Qué importancia tienen los errores metodológicos como el “data leakage” en la evaluación del rendimiento de sistemas de IA? 
+-> Investigando, encontré que el data leakage es: cuando información del “futuro” se filtra en el entrenamiento.
+Donde da ilusión que el modelo es algo muchisimo mejor de lo que realmente es, y este error puede conllevar a overfitting o problemas de falso buen rendimiento
+Entonces es bastante importante detectarlos para evitar falsas validaciones o test

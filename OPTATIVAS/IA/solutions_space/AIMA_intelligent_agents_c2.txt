@@ -1,0 +1,15 @@
+El Capítulo 2 de "Inteligencia Artificial: Un Enfoque Moderno" (AIMA) introduce el concepto de agentes inteligentes como entidades que perciben su entorno a través de sensores y actúan sobre él mediante actuadores con el objetivo de maximizar su progreso hacia metas específicas.
+ Un agente se define como cualquier cosa que puede ser vista como percibiendo su entorno a través de sensores y actuando sobre ese entorno a través de sus actuadores.
+ La función de un agente mapea secuencias de percepciones a acciones, y el programa del agente implementa esta función en una arquitectura física.
+
+El diseño de un agente racional requiere especificar su entorno de tarea, utilizando la especificación PEAS (Medida de Rendimiento, Entorno, Actuadores, Sensores).
+ Por ejemplo, para un conductor automático, la medida de rendimiento incluye seguridad, destino, rentabilidad y comodidad; el entorno son calles, peatones y condiciones climáticas; los actuadores son el volante, acelerador y frenos; y los sensores incluyen cámaras, GPS y sensores de velocidad.
+ La racionalidad de un agente se define como elegir la acción que maximiza el valor esperado de la medida de rendimiento dada la secuencia de percepciones hasta el momento, lo cual no implica omnisciencia ni clarividencia, sino que depende de la información disponible.
+
+El capítulo también clasifica los entornos según sus propiedades, como observable (completo o parcial), determinista (determinístico o estocástico), episódico (episódico o secuencial), estático (estático o dinámico), discreto (discreto o continuo) y el número de agentes (único o múltiple).
+ El mundo de la aspiradora es un ejemplo clásico de un entorno parcialmente observable, determinístico, secuencial, estático y discreto, con un solo agente.
+ La clasificación del entorno determina el diseño del agente, ya que el mundo real es generalmente parcialmente observable, estocástico, secuencial, dinámico, continuo y multiagente.
+
+Dentro de los tipos de agentes se encuentran los agentes reflejos simples, que actúan basándose únicamente en la percepción actual; los agentes basados en modelo, que mantienen un estado interno para rastrear el entorno; los agentes basados en objetivos, que consideran el futuro; los agentes basados en utilidad, que evalúan el valor de diferentes estados; y los agentes de aprendizaje, que pueden adaptarse y mejorar con el tiempo.
+ La función de un agente reflejo simple para la aspiradora, por ejemplo, es: si la superficie está sucia, aspirar; si está en A, moverse a B; si está en B, moverse a A.
+ La racionalidad de este agente se puede demostrar bajo ciertas suposiciones, como que la suciedad no se repite.
