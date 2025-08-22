@@ -22,6 +22,7 @@ A continuación, una lista de las materias que están incluidas en este reposito
 - **Organización del Computador**
 - **Probabilidad y Estadística**
 - **Introducción a la Lógica y la Computación**
+- **Sistemas Operativos**
 
 > 💡 Los apuntes pueden estar en formato PDF, PNG, JPG, según la materia.
 
