@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "glib.h": "c",
+        "command.h": "c",
+        "stdio.h": "c",
+        "stdbool.h": "c",
+        "glib-object.h": "c",
+        "string.h": "c",
+        "grand.h": "c",
+        "gqueue.h": "c",
+        "stdlib.h": "c",
+        "gprimes.h": "c",
+        "gqsort.h": "c",
+        "gquark.h": "c"
+    }
+}

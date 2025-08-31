@@ -1,15 +1,33 @@
 El Capítulo 2 de "Inteligencia Artificial: Un Enfoque Moderno" (AIMA) introduce el concepto de agentes inteligentes como entidades que perciben su entorno a través de sensores y actúan sobre él mediante actuadores con el objetivo de maximizar su progreso hacia metas específicas.
- Un agente se define como cualquier cosa que puede ser vista como percibiendo su entorno a través de sensores y actuando sobre ese entorno a través de sus actuadores.
- La función de un agente mapea secuencias de percepciones a acciones, y el programa del agente implementa esta función en una arquitectura física.
+Un agente se define como cualquier cosa que puede ser vista como percibiendo su entorno a través de sensores y actuando sobre ese entorno a través de sus actuadores.
+La función de un agente mapea secuencias de percepciones a acciones, y el programa del agente implementa esta función en una arquitectura física.
 
 El diseño de un agente racional requiere especificar su entorno de tarea, utilizando la especificación PEAS (Medida de Rendimiento, Entorno, Actuadores, Sensores).
- Por ejemplo, para un conductor automático, la medida de rendimiento incluye seguridad, destino, rentabilidad y comodidad; el entorno son calles, peatones y condiciones climáticas; los actuadores son el volante, acelerador y frenos; y los sensores incluyen cámaras, GPS y sensores de velocidad.
- La racionalidad de un agente se define como elegir la acción que maximiza el valor esperado de la medida de rendimiento dada la secuencia de percepciones hasta el momento, lo cual no implica omnisciencia ni clarividencia, sino que depende de la información disponible.
+Por ejemplo, para un conductor automático, la medida de rendimiento incluye seguridad, destino, rentabilidad y comodidad; el entorno son calles, peatones y condiciones climáticas; los actuadores son el volante, acelerador y frenos; y los sensores incluyen cámaras, GPS y sensores de velocidad.
+La racionalidad de un agente se define como elegir la acción que maximiza el valor esperado de la medida de rendimiento dada la secuencia de percepciones hasta el momento, lo cual no implica omnisciencia ni clarividencia, sino que depende de la información disponible.
 
 El capítulo también clasifica los entornos según sus propiedades, como observable (completo o parcial), determinista (determinístico o estocástico), episódico (episódico o secuencial), estático (estático o dinámico), discreto (discreto o continuo) y el número de agentes (único o múltiple).
- El mundo de la aspiradora es un ejemplo clásico de un entorno parcialmente observable, determinístico, secuencial, estático y discreto, con un solo agente.
- La clasificación del entorno determina el diseño del agente, ya que el mundo real es generalmente parcialmente observable, estocástico, secuencial, dinámico, continuo y multiagente.
+El mundo de la aspiradora es un ejemplo clásico de un entorno parcialmente observable, determinístico, secuencial, estático y discreto, con un solo agente.
+La clasificación del entorno determina el diseño del agente, ya que el mundo real es generalmente parcialmente observable, estocástico, secuencial, dinámico, continuo y multiagente.
 
 Dentro de los tipos de agentes se encuentran los agentes reflejos simples, que actúan basándose únicamente en la percepción actual; los agentes basados en modelo, que mantienen un estado interno para rastrear el entorno; los agentes basados en objetivos, que consideran el futuro; los agentes basados en utilidad, que evalúan el valor de diferentes estados; y los agentes de aprendizaje, que pueden adaptarse y mejorar con el tiempo.
- La función de un agente reflejo simple para la aspiradora, por ejemplo, es: si la superficie está sucia, aspirar; si está en A, moverse a B; si está en B, moverse a A.
- La racionalidad de este agente se puede demostrar bajo ciertas suposiciones, como que la suciedad no se repite.
+La función de un agente reflejo simple para la aspiradora, por ejemplo, es: si la superficie está sucia, aspirar; si está en A, moverse a B; si está en B, moverse a A.
+La racionalidad de este agente se puede demostrar bajo ciertas suposiciones, como que la suciedad no se repite.
+
+ENGLISH VERSION:
+ 
+Chapter 2 of "Artificial Intelligence: A Modern Approach" (AIMA) introduces the concept of intelligent agents as entities that perceive their environment through sensors and act upon it through actuators with the goal of maximizing their progress toward specific objectives.
+An agent is defined as anything that can be viewed as perceiving its environment through sensors and acting upon that environment through its actuators.
+The agent function maps sequences of perceptions to actions, and the agent program implements this function in a physical architecture.
+
+Designing a rational agent requires specifying its task environment using the PEAS framework (Performance measure, Environment, Actuators, Sensors).
+For example, for an autonomous driver, the performance measure includes safety, reaching the destination, efficiency, and comfort; the environment consists of streets, pedestrians, and weather conditions; the actuators are the steering wheel, accelerator, and brakes; and the sensors include cameras, GPS, and speed sensors.
+An agent’s rationality is defined as choosing the action that maximizes the expected value of the performance measure given the sequence of perceptions so far, which does not imply omniscience or clairvoyance, but rather depends on the information available.
+
+The chapter also classifies environments according to their properties, such as observability (fully or partially observable), determinism (deterministic or stochastic), episodicity (episodic or sequential), dynamics (static or dynamic), continuity (discrete or continuous), and the number of agents (single or multiple).
+The vacuum world is a classic example of a partially observable, deterministic, sequential, static, and discrete environment with a single agent.
+The environment classification determines the agent design, as the real world is generally partially observable, stochastic, sequential, dynamic, continuous, and multi-agent.
+
+Among the types of agents are simple reflex agents, which act solely based on the current perception; model-based agents, which maintain an internal state to track the environment; goal-based agents, which consider the future; utility-based agents, which evaluate the value of different states; and learning agents, which can adapt and improve over time.
+The simple reflex agent function for the vacuum cleaner, for example, is: if the surface is dirty, suck; if at A, move to B; if at B, move to A.
+The rationality of this agent can be demonstrated under certain assumptions, such as that dirt does not recur.

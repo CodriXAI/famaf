@@ -1,0 +1,493 @@
+PIPELINES - CASOS:
+
+---------------------------------------------- CASOS BASE V1 ------------------------------------------------
+
+PIPELINE SIMPLE INTERNO con builtin_alone SIN REDIRECCIONES
+No poseen pipes
+Pueden o no estar en bg
+No requieren de fork, execvp ni wait, los ejecuta el padre
+
+    Pipeline simple con cmd interno en fg:
+            Ej: cd ..
+
+            Formato Pipeline:
+                cmdline = [(["cd", ".."], NULL, NULL)]
+                wait = true
+
+            pipeline_length:
+                N = 1
+            
+            pipes necesarias:
+                N - 1 = 0
+
+            Ejecución:
+                - No crea pipes, hay 0
+
+                Padre:
+                - No crea fork
+                - Cae en el caso builtin_alone
+                - Se ejecuta directamente con builtin_run
+                
+                
+    Pipeline simple con cmd interno en bg:
+        
+        Ej: echo "Hola" &
+
+        Formato Pipeline:
+            cmdline = [(["echo", "Hola"], NULL, NULL)]
+            wait = false
+
+        pipeline_length:
+            N = 1
+
+        pipes necesarios:
+            N - 1 = 0
+
+        Ejecución:
+            - No crea pipes, hay 0
+
+            Padre:
+            - No crea fork
+            - Cae en el caso builtin_alone
+            - Se ejecuta directamente con builtin_run
+            - No hace falta esperar, lo ejecuta el padre (es uno solo)
+
+
+---------------------------------------------- CASOS BASE V2 ----------------------------------------------
+
+PIPELINE SIMPLE EXTERNO SIN REDIRECCIONES: 
+Se caracterizan por ser del estilo pipeline_length(apipe) = 1, pero no cumplen con builtin_is_internal
+No poseen pipes
+Pueden o no estar en bg
+
+    Pipeline simple con cmd externo en fg:
+
+        Ej: ls -l 
+
+        Formato Pipeline:
+            cmdline = [(["ls", "-l"], NULL, NULL)]
+            wait = true
+        
+        pipeline_length:
+            N = 1
+        
+        pipes necesarios:
+            N - 1 = 0
+
+        Ejecución: 
+            - No crea pipes, hay 0
+
+            - Crea fork para el hijo
+            - Cae en el caso !builtin_is_internal
+            - execvp con el identificador "ls"
+            - exit(1) si hubo errores
+
+            Padre:
+            - No hace falta cerrar extremos de pipes, no hay
+            - wait(NULL) para el padre (está en fg)
+    
+    Pipeline simple con cmd externo en bg:
+
+        Ej: ls -l &
+
+        Formato Pipeline:
+            cmdline = [(["ls", "-l"], NULL, NULL)]
+            wait = false
+
+        pipeline_length:
+            N = 1
+        
+        pipes necesarios:
+            N - 1 = 0
+
+        Ejecución: 
+            - No crea pipes, hay 0
+
+            - Crea fork para el hijo
+            - Cae en el caso !builtin_is_internal
+            - execvp con el identificador "ls"
+            - exit(1) si hubo errores
+            
+            Padre:
+            - No cierra extremos de pipes, no hay
+            - No hace wait, está en bg
+    
+
+--------------------------------------------- CASOS BASE V3 ------------------------------------------------
+
+PIPELINE SIMPLE INTERNO con builtin_alone CON REDIRECCIONES
+No poseen pipes
+Pueden o no estar en bg
+No requieren de fork, execvp ni wait, los ejecuta el padre
+
+    Pipeline simple con cmd interno con redirecciones en fg:
+            Ej: cd /hola > log.txt
+
+            Formato Pipeline:
+                cmdline = [(["cd"], "/hola", "log.txt")]
+                wait = true
+
+            pipeline_length:
+                N = 1
+            
+            pipes necesarias:
+                N - 1 = 0
+
+            Ejecución:
+                - No crea pipes, hay 0
+
+                Padre:
+                - No crea fork
+                - Cae en el caso builtin_alone
+                - Abre las redirecciones de stdin / stdout:
+                    open(...)
+                    dup2(fd, STDIN/STDOUT_FILENO)
+                    close(fd)
+                - Se ejecuta directamente con builtin_run
+                - No hay que cerrar extremos de pipes, no hay
+                
+    Pipeline simple con cmd interno con redirecciones en bg:
+            Ej: echo "Hola mundo" > saludo.txt &
+
+            Formato Pipeline:
+                cmdline = [(["echo", "Hola mundo"], NULL, "saludo.txt")]
+                wait = false
+
+            pipeline_length:
+                N = 1
+            
+            pipes necesarias:
+                N - 1 = 0
+
+            Ejecución:
+                - No crea pipes, hay 0
+
+                Padre:
+                - No crea fork
+                - Cae en el caso builtin_alone
+                - Abre la redirección de stdout:
+                    open(...)
+                    dup2(fd, STDOUT_FILENO)
+                    close(fd)
+                - Se ejecuta directamente con builtin_run
+                - No hay que cerrar extremos de pipes, no hay
+                    
+--------------------------------------------- CASOS BASE V4 ------------------------------------------------
+
+PIPELINE SIMPLE EXTERNO CON REDIRECCIONES
+No poseen pipes
+Pueden o no estar en bg
+
+    Pipeline simple con cmd externo con redirecciones en fg:
+            Ej: ls -l > list.txt
+
+            Formato Pipeline:
+                cmdline = [(["ls", "-l"], NULL , "list.txt")]
+                wait = true
+
+            pipeline_length:
+                N = 1
+            
+            pipes necesarias:
+                N - 1 = 0
+
+            Ejecución:
+                - No crea pipes, hay 0
+
+                - Crea fork para el hijo 
+                - Cae en el caso !builtin_is_internal
+
+                - Abre la redirección stdout:
+                    open(...)
+                    dup2(fd, STDOUT_FILENO)
+                    close(fd)
+
+                - execvp del ls
+                - exit(1) si hubo errores
+
+                Padre:
+                - No cierra extremos de pipes, no hay
+                - Hace wait(NULL), esperando a sus hijos (está en fg)
+                
+    Pipeline simple con cmd externo con redirecciones en bg:
+            Ej: echo "Hola mundo" > saludo.txt &
+
+            Formato Pipeline:
+                cmdline = [(["echo", "Hola mundo"], NULL, "saludo.txt")]
+                wait = false
+
+            pipeline_length:
+                N = 1
+            
+            pipes necesarias:
+                N - 1 = 0
+
+            Ejecución:
+                - No crea pipes, hay 0
+
+                Padre:
+                - No crea fork
+                - Cae en el caso builtin_alone
+                - Abre la redirección de stdout:
+                    open(...)
+                    dup2(fd, STDOUT_FILENO)
+                    close(fd)
+                - Se ejecuta directamente con builtin_run
+                - No hay que cerrar extremos de pipes, no hay
+
+-------------------------------------------- CASOS GENERALES -------------------------------------------------
+
+PIPELINE CON pipeline_length N>=2:
+Caso más general, se caracterizan por ser del estilo pipeline_length(apipe) >= 2
+Poseen pipes
+Pueden estar o no en bg (NOTA: o TODA la PIPELINE está en fg o TODA la PIPELINE está en bg)
+Pueden incluir cmds tanto internos como externos, aquí algunos ejemplos
+
+    Pipeline compuesta con cmd solo internos en fg:
+
+        Ej: echo "hola" | echo "mundo"
+
+        Formato Pipeline:
+            cmdline = [(["echo", "hola"], NULL, NULL) , (["echo", "mundo"],NULL,NULL)]
+            wait = true
+
+        pipeline_length:
+            N = 2
+
+        pipes necesarias:
+            N-1 = 1
+
+        Ejecución: 
+            - Crear la pipe necesaria con el extremo de lectura (pipes[0][0] stdin) y de escritura (pipes[0][1] stdout)
+
+            - Crear fork para el primer hijo
+            - Conectar stdout a pipe[0][1] ->  dup2(pipes[0][1], STDOUT_FILENO)
+            - Cae en el caso builtin_is_internal
+            - Hace bultin_run del primer echo "hola"
+            
+
+            - Crear fork para el segundo hijo
+            - Conectar stdin a pipe[0][0] -> dup2(pipes[0][0], STDIN_FILENO)
+            - Cae en el caso builtin_is_internal
+            - Hace builtin_run del segundo echo "mundo"
+            
+            
+            Padre:
+            - Cierra los extremos de la pipe close(pipe[0][1]) y close(pipe[0][0])
+            - wait(NULL) para el padre (está en fg), espera a los hijos
+    
+    Pipeline compuesta con cmd solo internos en bg:
+
+        Ej: echo "chau" | echo "universo" &
+
+        Formato Pipeline:
+            cmdline = [(["echo", "chau"], NULL, NULL), (["echo", "universo"],NULL,NULL)]
+            wait = false
+
+        pipeline_length:
+            N = 2
+
+        pipes necesarias:
+            N-1 = 1
+
+        Ejecución: 
+            - Crear la pipe necesaria con el extremo de lectura (pipe[0][0] stdin) y de escritura (pipe[0][1] stdout)
+
+            - Crear fork para el primer hijo
+            - Conectar stdout a pipe[0][1] ->  dup2(pipes[0][1], STDOUT_FILENO)
+            - Cae en el caso builtin_is_internal
+            - Hace bultin_run del primer echo "chau"
+            
+            - Crear fork para el segundo hijo
+            - Conectar stdin a pipe[0][0] -> dup2(pipes[0][0], STDIN_FILENO)
+            - Cae en el caso builtin_is_internal
+            - Hace builtin_run del segundo echo "universo"
+           
+            Padre:
+            - Cierra los extremos de la pipe close(pipe[0][1]) y close(pipe[0][0])
+            - No espera a los hijos (está en bg)
+    
+    Pipeline compuesta con cmd solo externos en fg:
+
+        Ej: ls -l | wc
+
+        Formato Pipeline:
+            cmdline = [(["ls", "-l"], NULL, NULL) , (["wc"],NULL,NULL)]
+            wait = true
+
+        pipeline_length:
+            N = 2
+
+        pipes necesarias:
+            N-1 = 1
+
+        Ejecución: 
+            - Crear la pipe necesaria con el extremo de lectura (pipes[0][0] stdin) y de escritura (pipes[0][1] stdout)
+
+            - Crear fork para el primer hijo
+            - Conectar stdout a pipe[0][1] ->  dup2(pipes[0][1], STDOUT_FILENO)
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del ls
+            - exit(1) en caso de error
+            
+            - Crear fork para el segundo hijo
+            - Conectar stdin a pipe[0][0] -> dup2(pipes[0][0], STDIN_FILENO)
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del wc
+            - exit(1) en caso de error
+            
+            
+            Padre:
+            - Cierra los extremos de la pipe close(pipe[0][1]) y close(pipe[0][0])
+            - wait(NULL) para el padre (está en fg), espera a los hijos
+
+    Pipeline compuesta con cmd solo externos en bg:
+
+        Ej: ls -l | wc &
+
+        Formato Pipeline:
+            cmdline = [(["ls", "-l"], NULL, NULL) , (["wc"],NULL,NULL)]
+            wait = false
+
+        pipeline_length:
+            N = 2
+
+        pipes necesarias:
+            N-1 = 1
+
+        Ejecución: 
+            - Crear la pipe necesaria con el extremo de lectura (pipes[0][0] stdin) y de escritura (pipes[0][1] stdout)
+
+            - Crear fork para el primer hijo
+            - Conectar stdout a pipe[0][1] ->  dup2(pipes[0][1], STDOUT_FILENO)
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del ls
+            - exit(1) en caso de error
+            
+            - Crear fork para el segundo hijo
+            - Conectar stdin a pipe[0][0] -> dup2(pipes[0][0], STDIN_FILENO)
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del wc
+            - exit(1) en caso de error
+            
+            
+            Padre:
+            - Cierra los extremos de la pipe close(pipe[0][1]) y close(pipe[0][0])
+            - No hace wait(NULL), no espera a los hijos
+
+    Pipeline compuesta con cmd mixtos en fg:
+
+        Ej: ls -l | echo "Hola" 
+
+        Formato Pipeline:
+            cmdline = [(["ls", "-l"], NULL, NULL) , (["echo", "Hola"],NULL,NULL)]
+            wait = true
+
+        pipeline_length:
+            N = 2
+
+        pipes necesarias:
+            N-1 = 1
+
+        Ejecución: 
+            - Crear la pipe necesaria con el extremo de lectura (pipes[0][0] stdin) y de escritura (pipes[0][1] stdout)
+
+            - Crear fork para el primer hijo
+            - Conectar stdout a pipe[0][1] ->  dup2(pipes[0][1], STDOUT_FILENO)
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del ls
+            - exit(1) en caso de error
+            
+            - Crear fork para el segundo hijo
+            - Conectar stdin a pipe[0][0] -> dup2(pipes[0][0], STDIN_FILENO)
+            - Cae en el caso builtin_is_internal
+            - Hace builtin_run del echo
+            
+            Padre:
+            - Cierra los extremos de la pipe close(pipe[0][1]) y close(pipe[0][0])
+            - Hace wait(NULL), espera a los hijos
+
+    Pipeline compuesta con cmd mixtos en bg:
+
+        Ej: echo "Vamo la gloria" | wc &
+
+        Formato Pipeline:
+            cmdline = [(["echo", "Vamo la gloria"], NULL, NULL) , (["wc"],NULL,NULL)]
+            wait = false
+
+        pipeline_length:
+            N = 2
+
+        pipes necesarias:
+            N-1 = 1
+
+        Ejecución: 
+            - Crear la pipe necesaria con el extremo de lectura (pipes[0][0] stdin) y de escritura (pipes[0][1] stdout)
+
+            - Crear fork para el primer hijo
+            - Conectar stdout a pipe[0][1] ->  dup2(pipes[0][1], STDOUT_FILENO)
+            - Cae en el caso builtin_is_internal
+            - Hace builtin_run del echo
+            
+            - Crear fork para el segundo hijo
+            - Conectar stdin a pipe[0][0] -> dup2(pipes[0][0], STDIN_FILENO)
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del wc
+            - exit(1) en caso de errores
+            
+            Padre:
+            - Cierra los extremos de la pipe close(pipe[0][1]) y close(pipe[0][0])
+            - NO hace wait(NULL), no espera a los hijos
+
+    Pipeline más compleja MIX:
+        
+        Ej: ls -l | wc | echo "a" > text.txt &
+
+        Formato Pipeline:
+            cmdline = [(["ls", "-l"], NULL, NULL) , (["wc"], NULL, NULL), (["echo", "a"], NULL, "text.txt")]
+            wait = false
+
+        pipeline_length:
+            N = 3
+
+        pipes necesarias:
+            N-1 = 2
+
+        Ejecución: 
+            - Crear las pipes necesarias con los extremos de lectura y escritura:
+            pipes[0][0] -> stdin 1er pipe
+            pipes[0][1] -> stdout 1er pipe
+            pipes[1][0] -> stdin 2da pipe
+            pipes[1][1] -> stdout 2da pipe
+
+            - Crear fork para el primer hijo
+            - Escribe stdout a pipes[0][1] ->  dup2(pipes[0][1], STDOUT_FILENO)
+            - Cierra la pipe close(pipes[0][1]) y las que no utilice
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del ls
+            - exit(1) si hay errores
+            
+            - Crear fork para el segundo hijo
+            - Lee stdin a pipes[0][0] -> dup2(pipes[0][0], STDIN_FILENO)
+            - Cierra la pipe close(pipes[0][0])
+            - Escribe stdout a pipes[1][1] -> dup2(pipes[1][1], STDOUT_FILENO)
+            - Cierra la pipe close(pipes[1][1]) y las que no utilice
+            - Cae en el caso !builtin_is_internal
+            - Hace execvp del wc
+            - exit(1) en caso de errores
+
+            - Crear fork para el tercer hijo
+            - Lee stdin a pipes[1][0] -> dup2(pipes[1][0], STDIN_FILENO)
+            - Cierra la pipe close(pipes[1][0]) y las que no utilice
+            - Abre la redirección de stdout:
+                open("text.txt",...)
+                dup2(fd, STDOUT_FILENO)
+                close(fd)
+            - Cierra el extremo que no usa close(pipes[1][1])
+            - Cae en el caso builtin_is_internal
+            - Hace el builtin_run del echo
+            
+            Padre:
+            - Cierra los extremos de la pipe close(pipes[0][0]), close(pipes[0][1]), close(pipes[1][0]) y close(pipes[1][1])
+            - NO hace wait(NULL), no espera a los hijos
+    

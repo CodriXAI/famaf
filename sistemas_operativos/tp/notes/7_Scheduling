@@ -1,0 +1,68 @@
+Tabla de ejemplo de propiedades de las políticas:
+    Politica      Apropiativa      Interactiva      ¿Tener el T?       ¿Justa/fair? 
+
+    FIFO              NO            Por lotes            NO                 SI                          
+
+    RR                SI            Interactivo          NO                 SI
+
+    SJF               NO            Por lotes            SI             Starvation
+    STCF              SI            Interactivo          SI             Starvation                     
+
+Pros:
+	FIFO: Muy sencilla de implementar
+	
+	RR: Atiende a todos los procesos con un quantum límite establecido, evita monopolios de procesos
+
+	SJF: Throughput
+
+	SCTF: Minimiza el turnaround, que es el tiempo desde que llega un proceso hasta que termina
+
+
+Contras:
+	
+	FIFO: Un proceso grande monopoliza
+
+	RR: Si está mal regularizado el quantum, puede generar mal rendimiento
+	
+	SJF: Monopolio
+
+	SCTF: Puede causar overhead si llegan muchos procesos con menos tiempo de completitud
+
+--------------------------------------------------------------> Donde <-----------------------------------------------------------------
+
+Politica: 
+	Es justamente las reglas con las que ordenamos el flujo de los procesos, ejemplo, FIFO, Round Robin, SJF, etc
+
+Preempting => Apropiativo:
+	La capacidad que tiene una política para poder "suspender" y posponer procesos
+	Ejemplo, FIFO es non-preempty, en cambio Round Robin es preempty
+
+Interactiva:
+		
+
+Tener el T:
+	Significa que tiene en cuenta la duración del proceso como tal
+
+
+Justa/Fair:
+	La justicia (fairness) es la capacidad que tiene una política de poder distribuir los recursos de cpu para que los procesos puedan ejecutarse
+	y que ninguno se quede, o esperando mucho tiempo o sin su ejecución.
+
+Pros:
+	Ventajas de utilizar dicha política
+
+
+Contras:
+	Desventajas de utilizar dicha politica
+
+
+
+Vocabulario:
+
+IPC: Instrucciones por ciclo => Instruction per cycle
+
+Por lotes: Prioriza la eficiencia de cargas largas y no interactivas (ejemplo de politica FIFO) Mejora el rendimiento y el throughput
+
+Interactivo: Prioriza la respuesta al usuario, rapidez y la baja latencia (ejemplo de política RR)
+
+Starvation: En el sentido literal es morirse de hambre, y ocurre cuando un proceso nunca recibe recursos de cpu, aunque esté listo para correr. Por ende nunca se ejecuta

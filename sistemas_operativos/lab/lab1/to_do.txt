@@ -1,0 +1,40 @@
+Para hacer:
+- Leer bien la consigna de lo que se esté realizando y en base a eso realizar lo mencionado abajo:
+- Entender lo que tenemos que hacer
+- División de tareas (Branches, Rotación de tareas, etc)
+- Definir un estilo de código y mismo formato para todos los integrantes
+- Lo mismo para los commits y pusheos
+- Coordinación y comunicación ante conflictos, situaciones emergentes, etc
+
+
+Implementación de los TADs 'scommand' y 'pipeline':
+
+1 - Crear el módulo command.c para empezar a implementar el TAD
+
+2 - Con las tareas divididas, empezar a trabajar por funciones:
+	Para ello leer bien la documentación de los headers
+	Averiguar si hay un módulo de GLib que nos permita acelerar procesos
+	Coordinar y garantizar el encapsulamiento
+
+3 - Una vez creada una función, testearla, no esperar a tener todo para arrancar a testear:
+	Nos asegura tener el control de donde están fallando las cosas
+
+4 - Al momento de hacer commits (preferiblemente por función correctamente agregada):
+	Que sea en una branch específica, NO agregar a la 'master' hasta que no se haya completado el objetivo de la branch
+	Comunicar cuando hayan commits, esto implicará que los otros hagan pull para actualizar su repositorio
+	Trabajar en lo posible los commits en diferentes lineas de código (evita conflictos)
+
+5 - Revisión y exposición general:
+	Cuando esté finalizada la parte de la implementación, todos tendremos que saber que han hecho los demás.
+	Contar un poco de cómo se llevó a cabo, qué hacen las funciones, etc
+	De esta forma en la defensa, todos vamos a saber todo
+
+Sugerencia Personal:
+	Tenemos dos TADs a implementar en command.c, de los cuales se dividen entre: Constructores - Modificadores - Proyectores
+	Ideal, subgrupos de 2, unos para scommand, otros 2 para pipeline. 
+	Si surgen dificultades, podemos abarcarlo entre los 4, uno codea, los otros piensan (evitamos conflictos en los merges)
+	Rotación sugerida, para que no trabajemos todo el tiempo sobre lo mismo.
+	Dos que estén trabajando en el mismo TAD pueden dividirse entre: Constructores/Media Modificadores && Media Modificadores/Proyectores por ejemplo
+	------> ¡Comunicación constante! <------------ 
+
+Para más consejos tecnicos ir aquí: https://chatgpt.com/share/68a890bf-a6b8-8009-9d44-4e7012f6964e

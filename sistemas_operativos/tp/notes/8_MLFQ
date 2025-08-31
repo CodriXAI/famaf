@@ -1,0 +1,36 @@
+MLFQ => Multi-Level feedback queue (En español: Colas multinivel con retroalimentación)
+
+	Es una política de planificación (scheduling) de CPU. Y el objetivo que tiene esta política es el de poder equilibrar las respuestas rápidas
+	para los procesos interactivos (I/O Bound) y eficiencia para los procesos pesados o de cálculos (CPU  Bound)
+	
+	Idea principal:
+
+		Se tienen varias colas, cada una con diferente prioridad.
+
+		Cada cola usa una política Round Robin (con distintos quantum de tiempo).
+
+		Las colas de mayor prioridad tienen quantum más corto.
+
+		Las de menor prioridad tienen quantum más largo.
+
+		Las reglas de realimentación son:
+
+		Si un proceso usa toda su ráfaga de CPU (no cede antes de terminar el quantum), se asume que es CPU bound, y se baja a una cola de menor prioridad.
+
+		Si un proceso cede antes de que termine el quantum (porque pidió I/O, por ejemplo), se asume que es interactivo (I/O bound), 
+		y se mantiene en la cola de prioridad alta.
+
+	Notar que:
+		Los procesos que se almacenan en la queue están en estado de "Ready" listos para correr. Y si hay procesos en la cola de más alta prioridad, serán
+		los que se ejecuten primero
+
+
+Vocabulario:
+
+	I/O-bound:
+		Un proceso es I/O-bound cuando la mayor parte de su ejecución se la pasa esperando operaciones del tipo entrada/salida
+		Ejemplo: Leer, escribir en disco, servidores esperando paquetes, consulta de base de datos, etc
+
+	CPU-bound:
+		Un proceso es del tipo CPU-bound cuando la mayor parte de su ejecución se consume en cálculos intensivos de CPU y no en I/O
+		Ejemplo: Renderizados de modelos, cálculos matemáticos complejos, entrenamiento en Machine Learning, etc
