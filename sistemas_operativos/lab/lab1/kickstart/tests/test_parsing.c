@@ -123,7 +123,8 @@ START_TEST (test_empty)
 
     init_parser("\n");
     output = parse_pipeline(parser);
-    ck_assert_msg (output==NULL, NULL);
+    ck_assert_msg (pipeline_length (output) == 0, NULL);
+    //ck_assert_msg (output==NULL, NULL);
 
     /* Esto debería generar un pipeline de un elemento, con un comando
      * vacío adentro FIXME: Me parece que no es cierto

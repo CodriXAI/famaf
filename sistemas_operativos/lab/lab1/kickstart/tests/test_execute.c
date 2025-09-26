@@ -1,6 +1,7 @@
 #include <check.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <assert.h>
 #include "test_execute.h"
 

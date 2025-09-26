@@ -1,0 +1,75 @@
+n = 1 fork. Número total de prints = 3
+
+print(a)
+fork() -------->
+print(a)        print(a)
+
+2⁰ + 2¹ = 1 + 2 = 3
+
+n = 2 fork. Número total de prints = 7
+
+print(a)
+fork()------------------------------------------> 
+print(a)                                         print(a)
+fork() ------------------>                       fork() ------------------------------>
+print(a)                  print(a)               print(a)                              print(a)
+
+2⁰ + 2¹ + 2² = 1 + 2 + 4 = 7
+
+n = 3 forks. Número total de prints = 15
+
+print(a)
+fork() --------->  
+print(a)         
+fork() --------->           
+print(a)         
+
+print(a) 
+fork()-----------------------------------------------------------_>
+print(a)                                                           print(a)    
+fork()-------------------->                                        fork()----------------------------------->                         
+print(a)                   print(a)                                print(a)                                  print(a)
+fork()------->             fork()----------->                      fork()----------------->                  fork()--------------->                     
+print(a)      print(a)     print(a)          print(a)              print(a)                print(a)          print(a)              print(a)
+
+2⁰ + 2¹ + 2² + 2³ = 1 + 2 + 4 + 8 = 15
+
+
+PATRÓN ENCONTRADO: SE VAN SUMANDO LAS POTENCIAS DE 2
+
+______________________________________________________________________________________________________________________________________________
+
+Para n forks. Entonces el número total de prints va a ser igual a:
+
+[Sumatoria 0 <= k <= n]: 2^k
+
+EXPLICACIÓN:
+    * Tenemos un print al inicio, por ende siempre se va a realizar un print independientemente la cantidad de forks
+    * El fork lo que hace es una bifurcación, divide en 2 el problema y realiza en 2 procesos lo que haya debajo
+    * Generalmente el patrón es: print - fork - print.
+    * Si tomamos como ejemplo los casos base:
+            print -> 1
+            fork -> bifurcación
+            print (x2 por fork) -> 2
+
+            Resultado = 3 prints
+
+            print -> 1
+            fork -> bifurcacion
+            print (x2 por el fork) -> 2
+            fork  (x2 por el fork) -> 2 bifurcaciones
+            print (x2 por el fork, x2 por el fork, x4) -> 4
+
+            Resultado = 7 prints
+
+            print -> 1
+            fork -> bifurcacion
+            print (x2 por el fork) -> 2
+            fork  (x2 por el fork) -> 2 bifurcaciones
+            print (x2 por el fork, x2 por el fork, x4) -> 4
+            fork  (x2 por el fork, x2 por el fork, x4) -> 4 bifurcaciones
+            print (x2 por el fork, x2 por el fork, x2 por el fork, x8) -> 8
+
+            Resultado = 15 prints
+
+

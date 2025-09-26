@@ -1,17 +1,18 @@
 #include <assert.h>
-#include <fcntl.h> /* Para las macros de open, sin incluir S_IRWXU */
-#include <glib.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h> /* Para el atributo: S_IRWXU para syscall open */
-#include <unistd.h> /* Para syscalls como fork, execvp, exit, wait, etc */
-#include <wait.h>
-
 #include "builtin.h" 
 #include "command.h"
 #include "execute.h"
+#include <fcntl.h> /* Para las macros de open */
+#include <stdlib.h>
+#include <glib.h>
+#include <wait.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <unistd.h> /* Para syscalls como fork, execvp, exit, wait, etc */
 #include "tests/syscall_mock.h"
 
+
+/* -----------------------------------------------MODULOS------------------------------------------------- */
 
 static char **scommand_to_array(scommand self){
     assert(self != NULL);
@@ -60,11 +61,11 @@ static void redir(scommand self){
  *  
  * EXPLICACIÓN DE MACROS:
  *      Para entrada (in) se usa O_RDONLY (read only) solo lectura
- *      Para salida (out) se utilizan: O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU
+ *      Para salida (out) se utilizan: O_WRONLY | O_CREAT | O_TRUNC, 0644+
  *              O_WRONLY: sólo escritura.
  *              O_CREAT: crear si no existe.
  *              O_TRUNC: vaciar el archivo si ya existe.
- *              S_IRWXU: permisos típicos (rw-r--r--).
+ *              0644: permisos típicos (rw-r--r--).
  */
 
 static void run_argv(char **argv){
@@ -73,8 +74,8 @@ static void run_argv(char **argv){
     perror("execvp");
     exit(1);
 }
-/* Ejecuta el comando contenido en el arreglo de punteros argv
- * Requires: argv != NULL && argv[0] != NULL
+/* Tomo el arreglo de punteros y lo ejecuto
+ *
  */
 
 static void run_command(scommand self){
@@ -84,21 +85,26 @@ static void run_command(scommand self){
     run_argv(argv);
     destroy_array(argv);
 } 
-/* Ejecuta el comando self
- * Requires: self != NULL
+/* Ejecuto el comando si es externo
+ *
  */
 
 
+/* Se encarga de ejecutar un comando simple externo
+ * Requires = (self != NULL && !scommand_is_empty(self) && !builtin_is_internal(self))
+ */
+
+/* -----------------------------------------FUNCIÓN GENERAL--------------------------------------------- */
+
 void execute_pipeline(pipeline apipe){
-    assert(apipe != NULL);
-    if(pipeline_length(apipe) != 0){
+    if(apipe != NULL && pipeline_length(apipe) != 0){
         unsigned int n = pipeline_length(apipe);
 
-        int (*pipes)[2] = malloc((n-1) * sizeof (*pipes)); 
+        int (*pipes)[2] = malloc((n-1) * sizeof *pipes); /* Array multidim que tiene [pipes][in/out] */
 
         for(unsigned int i = 0; i<n-1; i++){
             int p = pipe(pipes[i]); /* Creo una pipe */
-            
+        
             /* Si mientras creo pipes, haya surgido alguna con error, lo comunico */
 
             if(p == -1){
@@ -107,51 +113,46 @@ void execute_pipeline(pipeline apipe){
             }
         }
 
-        scommand cmd = pipeline_front(apipe);
+        for(unsigned int i = 0; i < n; i++){
 
-        bool not_internal = true; /* Flag que detecta un cmd interno en pipeline con n>1*/
+            /* Tomo el primer commando de la pipeline */
+            scommand cmd = pipeline_front(apipe);
 
-        if(builtin_alone(apipe)){
-            builtin_run(cmd);
-            pipeline_pop_front(apipe);
-        }else{
-            for(unsigned int i = 0; i < n && not_internal; i++){
-                /* Tomo el primer commando de la pipeline */
-                scommand cmd = pipeline_front(apipe);
+            if(builtin_alone(apipe)){
+                builtin_run(cmd);
+                pipeline_pop_front(apipe);
+            }else if(cmd != NULL && !scommand_is_empty(cmd)){
+                size_t pid = fork(); /* Bifurcación */
 
-                if(builtin_is_internal(cmd)){
-                    printf("Input not allowed \n");
-                    not_internal = false; /* Encontró un cmd interno */
-                }else if(cmd != NULL && !scommand_is_empty(cmd)){
-                    size_t pid = fork(); /* Bifurcación */
-
-                    if (pid == 0){ /* Proceso hijo */
-                        if(i > 0){ /* Si NO soy el primer comando */
-                            dup2(pipes[i-1][0], STDIN_FILENO);  /* Entonces tomo el stdin del comando anterior */
-                        }
-                        if(i < n-1){ /* Si NO soy el último comando */
-                            dup2(pipes[i][1], STDOUT_FILENO);   /* Entonces escribo en el pipe correspondiente */
-                        }
-
-                        /* Cerrar los pipes que no utilizamos */
-                        for(unsigned int j = 0; j < n-1; j++){  
-                            close(pipes[j][0]);
-                            close(pipes[j][1]);
-                        }
-
-                        /* Ejecución del comando dependiendo si es o no es interno */
-                        run_command(cmd);
-                        
-                    }else{
-                        /* Proceso Padre: */
-                        pipeline_pop_front(apipe);
+                if (pid == 0){ /* Proceso hijo */
+                    if(i > 0){ /* Si NO soy el primer comando */
+                        dup2(pipes[i-1][0], STDIN_FILENO);  /* Entonces tomo el stdin del comando anterior */
                     }
+                    if(i < n-1){ /* Si NO soy el último comando */
+                        dup2(pipes[i][1], STDOUT_FILENO);   /* Entonces escribo en el pipe correspondiente */
+                    }
+
+                    /* Cerrar los pipes que no utilizamos */
+                    for(unsigned int j = 0; j < n-1; j++){  
+                        close(pipes[j][0]);
+                        close(pipes[j][1]);
+                    }
+
+                    /* Ejecución del comando dependiendo si es o no es interno */
+                    if(builtin_is_internal(cmd)){
+                        builtin_run(cmd);
+                        exit(0); /* El reemplazo del execvp */
+                    }else{
+                        run_command(cmd);
+                    }
+                }else{
+                    /* Proceso Padre: */
+                    pipeline_pop_front(apipe);
                 }
-        
             }
+    
         }
 
-        /* Cierra los pipes  */
         for(unsigned int k = 0; k < n-1; k++){
             close(pipes[k][0]);
             close(pipes[k][1]);
@@ -166,7 +167,4 @@ void execute_pipeline(pipeline apipe){
         }
     }
 }
-
-
-
 

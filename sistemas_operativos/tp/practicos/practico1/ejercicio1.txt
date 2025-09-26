@@ -1,0 +1,85 @@
+Dado el siguiente código por terminal:
+$ time pi 1000000 > /dev/null & ... & time pi 1000000 > /dev/null &
+
+Donde mide el tiempo que tarda una sucesión de procesos en simultáneo, todos realizando el programa pi que imprime los dígitos del
+famoso número PI hasta llegar a 1 millón y redirecciona a la "basura" para que solo aparezca por pantalla los tiempos: 
+walltime y cputime.
+Siendo:
+    * Walltime: Tiempo total desde que se comienza la ejecución hasta que finaliza (contando interrupciones)
+    * Cputime: El tiempo que el sistema le ha otorgado al proceso como tal (no cuenta interrupciones)
+
+Tenemos la siguiente tabla con diferentes valores, dados por el formato (walltime, cputime) también llamado (real, user):
+
+#Instancias     Medición                                                Descripción
+
+1               (2.56,2.44)
+2               (2.53,2.42), (2.58,2.40)
+1               (3.44,2.41)
+4               (5.12,2.44), (5.13,2.44), (5.17,2.46), (5.18,2.46)
+3               (3.71,2.42), (3.85,2.42), (3.86,2.44)
+2               (5.04,2.36), (5.09,2.43)
+4               (7.67,2.41), (7.67,2.44), (7.73,2.44), (7.75,2.46)
+
+Las preguntas del enunciado:
+a) ¿Cuántos Núcleos tiene el sistema?
+b) ¿Porqué a veces el cputime es menor que el walltime?
+c) Indique en la Descripción que estaba pasando en cada medición.
+
+Primero tengamos en cuenta que nos dice cada fila:
+
+FILA 1:
+    1 Instancia => $ time pi 1000000 > /dev/null
+    (2.56,2.44)
+    Podemos ver que el real es muy similar al user, lo que implica que:
+        * El tiempo total que estuvo corriendo el sistema, fue solo para ejecutar el proceso.
+        * Conclusiones: Podemos decir que de momento el sistema posee al menos 1 Núcleo de CPU.
+    
+FILA 2:
+    2 Instancias => $ time pi 1000000 > /dev/null & time pi 1000000 > /dev/null
+    (2.53,2.42), (2.58,2.40)
+    Con dos instancias se observa que:
+        * El real y el user en ambos casos siguen siendo muy similares, casi sin diferencias
+        * Al ser dos instancias, podemos decir que se han ejecutado los dos procesos en simultáneo, por ende 
+          el sistema tiene al menos 2 Núcleos
+
+FILA 3:
+    1 Instancia => $ time pi 1000000 > /dev/null
+    (3.44,2.41)
+    Una instancia, pero ahora el real ha aumentado, pudieron ocurrir los siguientes escenarios:
+        * Los 2 núcleos (o más) de CPU se han turnado para la ejecución del proceso, aumentando el real
+          (Parece que, aunque el sistema tuviese más núcleos, por el aumento ligero del real, fueron exactamente 2)
+        * Existieron interrupciones dadas por el scheduler fuera de la ejecución del proceso
+        * Como el time solo mide el proceso que le pasemos como argumento, es muy probable que 2 núcleos se hayan turnado
+          y eso ha consumido más tiempo en real.
+
+FILA 4:
+    4 Instancias => $ time pi 1000000 > /dev/null & time pi 1000000 > /dev/null & time pi 1000000 > /dev/null
+                      & time pi 1000000 > /dev/null 
+    (5.12,2.44), (5.13,2.44), (5.17,2.46), (5.18,2.46)
+    4 instancias, donde podemos observar que user y real se mantienen estables, con la diferencia de que el real duplica aprox al
+    user. ¿Qué significa esto?:
+        * Es posible que, para los 4 procesos lanzados en simultáneo, se hayan estado turnando los núcleos de CPU, lo que explica
+          la gran diferencia del real respecto del user. 
+        * ¿Cuántos exactamente? No lo sabemos, lo que si podemos observar es que, el real ha duplicado al user, por ende ha demorado
+          el doble de tiempo por el turnamiento entre núcleos. Lo que puede afirmar que hayan sido 2 núcleos los que han estado
+          encargándose de la tarea.
+        * Aún podemos decir que el sistema tiene al menos 2 Núcleos
+
+FILA 5:
+    3 Instancias => time pi 1000000 > /dev/null & time pi 1000000 > /dev/null & time pi 1000000 > /dev/null
+    (3.71,2.42), (3.85,2.42), (3.86,2.44)
+    En 3 instancias, podemos ver que el real nuevamente llega a ser el doble aprox que el user. Lo que por la FILA 4:
+        * Hemos visto que se trata de al menos 2 Núcleos
+        * Si hubiese cabido la posibilidad de que fuesen más de 2 Núcleos (por ejemplo 3), en este caso hubiese ocurrido algo similar
+          a la FILA 2, donde en los 3 procesos, tanto real como user se mantenían similares, pero como ya empezó a haber intercambio
+          de Núcleos (aumentando el real). Podemos definir que la cantidad de núcleos es de al menos 2, y < 3. Por ende
+          Aquí confirmamos que hay exactamente 2 Núcleos
+
+FILA 6 Y 7 lo reafirman, aunque con matices:
+    * Si no hubiesemos tenido la FILA 5, por FILA 7, se puede interpretar como si realmente pudiesen existir 3 Núcleos en CPU
+    * La FILA 6 solo nos asegura que hay 2 núcleos.
+
+¿POR QUÉ AVECES CPUTIME < WALLTIME?
+El motivo porque esto ocurre es que al haber intercambio de Núcleos para los procesos, dicho intercambio conlleva también un
+tiempo extra para ejecutarse, lo que aumenta el walltime, que mide inclusive estas interrupciones típicas de virtualización del CPU
+

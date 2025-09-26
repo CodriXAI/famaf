@@ -1,0 +1,2 @@
+atoi: ASCII to integer
+	Su función principal es la de realizar la conversión de string a entero

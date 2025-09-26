@@ -1,0 +1,40 @@
+yield() => syscall para decirle al SO que le dé paso al lanzamiento del siguiente proceso (hint)
+
+Fragmentación externa
+
+LibC
+
+System call para pedir memoria: brk()
+brk es el punto de quiebre
+
+malloc() y free() no ejecutan syscalls
+
+Relocalizable = Capacidad de que un programa pueda ser reubicado en la memoria y ejecutarse igual
+
+Importante, cubrir los casos donde no se pueda saltar a partes de la memoria que no deberían saltar.
+    Riesgos de entrar al SO, saber donde está mapeado, borrar disco, o tomar simplemente el control del sistema, entre otros.
+
+Snipet
+
+ASLR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOTAS EXTRA: (Revisar)
+
+a[1<<30] = 0 => 2² * 2³⁰ = 2³² => 4GiB => 00000000000000 ...... 000000000000000  => (LOADER) 0
+A partir del loader, ocupa 4GiB
+
+a[1<<30] = 1 => 2² * 2³⁰ = 2³² => 4GiB => 1111111111111111 ..... 11111111111111 => (LOADER) != 1
+Luego del loader, "4 GiB"

@@ -23,14 +23,19 @@ int main(int argc, char *argv[]) {
         show_prompt();
         pipe = parse_pipeline(input);
 
+        if(pipe != NULL){
+            execute_pipeline(pipe);
+            pipe = pipeline_destroy(pipe);
+        }else{
+            printf("input not found \n");
+        }
+        
+
+
         /* Hay que salir luego de ejecutar? */
         quit = parser_at_eof(input);
-        /*
-         * COMPLETAR
-         *
-         */
     }
-    parser_destroy(input); input = NULL;
+    parser_destroy(input); 
+    input = NULL;
     return EXIT_SUCCESS;
 }
-

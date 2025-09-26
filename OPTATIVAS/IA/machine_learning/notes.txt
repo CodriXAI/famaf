@@ -1,0 +1,25 @@
+Baselines de cualquier modelo de Machine Learning:
+    Promedio y Regresión Logística, modelos básicos que se entienden
+
+En árboles de decisiones:
+    Se tiene en cuenta la entropía (incertidumbre)
+    Equivalente en teoría de la información, cuanto menos bits tenga que usar para representar los datos, menor será la entropía
+    Los nodos que vayamos a usar para la toma de decisiones se basan en cuánto a mayor information gain se tenga (menor entropía)
+    Se realizan de forma recursiva, hasta llegar a nodos puros (hojas de árboles) el cuál ya determina si es de un tipo u otro en clasificación binaria
+    Riesgos de overfitting (sobreajuste), riesgo de que el algoritmos del modelo memorice
+    La solución del overfitting se realiza mediante la "curación de datos":
+        Se realizan las podas (pruning) pre-pruning y post-pruning
+        Regularización: Suavizar los máximos y mínimos, smooth,y penaliza los valores más grandes de coeficientes
+
+Bosques de árboles de decisión: (XGBoost)
+    Con el mismo dataset de prueba, se generan aleatoriamente subconjunto del 90% de los datos, y por cada uno
+    se realiza un árbol de decisión, formando un conjunto de árboles denominado bosques, lo cuál permite luego sacar los factores comunes ya
+    máxima optimización, podación, Regularización.
+
+Recomendaciones:
+- Un aprendedor lineal es un baseline ineludible
+- La regresión logística es altamente interpretable
+- Los árboles de decisión son mucho más expresivos
+- Una gran forma de explorar nuestros datos, incluyendo como método de selección de atributos
+- Atención al overfitting!
+- Uno de los clasificadores más robustos, baseline imprescindible: XGBoost

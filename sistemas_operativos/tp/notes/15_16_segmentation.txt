@@ -1,0 +1,24 @@
+Segmentación - Tres registros (Con direcciones virtuales):
+
+    - Base: Indica el inicio del segmento, suma.
+
+    - Limit: Indica el límite del segmento, el cuál si se sobrepasa, se realiza una excepción denominada "segmentation fault", comparación
+
+    - rwx: Read-Write-Execute, son 3 bits los cuales activan o desactivan los permisos, comparación
+
+    Para hacerlo necesitamos, un comparador, una AND y un adder de 64 bits.
+
+    Esto con el fin de lograr la relocalización, y direcciones virtuales
+
+    Con esto resolvemos:
+        Relocalización, Protección y Rapidez
+    Si tenemos un problema en un nivel de abstracción, conviene bajar un nivel
+
+    El manejo de estos 3 registros y el resguardo de los mismos, hace que al momento de realizar un cambio de contexto, pueda cambiar el mapeo completo de la memoria
+    con solo un context switch.
+
+
+Fragmentación Interna
+
+
+Fragmentación Externa

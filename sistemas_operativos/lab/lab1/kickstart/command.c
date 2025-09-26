@@ -44,7 +44,7 @@ scommand scommand_destroy(scommand self){
 
 void scommand_push_back(scommand self, char * argument){
     assert(self!=NULL && argument!=NULL);
-    g_queue_push_tail(self->cmd, g_strdup(argument));
+    g_queue_push_tail(self->cmd,argument);
     assert(!scommand_is_empty(self)); 
 }
 
@@ -233,32 +233,57 @@ bool pipeline_get_wait(const pipeline self){
     return self->wait;
 }
 
+
 char *pipeline_to_string(const pipeline self){
     assert(self != NULL);
     
     char *straux;
     char *pipe;
     char *ampersand;
+    char * cmd_str;
+    size_t total_len = 0; 
     scommand arg;
 
-    straux = malloc(1);
-    straux[0] = '\0';
+    if (pipeline_is_empty(self)) {
+        straux = malloc(1);
+        straux[0] = '\0';
+    }
+
+    for (guint i = 0; i < pipeline_length(self); i++) {
+        arg = g_queue_peek_nth(self->cmdline, i);
+        if (!scommand_is_empty(arg)) {
+            char *cmd_str = scommand_to_string(arg);
+            total_len += strlen(cmd_str);
+            free(cmd_str);  // liberamos luego de medir
+
+            if (i < pipeline_length(self) - 1) total_len += 3; // " | "
+        }
+    }
+
+    if (!self->wait) total_len += 2; // " &"
     
-    if(!pipeline_is_empty(self)){
-        for(guint i = 0; i<pipeline_length(self);i++){
-            arg = g_queue_peek_nth(self->cmdline, i);
-            straux = strcat(straux, scommand_to_string(arg));
+    straux = malloc(total_len + 1); //reserva memoria para los scommands
+    straux[0] = '\0';
+
+    for(guint i = 0; i<pipeline_length(self);i++) {
+        arg = g_queue_peek_nth(self->cmdline, i);
+        
+        if (!scommand_is_empty(arg)) { 
+            cmd_str =  scommand_to_string(arg);  
+            straux = strcat(straux, cmd_str); 
+            free(cmd_str);
+            
             if(i<pipeline_length(self)-1){
-                pipe = malloc(4);
                 pipe = " | ";
                 straux = strcat(straux, pipe);
+              }
             }
         }
         if(!self->wait){
-            ampersand = malloc(3);
             ampersand = " &";
             straux = strcat(straux, ampersand);
         }
-    }
+    
     return straux;
 }
+

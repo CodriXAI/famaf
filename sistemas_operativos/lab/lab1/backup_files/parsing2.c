@@ -1,9 +1,9 @@
-#include <stdbool.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#include "command.h"
-#include "parser.h"
 #include "parsing.h"
+#include "parser.h"
+#include "command.h"
 
 static bool handle_arguments (scommand new_cmd, char *arg, arg_kind_t type){
     bool control = false;
@@ -20,9 +20,9 @@ static bool handle_arguments (scommand new_cmd, char *arg, arg_kind_t type){
             control = true; 
         }
     } 
-
+    
     if(!control){
-        free(arg); //si no fue usado por ningun scommand, se libera
+      free(arg);
     }
 
     return control; 
@@ -38,14 +38,9 @@ static scommand parse_scommand(Parser p){
 
     while(!parser_at_eof(p) && !done){
         arg = parser_next_argument(p, &type);
-        if (arg == NULL){
-            done = true;
-        }else {
-            if (!handle_arguments(new_cmd, arg, type)){
-                done = true;
-            } 
-        } 
-
+        if (arg == NULL || !handle_arguments(new_cmd, arg, type)) {
+                done = true; 
+        }
     }
 
     return new_cmd; 
@@ -53,14 +48,9 @@ static scommand parse_scommand(Parser p){
 
 static void scommand_push (Parser p, pipeline result, bool *error, bool *another_pipe) {
     scommand cmd = parse_scommand(p);
-    if (cmd != NULL) {
-        if (!scommand_is_empty(cmd)){
-            pipeline_push_back(result, cmd); 
-        }
-        else{
-            cmd = scommand_destroy(cmd);
-       }
-    }
+    if (cmd != NULL && !scommand_is_empty(cmd)){
+        pipeline_push_back(result, cmd);
+    }  
     
     *error = (cmd==NULL || scommand_is_empty(cmd));   
     parser_op_pipe(p, another_pipe); 
@@ -68,16 +58,14 @@ static void scommand_push (Parser p, pipeline result, bool *error, bool *another
 
 static pipeline should_pipe_die (Parser p, pipeline result, bool *error){  
     bool garbage = false; 
-
     parser_garbage(p, &garbage);
 
     if (result != NULL){
         if (((*error && !pipeline_is_empty(result))) || 
             (parser_at_eof(p) && pipeline_is_empty(result))) {
-            result = pipeline_destroy(result);   
-
+            result = pipeline_destroy(result); 
         }
-    }    
+    }
 
     return result; 
 }
