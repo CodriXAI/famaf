@@ -1,3 +1,18 @@
+=== EJERCICIO 5 - PRACTICO 1 S.O ===
+
+Indique cuantas letras “a” imprime este programa, describiendo su funcionamiento.
+-------------
+printf("a\n");
+fork();
+printf("a\n");
+fork();
+printf("a\n");
+fork();
+printf("a\n");
+--------------
+Generalice a n forks. Analice para n=1, luego para n=2, etc., busque la serie y deduzca la expresión
+general en función del n.
+
 n = 1 fork. Número total de prints = 3
 
 print(a)

@@ -1,0 +1,46 @@
+=== EJERCICIO 12 - PRACTICO 1 S.O ===
+
+Verdadero o falso. Explique:
+
+(a) Es posible que user+sys < real.
+(b) Dos procesos no pueden usar la misma dirección de memoria virtual.
+(c) Para guardar el estado del proceso es necesario salvar el valor de todos los registros del micropro-
+cesador.
+(d) Un proceso puede ejecutar cualquier instrucción de la ISA.
+(e) Puede haber traps por timer sin que esto implique cambiar de contexto.
+(f) fork() devuelve 0 para el hijo, porque ningún proceso tiene PID 0.
+(g) Las syscall fork() y execv() están separadas para poder redireccionar los descriptores de archivo.
+(h) Si un proceso padre llama a exit() el proceso hijo termina su ejecución de manera inmediata.
+(i) Es posible pasar información de padre a hijo a traves de argv, pero el hijo no puede comunicar
+información al padre ya que son espacios de memoria independientes.
+(j) Nunca se ejecuta el código que está después de execv().
+(k) Un proceso hijo que termina, no se puede liberar de la Tabla de Procesos hasta que el padre no
+haya leı́do el exit status via wait().
+
+<-----------------------_>
+
+(a) - VERDADERO: Es posible que real aumente mucho mas que user + sys debido a interrupciones, I/O,
+u otros procesos, etc.
+
+(b) - VERDADERO: La memoria virtual no es compartida, cada proceso tiene su propia dirección de memoria virtual
+especificado.
+
+(c) - FALSO: Hay que salvar solo los registros relevantes de dicho proceso antes de un context switch
+
+(d) - FALSO: Hay ciertas instrucciones de la ISA que pueden modificar memoria, o romper el Sistema, para ello
+se hacen las llamadas al sistema y se evalua la situación mediante el scheduler.
+
+(e) - VERDADERO: Las traps también sirven para hacer otros tipos de syscalls por ejemplo.
+
+(f) - VERDADERO?: Se supone que el padre es el que identifica los PID de los hijos y siempre son mayores a 1
+
+(g) - FALSO: Fork() hace bifurcaciones, excev() hace que el proceso seleccionado actúe según el argv que obtenga
+
+(h) - FALSO: El hijo sigue ejecutándose, siendo adquirido (adoptado) por init, queda huérfano.
+
+(i) - FALSO: El hijo se puede comunicar con el padre por otros medios. (Si es solo por argv, ahi si cambia la cosa).
+
+(j) - FALSO: Si el execv falla, se ejecutará el código debajo de la syscall.
+
+(k) - VERDADERO: Si nunca se llama a wait, queda Zombie.
+

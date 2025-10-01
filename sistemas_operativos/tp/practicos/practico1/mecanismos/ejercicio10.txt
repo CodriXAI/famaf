@@ -1,0 +1,51 @@
+=== EJERCICIO 10 - PRACTICO 1 S.O ===
+
+Para el diagrama de transición de estados de un proceso (OSTEP Figura 4.2), describa
+cada uno de los 4 (cuatro) escenarios posibles acerca de como funciona (o no) el Sistema Operativo si
+se quita solo una de las cuatro flechas.
+
+Tenemos los 3 estados de un proceso:
+RUNNING - READY - BLOCKED
+
+Y las transiciones son del siguiente formato:
+
+RUNNING -> Scheduled -> READY
+
+READY -> Descheduled -> RUNNING
+
+RUNNING -> I/O: initiate -> BLOCKED
+
+BLOCKED -> I/O: Done -> READY
+
+Consecuencias si eliminamos:
+
+Scheduled: 
+    Los procesos que están corriendo, al no poder ser manejados voluntariamente por el
+    scheduler, se quedan en RUNNING y no le cede CPU a los procesos que están en READY
+    Problema: Se queda solo en un solo proceso, no dejando que otros entren a correr
+    en especial es un problema si son procesos de mayor prioridad.
+    No bloquean I/O, se pierde planificación justa, evitan multitarea
+    Starvation por los procesos que están en READY
+
+Descheduled:
+    Al revés, no se permite que procesos que estén listos para correr realmente lo hagan.
+    Si el último proceso en running pasa por scheduled sin opción de regresar, el CPU se queda vacio
+    Problema: S.O congelado, sin posibilidad de ejecutar nuevos procesos
+    No bloquean I/O
+    Starvation TOTAL
+
+I/O initiate:
+    Existe una pérdida de concurrencia, pues no puede esperar entradas ni salidas, y si un 
+    proceso necesita de estos, no conseguiría nunca esperarlo.
+    Resultado: Tendríamos un proceso que por I/O nunca podría bloquearse
+    El S.O se puede congelar gravemente mientras espera I/O
+
+I/O done:
+    Un proceso nunca puede despertar por I/O, resultado, procesos muertos constantemente en
+    blocked que no pueden despertar. Haciendo que la I/O se vuelva inutil 
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+=== EJERCICIO 11 - PRACTICO 1 S.O ===
+
+Dentro de xv6 el archivo x86.h contiene struct trapframe donde se guarda toda
+la información cuando se produce un trap. Indicar que parte es la que apila el hardware cuando se
+produce un trap y que parte apila el software.
+
+POR MOTIVOS DE COMPATIBILIDAD Y ANTIGUEDAD, SE DECIDE NO HACER ESTE EJERCICIO PORQUE QUEDÓ
+"OBSOLETO" CON EL TIEMPO

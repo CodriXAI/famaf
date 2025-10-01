@@ -1,0 +1,32 @@
+=== ANÁLISIS Y COMPARATIVA REPO_JULI REPO_CRIS ===
+
+VENTAJAS REPO_JULI:
+	* Robustez y seguridad garantizada con global lock
+	* Bastante explícito y con amplios campos para mayor información del semáforo
+	* Destaca en la buena implementación de Semáforo Binario Nombrado
+	* Test exhaustivo
+	* Señalizado y facil de leer
+	* Particularidad de aceptar que múltiples procesos utilicen un semáforo específico
+
+ISSUES REPO_JULI:
+	* Inicialización de parámetros de arreglo global innecesaria
+	* Poca optimización (recomendar while sobre for para búsqueda)
+	* sem_init como función de acceso al usuario (cuestiones de diseño)
+	* Returns (opcional, detalle menor)
+
+VENTAJAS REPO_CRIS:
+	* Simplificado
+	* Optimizado con ciclo while
+	* Sem_init como función auxiliar, le quita el poder al usuario de inicializar semáforos
+	* Modularizado y dividido entre syscall y función
+
+ISSUES REPO_CRIS:
+	* Poca robustez por falta de lock global (identificado por REPO_JULI)
+	* No cumple con la consigna de Semáforos Nombrados
+	* No tiene un método definido para que múltiples procesos utilicen UN semáforo (le brinda a cada proceso uno distinto)
+	* Puede que esté demasiado simplificado, siendo propensos a otros errores
+
+PREGUNTAS GENERALES:
+	* ¿Hará falta un sistema para detectar que múltiples procesos utilicen un solo semáforo?
+	* ¿Deberíamos tener un control sobre los procesos bloqueados en el diseño de nuestro semáforo? (Posiblemente)
+	

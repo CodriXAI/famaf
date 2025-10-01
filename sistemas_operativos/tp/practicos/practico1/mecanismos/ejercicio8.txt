@@ -1,0 +1,37 @@
+=== EJERCICIO 8 - PRACTICO 1 S.O ===
+
+
+Si estos programas hacen lo mismo. ¿Para que está la syscall dup()? ¿UNIX tiene un
+mal diseño de su API?
+
+Programa 1: 
+
+close(STDOUT_FILENO);
+open("salida.txt", O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);
+printf("¡Mirá mamá salgo por un archivo!");
+
+
+Programa 2:
+
+fd = open("salida.txt", O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);
+close(STDOUT_FILENO);
+dup(fd);
+printf("¡Mirá mamá salgo por un archivo!");
+
+Analisis Programa 1:
+    Cierra la salida estandar del archivo (fd = 1)
+    Open abre el archivo salida.txt en el fd disponible más bajo (como se cerró el 1, lo coloca ahi)
+    Ahora el stdout se redirecciona a salida.txt (pero porque se cerró antes el STDOUT_FILENO)
+    Se imprime en la salida estandar (ahora salida.txt) el printf
+
+Análisis Programa 2:
+    En la variable fd Se abre un descriptor de archivo en el lugar más bajo (fd = 3)
+    Se cierra el STDOUT_FILENO (fd = 1)
+    Se duplica el fd = 3 en el lugar más bajo de memoria (fd = 1, anteriormente cerrado)
+    Hace lo mismo, imprime en el nuevo stdout salida.txt
+
+Importancia del dup en estas situaciones:
+    *Te da una forma explícita de como poder crear las redirecciones
+    *Si bien con el truco del Program 1 funciona, se siente más forzado que como un procedimiento real
+    (y dependes del UNIX).
+    *Sin dup, podrías depender de algún efecto secundario de open 

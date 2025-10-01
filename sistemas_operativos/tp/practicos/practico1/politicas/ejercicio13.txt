@@ -1,0 +1,129 @@
+=== EJERCICIO 13 - PRACTICO 1 S.O ===
+
+Dados tres procesos CPU-bound puros A, B, C con T-arrival en 0 para todos y T-cpu de
+30, 20 y 10 respectivamente. Dibujar la lı́nea de tiempo para las polı́ticas de planificación FCFS y
+SJF. Calcular el promedio de T-turnaround y T-response para cada polı́tica.
+
+Tenemos 3 procesos:
+A - B - C todos CPUbound
+
+A:
+    T-arrival: 0
+    T-cpu: 30
+
+B:
+    T-arrival: 0
+    T-cpu: 20
+
+C:
+    T-arrival: 0
+    T-cpu: 10
+
+
+
+DETALLES IMPORTANTES:
+
+    T-turnaround: 
+        * Es el tiempo desde que empieza un programa hasta que termina:
+        T-turnaround = T-fin - T-arrival
+
+    T-response:
+        * Es el tiempo que pasa desde que llega el proceso hasta su primer ejecución:
+        T-response = T-firstejecution - T-arrival
+
+Linea de tiempo de planificación FCFS (First Come first serve):
+    - Esta política rige que el primer proceso en llegar es el primero en ejecutarse
+    - Política por lotes (No se interrumpen programas para intercambiarse con otro), se ejecuta todo un proceso
+    primero.
+
+    0 ---> 30 => Llegan todos los procesos y se ejecuta A:
+    30 ---> 50 => Termina de ejecutar A y se ejecuta B:
+    50 ---> 60 => Termina de ejecutar B y se ejecuta C:
+    60 ---> => Termina de ejecutarse C y ya no quedan procesos
+
+    Cálculo del T-turnaround promedio:
+        
+        T-arrival A,B,C = 0
+
+        T-fin A = 30
+        T-fin B = 50
+        T-fin C = 60
+
+        T-turnaround = T-finProceso - 0 = T-finProceso
+
+        T-turnaroundA = 30
+        T-turnaroundB = 50
+        T-turnaroundC = 60
+
+        T-turnaroundPromedio = (30+50+60) / 3 aprox => 140 / 3 aprox => 46,66 aprox
+
+    Cálculo del T-response promedio:
+        
+        T-arrival A,B,C = 0
+        
+        T-firstejecution A = 0
+        T-firstejecution B = 30
+        T-firstejecution C = 50
+
+        T-response = T-firstejecutionProceso - 0 = T-firstejecutionProceso
+
+        T-responseA = 0
+        T-responseB = 30
+        T-responseC = 50
+
+        T-responsePromedio = (0+30+50) / 3 aprox => 80 / 3 aprox => 26,66 aprox
+
+    RESUMEN FCFS:
+        T-turnaroundPromedio = 46,66 aprox
+        T-responsePromedio = 26,66 aprox
+
+Linea de tiempo de Planificación SJF (Short Job First):
+    - Esta política rige que el proceso que menos tiempo tome en ejecutarse, será el primero elegido
+    - Dejando para el final al proceso más "pesado"
+    - Es política por lotes salvo excepciones sutiles.
+
+    0 ---> 10: Llegan A, B, C, y se ejecuta el proceso más corto C
+    10 ---> 30: Termina de ejecutarse C, y se ejecuta el siguiente más corto B 
+    30 ---> 60: Termina de ejecutarse B, y se ejecuta el último, A
+
+    Cálculo del T-turnaround promedio:
+        
+        T-arrival A,B,C = 0
+
+        T-fin A = 60
+        T-fin B = 30
+        T-fin C = 10
+
+        T-turnaround = T-finProceso - 0 = T-finProceso
+
+        T-turnaroundA = 60
+        T-turnaroundB = 30
+        T-turnaroundC = 10
+
+        T-turnaroundPromedio = (60+30+10) / 3 aprox => 100 / 3 aprox => 33,33 aprox
+
+    Cálculo del T-response promedio:
+        
+        T-arrival A,B,C = 0
+        
+        T-firstejecution A = 30
+        T-firstejecution B = 10
+        T-firstejecution C = 0
+
+        T-response = T-firstejecutionProceso - 0 = T-firstejecutionProceso
+
+        T-responseA = 30
+        T-responseB = 10
+        T-responseC = 0
+
+        T-responsePromedio = (0+30+10) / 3 aprox => 40 / 3 aprox => 13,33 aprox
+
+    RESUMEN FCFS:
+        T-turnaroundPromedio = 33,33 aprox
+        T-responsePromedio = 13,33 aprox
+
+    
+
+    
+
+

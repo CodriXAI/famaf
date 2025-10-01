@@ -1,3 +1,5 @@
+=== EJERCICIO 1 - PRACTICO 1 S.O ===
+
 Dado el siguiente código por terminal:
 $ time pi 1000000 > /dev/null & ... & time pi 1000000 > /dev/null &
 

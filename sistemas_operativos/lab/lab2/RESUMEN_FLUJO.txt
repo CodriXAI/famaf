@@ -1,0 +1,10 @@
+En pocas palabras: 
+En el user lo que ocurre (y en específico en pingpong) 
+es que tomamos una variable entera y le asignamos el open, open solo va a recibir un valor entero, 
+el cuál se le va a pasar a la syscall para guardarlo en registro. En el kernel, la syscall open se 
+comunica con la función open, la función busca desde el user ese valor inicial, con argint lo obtiene, 
+y, en caso de que haya algún semáforo disponible en el arreglo de estructuras (dado en el kernel), se lo 
+va a pasar a sem init, en sem init, tomando ese valor que trajeron desde el user, inicializa el semáforo 
+junto con los otros campos. En pocas palabras, en el user, vemos que abrimos un semáforo con open y nos 
+devuelve el FD o ID del semáforo creado, internamente en el kernel, la estructura queda inicializada y 
+referenciada en el arreglo de estructura

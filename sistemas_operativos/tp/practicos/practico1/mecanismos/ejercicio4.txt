@@ -1,0 +1,48 @@
+=== EJERCICIO 4 - PRACTICO 1 S.O ===
+
+Un programa define la variable int x=100 detro de main() y hace fork().
+
+(a) ¿Cuánto vale x en el proceso hijo?
+
+(b) ¿Qué le pasa a la variable cuando el proceso padre y el proceso hijo le cambian de valor?
+
+(c) Contestar nuevamente las preguntas si el compilador genera código de máquina colocando esta
+variable en un registro del microprocesador.
+
+Supongamos el siguiente escenario:
+
+.
+. (librerias)
+.
+
+int main(void){
+    int x = 100;
+    pid_t pid = fork();
+
+    -------
+    sector padre (*)
+
+    -----
+    sector hijo (**)
+    -----
+
+    --------
+}
+
+A - X en proceso hijo: 
+    En el proceso hijo, si solo se ejecutó el fork, sigue valiendo 100 tanto para el padre como
+    para el hijo
+
+B - Padre e Hijo le cambian el valor:
+    Si el hijo le cambia el valor:
+        Solo tendrá ese valor dentro del contexto del proceso hijo, el padre no tiene idea de esto
+    Si el padre le cambia el valor:
+        Todo el contexto, de padre e hijo, cambia a dicho valor modificado
+
+C - Si la variable se la coloca en un registro de microprocesador:
+    Recordar que el fork hace una bifurcación, donde ahora tenemos dos procesos distintos, con sus
+    respectivos contextos en cuánto a registro, memoria, etc.
+    Si suponemos que el registro del microprocesador donde se guarda el valor de la variable no
+    forma parte del context switch realizado entre procesos. Entonces rompe directamente con la 
+    lógica de padre/hijo, pues el cambio de dicha variable se vería en ambos en simultáneo.
+    Rompiendo la lógica de: context switch, guardado de registros en PCB, carga de los nuevos

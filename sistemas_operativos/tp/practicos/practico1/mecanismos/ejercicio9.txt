@@ -1,0 +1,13 @@
+=== EJERCICIO 9 - PRACTICO 1 S.O ===
+
+Este programa se llama bomba fork. ¿Cómo funciona? ¿Es posible mitigar sus efectos?
+
+while(1)
+    fork();
+
+La bomba fork es un bucle infinito donde constantemente se están realizando bifurcaciones 
+Donde el objetivo principal es dañino, como afectar el rendimiento de la máquina o saturarla hasta
+tal punto que quede inutilizable. Y si es posible mitigar los efectos forzando su cierre.
+
+Basicamente, no le estas preguntando si se quiere detener. LO DETENÉS sin importar nada.
+Enviando la señal de kill SIGKILL por ejemplo

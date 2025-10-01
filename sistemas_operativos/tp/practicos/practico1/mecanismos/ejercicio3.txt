@@ -1,0 +1,16 @@
+=== EJERCICIO 3 - PRACTICO 1 S.O ===
+
+Describir donde se cumplen las condiciones user<real, user=real, real<user.
+
+1 - user < real:
+    El caso más normal, donde además de procesos ejecutándose, surgieron interrupciones, esperas E/S
+    o ciclado de núcleos que también hacen que el real aumente
+
+2 - user = real:
+    Solo se ha ejecutado los procesos correpondientes, sin ninguna interrupción, espera. (O una
+    muy baja como para notar diferencia notable). Y significa que no hubo ciclado de núcleos en 
+    la mayoría de los casos.
+
+3 - user > real:
+    Ocurre sobre todo en procesamiento multihilo, multicore. Donde se puede observar que hay
+    varios CPUs corriendo procesos en simultáneo, haciendo que la suma en user supere la de real.

@@ -1,0 +1,36 @@
+=== EJERCICIO 2 - PRACTICO 1 S.O ===
+
+El enunciado nos pide que expliquemos el porqué walltime < cputime en el siguiente programa:
+
+$ time ./dgemm 2000 2000 2000
+test!
+m=2000,n=2000,k=2000,alpha=1.200000,beta=0.001000,sizeofc=4000000
+
+Se obtienen los siguientes datos de time:
+
+real   0m1.027s
+user   0m1.752s
+
+Podemos observar que real < user. ¿Por qué?
+
+> Primeramente que significa dgemm.
+    dgemm significa "Double-Precision General Matrix multiplication"
+    o también Multiplicación general de matrices de doble precisión.
+    
+    Entonces, el programa está midiendo el tiempo de la multiplicación de 3 matrices donde:
+    Alpha y Beta = Escalares
+    m,n y k = dimensiones de las matrices
+    C = Matriz resultante (como podemos observar, tiene un tamaño gigantisimo)
+
+> ¿Por qué real < user?
+    La multiplicación de matrices se puede estar realizando en varios hilos/procesos a la vez
+    Dado que el sistema decide utilizar varios núcleos, y al ser tan costosas las operaciones
+    debido a las grandes dimensiones de las matrices, puede que demore lo suyo en cada proceso/hilo
+
+    Sabemos que el tiempo reloj (real) es el tiempo total que se demora el programa en iniciar hasta 
+    finalizar. Luego, el user es la suma de todos los procesos/hilos que se están ejecutando (incluso
+    en simultáneo). 
+
+    Entonces el motivo por el cuál real < user, se debe a que varios CPUs están ejecutando estos
+    procesos pesados que hacen que su suma en cpu sea mayor que el real.
+

@@ -1,0 +1,16 @@
+=== EJERCICIO 6 - PRACTICO 1 S.O ===
+
+Indique cuantas letras “a” imprime este programa:
+
+-----------
+char * const args[] = {"/bin/date", "-R", NULL};
+execv(args[0], args);
+printf("a\n");
+-----------
+
+En teoría, si ejecutamos el proceso /bin/date, nos debería mostrar la fecha de hoy
+Y al tratarse de la syscall execv, esta solo ejecuta lo que sigue abajo siempre y cuando falle
+Como no debería fallar en teoría, entonces directamente ignora el printf.
+Ahora, si llegase a existir letras "a" en el proceso que ejecuta execv, solo imprimirá las que haya ahí
+Ejemplo: Si el mes es Agosto, u Mayo, etc. (Trampa anti tontos xD).
+Si estamos hablando del printf, ahi si ninguna.
