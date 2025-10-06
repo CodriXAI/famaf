@@ -1,0 +1,27 @@
+=== EJERCICIO 15 - PRACTICO 1 S.O ===
+
+Las polı́ticas de planificación se pueden clasificar en dos grades grupos: 
+por lotes (batch) e interactivas. 
+Otro criterio posible es si la planificación necesita el T-cpu o no. Clasificar
+FCFS, SJF, STCF, RR, MLFQ según estos dos criterios.
+
+Por Lotes:
+    FCFS
+    SJF
+    STCF -> (Según CHATGPT y leyendo OSTEP: Es porque sus decisiones se basan en
+    tiempos de CPU y no en respuesta rápida ni Fairless)
+
+Interactivas:
+    RR
+    MLFQ
+
+==================================
+
+Necesita T-cpu:
+    SJF
+    STCF
+
+No Necesita T-cpu:  
+    RR
+    FCFS
+    MLFQ

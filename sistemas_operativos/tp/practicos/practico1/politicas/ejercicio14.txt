@@ -1,0 +1,140 @@
+=== EJERCICIO 14 - PRACTICO 1 S.O ===
+
+Para esto procesos CPU-bound puros dibujar la lı́nea de tiempo y completar la tabla
+para las polı́ticas apropiativas (con flecha de running a ready): STCF, RR(Q=2). Calcular el promedio
+de T-turnaround y T-response en cada caso.
+
+================================ TABLA: =============================
+
+PROCESO         T-arrival            T-cpu         
+   
+   A                2                  4
+
+   B                0                  3
+ 
+   C                4                  1
+
+====================================================================================
+
+SIGNIFICADO DE LAS POLÍTICAS:
+
+STCF (Shortest Time to Completion First):
+    En cada momento, el scheduler selecciona el proceso con menor tiempo restante entre
+    los que hayan llegado
+
+    Si llega un proceso nuevo con menor tiempo restante al que está ejecutándose
+    el proceso en ejecución se "preempa" (quita cpu) y pasa a Ready y ejecuta el
+    nuevo.
+
+
+RR (Round Robin):
+    
+    El objetivo de esta política es garantizar la justicia (fairness).
+    Los procesos se almacenan en una cola circular FIFO
+    Luego se comienza a ejecutar el primer proceso en la cola, ¿bajo qué contexto?
+    Para garantizar la justicia, se utiliza un parámetro de medida de tiempo
+    llamado "Quantum", en donde:
+        Si el proceso demora menos de lo indicado en el quantum, el scheduler le brinda
+        el cpu al siguiente proceso de la cola.
+        
+        Si el proceso está demorando más que el quantum, el scheduler inmediatamente
+        le quita la cpu al proceso y le brinda al siguiente sin dejar que dicho proceso
+        finalice. La cuestión es que cada proceso tendrá como mucho la misma cantidad de 
+        tiempo y si no lo respetan, el scheduler lo fuerza directamente
+
+====================================================================================
+
+LÍNEA DE TIEMPO STCF:
+
+    Proceso
+    A -> T-arrival = 2, T-cpu = 4
+    B -> T-arrival = 0, T-cpu = 3
+    C -> T-arrival = 4, T-cpu = 1
+
+    T:0 -> Llega B y ejecuta hasta que llegue otro proceso | Procesos en Running: B, Procesos en Ready: Nothing
+    T:2 -> Llega A, Se ejecutaron 2 T-cpu de B (T-cpuBNow = 3-2 = 1) 
+            -> Compara T-cpuANow vs T-cpuBNow => 4 > 1 => Sigue con B | Procesos en Running: B, Procesos en Ready: A
+    T:3 -> Termina de ejecutarse el T-cpuBNow de B
+            -> Sigue con A | Procesos en Running: A, Procesos en Ready: Nothing
+    T:4 -> Llega C, se ejecutó 1 T-cpu de A (T-cpuANow = 4 - 1 = 3) 
+            -> Compara T-cpuANow vs TcpuCNow => 3 > 1 => Sigue con C  | Procesos en Running: C, Procesos en Ready: A
+    T:5 -> Termina de ejecutarse el T-cpuCNow de C 
+            -> Sigue con A | Procesos en Running: A, Procesos en Ready: Nothing
+    T:8 -> Termina de ejecutarse el T-cpuANow de A 
+            -> Todos los procesos fueron terminados 
+
+LÍNEA DE TIEMPO RR CON QUANTUM = 2:
+
+    Proceso
+    A -> T-arrival = 2, T-cpu = 4
+    B -> T-arrival = 0, T-cpu = 3
+    C -> T-arrival = 4, T-cpu = 1
+
+    Quantum Q = 2
+
+    T:0 -> Llega B y se ejecuta | Procesos en Running = B, Procesos en Ready = Nothing
+    T:2 -> Llega A, B no terminó en quantum, (T-cpuBNow = 3 - 2 = 1)
+            -> Le da prioridad a A | Procesos en Running = A, Procesos en Ready = B 
+    T:4 -> Llega C, A no terminó en quantum, (T-cpuANow = 4 - 2 = 2)
+            -> Le da prioridad a B | Procesos en Running = B, Procesos en Ready = C, A
+    T:5 -> Termina B, respetando el quantum
+            -> Le da prioridad a C | Procesos en Running = C, Procesos en Ready = A
+    T:6 -> Termina C, respetando el quantum 
+            -> Le da prioridad a A | Procesos en Running = A, Procesos en Ready = Nothing 
+    T:8 -> Termina A, respetando el quantum 
+            -> Todos los procesos fueron terminados 
+
+============================= A COMPLETAR: ========================
+
+PARA STCF:
+
+    Process A:
+        T-firstrun: 2        
+        T-completion: 8                
+        T-turnaround: 6          
+        T-response: 1
+
+    Process B:
+        T-firstrun: 0       
+        T-completion: 3                
+        T-turnaround: 3           
+        T-response: 0
+
+    Process C:
+        T-firstrun: 4        
+        T-completion: 5               
+        T-turnaround: 1           
+        T-response: 1
+
+    Promedio de T-turnaround en STCF:
+        (6+3+1) / 3 = 10 / 3 aprox 3,33...
+
+    Promedio de T-response en STCF:
+        (1+0+1) / 3 = 2 / 3 aprox 0,66...
+
+
+Para RR con Q=2:
+
+    Process A:
+        T-firstrun: 2         
+        T-completion: 8                
+        T-turnaround: 6           
+        T-response: 0 
+
+    Process B:
+        T-firstrun: 0        
+        T-completion: 5                
+        T-turnaround: 5           
+        T-response: 0 
+
+    Process C:
+        T-firstrun: 5        
+        T-completion: 6               
+        T-turnaround: 2           
+        T-response: 1 
+    
+    Promedio de T-turnaround en RR con Q=2:
+        (6+5+2) / 3 = 13 / 3 aprox 4,33...
+
+    Promedio de T-response en RR con Q=2:
+        (0+0+1) / 3 = 1 / 3 aprox 0,33... 

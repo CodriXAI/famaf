@@ -24,7 +24,7 @@ C:
 DETALLES IMPORTANTES:
 
     T-turnaround: 
-        * Es el tiempo desde que empieza un programa hasta que termina:
+        * Es el tiempo desde que está el proceso en el sistema hasta que finaliza:
         T-turnaround = T-fin - T-arrival
 
     T-response:
