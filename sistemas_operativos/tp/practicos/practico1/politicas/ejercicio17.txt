@@ -1,0 +1,138 @@
+=== EJERCICIO 17 - PRACTICO 1 S.O ===
+
+Realice el diagrama de planificación para un planificador 
+MLFQ con cuatro colas (Q= 1, 2, 4 y 8) 
+para los siguientes procesos CPU-bound:
+
+Proceso    T-arrival     T-cpu
+   A           0           7
+   B           1           3
+   C           2           4
+   D           4           3
+   E           7           4
+
+
+Planificador MLFQ (Multi-level Feedback Queue):
+
+    La planificación de Colas por multinivel es un tipo de planificación en la cuál se establecen prioridades
+    por niveles (queues) las cuales cuanto más bajo sea la queue donde se encuentre un proceso, significa que
+    necesitó más cpu, y las que estén en las queue superiores, son los que el sistema priorizó porque precisaban
+    menos cpu. 
+
+    El sistema consta de conjunto de queues (Q1,..,QN) donde a medida que aumenta el Qi, aumenta su quantum
+
+    Todos los procesos arrancan en la queue superior, y en base a su comportamiento con el quantum dado.
+    Puede conservar su lugar en dicha queue, o ir bajando según estas condiciones:
+        
+        * Si el proceso cede CPU antes de que llegue el Quantum (o justo cuando llega), no baja de prioridad 
+        y conserva su lugar en la Queue
+
+        * Si el proceso NO cede CPU antes o durante el quantum, bajará de prioridad en el orden de las queues
+    
+    ¿Cómo elige el CPU cuál proceso ejecutar?
+    Dado un tiempo T, en ese instante, el scheduler se fija el primer proceso de la primer cola más alta no vacia
+    Ejemplo:
+        Q1: [A,B], Q2: [C,D]
+    En ese instante, el CPU va a elegir ejecutar el proceso A
+
+Línea de Tiempo MLFQ:
+
+    MLFQ DATA:
+
+    4 Queues:
+
+    Q1:
+        Quantum = 1
+    Q2:
+        Quantum = 2
+    Q3:
+        Quantum = 4
+    Q4:
+        Quantum = 8
+
+
+    T=0: A
+        Llega A, recibe el cpu burst = 7 -> TcpuA
+        Se coloca en la Q1
+        Q1: [A], Q2: [], Q3:[], Q4:[]
+        A consume 1 -> Quantum 1 / 1 = 7-1 = 6 -> TcpuA
+        Llega el quantum, Baja de prioridad a Q2 -> Q1: [], Q2: [A], Q3:[], Q4:[]
+    T=1: B 
+        Llega B, recibe el cpu burst = 3 -> TcpuB
+        Se coloca en la Q1
+        Q1: [B], Q2: [A], Q3:[], Q4:[]
+        B consume 1 -> Quantum 1 / 1 = 3-1 = 2 -> TcpuB
+        Llega el quantum, Baja de prioridad a Q2 -> Q1: [], Q2: [A,B], Q3:[], Q4:[]
+    T=2: C
+        Llega C, recibe el cpu burst = 4 -> TcpuC
+        Se coloca en la Q1
+        Q1: [C], Q2: [A,B], Q3:[], Q4:[]
+        C consume 1 -> Quantum 1 / 1 = 4-1 = 3 -> TcpuC
+        Llega el Quantum, Baja de prioridad a Q2
+        Q1: [], Q2: [A,B,C], Q3:[], Q4:[] 
+    T=3: A
+        A consume 1 = Quantum 1 / 2 = 6-1 = 5 -> TcpuA 
+        Q1: [], Q2: [A,B,C], Q3:[], Q4:[] 
+    T=4: D
+        Llega D, recibe el cpu burst = 3 -> TcpuD 
+        Se coloca en la Q1
+        Q1: [D], Q2: [A,B,C], Q3:[], Q4:[] 
+        D consume 1 -> Quantum 1 / 1 = 3-1 = 2 -> TcpuD 
+        Llega el quantum, baja de prioridad a Q2 
+        Q1: [], Q2: [A,B,C,D], Q3:[], Q4:[]
+    T=5: A
+        A consume 1 = Quantum 2 / 2 = 5-1 = 4 -> TcpuA
+        Llega el quantum, baja de prioridad a Q3 
+        Q1: [], Q2: [B,C,D], Q3:[A], Q4:[] 
+    T=6: B
+        B consume 1 -> Quantum 1 / 2 = 2-1 = 1 -> TcpuB 
+        Q1: [], Q2: [B,C,D], Q3:[A], Q4:[] 
+    T=7: E
+        Llega E, recibe el cpu burst = 4 -> TcpuE 
+        Se coloca en la Q1 
+        Q1: [E], Q2: [B,C,D], Q3:[A], Q4:[] 
+        E consume 1 -> Quantum 1 / 1 = 4-1 = 3 -> TcpuE 
+        Llega el Quantum, baja de prioridad a Q2
+        Q1: [], Q2: [B,C,D,E], Q3:[A], Q4:[] 
+    T=8: B
+        B consume 1 -> Quantum 2 / 2 = 1-1 = 0 -> Terminó
+        Q1: [], Q2: [C,D,E], Q3:[A], Q4:[] 
+    T=9: C
+        C consume 1 -> Quantum 1 / 2 = 3-1 = 2 -> TcpuC 
+        Q1: [], Q2: [C,D,E], Q3:[A], Q4:[] 
+    T=10: C
+        C consume 1 -> Quantum 2 / 2 = 2-1 = 1 -> TcpuC 
+        Llega el quantum, baja de prioridad a Q3
+        Q1: [], Q2: [D,E], Q3:[A,C], Q4:[]
+    T=11: D
+        D consume 1 -> Quantum 1 / 2 = 2-1 = 1 -> TcpuD 
+        Q1: [], Q2: [D,E], Q3:[A,C], Q4:[]
+    T=12: D
+        D consume 1 -> Quantum 2 / 2 = 1-1 = 0 -> Terminó 
+        Q1: [], Q2: [E], Q3:[A,C], Q4:[] 
+    T=13: E
+        E consume 1 -> Quantum 1 / 2 = 3-1 = 2 -> TcpuE 
+        Q1: [], Q2: [E], Q3:[A,C], Q4:[] 
+    T=14: E
+        E consume 1 -> Quantum 2 / 2 = 2-1 = 1 -> TcpuE
+        Llega el quantum, baja de prioridad a Q3
+        Q1: [], Q2: [], Q3:[A,C,E], Q4:[] 
+    T=15: A
+        A consume 1 -> Quantum 1 / 4 = 4-1 = 3 -> TcpuA 
+        Q1: [], Q2: [], Q3:[A,C,E], Q4:[] 
+    T=16: A
+        A consume 1 -> Quantum 2 / 4 = 3-1 = 2 -> TcpuA 
+        Q1: [], Q2: [], Q3:[A,C,E], Q4:[] 
+    T=17: A
+        A consume 1 -> Quantum 3 / 4 = 2-1 = 1 -> TcpuA 
+        Q1: [], Q2: [], Q3:[A,C,E], Q4:[]
+    T=18: A
+        A consume 1 -> Quantum 4 / 4 = 1-1 = 0 -> Terminó 
+        Q1: [], Q2: [], Q3:[C,E], Q4:[]
+    T=19: C
+        C consume 1 -> Quantum 1 / 4 = 1-1 = 0 -> Terminó 
+        Q1: [], Q2: [], Q3:[E], Q4:[]
+    T=20: E
+        E consume 1 -> Quantum 1 / 4 = 1-1 = 0 -> Terminó 
+        Todos los procesos han finalizado 
+        Q1: [], Q2: [], Q3:[], Q4:[]

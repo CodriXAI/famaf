@@ -118,7 +118,7 @@ Linea de tiempo de Planificación SJF (Short Job First):
 
         T-responsePromedio = (0+30+10) / 3 aprox => 40 / 3 aprox => 13,33 aprox
 
-    RESUMEN FCFS:
+    RESUMEN SJF:
         T-turnaroundPromedio = 33,33 aprox
         T-responsePromedio = 13,33 aprox
 

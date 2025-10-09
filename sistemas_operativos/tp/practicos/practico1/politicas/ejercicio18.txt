@@ -1,0 +1,36 @@
+=== EJERCICIO 17 - PRACTICO 1 S.O ===
+
+Verdadero o falso. Explique.
+
+(a) Cuando el planificador es apropiativo (con flecha de Running a Ready) no se puede devolver el
+control hasta que no pase el quantum.
+
+(b) Entre las polı́ticas por lote FCFS y SJF, hay una que siempre es mejor que la otra respecto a
+T-turnaround
+
+(c) La polı́tica RR con quantum = ∞ es FCFS.
+
+(d) MLFQ sin priority boost hace que algunos procesos puedan sufrir de starvation (inanición).
+
+(e) En MLFQ acumular el tiempo de CPU independientemente del movimiento entre colas evita hacer
+trampas como yield() un poquitito antes del quantum.
+
+
+(a): FALSO: Si el proceso termina antes que el quantum, o es bloqueado, es posible devolver el control nuevamente incluso
+antes del quantum
+
+(b): FALSO: NO SIEMPRE una es mejor que la otra, puede ocurrir que durante procesos largos haya starvation.
+pero hay casos donde el SJF reduce el T-turnaround.
+
+(c): VERDADERO: Pues si no hay un quantum que ceda el CPU (En realidad si pero es infinito), los procesos que se vayan encolando tendrán que
+esperar si o si a que se termine el proceso en ejecución para obtener CPU.
+
+(d): VERDADERO: La priority boost es un mecanismo que hace que procesos que estén en las colas de menor prioridad
+eventualmente puedan subir a lo más alto. Sin este mecanismo, los procesos que estén debajo no subirán nunca. Y si
+empiezan a llegar procesos de mayor prioridad, puede haber riesgo de starvation
+
+(e): VERDADERO: Yield es una syscall para decirle al sistema, cedé el CPU, generando que el proceso pase de 
+RUNNING -> READY. Esto puede ser un problema para procesos que realmente son CPU-bound (usan mucho cpu en total)
+Pero gracias a yield() pueden engañar al sistema, al estar cerca del quantum, "cediendo" el cpu, provocando que 
+no bajen de prioridad en las colas, y pudiendo seguir consumiendo mas CPU. Si en vez de esto miramos el tiempo total de
+consumo de CPU. Ese truco no funcionará, porque si acumula suficiente, de todos modos será bajado de prioridad.
