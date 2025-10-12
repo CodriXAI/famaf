@@ -1,0 +1,15 @@
+=== EJERCICIO 6 - PRACTICO 2 S.O ===
+
+Distinguir relocalización estática y relocalización dinámica.
+
+Relocalizacion estatica:
+    * Se realiza todo el procedimiento antes de ejecución
+    * No tiene protección (no verifica bounds)
+    * Se relocaliza la memoria de la siguiente forma:
+        Memoria Fisica = Base + Memoria Virtual 
+
+Relocalización dinámica:
+     * Se realiza todo el procedimiento en tiempo de ejecución
+    * Tiene protección (verifica bounds: 0 <= VD < bound)
+    * Se relocaliza la memoria de la siguiente forma:
+        Memoria Fisica = Base + Memoria Virtual 

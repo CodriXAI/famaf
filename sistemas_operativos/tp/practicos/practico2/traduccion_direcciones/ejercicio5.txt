@@ -1,0 +1,67 @@
+=== EJERCICIO 5 - PRACTICO 2 S.O ===
+
+Mostrar con un ejemplo de disposición de memoria fı́sica de varios procesos como 
+el esquema de traducción de direcciones con base+lı́mite puede producir 
+"fragmentación interna y fragmentación externa".
+
+Notemos el siguiente ejemplo: 
+
+Memoria Fisica total: 10KB => 10 * 2¹⁰ => 10 * 1024 => 10240 bytes
+
+Luego tenemos los procesos:
+P1, P2tal que:
+
+------------------------------
+BaseP1 (Fisica) = 0 bytes
+BoundP1 (Virtual) = 5000bytes
+
+Espacio Libre: [5000...6000]
+
+BaseP2 (Fisica) = 6000 bytes
+BoundP2 (Virtual) = 4000 bytes
+
+Espacio Libre: [10000....10240]
+-------------------------------
+
+Gráficamente visualizado:
+
+------------------------- 0
+|                       |
+|                       |
+|          P1           |
+|                       |
+------------------------- 5000
+|                       |
+|        (Free)         |
+------------------------- 6000
+|                       |
+|          P2           |
+|                       |
+------------------------- 10000
+|        (Free)         |
+------------------------- 10240
+
+Mapa diagrama de como está distribuida la memoria física.
+
+Y en la memoria Física tenemos ya ubicados P1 y P2. Esto implica que:
+
+Memoria Física utilizada: 5000+4000 = 9000 bytes
+Memoria Física restante: 10240 - 9000 = 1240 bytes 
+    Estos están repartidos entre un bloque de 1000 bytes entre P1 y P2 y un bloquecito 
+    de 240 bytes luego de P2 
+
+Ahora suponiendo que queremos meter el siguiente proceso:
+BaseP3 (Fisica) = 5000 bytes
+BoundP3 (Virtual) = 1300 bytes
+
+Esto daría un problema de fragmentación externa, pues no hay espacio disponible 
+desde la 5000 hasta las 6000 para meter los 1300 que pide el proceso.
+Mucho menos podríamos colocarlo en el otro segmento que tiene solo 240 bytes 
+
+Ahora suponiendo que quisieramos meter el siguiente proceso:
+BaseP4 (Fisica) = 5000 bytes
+BoundP4 (Virtual) = 700 bytes
+
+Esto daría un problema de fragmentación interna, pues cabe en el espacio disponible
+desde 5000 a 6000, pero habrán 300 bytes desperdiciados.
+

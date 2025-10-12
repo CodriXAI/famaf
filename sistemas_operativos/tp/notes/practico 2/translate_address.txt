@@ -1,0 +1,97 @@
+Toda instruccion que haga un fetch, load o store a memoria será traducida
+
+Base & Bound => Base y límite de un programa.
+Base con respecto a donde empieza un programa en cuanto a memoria física
+Bound es el límite que tiene en cuanto a memoria virtual
+Este par se almacena en registros y por CPU.
+    
+Relocalización estática (fórmula de física a virtual y viceversa):
+    physical address = virtual address + base 
+    Se aplica una sola vez, NO garantiza protección
+
+Relocalización dinámica (fórmula de física a virtual y viceversa):
+    physical address = virtual address + base 
+    Se aplica cada que se pide memoria, Garantiza protección siempre chequeando que:
+    0 <= virtual address < Bound
+
+    Estas relocalizaciones dinamicas ocurren siempre en tiempo de ejecución (run time)
+
+memory management unit = MMU
+
+memory trace o traza = rastro que va dejando la memoria a medida que se va ejecutando la memoria  
+
+
+Ejemplo:
+    Un programa fue compilado como si empezara en la dirección 0 (como todos).  
+    Durante la ejecución, el sistema operativo decide cargarlo en memoria física desde la dirección 3000, 
+    y el  programa ocupa 1024 bytes. Por ende tenemos los siguientes datos:
+        Base = 3000 (Memoria Física)
+        Bound = 1024 (Tamaño máximo de memoria virtual)
+
+    Ahora suponemos que el programa contiene una instrucción que accede a la dirección virtual 100.
+
+    Relocalización Estática:
+        El loader se ajusta a las direcciones:
+            Memoria Fisica = 100 + 3000 = 3100
+        Por ende el loader se reescribe en la dirección 3100
+        Ahora el programa contiene direcciones físicas (no virtuales)
+        Durante la ejecución, la CPU accede directamente a 3100
+
+        Problemas:
+            Si quisieramos mover el programa a base = 5000, habría que reescribir todo de nuevo
+
+            No tiene protección, si queremos acceder a la dirección 99999999, el cpu lo hace igual
+            pues no utilizamos el bound para regular esto
+
+    Relocalización Dinámica:
+        Ahora el hardware (MMU/CPU), hace el cálculo cada vez que se accede a memoria:
+            Memoria Fisica = 100 + 3000 = 3100 
+        Pero verifica que:
+            0 <= 100 < 1024, que era el Bound establecido. Como no hay problema, accede.
+        Si quisiera acceder a la dirección 2000:
+            Memoria Físcia = 2000 + 3000 = 5000
+        Pero:
+            0 <= 2000 < 1024 no es correcto, por ende salta una excepción, protegiendo el resto de 
+            memoria.
+
+
+Ejemplo del OSTEP (physical memory to virtual memory with Base & Bound):
+    Programa con un address space de 4KB (muy pequeño) => address space de 2² * 2¹⁰ = 2¹² = 4096 bytes -> Bound
+    Por ende el bound en bytes es de 4096 en virtual.
+    Luego será cargado en la memoria física 16KB => Loaded in 2⁴ * 2¹⁰ = 2¹⁴ = 16384 bytes -> Base
+
+    Posteriormente se quiere acceder a estas direcciones virtuales:
+
+    Virtual                                                             physical
+    
+       0   ->    16384 + 0    = 16384  && 0 <= 0 < 4096 = True      ->    16KB 
+      1024 ->    16834 + 1024 = 17408  && 0 <= 1024 < 4096 = True   ->    17KB 
+      3000 ->    16834 + 3000 = 19834  && 0 <= 3000 < 4096 = True   ->    19.8KB aprox
+      4400 ->    16834 + 4400 = 21234  && 0 <= 4400 < 4096 = False  ->    Fail (out of bounds exception)
+
+Modificar y almacenar en registros especiales para base y bound son instrucciones privilegiadas. Eso 
+quiere decir que solo podrán ser ejecutadas en kernel mode, ya que pueden modificar completamente el 
+address space de cada programa.
+
+Primero se verifica el límite, y si es válido se realiza la suma.
+
+La free list es una estructura de datos que posee el OS para saber en todo momento los rangos de memoria 
+física que aún no está siendo utilizado
+        
+
+Fragmentación Interna:
+    Ocurre cuando el SO le asigna un cierto espacio de memoria fisica a un proceso, y este mismo
+    no ocupa todo el espacio otorgado, por ende ese espacio que queda restante está siendo desperdiciado 
+Solución para esta fragmentación: Segmentación:
+    La cuál permite justamente segmentar, dividir el espacio para aprovechar mejor el espacio y reducir 
+    la fragmentación interna.
+
+
+Fragmentación Externa:
+    Ocurre entre bloques de procesos, donde el espacio que queda no es lo suficientemente grande para 
+    poder meter un proceso que requiera más espacio. Generalmente se pueden encontrar varios espacios 
+    separados pequeños distribuidos por la memoria, y si bien la suma de ellos podrían alcanzar para un 
+    cierto proceso, lo cierto es que un proceso toma un espacio de direcciones contiguo. Hay soluciones 
+    para esta fragmentación que requeriría juntar todo el espacio libre en uno solo más grande.
+
+

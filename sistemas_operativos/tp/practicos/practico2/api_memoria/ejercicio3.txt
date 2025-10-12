@@ -1,0 +1,23 @@
+=== EJERCICIO 3 - PRACTICO 2 S.O ===
+
+Verdadero o falso. Explique:
+
+    (a) malloc() es una syscall.
+
+    (b) malloc() siempre llama a una syscall.
+
+    (c) malloc() a veces produce una llamada a una syscall.
+
+    (d) Idem con free().
+
+    (e) El tiempo de cómputo que toma malloc(x) es proporcional a x.
+
+Respuestas:
+    (a): FALSO -> Malloc es una llamada a librería C (Library Call).
+    (b): FALSO -> Solo si necesita ampliar la heap. Hará las syscalls sbrk / mmap
+    (c): VERDADERO -> La contradicción de la anterior, aveces necesita ampliar la heap.
+    (d): VERDADERO -> Comportamiento similiar a Malloc:
+        No es una syscall, es una lib call. No siempre llama a una syscall, solo lo hace 
+        aveces cuando requiere devolver memoria al Sistema Operativo.
+    (e): FALSO -> Depende de la gestión más interna de los bloques que del propio malloc.
+    Ya que solo reserva el espacio, no inicializa toda la memoria.

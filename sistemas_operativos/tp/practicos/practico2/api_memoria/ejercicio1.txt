@@ -1,0 +1,57 @@
+=== EJERCICIO 1 - PRACTICO 2 S.O ===
+
+Para cada una de las variables de este código indicar si están en el segmento de código,
+de pila o de montı́culo (heap). Si hay punteros indicar a que segmento apunta.
+
+Extra:
+¿Dónde se ubica el arreglo global si lo declaramos inicializado a cero? 
+int a[N] = {0};
+
+Address Space - S.O:
+
+--------------------
+|  Program Code    |
+|                  |
+--------------------
+|      Heap        |
+|                  |
+--------------------
+|                  |
+|                  |
+|                  |
+|     (free)       |
+|                  |
+|                  |
+|                  |
+--------------------
+|      Stack       |
+|                  |
+--------------------
+
+Code:
+    #include <stdlib.h>
+
+    #define N 1024
+
+    int a[N];
+
+    int main(int argc, char ** argv)
+    {
+        int i;
+        register int s = 0;
+        int *b = calloc(N, sizeof(int));
+        for (i=0; i<N; ++i)
+            s += a[i]+b[i];
+        free(b);
+        return s;
+    }
+
+Variables:
+    * "a" es un arreglo global, por ende no se almacena ni en stack, ni en heap 
+    ni en program Code (se almacena en Data segment)
+    * "i" es una variable local de main entera, claramente va al stack 
+    * "s" es especial, opcionalmente si hay registros disponibles 
+    su contenido se guardará en registros de CPU, caso contrario en Stack 
+    * "N" es una constante que cambia su valor a 1024 en tiempo de compilación 
+    * "b" es un puntero a entero, se almacena en stack, y apunta al segmento heap 
+    el contenido dentro se almacena en la heap.

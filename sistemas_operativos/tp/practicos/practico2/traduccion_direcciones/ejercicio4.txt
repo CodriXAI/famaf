@@ -1,0 +1,47 @@
+=== EJERCICIO 4 - PRACTICO 2 S.O ===
+
+
+Mostrar la secuencia de accesos a la memoria fı́sica que se produce al ejecutar este
+programa assembler x86_32, donde el registro base=4096 y bounds=256.
+
+0: movl $128,%ebx //Asignamos 128 al registro ebx
+5: movl (%ebx),%eax //Lee en la dirección 128 de memoria y lo almacena en el registro eax 
+8: shll $1, %ebx //Hace un shift left, Multiplica * 2 el valor de ebx => 256 
+10: movl (%ebx),%eax //Lee en la dirección 256 de memoria y lo reemplaza en eax
+13: retq //Return de la función.
+
+Resumidamente:
+0: movl $128,%ebx //ebx = 128
+5: movl (%ebx),%eax //eax = memoria[128]
+8: shll $1, %ebx //ebx << 1 = 128*2¹ = 256
+10: movl (%ebx),%eax //eax = memoria[256]
+13: retq //return 
+
+Secuencia de accesos a memoria física:
+
+    Tener en cuenta que:
+        Memoria Fisica = Memoria Virtual + Base 
+    0: La dirección virtual es 128
+    5: Hay fetch, Queremos averiguar la memoria física
+        Verificando bound:
+            0 <= 128 < 256 -> Permitido
+        Memoria Física = 128 + 4096 = 4224
+        Accedimos a la memoria física 4224
+    8: Shifteo, ahora memoria virtual = 256
+    10: Hay fetch, Queremos averiguar la memoria física
+        Verificando bound:
+            0 <= 256 < 256 -> Out of bound exception
+        Se genera trap/seg fault
+    
+
+Resumen:
+    Secuencia Memoria física:
+
+    Virtual                Física 
+    
+      128         ->        4224
+      256         ->        Out of bound exception
+    
+NOTA: Solo nos preocupamos de convertir de virtual a fisica si hay:
+    Fetch - Store - Load osea necesitamos traer algo o dejar algo en memoria 
+    Y para ello necesitamos conocer los valores.

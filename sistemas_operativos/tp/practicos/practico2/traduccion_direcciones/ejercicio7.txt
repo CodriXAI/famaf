@@ -1,0 +1,16 @@
+=== EJERCICIO 7 - PRACTICO 2 S.O ===
+
+Verdadero o falso. Explique.
+
+(a) Modificar los registros base y bounds son instrucciones privilegiadas.
+
+(b) Hay un juego de registros (base, bounds) por cada proceso.
+
+Respuestas:
+(a): VERDADERO -> Solo en kernel mode se pueden modificar los limites y base 
+
+(b): VERDADERO -> Ya que en caso contrario, podrían superponerse y generar 
+                  comportamientos de sobreescritura o similares (duda:
+                  los bounds podrían coincidir?)
+                  Pueden coincidir los bounds, pero en términos de pares se
+                  diferencian si o si de la base.

@@ -1,0 +1,79 @@
+=== EJERCICIO 2 - PRACTICO 2 S.O ===
+
+
+Debuggear el mal uso de memoria en los siguientes pedacitos de código:
+
+Code 1:
+    char *s = malloc(512);
+    gets(s);
+
+Code 2:
+    char *s = "Hello Waldo";
+    char *d = malloc(strlen(s));
+    strcpy(d,s);
+
+Code 3:
+    char *s = "Hello Waldo";
+    char *d = malloc(strlen(s));
+    d = strdup(s);
+
+Code 4:
+    int * a = malloc(16)
+    a[15] = 42;
+
+TODOS LOS CODES:
+    Faltaría por seguridad que se esté verificando que el malloc no haya dado NULL.
+    Esto evitaría problemas en caso que se falle en pedir memoria para guardar en heap
+
+Code 1 Depuración:
+    
+    * Tenemos un puntero a char s, el cuál pide memoria de tamaño 512bytes 
+    (para 511 carácteres + \n).
+    
+    * Y luego con gets(s), según man, obtenemos en formato string la entrada estandar 
+    (muy peligroso en este caso).
+
+    Bugs:
+
+    * Como gets es impredecible en cuanto a tamaño (gets puede recibir desde el stdin
+    una entrada superior a 511bytes del user, ocasionando buffer overflow y pudiendo 
+    sobreescribir otras partes de la memoria o un potencial seg fault).
+
+Code 2 Depuración:
+
+    * Tenemos un puntero a char s que apunta a una string "Hello Waldo"
+    * Otro puntero a char d que pide memoria de tamaño de longitud de S
+    * Se copia el contenido de s a d 
+
+    Bugs:
+    * Error típico al pedir memoria para strings, en d, el código actual explotaría 
+    pues no coinciden en espacio. Faltaría sumar 1 al tamaño que se pide para d (por el
+    \0 que define cuando termina la cadena). En caso de no hacerlo se produciría un 
+    comportamiento indefinido (undefined behavior) al no encontrar espacio definido para 
+    \0.
+
+Code 3 Depuración:
+    * Tenemos un puntero a char s que apunta a una string "Hello Waldo"
+    * Otro puntero a char d que pide memoria de tamaño de longitud de S
+    * Se duplica el contenido de s a d 
+
+    Bugs:
+    * strdup internamente ya tiene un strcpy, pues hace su malloc internamente 
+    * El malloc de antes previo a asignarle a d el valor que tire strdup está de más, y 
+      va a generar un "memory leak", memoria reservada ya sin referencia, pues ahora d 
+      apuntaría a la string duplicada en otra dirección completamente aparte. Por ende 
+      ese primer malloc está de más.
+    * También recalcar que una vez se termine de utilizar strdup, se debe liberar d.
+      pues internamente se ha reservado espacio. 
+
+Code 4 Depuración:
+    * Un puntero a entero "a", al cuál se le están reservando 16bytes fijos en la heap.
+    * Consecuentemente se le solicita que a en el elemento 15 almacene 42.
+
+    Bugs:
+    * Primero, almacenamos 16 bytes fijos. Eso a lo sumo alcanza para (4 * 4 bytes. 
+    es decir, 4 enteros). Y ahí se están pidiendo 15 * 4 bytes = 60, en el byte 60.
+    Como llegamos hasta 16 bytes con el malloc, estamos escribiendo 44bytes más lejos del
+    límite reservado, ocasionando un undefined behavior.
+    * Si quisiéramos un arreglo para 16 enteros [0..15], hay que hacer 16 * sizeof(int) en
+    el malloc. De esta forma si reservamos suficiente espacio para los 16 enteros. 
