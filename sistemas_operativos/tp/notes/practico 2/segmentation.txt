@@ -1,0 +1,198 @@
+Para dar soluciones a los problemas de desperdicio de espacio en memoria al hacer 
+relocalización, necesitamos entender que el sistema de registros base/bound como un 
+par único del proceso es insuficiente, puesto que dicha base y límite está dado entorno 
+a toda la memoria física, por ende, si intentamos relocalizar un espacio específico,
+habrán espacios desperdiciados (waste). De aquí surge la segmentación, en la cuál se
+generaliza el concepto de base/bounds para cada segmento de la memoria.
+
+En el caso del ejemplo que estamos trabajando, tenemos 3 segmentos de memoria lógicos:
+El code, la stack y la heap. Lo que hacemos es mover estos 3 segmentos de forma 
+independiente a diferentes partes de memoria física, evitando así que se relocalicen
+direcciones sin usar y evitar desperdicio.
+
+En el ejemplo del libro (Capitulo 16, segmentación) podemos observar las figuras 16.1 
+(address space) y 16.2 (Memoria Física) Realizamos las segmentaciones correspondientes:
+
+16.1 (address space):
+    Program Code:
+        Base: 0KB = 0 bytes
+        Bound: 2KB = 2048 bytes
+    Stack:
+        Base: 14KB = 14336 bytes
+        Bound: 2KB = 2048 bytes
+    Heap:
+        Base: 4KB = 4096 bytes
+        Bound: 3KB = 3072 bytes
+
+16.2 (physical memory):
+    Program Code:
+        Base: 32KB
+        Bound: 2KB
+    Stack:
+        Base: 28KB
+        Bound: 2KB
+    Heap: 
+        Base: 34KB
+        Bound: 3KB
+
+Y ahora supongamos que queremos hacer lo siguiente:
+    Supongamos que queremos acceder a la dirección virtual 100 en el program code.
+        Base de Program code: 32KB = 32 * 2¹⁰ = 32 * 1024 = 32768
+        Dirección virtual a la que queremos acceder = 100
+
+        Se cumple que 0<= 100 < 2048, Está dentro de los límites de la dirección virtual.
+
+        Dirección Física = Dirección Virtual + Base = 100 + 32768  = 32868
+
+        Nota: Darse cuenta que en este caso va desde 0, por eso es facil
+
+    Ahora supongamos que queremos acceder a la dirección virtual 4200 en la heap.
+        Base de Heap: 34KB = 34 * 2¹⁰ = 34 * 1024 = 34816
+        Dirección virtual a la que queremos acceder = 4200
+        
+        (OJO: Porque no empezamos desde 0, sino que la heap empieza desde 4096 en
+        virtual hay que calcular el offset, la verdadera dirección contando desde la 
+        base)
+
+        Verdadera Dirección Virtual = 4200 - 4096 = 104
+
+        Se cumple que 0 <= 104 < 3072, Está dentro de los límites de dirección virtual. 
+
+        Dirección Física = Dirección Virtual + Base = 104 + 34816 = 34920
+
+        Basicamente tenemos que tratar a la base virtual como ese "0" y calcular la 
+        distancia partiendo desde esa base con la dirección que solicita el usuario.
+
+    
+A modo de registros, los segmentos y el offset se guardan en 14 bits.
+Donde los 2 más significativos van a representar el segmento que corresponde, mientras 
+que los 12 bits menos significativos se utilizarán para representar el offset.
+
+Dado que usamos 2 bits para representar los segmentos, y en la memoria virtual tenemos 
+16KB en el address space, nos damos cuenta que como máximo (y de forma equitativa),
+podremos obtener 4 segmentos de 4KB cada uno.
+
+Además, necesitamos una señal además de el segmento donde estamos, la base y el bound,
+para identificar bien la dirección de crecimiento (grow) del segmento. Si crece 
+positivamente (1) o negativamente (0).
+
+Podemos ver el siguiente ejemplo: Figura 16.2
+
+---------------- 0KB
+|              |
+|      OS      |  
+|              |
+---------------- 16KB
+|              |
+| (Not in use) |
+|              |
+---------------- 26KB
+|      ^       |
+|      |       |
+|    Stack     |
+---------------- 28KB (Stack Base)
+| (Not in use) |
+---------------- 32KB (Code Base)
+|     Code     |
+---------------- 34KB (Heap Base)
+|     Heap     |    
+|              |
+|      |       |
+|      v       |
+---------------- 
+|              |
+|              |
+| (Not in use) | 48KB
+|              |
+|              |
+|              |
+---------------- 64KB
+
+(Memoría Física de Ejemplo)
+
+Podemos observar entonces que, en base a esta memoría Física quedarían:
+
+Segment      Base     Size(max 4K)    Grows Positive?
+Code00       32KB         2KB               1
+Heap01       34KB         3KB               1
+Stack11      28KB         2KB               0
+
+Nota: Dependiendo de donde crezca el segmento (Grow Positive or Negative), el base estará
+en un extremo u otro del segmento.
+    Ejemplo: Si el segmento crece hacia abajo (Grows Positive), entonces el base estará
+    en el extremo superior, en cambio si el segmento crece hacia arriba (Grows Negative),
+    el base estará en el extremo inferior. NO se modifica el base.
+
+
+Ejemplo de cálculo de memoria física con crecimiento negativo:
+    Supongamos que queremos calcular la memoria física del stack dada la dirección 
+    virtual 15KB (15360 bytes), entonces conocemos lo siguiente:
+
+    * Los 2 bits mas significativos = 11 (stack).
+
+    * El base es de 28KB 
+    * El tamaño máximo del segmento es de 4KB 
+    * Se espera la dirección Física en la traducción 27KB
+    * Bounds actual del stack = 2KB 
+
+    La misión será separar el offset en el siguiente binario:
+
+    111100 0000 0000 
+
+    Donde: 
+        11 -> Id del segmento 
+        1100 0000 0000 -> En hexa esto es 0xC00 => Equivale a 3KB, por ende, offset =+3KB 
+
+    Como el stack crece hacia abajo, necesitamos hacer la conversión necesaria, para ello,
+    restamos al offset el tamaño máximo del segmento.
+    3KB - 4KB = -1KB (Ese es el verdadero crecimiento, offset) 
+
+    Luego: Dirección Física = (-1KB) + 28KB = 27KB -> Dirección Física esperada.
+
+    NOTA: Para verificar la validez del offset correcto, tenemos que fijarnos que no se 
+    pase su módulo (valor absoluto) del bound.
+    En este caso | -1 | <= 2 -> 1 <= 2, Correcto, sin problemas.
+
+    Por ende, ahora el nuevo stack ha crecido hasta la dirección fisica 27KB.
+        Su base es de 28KB
+        Su bound es de 2KB 
+        Tamaño máximo 4KB 
+        No ha cambiado 
+
+Bits de protección:
+    Para poder proteger los segmentos se utilizan 3 variables de protección denominadas
+    "permisos". Las cuales son las clásicas RWX, osea: Read - Write - Execute
+    Son 3 bits que se ponen en 0 o 1 dependiendo de los permisos que queramos que tenga
+    dicho segmento o no.
+
+
+Code sharing: 
+    El code sharing se da cuando dos procesos (por ejemplo luego de un fork) utilizan 
+    el mismo segmento (en este caso de código) a la vez. Aprovechando la virtualización 
+    y mejor la memoria.
+
+Algoritmos de ajuste de Fragmentación Externa:
+    Para combatir el tener que estar teniendo huecos de memoria libre donde no caben 
+    procesos, hay diferentes técnicas, que no garantizan una solución definitiva pero 
+    minimizan el efecto de dicho problema:
+        * Compactación: Consiste en juntar todo el espacio libre en uno solo,
+        redireccionando todos los segmentos para que cumpla ese fin, el problema es
+        que es muy caro, por ende no conveniente en todos los casos.
+
+        *Los algoritmos Fit: Que buscan la forma de aprovechar los huecos de memoria:
+            Best Fit: Selecciona el que mejor se ajuste (aunque no entre del todo) 
+            Worse Fit: Selecciona el que peor se ajuste (puede sobrar mucho espacio)
+            First Fit: Selecciona el primer hueco que encuentre. 
+            Random Fit: Selecciona un hueco al azar de los que encuentre.
+
+Segmentación Gruesa (coarse) vs Segmentación Fina (Fine):
+    
+    Gruesa: Divide la memoria fisica en segmentos grandes, lo cuál le brinda simplicidad 
+    a lo estructurado. Pero es más propenso a Fragmentación externa y es poco flexible
+    si un segmento quiere crecer, posiblemente no tenga espacio contiguo.
+    Fina: Divide la memoria fisica en segmentos pequeños, uno por cada función, variables,
+    estructuras, etc. Tiene mejor control de seguridad y flujo, pero propensa a más 
+    overhead, administración más compleja y lenta en cuanto a traducción.
+
+
+

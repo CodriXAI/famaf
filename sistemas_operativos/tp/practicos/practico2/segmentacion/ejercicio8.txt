@@ -1,0 +1,75 @@
+=== EJERCICIO 8 - PRACTICO 2 S.O ===
+
+Una computadora proporciona a cada proceso 65536 bytes de espacio de direcciones
+dividido en páginas de 4 KiB. Un programa especı́fico tiene el segmento código de 
+32768 bytes de longitud, el segmento montı́culo de 16386 bytes de longitud, y un 
+segmento pila de 15870 bytes.
+
+¿Cabrá el programa en el espacio de direcciones? 
+
+¿Y si el tamaño de página fuera de 512 bytes?
+
+Recuerde que una página no puede contener segmentos de distintos tipos asi se pueden proteger cada
+uno de manera adecuada.
+
+-----------------------------------------------------------------------------------------
+
+*Tenemos que una computadora brinda por cada proceso 65536 bytes divididos en páginas de 
+4KB.
+
+Un programa random tiene:
+    32768 bytes en Code 
+    16386 bytes en Heap (Montículo xd)
+    15870 bytes en Stack (Pila)
+
+Nos preguntan si cabe en el address space (CON PÁGINAS DE 4KB OJO).
+Veamos la suma: 32768 + 16386 + 15870 = 65024 < 65536 
+A priori en espacio total sobrarían 512 bytes. Hay que ver con la división de páginas.
+
+Espacio total: 65536
+Tamaño por página = 4KB
+65024 bytes / 4Kib = 65536 / 4096 = 16 => Exactamente 16 páginas brinda por proceso.
+
+Tenemos que tener en cuenta que: 
+    * Una página no puede tener segmentos de diferentes tipos, para mejorar seguridad.
+    Por ende en cada página solo habrá segmentos del mismo tipo, veamos cuantas por tipo:
+    
+        CODE: 32768 / 4KiB = 32768 / 4096 = 8 Páginas EXACTAS  
+
+        HEAP: 16386 / 4KiB = 16386 / 4096 = 4.000488281 => Harán falta 5 páginas
+        Como es más de lo necesario calculamos cuánto: 5 * 4096 = 20480 bytes asignados
+        (Van a sobrar en la heap: 20480 - 16386 = 4094 bytes desperdiciados)
+
+        STACK: 15870 / 4KiB = 15870 / 4096 = 3.874511719 => Harán falta 4 páginas
+        Como es más de lo necesario calculamos cuánto: 4 * 4096 = 16384 bytes asignados
+        (Van a sobrar en la stack: 16384 - 15870 = 514 bytes desperdiciados)
+
+    TOTAL DE PÁGINAS UTILIZADAS: 8 + 5 + 4 = 8 + 9 = 17 Páginas
+
+    Luego 17 > 16, por ende NO cabe el programa en páginas de 4KiB, hay fragmentación
+    interna de:
+        4094 + 514 + 0 = 4608 bytes desperdiciados entre Heap y Stack.    
+
+Veamos el mismo razonamiento pero ahora en páginas de 512KiB:
+
+Espacio total: 65536 bytes
+Tamaño por página = 512 bytes
+65024 bytes / 512 bytes = 128 => Exactamente 128 páginas para cada proceso.
+
+Tenemos que tener en cuenta que: 
+    * Una página no puede tener segmentos de diferentes tipos, para mejorar seguridad.
+    Por ende en cada página solo habrá segmentos del mismo tipo, veamos cuantas por tipo:
+    
+        CODE: 32768 / 512 = 64 páginas exactas 
+
+        HEAP: 16386 / 512 = 32.00390625 => Va a hacer falta 33 páginas. 
+        33 * 512 = 16896, Veamos cuanto sobra: 16896 - 16386 = 510 bytes desperdiciados
+
+        STACK: 15870 / 512 = 30.99609375 => Va a hacer falta 31 páginas.
+        31 * 512 = 15872, Literal sobran 15872 - 15870 = 2 bytes XD 
+
+    TOTAL DE PÁGINAS UTILIZADAS: 64 + 33 + 31 = 128 Páginas Justo.
+
+    128 = 128, SI cabe el programa en páginas de 512 bytes.
+
+    Hay mucha menos fragmentación interna, se desperdiciaron solo 512 bytes.
