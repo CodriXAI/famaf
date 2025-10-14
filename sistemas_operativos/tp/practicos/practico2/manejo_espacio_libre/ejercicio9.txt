@@ -1,0 +1,51 @@
+=== EJERCICIO 9 - PRACTICO 2 S.O ===
+
+Suponga un sistema de memoria contiguo con la siguiente secuencia de tamaños de
+huecos: 10 KiB, 4 KiB, 20 KiB, 18 KiB, 7 KiB, 9 KiB, 12 KiB, 15 KiB.
+Para la siguiente secuencia de solicitudes de segmentos de memoria: 12 KiB, 
+10 KiB, 9 KiB.
+¿Cuáles huecos se toman para las distintas polı́ticas?
+
+(a) Primer ajuste (first fit).
+
+(b) Mejor ajuste (best fit).
+
+(c) Peor ajuste (worst fit).
+
+(d) Siguiente ajuste (next fit).
+
+Secuencia de tamaños de huecos:
+
+10KiB -> 4KiB -> 20KiB -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+
+(a) First Fit:
+    12Kib:
+        10KiB -> 4KiB -> "8KiB" -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+    10KiB:
+        "0KiB" -> 4KiB -> 20KiB -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+    9KiB:
+        "1KiB" -> 4KiB -> 20KiB -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+
+(b) Best Fit:
+    12Kib:
+        10KiB -> 4KiB -> 20KiB -> 18KiB -> 7KiB -> 9KiB -> "0KiB" -> 15KiB
+    10KiB:
+        "0KiB" -> 4KiB -> 20KiB -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+    9KiB:
+        10KiB -> 4KiB -> 20KiB -> 18KiB -> 7KiB -> "0KiB" -> 12KiB -> 15KiB
+
+(c) Worst Fit:
+    12Kib:
+        10KiB -> 4KiB -> "8KiB" -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+    10KiB:
+        10KiB -> 4KiB -> "10KiB" -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+    9KiB:
+        10KiB -> 4KiB -> "11KiB" -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+
+(d) Next Fit:
+    12Kib:
+        10KiB -> 4KiB -> "8KiB" -> 18KiB -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+    10KiB:
+        10KiB -> 4KiB -> "8KiB" -> "8KiB" -> 7KiB -> 9KiB -> 12KiB -> 15KiB
+    9KiB:
+        10KiB -> 4KiB -> "8KiB" -> "8KiB" -> 7KiB -> "0KiB" -> 12KiB -> 15KiB
