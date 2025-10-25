@@ -1,0 +1,359 @@
+=== EJERCICIO 14 - PRACTICO 2 S.O ===
+
+Dado el sistema de paginado de dos niveles del i386 direcciones
+virtuales de 32 bits, direcciones fı́sicas de 32 bits, 10 bits de ı́ndice de 
+page directory, 10 bits de ı́ndice de table directory, y 12 bits de offset 
+dentro de la página, o sea un (10, 10, 12), indicar:
+
+(a) Tamaño de total ocupado por el directorio y las tablas de página para 
+mapear 32 MiB al principio de la memoria virtual.
+
+(b) Tamaño total del directorio y tablas de páginas si están mapeados los 
+4 GiB de memoria.
+
+(c) Dado el ejercicio anterior ¿Ocuparı́a menos o más memoria si fuese una 
+tabla de un solo nivel? Explicar.
+
+(d) Mostrar el directorio y las tablas de página para el siguiente 
+mapeo de virtual a fı́sica:
+
+Virtual                     |      Física 
+                            |
+[0MiB, 4MiB)                |      [0MiB, 4MiB)
+[8MiB, 8MiB + 32KiB)        |      [128MiB, 128MiB + 32KiB)
+
+
+(a):
+
+Lo que queremos mapear son 32MiB:
+    
+    Tenemos que estamos en un esquema ( 10, 10, 12 ) en i386.
+    Luego 10 bits son para el PDI, 10 bits son para PTI, y 12 bits de offset.
+    Por estándar de i386, cada Entrada (de PD y PT) ocupa 4 bytes.
+
+    Primero, ¿Cuánta capacidad tiene una página?
+        Si nos fijamos en el offset ocupa 12 bits. Si calculamos 2¹² = 4096
+        Implica que cada página tiene una capacidad de 4KiB 
+
+    Segundo, ¿Cuánto espacio EN MEMORIA ocupa 1 Page Table?
+        Si nos fijamos, tenemos que para las PT, tenemos 10 bits reservados.
+        Luego, cada page table tiene 2¹⁰ = 1024 entradas y por estándar de i386,
+        4 bytes por entrada => 4KiB por Page Table (Espacio en Memoria).
+
+    Tercero, ¿Cuánta capacidad de MAPEO tiene 1 Page Table?
+        Como cada PT apunta a 1024 páginas (una por entrada). Tenemos que:
+        4Kib * 1024 = 2¹² * 2¹⁰ = 2²² = 4MiB de capacidad de Mapeo 
+    
+    Cuarto, ¿Cuántas PT's necesitaríamos para mapear 32MiB?
+        Si cada page table puede mapear hasta 4MiB, entonces necesitamos 
+        8 pages tables para mapear las 32MiB.
+    
+    Quinto, ¿Cuánto espacio EN MEMORIA ocupa el Page Directory?
+        Tenemos 10 bits reservados para el Page Directory, y cada entrada 
+        por estandar ocupa 4 bytes, 4 * 1024 = 4KiB de espacio en memoria por 
+        parte del Page Directory 
+
+    Sexto, ¿Cuánto espacio EN MEMORIA ocupa TODO (Directorio y Tabla de 
+    páginas)?
+        Tenemos 1 PD (4KiB) + 8 PT (32KiB) = 36KiB para mapear 32MiB 
+
+    Séptimo, Conclusiones:
+        NO Confundir ESPACIO EN MEMORIA con CAPACIDAD DE MAPEO:
+            El espacio es lo que ocupa la estructura como tal 
+            El mapeo es cuanto espacio puede relacionar con los punteros 
+        
+        Ejemplo:
+            El PD ocupa en memoria 4KiB, sin embargo tiene una capacidad de 
+            mapeo de 4GiB
+            1024 entradas apuntando a los 4MiB que mapea cada page table 
+            = 2¹⁰ * 2²² = 2³² = 4GiB
+
+
+    Gráficamente visualizado:
+
+    Page Directory (PD) → 1 página, 1024 entradas
+    +--------------------+
+    | PDE 0 → Page Table 0 |
+    | PDE 1 → Page Table 1 |
+    | PDE 2 → Page Table 2 |
+    | PDE 3 → Page Table 3 |
+    | PDE 4 → Page Table 4 |
+    | PDE 5 → Page Table 5 |
+    | PDE 6 → Page Table 6 |
+    | PDE 7 → Page Table 7 |
+    | PDE 8-1023 → No usado |
+    +--------------------+
+
+    Con PDE = Page Directory Entry
+        Las cuales son como punteros que apuntan a ciertas estructuras de datos:
+            * A otros Pages Directories, Pages Tables, a Páginas.
+
+    Cada Page Table → 1 página, 1024 entradas
+    Page Table 0:
+    +------------------------+
+    | PTE 0 → Página 0       |
+    | PTE 1 → Página 1       |
+    | ...                    |
+    | PTE 1023 → Página 1023 |
+    +------------------------+
+
+    Page Table 1:
+    +------------------------+
+    | PTE 0 → Página 1024    |
+    | PTE 1 → Página 1025    |
+    | ...                    |
+    | PTE 1023 → Página 2047 |
+    +------------------------+
+
+    ...
+
+    Page Table 7:
+    +------------------------+
+    | PTE 0 → Página 7168    |
+    | ...                    |
+    | PTE 1023 → Página 8191 |
+    +------------------------+
+
+    Con PTE = Page Table Entry:
+        Las cuales son como punteros que pueden apuntar a Páginas.
+
+    *****Espacio en Memoria para mapear 32MiB con 1 PD y 8 PT: 36KiB******
+
+    DETALLES IMPORTANTES:
+        * Página NO es lo mismo que Entrada.
+        * Por estándar de i386, cada Entrada (de PD y PT) ocupa 4 bytes
+
+(b):
+    Lo que queremos mapear son 4GiB COMPLETOS:
+
+        Primero, lo que ya sabemos:
+            *Cada página tiene 4KiB de espacio
+            *PT:
+                Espacio en Memoria: 4KiB
+                Capacidad de Mapeo: 4MiB 
+            *PD:
+                Espacio en Memoria: 4KiB 
+                Capacidad de Mapeo: 4GiB 
+
+            Si queremos mapear los 4GiB, necesitamos todo el almanaque de PT 
+
+        Segundo, calcular cuantas PT son necesarias:
+            Basicamente, TODAS, las 1024, y como cada PT ocupa en memoria 
+            4KiB => 1024 * 4KiB = 2¹⁰ * 2¹² = 2²² = 4MiB de espacio en memoria 
+            por las 1024 Pages Tables 
+        
+        Tercero, entonces el espacio total en memoria es:
+            4KiB por el PD + 4MiB de las 1024 pages tables
+
+    Gráficamente visualizado:
+
+    Page Directory (PD) → 1024 entradas a 1 Page Table cada una 
+    +----------------------------+
+    | PDE 0 → Page Table 0       |
+    | PDE 1 → Page Table 1       |
+    | PDE 2 → Page Table 2       |
+    | PDE 3 → Page Table 3       |
+    | PDE 4 → Page Table 4       |
+    | PDE 5 → Page Table 5       |
+    | PDE 6 → Page Table 6       |
+    | PDE 7 → Page Table 7       |
+    | PDE 8 → Page Table 8       |
+    |          ...               |
+    | PDE 1023 → Page Table 1023 |
+    +----------------------------+
+
+    Con PDE = Page Directory Entry
+        Las cuales son como punteros que apuntan a ciertas estructuras de datos:
+            * A otros Pages Directories, Pages Tables, a Páginas.
+
+    Cada Page Table → 1024 entradas a 1 página cada una 
+    Page Table 0:
+    +----------------------------------------------+
+    | PTE 0 → Página 0  (0 KiB – 4 KiB)            |
+    | PTE 1 → Página 1  (4 KiB – 8 KiB)            |
+    | ...                                          |
+    | PTE 1023 → Página 1023                       | 
+    +----------------------------------------------+
+
+    Page Table 1:
+    +---------------------------------------------+
+    | PTE 0 → Página 1024                         |
+    | PTE 1 → Página 1025                         |
+    | ...                                         |
+    | PTE 1023 → Página 2047                      |
+    +---------------------------------------------+
+
+    ...
+
+    Page Table 1023:
+    +-----------------------------+
+    | PTE 0 → Página 1,047,552    |
+    | ...                         |
+    | PTE 1023 → Página 1,048,575 |
+    +-----------------------------+
+
+    Con PTE = Page Table Entry:
+        Las cuales son como punteros que pueden apuntar a Páginas.
+
+    *****Espacio en Memoria para mapear 4GiB con 1 PD y 1024 PT: 
+    4KiB + 4MiB ******
+    
+(c):
+    Para el ejercicio anterior el (b) para mapear las 4GiB en un esquema de 2 niveles, se necesitó 
+    1 PD + 1024 PT que dieron de resultado: 4KiB + 4MiB de Tamaño
+
+    Si fuese para un esquema de un solo nivel, tendríamos a disposición una PT que por estándar de 
+    i386 cada entrada de la misma ocupa 4 bytes. Para las 4GiB que queremos mapear deberiamos tener 
+    en cuenta que:
+        * Las páginas siguen siendo de 4KiB eso quiere decir que el offset sigue siendo 12 bits 
+        * Como siguen siendo direcciones de 32 bits tenemos que un nivel sería: 32 - 12 = 20 bits para 
+        la PT. Por ende tendríamos 2²⁰ = 4MiB de espacio reservado para la PT, es decir: 1.048.576 entradas 
+        (Muchas páginas alv :p)
+
+        * Luego la capacidad de mapeo de la Page Table con esos 4Mib sería de:
+        1.048.576 * 4KiB (Cant de entradas * El espacio de las páginas) = 2²⁰ * 2¹² = 2³² = 4GiB  
+
+    Gráficamente visualizado:
+
+    Page Table (PT) → 1.048.576 entradas a 1 página cada una
+    +---------------------------------+
+    | PTE 0 → Page 0                  |
+    | PTE 1 → Page 1                  |
+    | PTE 2 → Page 2                  |
+    | PTE 3 → Page 3                  |
+    | PTE 4 → Page 4                  |
+    | PTE 5 → Page 5                  |
+    | PTE 6 → Page 6                  |
+    | PTE 7 → Page 7                  |
+    | PTE 8 → Page 8                  |
+    |          ...                    |
+    |                                 |
+    | PTE 1.048.575 → Page 1.048.575  |
+    +---------------------------------+
+
+    Donde PTE es Page Table Entry, y el tamaño total que ocupa la Page Table es 4MiB para mapear 4GiB 
+    El esquema de un solo nivel quedaría (20 , 12), es decir:
+        | 20 bits para la PT | 12 bits para el offset |
+
+    Comparando, nos damos cuenta que en términos de espacio en memoria, conviene más mapear 4GiB en un 
+    esquema de un solo nivel 
+
+
+(d):
+    Virtual                     |      Física 
+                                |
+    [0MiB, 4MiB)                |      [0MiB, 4MiB)
+    [8MiB, 8MiB + 32KiB)        |      [128MiB, 128MiB + 32KiB)
+
+
+    Recordemos:
+    
+    Page Directory (PD) → 1024 entradas a 1 Page Table cada una 
+    +----------------------------+
+    | PDE 0 → Page Table 0       |
+    | PDE 1 → Page Table 1       |
+    | PDE 2 → Page Table 2       |
+    | PDE 3 → Page Table 3       |
+    | PDE 4 → Page Table 4       |
+    | PDE 5 → Page Table 5       |
+    | PDE 6 → Page Table 6       |
+    | PDE 7 → Page Table 7       |
+    | PDE 8 → Page Table 8       |
+    |          ...               |
+    | PDE 1023 → Page Table 1023 |
+    +----------------------------+
+
+    Con PDE = Page Directory Entry
+        Las cuales son como punteros que apuntan a ciertas estructuras de datos:
+            * A otros Pages Directories, Pages Tables, a Páginas.
+
+    Cada Page Table → 1024 entradas a 1 página cada una 
+    Page Table 0:
+    +----------------------------------------------+
+    | PTE 0 → Página 0  (0 KiB – 4 KiB)            |
+    | PTE 1 → Página 1  (4 KiB – 8 KiB)            |
+    | ...                                          |
+    | PTE 1023 → Página 1023                       | 
+    +----------------------------------------------+
+
+    Page Table 1:
+    +---------------------------------------------+
+    | PTE 0 → Página 1024                         |
+    | PTE 1 → Página 1025                         |
+    | ...                                         |
+    | PTE 1023 → Página 2047                      |
+    +---------------------------------------------+
+
+    ...
+
+    Page Table 1023:
+    +-----------------------------+
+    | PTE 0 → Página 1,047,552    |
+    | ...                         |
+    | PTE 1023 → Página 1,048,575 |
+    +-----------------------------+
+
+    Con PTE = Page Table Entry:
+        Las cuales son como punteros que pueden apuntar a Páginas.
+
+    *****Espacio en Memoria para mapear 4GiB con 1 PD y 1024 PT: 
+    4KiB + 4MiB ******
+
+    Las direcciones a mapear van desde la:
+
+    VA1: [0Mib , 4MiB) -> [0Mib, 4MiB)
+        Como cada Page Table puede mapear hasta 4MiB, y empezamos desde 0MiB, entonces todo
+        se va a mapear en la PTE[0].
+        Acceso: 
+            PDE[0] > 
+                PTE[0] > 
+                    For i = 0...1023 do 
+                         map (PTE[i]) 
+                    od
+
+    VA2: [8MiB, 8MiB + 32KiB) ->  [128MiB, 128MiB + 32KiB)
+
+        Cada Page Table mapea hasta 4MiB, entonces tenemos:
+            PT0 -> 0MiB - 4MiB
+            PT1 -> 4MiB - 8MiB
+            PT2 -> 8MiB - 12MiB -> AQUÍ
+
+        Luego, vemos que el rango es de 32KiB, que implican 8 páginas (0..7) de 4KiB.
+
+        Por último, el PDE[2] es el que apunta a la PTE[2].
+
+        Por ende se mapearía de la siguiente manera:
+        Acceso:
+            PDE[2] >
+                PTE[2] >
+                    For i = 0..7 do 
+                        map(PTE[i])
+                    od
+
+    Resultado Final Gráfico:
+
+    Page Directory (PD) → 1024 entradas a 1 Page Table cada una 
+
+
+                                                            Page Table 0 [0MiB, 4MiB)
+                                                            +------------------------+
+                                                            |   PTE 0 → Page 0       |
+                                                            |   PTE 1 → Page 1       |
+                                                            |   PTE 2 → Page 2       |
+                                                            |     ...                |
+                                                            |   PTE 1023 → Page 1023 |
+    +--------------------------------------+                |                        |
+    | PDE 0 → Page Table 0 ------------------------------>  +------------------------+
+    | PDE 1 → Page Table 1 (Nothing)       |
+    | PDE 2 → Page Table 2 ------------------------------>  Page Table 2 [128MiB, 128MiB + 32KiB)
+    | PDE 3 → Page Table 3 (Nothing)       |                +------------------------+
+    | PDE 4 → Page Table 4 (Nothing)       |                |   PTE 0 → Page 0       |
+    | PDE 5 → Page Table 5 (Nothing)       |                |   PTE 1 → Page 1       |
+    | PDE 6 → Page Table 6 (Nothing)       |                |         ...            |
+    | PDE 7 → Page Table 7 (Nothing)       |                |   PTE 7 → Page 7       |
+    | PDE 8 → Page Table 8 (Nothing)       |                |   PTE 8 → (Nothing)    |
+    |          ... (Nothing)               |                |   PTE 9 → (Nothing)    |
+    | PDE 1023 → Page Table 1023 (Nothing) |                |         ...            |
+    +--------------------------------------+                |   PTE 1023 → (Nothing) |
+                                                            +------------------------+
+

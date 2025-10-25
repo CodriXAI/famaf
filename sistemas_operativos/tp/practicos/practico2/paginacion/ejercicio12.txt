@@ -1,0 +1,197 @@
+=== EJERCICIO 12 - PRACTICO 2 S.O ===
+
+Dado un tamaño de página de 4 KiB = 2¹² = 4096 bytes y la tabla
+de paginado de la Fig. 1.
+
+(a) ¿Cuántos bits de direccionamiento hay para cada espacio?
+
+(b) Determine las direcciones fı́sicas a partir de las virtuales: 39424, 12416,
+26112, 63008, 21760, 32512, 43008, 36096, 7424, 4032.
+
+(c) Determine el mapeo inverso, o sea las direcciones virtuales a partir de las
+direcciones fı́sicas: 16385, 4321.
+
+
+
+Figura 1:
+
+V     F      ¿Válida?
+
+0    000        1
+1    111        1
+2    000        0
+3    101        1
+4    100        1 
+5    001        1 
+6    000        0
+7    000        0
+8    011        1
+9    110        1
+10   100        1
+11   000        0
+12   000        0
+13   000        0
+14   000        0
+15   010        1
+
+Donde:
+V = Virtual / F = Física / Validez (1 = Es válida, 0 = No es valida => Page Fault)
+
+En detalle:
+    *Tenemos 16 entradas (páginas) de la 0 a la 15, cada una con sus datos.
+    *El esquema de paginación está dividido en páginas de 4KiB => 12 bits de offset
+    *Dichos 12 bits menos significativossirven para el desplazamiento, tanto para las páginas virtuales 
+    como los marcos físicos.
+    *Para el espacio virtual, se requiere saber el VPN (Virtual Page Number), representado según la cantidad 
+    de entradas (en este caso son 16 páginas, que se pueden representar con 4 bits)
+    *Para los marcos físicos, podemos ver en tabla que se representan con 3 bits (2³ marcos, 8 marcos)
+
+(a): 
+    Para el espacio de paginas virtuales, se requieren 4 bits de VPN + 12 bits de offset = 16 bits
+    Para el espacio de los marcos físicos, se requieren 3 bits de marco + 12 bits de offset = 15 bits 
+
+(b):
+
+    Para pasar de virtual a física:
+        Primero para saber la dirección virtual:
+        VPN = (VA / size_page) PARTE ENTERA
+        Offset = VA % size_page RESIDUO
+
+        Y de ahi traducirlo a física (en este caso en tabla):
+            (Marco Fisico * size_page) + offset 
+    
+    Para saber el residuo:
+        Algoritmo de la división:
+            Dividendo = (Divisor * Cociente) + Resto
+            {Restamos Resto a ambos lados}
+            Dividendo - Resto = (Divisor * Cociente)
+            {Restamos Dividendo a ambos lados}
+            - Resto = (Divisor * Cociente) - Dividendo
+            {Multiplicamos por (-1) en ambos lados}
+            Resto = -(Divisor * Cociente) + Dividendo
+            {Conmutatividad}
+            Resto = Dividendo - (Divisor * Cociente) 
+
+    Direcciones Virtuales:
+        VA: 39424 -> PA: 27136
+            39424 / 4096 = 9.625 => VPN = 9
+
+            Consultamos la Tabla en la VPN 9: Es válida 
+
+            39424 % 4096 = 39424 - (4096 * 9) => Offset = 2560
+
+            Consultamos la Tabla en la VPN 9:
+                El número de marco es 110, que sería 6 en decimal. Corresponde al marco 6
+            
+            Dirección Fisica:
+                (6 * 4096) + 2560 = "27136"
+
+        VA: 12416 -> PA: 20608
+            12416 / 4096 = 3.03125 => VPN = 3
+
+            Consultamos en la Tabla la VPN 3: Es válida 
+
+            12416 % 4096 = 12416 - (4096 * 3) => Offset = 128
+
+            Consultamos la Tabla en la VPN 3:
+                El número de marco es 101, que sería 5 en decimal . Corresponde al marco 5
+
+            Dirección Física:
+                (5 * 4096) + 128 = "20608" 
+
+        VA: 26112 -> Page Fault 
+            26112 / 4096 = 6.375 => VPN = 6
+
+            Consultamos en la Tabla la VPN 6: No es válida 
+
+            Page Fault
+
+        VA: 63008 -> PA: 22048
+            63008 / 4096 = 15.3828125 => VPN = 15
+
+            Consultamos en la Tabla la VPN 15: Es válida 
+
+            63008 % 4096 = 63008 - (4096 * 15) => Offset = 1568
+
+            Consultamos en la Tabla la VPN 15:
+                El número de marco es 010, en decimal es 2, Marco físico 2
+
+            Dirección Física:
+                (5 *  4096) + 1568 = "22048"            
+
+        VA: 21760 -> PA: 5376
+            21760 / 4096 = 5.3125 => VPN = 5
+
+            Consultamos en la Tabla la VPN 5: Es válida 
+
+            21760 % 4096 = 21760 - (4096 * 5) => Offset = 1280
+
+            Consultamos en la Tabla la VPN 5:
+                El número de marco es 001, en decimal es 1, Marco fisico 1 
+            
+            Dirección Física:
+                (1 * 4096) + 1280 = "5376"
+
+        VA: 32512 -> Page Fault
+            32512 / 4096 = 7.9375 => VPN = 7
+
+            Consultamos en la Tabla la VPN 7: No es válida
+
+            Page Fault 
+
+        VA: 43008 -> PA: 18432
+            43008 / 4096 = 10.5 => VPN = 10
+
+            Consultamos en la Tabla la VPN 10: Es válida 
+
+            43008 % 4096 = 43008 - (4096 * 10) => Offset = 2048
+
+            Consultamos en la Tabla la VPN 10:
+                El número de marco es 100, en decimal 4, Marco Físico 4
+
+            Dirección Física:
+                (4 * 4096) + 2048 = "18432"
+
+        VA: 36096 -> PA: 15616
+            36096 / 4096 = 8.8125 => VPN = 8
+
+            Consultamos en la Tabla la VPN 8: Es válida 
+
+            36096 % 4096 = 36096 - (4096 * 8) => Offset = 3328
+
+            Consultamos en la Tabla la VPN 8:
+                El número de marco es 011, en decimal 3, Marco Físico 3
+            
+            Dirección Física:
+                (3 * 4096) + 3328 = "15616"
+            
+        VA: 7424  -> PA: 32000
+            7424 / 4096 = 1.8125 => VPN = 1
+
+            Consultamos en la Tabla la VPN 1: Es válida 
+
+            7424 % 4096 = 7424 - (1 * 4096) => Offset = 3328
+
+            Consultamos en la Tabla la VPN 1:
+                El número de marco es 111, en decimal es 7, Marco Fisico 7
+
+            Dirección Física:
+                (7 * 4096) + 3328 = "32000"
+
+        VA: 4032  -> PA: 4032
+            4032 / 4096 = 0.984375 => VPN = 0
+
+            Consultamos en la Tabla la VPN 0: Es válida 
+
+            4032 % 4096 = 4032 - (4096 * 0) => Offset = 4032
+
+            Consultamos en la Tabla la VPN 0:
+                El número de marco es 000, en decimal 0, el Marco Físico 0
+            
+            Dirección Física:
+                (0 * 4096) + 4032 = "4032"
+
+
+
+
+

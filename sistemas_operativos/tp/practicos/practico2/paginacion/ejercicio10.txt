@@ -1,0 +1,41 @@
+=== EJERCICIO 10 - PRACTICO 2 S.O ===
+
+La TLB de una computadora con una page table de un nivel tiene una eficiencia del
+95 %. Obtener un valor de la TLB toma 10ns. La memoria principal tarda 120ns. 
+
+¿Cuál es el tiempo promedio para completar una operación de memoria teniendo en 
+cuenta que se usa tabla de páginas lineal?
+
+
+
+Datos: 
+    * 95% de Eficiencia:
+        Quiere decir que el 95% de las veces la TLB tiene la dirección (TLB HIT) y 
+        el otro 5% no (TLB miss).
+
+    * La TLB tarda 10ns en obtener un valor.
+
+    * En total la memoria principal tarda 120ns.
+
+El tiempo en promedio para completar una operación EN MEMORIA sabiendo que la tabla es
+lineal, eso quiere decir que es de un solo nivel. Por ende toda la tabla está en 
+memoria principa, y leer una entrada de la tabla por ende costará 120ns.
+
+Si la TLB encima de esto falla (TLB miss) el tiempo constará en:
+    Es 10ns para consultar la TLB, la cuál falla
+    Es 120ns para consultar la tabla.
+    Luego 120ns para acceder al verdadero dato en memoria.
+    En total 250ns
+
+Si la TLB encima de esto NO falla (TLB hit) el tiempo constará en:
+    Es 10ns para consultar la TLB, la cuál tiene éxito.
+    Luego 120ns para acceder al verdadero dato en memoria 
+    En total 130ns
+
+Como hay probabilidad de efectividad, se realiza una suma ponderada:
+    (95%) * 130 + (5%) * 250
+    0.95 * 130 + 0.05 * 250 = 136ns
+
+Es decir: El tiempo promedio para completar una operación en memoria es de 136ns.
+
+

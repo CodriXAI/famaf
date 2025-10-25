@@ -1,0 +1,13 @@
+diff --git a/big_brother.c b/big_brother.c
+index 9e70bfe..b144db0 100644
+--- a/big_brother.c
++++ b/big_brother.c
+@@ -6,7 +6,7 @@
+ #include <string.h>
+
+ int bb_is_log_file_dentry(fat_dir_entry dir_entry) {
+-    return strncmp(LOG_FILE_BASENAME, (char *)(dir_entry->base_name), 3) == 0 &&
++    return strncmp(LOG_FILE_BASENAME, (char *)(dir_entry->base_name), 2) == 0 &&
+            strncmp(LOG_FILE_EXTENSION, (char *)(dir_entry->extension), 3) == 0;
+ }
+

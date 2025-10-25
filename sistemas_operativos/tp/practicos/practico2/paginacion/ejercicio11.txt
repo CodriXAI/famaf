@@ -1,0 +1,41 @@
+=== EJERCICIO 11 - PRACTICO 2 S.O ===
+
+Considere el siguiente programa que ejecuta en un microprocesador con soporte de
+paginación, páginas de 4 KiB y una TLB de 64 entradas.
+
+    int x[N];
+    int step = M;
+    for (int i=0; i<N; i+=step)
+        x[i] = x[i]+1;
+
+
+(a) ¿Qué valores de N, M hacen que la TLB falle en cada iteración del ciclo?
+
+(b) ¿Cambia en algo si el ciclo se repite muchas veces? Explique.
+
+Tenemos páginas de 4KiB (4096 bytes) y una TLB de 64 entradas.
+
+Eso implica que como máximo: La TLB antes de fallar va a poder almacenar:
+64 * 4KiB = 256KiB
+
+Sabemos que: 
+    * Un arreglo en memoria es contiguo.
+    * El tamaño en bytes de un int es de 4 bytes.
+    * N determina el largo del arreglo.
+    * M determina el salto que hace el for.
+
+Hagamos matematicas hijo:
+
+    La TLB tiene 64 entradas (1 por página)
+    Cada página de la TLB tiene capacidad de 4KiB (4096 bytes)
+    Como cada int pesa 4 bytes, calculemos cuantos enteros tiene cada página:  
+        4096 / 4 = 1024 enteros x página.
+    La TLB produce un TLB miss si se encuentra con una página que no tiene cargada.
+    Por ende si se salta cada 1024 enteros o más, se producirán TLB miss, osea que falle.
+    Como el salto lo determina M, entonces concluimos que:
+
+    (a): Para que la TLB falle, necesitamos M >= 1024. En cuanto a N, solo hará que,
+    cuanto más grande sea, más TLB miss haya y cuanto menos grande sea, más eficiente será. 
+
+    (b): Si el ciclo se repite varias veces, es probable que se reduzca los TLB miss.
+    Si la TLB aún conserva en caché las páginas, van a aparecer hits, 

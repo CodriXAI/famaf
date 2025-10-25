@@ -1,0 +1,36 @@
+TLB = translation-lookaside buffer = Búfer de Búsqueda de Traducción
+También puede ser conocido como address-translation cache
+Es una parte del chip del hardware MMU (memory-management unit) y es simplemente 
+un hardware caché.
+
+Almacena de a pares: VPN -> PFN (Número de página virtual a Marco físico) y evita tener 
+que estar consultando todo el tiempo al page table (es más lenta).
+
+Tenemos dos métodos de localidades para el caché:
+    Localización Temporal (temporal locality):
+        "Si algo se usó recientemente, es muy probable que se use de nuevo".
+        
+        En el contexto del TLB:
+            *Si un proceso accedió recientemente a una página virtual, es muy probable 
+            que vuelva a acceder a la misma página pronto.
+            
+            *Por eso, conviene mantener esa traducción en el TLB: cuando vuelva a 
+            necesitarla, se obtiene enseguida, sin ir a la tabla de páginas. 
+        
+        Por ejemplo: Si constantemente se accede al primer elemento de un arreglo.
+    
+    Localización espacial (spatial locality):
+        "Si algo se usó recientemente, es muy probable que acceda pronto a algo
+        cercano"
+        En el contexto del TLB:
+            *Cuando el programa accede a una dirección dentro de una página, 
+            es probable que también acceda a otras direcciones dentro de esa misma 
+            página.
+
+            *Esto hace que, con una sola entrada del TLB, cubras muchos accesos 
+            consecutivos a direcciones virtuales vecinas.
+
+        Por ejemplo: Si se acceden a elementos de array que estén en la misma página.
+
+
+
