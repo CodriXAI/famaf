@@ -1,0 +1,112 @@
+=== EJERCICIO 18 - PRACTICO 2 S.O ===
+
+Se define un page directory donde la última entrada, la 1023, apunta a la base del
+mismo.
+
+(a) ¿A dónde apunta la dirección virtual 0xFFC00000?
+
+(b) ¿Y la dirección virtual 0xFFFE0000?
+
+(c) Indique a donde apunta la dirección virtual 0xFFFFF000.
+
+(d) Finalmente, describa para que sirve este esquema de memoria virtual.
+
+Razonando:
+    Al parecer tenemos lo que sería un page directory circular.
+
+           +---------------------------+
+           |     PDE 0 → PT0           |
+           |     PDE 1 → PT1           |
+           |     PDE 2 → PT2           |
+           |          ...              |
+           |   PDE 1023 → Base del PD  | 
+           +---------------------------+
+
+Vamos a suponer que seguimos hablando del esquema de 2 niveles ( 10, 10, 12 )
+
+Donde una dirección virtual se construye de 32 bits y los cuales:
+
+| 10 bits para el PD | 10 bits para el PT | 12 bits para offset | 
+
+(a):
+    VA: 0xFFC00000
+
+    Pasamos a binario:
+        | 1111 | 1111 | 1100 | 0000 | 0000 | 0000 | 0000 | 0000
+
+    Tomamos los primeros 10 bits para ver el PD:
+        1111111111 = 1023
+
+    Tomamos los siguientes 10 bits para ver la PT:
+        0000000000 = 0
+    
+    Offset:
+        0000000000000 = 0
+    
+    Cómo es circular, la entrada 1023 apunta a la base. Por ende la dirección 
+    0xFFC00000 apunta al PDE 1023 que apunta a PT0.
+
+
+
+(b):
+    VA: 0xFFFE0000
+
+    Pasamos a binario:
+        | 1111 | 1111 | 1111 | 1110 | 0000 | 0000 | 0000 | 0000
+
+    
+    Tomamos los primeros 10 bits para ver el PD:
+        1111111111 = 1023
+    
+    Tomamos los otros 10 bits para ver la PT:
+        1111100000 = 992
+    
+    Offset:
+        000000000000 = 0
+
+    Cómo es circular, la entrada 1023 apunta a la base.
+    Por ende la dirección 0xFFFE0000 apunta al PDE 1023, a la PT992.
+
+(c):
+    VA: 0xFFFFF000
+
+    Pasamos a binario:
+        | 1111 | 1111 | 1111 | 1111 | 1111 | 0000 | 0000 | 0000
+    
+    Tomamos los primeros 10 bits para ver el PD:
+        1111111111 = 1023
+    
+    Tomamos los siguientes 10 bits para ver la PT:
+        1111111111 = 1023
+
+    Offset:
+        000000000000 = 0
+
+    Tenemos al mismo PD como PT ya que es el mismo 1023, por ende apunta a la 
+    dirección física del PD.
+
+    Es rarísimo porque:
+        La última entrada del PD, la PDE[1023] dice: Ahora apunto a una 
+        page table que soy yo mismo, y dicha entrada no apunta a una 
+        PT sino son de nuevo PDE que apuntan a las PT. Yo soy tu gominola.
+
+
+Gráficamente:
+
++---------------------------+
+|     PDE 0 → PT0           |
+|     PDE 1 → PT1           |
+|     PDE 2 → PT2           |     |-----------------------------------------
+|          ...              |     v                                        |
+|     PDE 1023 ------------------------> PD que actúa como Page Table      |
++---------------------------+            +---------------------------+     |
+                                         |      PTI 0  → PDE 0       |     |
+                                         |      PTI 1  → PDE 1       |     |
+                                         |      PTI 2  → PDE 2       |     |
+                                         |            ...            |     |
+                                         |      PTI 1023 ------------------|
+                                         +---------------------------+
+
+
+(d):
+    Suele ser útil para escritura/lectura de buffers de forma cíclica.

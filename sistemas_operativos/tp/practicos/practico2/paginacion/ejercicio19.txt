@@ -1,0 +1,152 @@
+=== EJERCICIO 19 - PRACTICO 2 S.O ===
+
+Explique como se usa la paginación para hacer:
+
+(a) Dereferenciamiento de puntero a NULL tira excepción.
+
+(b) Archivo de intercambio o swap file.
+
+(c) Demand paging para la carga de programas.
+
+(d) Auto-growing stack.
+
+(e) Non-executable stacks.
+
+(f) Memory mapped files mmap().
+
+(g) Copy-on-write (COW) para el fork().
+
+(h) sbrk() barato y por lo tanto malloc() barato.
+
+(i) malloc();memset(0) = calloc() barato.
+
+(j) Código compartido entre procesos: shared libraries, código de kernel, etc.
+
+(k) Memoria compartida entre procesos.
+
+Listado de técnicas:
+
+    (a) Dereferenciamiento de puntero NULL tira excepción
+
+        El puntero NULL normalmente apunta a dirección 0.
+
+        Con paginación, no se asigna ninguna página física a la primera página 
+        (dirección 0 a 0xFFF, si la página es de 4KiB).
+
+        Cuando un proceso intenta leer o escribir ahí, la MMU detecta que la 
+        entrada de la tabla de páginas no es válida → Page Fault → el kernel 
+        lanza una excepción (segmentation fault).
+
+    (b) Archivo de intercambio o swap file
+
+        Cuando la RAM se llena, algunas páginas se pueden mover a disco (swap file).
+
+        La paginación permite esto porque cada página tiene un bit que 
+        indica si está en RAM o en swap.
+
+        Si un proceso accede a una página que está en swap → Page Fault → el kernel
+        carga la página desde el disco a RAM y actualiza la tabla de páginas.
+
+    (c) Demand paging para la carga de programas
+
+        Al ejecutar un programa, no se cargan todas las páginas de memoria 
+        inmediatamente, solo las necesarias.
+
+        Cada página de código/datos empieza como no válida en la tabla de páginas.
+
+        Al acceder a una página por primera vez → Page Fault → kernel carga esa 
+        página desde el ejecutable a memoria.
+
+        Así se ahorra RAM y el programa arranca más rápido.
+
+    (d) Auto-growing stack
+
+        El stack comienza pequeño y crece según sea necesario.
+
+        Si un proceso hace push y se sale del stack asignado:
+
+        La dirección siguiente no está mapeada → Page Fault.
+
+        Kernel reserva una nueva página, actualiza la tabla → stack crece 
+        automáticamente.
+
+        Paginar hace que esto sea seguro y flexible.
+
+    (e) Non-executable stacks
+
+        Cada entrada de tabla de páginas tiene bits de permisos 
+        (read, write, execute).
+
+        Al marcar las páginas del stack como no ejecutables:
+
+        Código no puede correr desde ahí.
+
+        Evita exploits tipo stack-smashing.
+
+    (f) Memory mapped files (mmap())
+
+        mmap() mapea un archivo a un rango de direcciones virtuales.
+
+        La tabla de páginas apunta a las páginas del archivo en disco, 
+        no necesariamente a RAM todavía.
+
+        Acceso a la página → Page Fault → se carga esa parte del archivo a memoria.
+
+        Permite leer/escribir archivos como si fueran memoria.
+
+    (g) Copy-on-write (COW) para fork()
+
+        Al hacer fork(), padre e hijo comparten las mismas páginas marcadas 
+        como read-only.
+
+        Si uno escribe en una página:
+
+        Se produce un Page Fault.
+
+        Kernel copia la página → cada proceso tiene su propia copia.
+
+        Evita duplicar memoria innecesaria al hacer fork.
+
+    (h) sbrk() barato → malloc() barato
+
+        sbrk() incrementa el break del heap, ajustando la tabla de páginas.
+
+        Solo se agregan nuevas páginas virtuales, sin inicializar aún.
+
+        Es barato porque solo se modifican tablas; la RAM se asigna cuando se 
+        accede a la página (demand paging).
+
+    (i) malloc() + memset(0) = calloc() barato
+
+        Para calloc(), se necesitan páginas inicializadas a cero.
+
+        En Linux, se usan páginas compartidas de cero (zero-fill-on-demand):
+
+        La tabla de páginas apunta a una página de cero read-only compartida.
+
+        Cuando el proceso escribe → Page Fault → copia la página y la asigna.
+
+        Así calloc() es barato porque no se escribe físicamente cero hasta 
+        que se necesita.
+
+    (j) Código compartido entre procesos
+
+        Bibliotecas compartidas (.so) o código del kernel:
+
+        Las páginas de código son read-only y mapeadas en la misma dirección virtual
+        para varios procesos.
+
+        La tabla de páginas de cada proceso apunta a la misma página física.
+
+        Ahorras memoria y puedes actualizar código del kernel sin afectar cada 
+        proceso.
+
+    (k) Memoria compartida entre procesos
+
+        Se reservan páginas específicas y se actualizan las tablas de varios 
+        procesos para que apunten a la misma página física.
+
+        Todos los procesos ven los cambios en tiempo real.
+
+        Ejemplo: IPC con shmget() y mmap().
+

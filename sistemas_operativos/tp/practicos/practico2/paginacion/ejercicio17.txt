@@ -1,0 +1,128 @@
+=== EJERCICIO 17 - PRACTICO 2 S.O ===
+
+¿Verdadero o Falso? Explique.
+
+(a) Hay una page table por cada proceso.
+
+(b) La MMU siempre mapea una memoria virtual más grande a una memoria fı́sica 
+más pequeña.
+
+(c) La dirección fı́sica siempre la entrega la TLB.
+
+(d) Dos páginas virtuales de un mismo proceso se pueden mapear a la misma página 
+fı́sica.
+
+(e) Dos páginas fı́sicas de un mismo proceso se pueden mapear a la misma página 
+virtual.
+
+(f) En procesadores de 32 bits y gracias a la memoria virtual, cada proceso tiene 
+232 direcciones de memoria.
+
+(g) La memoria virtual se puede usar para ahorrar memoria.
+
+(h) Toda la memoria virtual tiene que estar mapeada a memoria fı́sica.
+
+(i) El page directory en i386 se comparte entre todos los procesos.
+
+(j) Puede haber marcos de memoria fı́sica que no tienen un marco de memoria 
+virtual que los apunte.
+
+(k) Por culpa de la memoria virtual hacer un fork resulta muy caro en términos 
+de memoria.
+
+(l) Los procesadores tienen instrucciones especiales para acceder a la memoria 
+fı́sica evitando la MMU.
+
+(m) Es imposible hacer el mapeo inverso de fı́sica a virtual.
+
+(n) No se puede meter todo un Sistema Operativo completo con memoria 
+paginada i386 en 4 KiB.
+
+
+(a):
+    VERDADERO: Cada proceso tiene su propia (o propias) page tables que 
+    contienen sus espacios de direcciones.
+
+(b):
+    (No sé), calculo que FALSO porque la idea es que la virtualización sea 
+    acorde a la memoria física (incluso más chica)
+
+    FALSO: No SIEMPRE va a ser más grande, dependiendo el diseño, como el
+    i386 con PAE, esto no ocurre.
+
+(c):
+    FALSO: La TLB solo puede recopilar direcciones que frecuentemente se utilizan 
+    y acelerar el proceso de direccionamiento. Más no la entrega siempre (véase
+    los TLB miss)
+
+(d):
+    FALSO: Habría overwriting de memoria. MAL
+
+    VERDADERO: Es una técnica para cuando hay memoria compartida, y dos páginas 
+    virtuales se pueden mapear a una dirección física.
+
+(e):
+    FALSO: Una dirección virtual se puede mapear SOLO a una dirección física.
+
+(f):
+    ¿Por qué 232 direcciones nomás? No, se pueden representar 2³² direcciones.
+
+(g):
+    VERDADERO. Puede evitar duplicado de páginas, lo que hace que ahorre 
+    uso de memoria física, por ende, energía.
+
+(h):
+    FALSO: Es posible que haya memoria virtual no utilizada por ende no mapeada
+    y no habría problemas
+
+(i):
+    FALSO: Cada proceso debe tener su propio PD
+
+(j):
+    VERDADERO.
+
+(k):
+    (Ni idea), 
+    ¿bifurcar un proceso implicaría un duplicado también de memoria virtual?
+    En caso que así sea, VERDADERO.
+
+    FALSO (EN GENERAL): Si contamos a los SO antiguos, si sería muy caro por el 
+    duplicado de páginas, los SO modernos preveen esta problemática compartiendo 
+    las páginas hasta que un proceso intenta modificarlas.
+
+(l):
+    (No sé acá si que no se xd)
+
+    Depende lo que hablemos:
+    Si es software de usuario: FALSO, Si es a nivel hardware: VERDADERO
+
+(m): 
+    FALSO: De hecho es una técnica muy utilizada.
+
+(n): 
+    VERDADERO: ¿Qué SO pesa 4KiB solamente?
+
+
+DATOS EXTRAS:
+
+    Técnica Copy-On-Write:
+        Para evitar lo que sería el problema del FORK (o de duplicado en general)
+        Se creó esta técnica.
+
+        Un Fork genera un proceso hijo, que a priori es una copia exacta del padre.
+        Si cada proceso tuviera sus propias memorias físicas, sería carísimo el
+        duplicado.
+
+        Por ende lo que ocurre es que en el momento que se hace un fork, no se 
+        duplica el paginado ni marcos físicos, sino que ambos comparten el mismo 
+        esquema de paginación, que se coloca en solo lectura para no modificar 
+        y evitar conflictos
+
+        Y solo se genera un duplicado real de la página cuándo uno de los procesos 
+        (sea padre o hijo) intenta escribir en la misma. Ahi se genera la copia 
+        exclusiva de dicho proceso, de ahi el nombre Copy On Write. Y esta copia 
+        si ya tiene el permiso de escritura.
+
+        De esta forma se reduce muchisimo el costo.
+
+
