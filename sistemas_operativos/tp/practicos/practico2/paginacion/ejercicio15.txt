@@ -1,0 +1,12 @@
+=== EJERCICIO 15 - PRACTICO 2 S.O ===
+
+Explique porque un i386 no puede mapear los 4 GiB completos de memoria virtual.
+¿Cuál es el máximo?
+
+Basicamente si consideramos un estándar i386, a priori por los cálculos hechos 
+en ejercicios anteriores podemos ver que se podría mapear los 4GiB.
+
+Sin embargo lo que ocurre en la práctica real es que generalmente la memoria física 
+muy seguramente no esté toda disponible para mapear los 4GiB, y hayan reservas sea
+de memoria RAM, el mismo sistema operativo, o lo que se tenga que precargar como 
+la BIOS, etc. Por ende el máximo suele ser un poco menos.

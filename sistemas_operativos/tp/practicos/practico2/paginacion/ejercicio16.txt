@@ -1,0 +1,151 @@
+=== EJERCICIO 16 - PRACTICO 2 S.O ===
+
+Explique como podrı́a extender el esquema de memoria virtual del i386 para que,
+aunque cada proceso tenga acceso a 4 GiB de memoria virtual (32 bits), en total 
+se puedan utilizar 64 GiB (36 bits) de memoria fı́sica
+
+
+
+Bueno (Inhala) vamo despacio que esto va pa rato.
+
+
+¿Qué ocurre con el esquema i386 normal?
+    Tenemos que en el esquema normal podemos llegar a 2 niveles.
+    1 Page Directory con PDEs que apunta a 1024 Pages Tables, en cada una 
+    tenemos 1024 PTE que apuntan a Páginas con tamaño 4KiB cada una.
+
+    Cada PT puede mapear hasta 4MiB, y el PD mapea las 4GiB que tiene como máximo 
+    este esquema.
+
+    La limitación radica en la cantidad de bytes que ocupa el estandar en sus 
+    entradas (PTEs y PDEs) que son 4 bytes. 
+
+    Entonces surge la idea del PAE (Physical Address Extension) que consiste en 
+    aumentar el tamaño de las entradas a 8 bytes. Pero no solo eso, sino que además
+    se agrega un 3er nivel al esquema i386 con PAE, que denominaremos PDPT
+    Osea Page Directory Pointer Table.
+
+Nuevo esquema: i386 con PAE:
+    Ahora con las entradas a 8 bytes y con un 3er nivel tenemos que ver como se 
+    reorganiza el esquema. 
+
+    Primero que nada, se eleva la cantidad de bits a 36 de dirección física.
+    Esto admite una capacidad total de 64GiB de mapeo completo con un tamaño de 
+    página estable de 4KiB.
+
+    Luego, ¿Cómo se reorganiza las estructuras?
+        
+        * Primero en cuanto a direcciones virtuales se siguen utilizando 32bits
+        solo se modificarán las direcciones físicas y el cómo los procesos 
+        interpretan esos 32bits de dirección virtual.
+
+        * Segundo, como dijimos, se agrega un 3er nivel PDPT > PD > PT, y quedan
+        distribuidos los 32 bits de la siguiente manera:
+            2 bits para PDPT | 9 bits para PD | 9 bits para PT | 12 bits para Offset
+        
+        * Tercero, implica que habrá un PDPT con 4 entradas cada una apuntando 
+        a un Page Directory distinto, cada page directory y page table 
+        tendrá 2⁹ = 512 entradas (pero recordemos que aumentamos a 8 bytes 
+        las entradas) y las páginas seguirán siendo de 4KiB
+
+        Si hacemos matemáticas:
+            Cada página es de 4KiB, ahora las pages tables pueden tener 512
+            entradas de 8 bytes, cada entrada apuntando a una página.
+            Por ende ahora mapea 2MiB por page table. Pues:
+                2¹² * 2⁹ = 2²¹ = 2MiB 
+
+            Cada page directory ahora tiene 512 entradas de 8 bytes, cada entrada 
+            apunta a una page table (Que soporta 2MiB de mapeo cada una), 
+            por ende cada page directory puede mapear 1GiB.
+            Pues:
+                512 * 2MiB = 2⁹ * 2²¹ = 2³⁰ = 1GiB 
+            
+            Y tenemos el más general PDPT que tiene 4 entradas que apuntan cada una
+            a un page directory que mapea 1GiB cada uno.
+            Entonces el PDPT mapea 4GiB.
+
+        Podemos observar que no aumentó en direcciones virtuales, lo único que ocurre 
+        es que podemos apuntar a más lugares de la memoria física 
+        (En específico, como usamos 36bits, podemos extenderlo a 64GiB, 2³⁶)
+
+        Esto es posible gracias a la variabilidad de los pages directories. Y 
+        la "aparente reducción" en pages directories y pages tables. (En realidad)
+        se aprovechan mejor los 32bits y se extienden las entradas a 8 bytes.
+
+        Conclusión:
+
+            Modificamos la estructura para que cada entrada sea de 64bits (8 bytes)
+            los cuales se utilizan 36bits para las direcciones físicas, y el resto
+            para flags, control, etc.
+
+            Sumado a un tercer nivel PDPT el que nos permite "ver más allá" de 
+            4GiB en físico, llegando hasta 64GiB aprovechando esta amplitud de 
+            36bits para memoria física, este tercer nivel nos permite que 
+            el mapeo virtual sea de 4GiB por el PDPT y el Físico de 64GiB.
+
+            Por ende, de esta forma es posible llegar más lejos en memoria física.
+
+
+Gráficamente visualizado:
+
+    3 Niveles (9, 9, 12) con 2 bits para PDPT
+
+    PDPT de 4 entradas, cada una apunta a un PD, 4 PDs 
+    +-------------------------------------+ 
+    |      PDPTE 0 → Page Directory 0     |
+    |      PDPTE 1 → Page Directory 1     |
+    |      PDPTE 2 → Page Directory 2     |
+    |      PDPTE 3 → Page Directory 3     |
+    +-------------------------------------+
+
+    Donde PDPTE es Page Directory Pointer Table Entry, son punteros que apuntan 
+    a un Page Directory cada uno.
+
+    Cada PD: 512 entradas (más espacio), cada una apunta a una PT, 2048 PTs
+
+    Page Directory 0:
+    +------------------------------+
+    |    PDE 0  → Page Table 0     |
+    |    PDE 1  → Page Table 1     |
+    |    PDE 2  → Page Table 2     |
+    |    PDE 3  → Page Table 3     |
+    |            ...               |
+    |    PDE 511 → Page Table 511  | 
+    +------------------------------+
+
+                ...
+
+    Page Directory 4:
+    +-------------------------------+
+    |    PDE 0  → Page Table 1535   |
+    |    PDE 1  → Page Table 1536   |
+    |    PDE 2  → Page Table 1537   |
+    |    PDE 3  → Page Table 1538   |
+    |            ...                |
+    |    PDE 511 → Page Table 2047  | 
+    +-------------------------------+
+
+    Cada PT: 512 entradas (más espacio), cada una apunta a una página, 262144 páginas
+
+    Page Table 0:
+    +------------------------+
+    |    PTE 0  → Page 0     |
+    |    PTE 1  → Page 1     |
+    |    PTE 2  → Page 2     |
+    |    PTE 3  → Page 3     |
+    |          ...           |
+    |    PTE 511 → Page 511  | 
+    +------------------------+
+
+                ...
+            
+    Page Table 511:
+    +--------------------------+
+    |    PTE 0  → Page 261631  |
+    |    PTE 1  → Page 261632  |
+    |    PTE 2  → Page 261633  |
+    |    PTE 3  → Page 261634  |
+    |          ...             |
+    |    PTE 511 → Page 262143 | 
+    +--------------------------+
+

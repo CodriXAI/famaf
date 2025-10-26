@@ -72,17 +72,17 @@ Lo que queremos mapear son 32MiB:
     Gráficamente visualizado:
 
     Page Directory (PD) → 1 página, 1024 entradas
-    +--------------------+
-    | PDE 0 → Page Table 0 |
-    | PDE 1 → Page Table 1 |
-    | PDE 2 → Page Table 2 |
-    | PDE 3 → Page Table 3 |
-    | PDE 4 → Page Table 4 |
-    | PDE 5 → Page Table 5 |
-    | PDE 6 → Page Table 6 |
-    | PDE 7 → Page Table 7 |
+    +-----------------------+
+    | PDE 0 → Page Table 0  |
+    | PDE 1 → Page Table 1  |
+    | PDE 2 → Page Table 2  |
+    | PDE 3 → Page Table 3  |
+    | PDE 4 → Page Table 4  |
+    | PDE 5 → Page Table 5  |
+    | PDE 6 → Page Table 6  |
+    | PDE 7 → Page Table 7  |
     | PDE 8-1023 → No usado |
-    +--------------------+
+    +-----------------------+
 
     Con PDE = Page Directory Entry
         Las cuales son como punteros que apuntan a ciertas estructuras de datos:
