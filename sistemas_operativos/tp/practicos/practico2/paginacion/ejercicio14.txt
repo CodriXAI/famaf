@@ -28,21 +28,21 @@ Virtual                     |      Física
 Lo que queremos mapear son 32MiB:
     
     Tenemos que estamos en un esquema ( 10, 10, 12 ) en i386.
-    Luego 10 bits son para el PDI, 10 bits son para PTI, y 12 bits de offset.
+    Luego 10 bits son para el PD, 10 bits son para PT, y 12 bits de offset.
     Por estándar de i386, cada Entrada (de PD y PT) ocupa 4 bytes.
 
     Primero, ¿Cuánta capacidad tiene una página?
-        Si nos fijamos en el offset ocupa 12 bits. Si calculamos 2¹² = 4096
-        Implica que cada página tiene una capacidad de 4KiB 
-
+        Si nos fijamos en el offset ocupa 12 bits. Si calculamos 2¹² = 4096 bytes
+        Implica que cada página tiene una capacidad de 4KiB.
+.
     Segundo, ¿Cuánto espacio EN MEMORIA ocupa 1 Page Table?
         Si nos fijamos, tenemos que para las PT, tenemos 10 bits reservados.
         Luego, cada page table tiene 2¹⁰ = 1024 entradas y por estándar de i386,
-        4 bytes por entrada => 4KiB por Page Table (Espacio en Memoria).
+        4 bytes por entrada => 1024 * 4 bytes => 4KiB por Page Table (Espacio en Memoria).
 
     Tercero, ¿Cuánta capacidad de MAPEO tiene 1 Page Table?
-        Como cada PT apunta a 1024 páginas (una por entrada). Tenemos que:
-        4Kib * 1024 = 2¹² * 2¹⁰ = 2²² = 4MiB de capacidad de Mapeo 
+        Como cada PT apunta a 1024 páginas (una página por entrada). Tenemos que:
+        4Kib * 1024 = 2¹² * 2¹⁰ = 2²² = 4MiB de capacidad de Mapeo por Page Table  
     
     Cuarto, ¿Cuántas PT's necesitaríamos para mapear 32MiB?
         Si cada page table puede mapear hasta 4MiB, entonces necesitamos 
@@ -86,7 +86,7 @@ Lo que queremos mapear son 32MiB:
 
     Con PDE = Page Directory Entry
         Las cuales son como punteros que apuntan a ciertas estructuras de datos:
-            * A otros Pages Directories, Pages Tables, a Páginas.
+            * En este caso a Page Tables.
 
     Cada Page Table → 1 página, 1024 entradas
     Page Table 0:
@@ -120,14 +120,14 @@ Lo que queremos mapear son 32MiB:
     *****Espacio en Memoria para mapear 32MiB con 1 PD y 8 PT: 36KiB******
 
     DETALLES IMPORTANTES:
-        * Página NO es lo mismo que Entrada.
-        * Por estándar de i386, cada Entrada (de PD y PT) ocupa 4 bytes
+        * Página NO es lo mismo que Entrada. Uno es un tipo de dato, el otro es un puntero.
+        * Por estándar de i386, cada Entrada (de PD y PT) ocupa 4 bytes.
 
 (b):
     Lo que queremos mapear son 4GiB COMPLETOS:
 
         Primero, lo que ya sabemos:
-            *Cada página tiene 4KiB de espacio
+            *Cada página tiene 4KiB de tamaño
             *PT:
                 Espacio en Memoria: 4KiB
                 Capacidad de Mapeo: 4MiB 
@@ -164,7 +164,7 @@ Lo que queremos mapear son 32MiB:
 
     Con PDE = Page Directory Entry
         Las cuales son como punteros que apuntan a ciertas estructuras de datos:
-            * A otros Pages Directories, Pages Tables, a Páginas.
+            * En este caso a una Page Table
 
     Cada Page Table → 1024 entradas a 1 página cada una 
     Page Table 0:
@@ -265,7 +265,7 @@ Lo que queremos mapear son 32MiB:
 
     Con PDE = Page Directory Entry
         Las cuales son como punteros que apuntan a ciertas estructuras de datos:
-            * A otros Pages Directories, Pages Tables, a Páginas.
+            * En este caso Page Tables.
 
     Cada Page Table → 1024 entradas a 1 página cada una 
     Page Table 0:
@@ -303,10 +303,10 @@ Lo que queremos mapear son 32MiB:
 
     VA1: [0Mib , 4MiB) -> [0Mib, 4MiB)
         Como cada Page Table puede mapear hasta 4MiB, y empezamos desde 0MiB, entonces todo
-        se va a mapear en la PTE[0].
+        se va a mapear en la PT0.
         Acceso: 
             PDE[0] > 
-                PTE[0] > 
+                PT0 > 
                     For i = 0...1023 do 
                          map (PTE[i]) 
                     od
@@ -320,19 +320,19 @@ Lo que queremos mapear son 32MiB:
 
         Luego, vemos que el rango es de 32KiB, que implican 8 páginas (0..7) de 4KiB.
 
-        Por último, el PDE[2] es el que apunta a la PTE[2].
+        Por último, el PDE[2] es el que apunta a la PT2.
 
         Por ende se mapearía de la siguiente manera:
         Acceso:
             PDE[2] >
-                PTE[2] >
+                PT2 >
                     For i = 0..7 do 
                         map(PTE[i])
                     od
 
     Resultado Final Gráfico:
 
-    Page Directory (PD) → 1024 entradas a 1 Page Table cada una 
+   
 
 
                                                             Page Table 0 [0MiB, 4MiB)
@@ -341,7 +341,8 @@ Lo que queremos mapear son 32MiB:
                                                             |   PTE 1 → Page 1       |
                                                             |   PTE 2 → Page 2       |
                                                             |     ...                |
-                                                            |   PTE 1023 → Page 1023 |
+    Page Directory (PD) -> 1024 entradas                    |                        |
+    A una Page Table cada una                               |   PTE 1023 → Page 1023 |
     +--------------------------------------+                |                        |
     | PDE 0 → Page Table 0 ------------------------------>  +------------------------+
     | PDE 1 → Page Table 1 (Nothing)       |
@@ -357,3 +358,8 @@ Lo que queremos mapear son 32MiB:
     +--------------------------------------+                |   PTE 1023 → (Nothing) |
                                                             +------------------------+
 
+
+
+Yo soy tu gominola, yo soy tu gominola, osito gomi gomi gomi gomi gominola :D 
+
+Estoy rotisimo a este punto xDD 
