@@ -1,0 +1,303 @@
+===================== 1er PARCIAL S.O =====================
+
+Ejercicio 4:
+Se produce un cambio de contexto a proc[7]  y por lo tanto CR3 = proc[7].pgdir. Dar la 
+traza de accesos a memoria física, suponiendo que la TLB se limpió en el cambio de contexto 
+(TLB shootdown) y la MMU, tiene que hacer el page-walk cuando falla. Suponga que la 
+TLB tiene suficiente capacidad para almacenar todos los mapeos de marco virtual a 
+marco físico. Subrayar/remarcar los accesos a memoria física que se generan al consultar 
+los pagedir y pagetable porque no está en la TLB. 
+
+AYUDA: Cuando la MMU hace el page-walk hay que completar las direcciones de los marcos físicos
+0xBE110, 0xFA110 Y 0xCA110 con offsets de 3 dígitos hexadecimales, que no necesariamente serán
+0x000.
+
+0xBE110:
+===================
+0x3FF: 0xFA110, W-
+0x3FE: 0X00000, R-
+
+0x003: 0x00000, R-
+0x002: 0x00CAB, R-
+0x001: 0xCA110, WP
+0x000: 0xCA110, WP
+===================
+
+0xFA110:
+===================
+0x3FF: 0xFA110, WP
+0x3FE: 0x00000, R-
+
+0x003: 0x00000, R-
+0x002: 0x0B0CA, R-
+0X001: 0xCA110, R-
+0x000: 0xCA110, RP
+===================
+
+0xCA110:
+===================
+0x3FF: 0xFA110, WP
+0X3FE: 0x0C0CA, R-
+
+0x003: 0x0C0CA, R-
+0x002: 0x0B0CA, R-
+0x001: 0x7A11A, RP
+0x000: 0x0B0CA, RP
+===================
+
+Traza el código ensamblador:
+
+    #PRELUDIO: (Fetch)
+        0, 6, 9
+
+        #LOOP:
+        10: 0x401000, 13: 0x401004, 17, 1a, 1c
+        10: 0x401004, 13: 0x401008, 17, 1a, 1c
+        10: 0x401008, 13: 0x40100C, 17, 1a, 1c
+
+        #EPÍLOGO:
+        1e, 23
+
+Tener en cuenta que:
+    *Ahora estamos en proc[7] con proc[7].pgdir = 0xBE110
+    *La TLB está vacía (propenso a realizar TLB MISS) y tiene capacidad de mapear todas las direcciones
+    *Cuando se hace el page walk, hay que completar la tabla con direcciones de 3 digitos hexa.
+
+0x00000000 zmain>:
+
+#PRELUDIO:
+0: (TLB MISS):
+    0x00000000
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000
+    Tomamos los primeros 10 bits (PDE):
+        0000000000 = 0x000
+    CR3 apunta a 0xBE110 (PD), consultamos el PDE 0x000:
+        0x000: 0xCA110, WP (Está presente)
+    Tomamos los siguientes 10 bits (PTE):
+        0000000000 = 0x000
+    Consultamos en 0xCA110:
+        0x000: 0x0B0CA, RP (Está presente)
+    Con el offset:
+        000000000000 = 0x000
+    Finalmente 0x00000000 mapea en físico a 0x0B0CA000
+
+TLB: [0x0B0CA]
+
+6: (TLB HIT):
+    0x00000006
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0110
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000000110 = 0x006
+    Finalmente 0x00000006 mapea en físico a 0x0B0CA006
+
+TLB: [0x0B0CA]
+
+9: (TLB HIT):
+    0x00000009
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 1001
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000001001 = 0x009
+    Finalmente 0x00000009 mapea en físico a 0x0B0CA009
+
+TLB: [0x0B0CA]
+
+#LOOP:
+10: (TLB HIT):
+    0x00000010
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 0000
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000010000 = 0x010
+    Finalmente 0x00000010 mapea en físico a 0x0B0CA010
+
+TLB: [0x0B0CA]
+
+    (TLB MISS):
+    Acceso a memoria: 0x00401000
+    0000 | 0000 | 0100 | 0000 | 0001 | 0000 | 0000 | 0000
+    Tomamos los primeros 10 bits (PDE):
+        0000000001 = 0x001
+    CR3 apunta a 0xBE110 (PD), consultamos el PDE 0x001:
+        0x001: 0xCA110, WP (Presente)
+    Tomamos los siguientes 10 bits (PTE):
+        0000000001 = 0x001
+    Consultamos en 0xCA110 el PTE 0x001:
+        0x7A11A, RP (Presente)
+    Por el offset:
+        000000000000 = 0x000
+    Finalmente el acceso a memoria 0x00401000 apunta al marco físico 0x7A11A000
+
+TLB: [0x0B0CA, 0x7A11A]
+
+13: (TLB HIT)
+    0x00000013
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 0011
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000010011 = 0x013
+    Finalmente 0x00000013 mapea en físico a 0x0B0CA013
+
+TLB: [0x0B0CA, 0x7A11A]
+
+    (TLB HIT)
+    Acceso a memoria 0x00401004:
+    0000 | 0000 | 0100 | 0000 | 0001 | 0000 | 0000 | 0100
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x7A11A
+    Por el offset:
+        000000000100 = 0x004
+    Finalmente 0x00401004 mapea en físico a 0x7A11A004
+
+TLB: [0x0B0CA, 0x7A11A]
+
+17: (TLB HIT)
+    0x00000017
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 0111
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000010111 = 0x017
+    Finalmente 0x00000017 mapea en físico a 0x0BOCA017
+
+TLB: [0x0B0CA, 0x7A11A]
+
+1A: (TLB HIT)
+    0x0000001A
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 1010
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000011010 = 0x01A 
+    Finalmente 0x0000001A mapea en físico a 0x0BOCA01A
+
+TLB: [0x0B0CA, 0x7A11A]
+
+1C: (TLB HIT)
+    0x0000001C
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 1101
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000011010 = 0x01C
+    Finalmente 0x0000001C mapea en físico a 0x0BOCA01C
+
+TLB: [0x0B0CA, 0x7A11A]
+
+10:
+    (TLB HIT)
+    0x0B0CA010
+
+    (TLB HIT)
+    Acceso a memoria: 0x401004
+    0x7A11A004
+
+TLB: [0x0B0CA, 0x7A11A]
+
+13:
+    (TLB HIT)
+    0x0B0CA013
+
+    (TLB HIT)
+    Acceso a memoria: 0x401008
+     0000 | 0000 | 0100 | 0000 | 0001 | 0000 | 0000 | 1000
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x7A11A
+    Por el offset:
+        000000001000 = 0x008
+    Finalmente 0x00401008 mapea en físico a 0x7A11A008
+
+TLB: [0x0B0CA, 0x7A11A]
+
+17:
+    (TLB HIT)
+    0x0B0CA017
+
+TLB: [0x0B0CA, 0x7A11A]
+
+1A:
+    (TLB HIT)
+    0x0B0CA01A
+
+TLB: [0x0B0CA, 0x7A11A]
+
+1C:
+    (TLB HIT)
+    0x0B0CA01C
+
+TLB: [0x0B0CA, 0x7A11A]
+
+10:
+    (TLB HIT)
+    0x0B0CA010
+
+    (TLB HIT)
+    Acceso a memoria: 0x401008
+    0x7A11A008
+
+TLB: [0x0B0CA, 0x7A11A]
+
+13:
+    (TLB HIT)
+    0x0B0CA013
+
+    (TLB HIT)
+    Acceso a memoria: 0x40100C
+     0000 | 0000 | 0100 | 0000 | 0001 | 0000 | 0000 | 1101
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x7A11A
+    Por el offset:
+        000000001101 = 0x00C
+    Finalmente 0x00401008 mapea en físico a 0x7A11A00C
+
+TLB: [0x0B0CA, 0x7A11A]
+
+17:
+    (TLB HIT)
+    0x0B0CA017
+
+TLB: [0x0B0CA, 0x7A11A]
+
+1A:
+    (TLB HIT)
+    0x0B0CA01A
+
+TLB: [0x0B0CA, 0x7A11A]
+
+1C:
+    (TLB HIT)
+    0x0B0CA01C
+
+TLB: [0x0B0CA, 0x7A11A]
+
+#EPÍLOGO:
+1E: (TLB HIT)
+    0x0000001E
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 1110
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000011110 = 0x01E
+    Finalmente 0x0000001E mapea en físico a 0x0BOCA01E
+
+23: (TLB HIT) 
+    0x00000023
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0010 | 0011
+    Por TLB HIT sabemos que vamos a 0xBE110, 0xCA110, 0x0BOCA
+    Por el offset:
+        000000100011 = 0x023
+    Finalmente 0x00000023 mapea en físico a 0x0BOCA023
+
+Finalmente la Traza en memoria física obtenida es:
+
+#PRELUDIO:
+0x0B0CA000, 0x0B0CA006, 0x0B0CA009
+
+#LOOP:
+0x0B0CA010: 0x7A11A000, 0x0B0CA013: 0x7A11A004, 0x0B0CA017, 0x0B0CA01A, 0x0B0CA01C
+0x0B0CA010: 0x7A11A004, 0x0B0CA013: 0x7A11A008, 0x0B0CA017, 0x0B0CA01A, 0x0B0CA01C
+0x0B0CA010: 0x7A11A008, 0x0B0CA013: 0x7A11A00C, 0x0B0CA017, 0x0B0CA01A, 0x0B0CA01C
+
+#EPÍLOGO:
+0x0BOCA01E, 0x0BOCA023
+    
+
+
+
+    
+
+

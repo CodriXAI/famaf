@@ -1,0 +1,174 @@
+===================== 1er PARCIAL S.O =====================
+
+Ejercicio 3:
+Tenemos dos procesos pid = 4 y pid = 7 ejecutando el código de 
+máquina anterior, donde el registro base CR3 está guardado dentro 
+del campo pgdir de struct proc. Tenemos:
+
+proc[4].pgdir = 0xFA110
+proc[7].pgdir = 0xBE110
+
+El contenido de las tablas de página es como sigue. La fila superior 
+muestra los 5 digitos hexa (20 bits) con la dirección del marco físico:
+
+0xBE110:
+===================
+0x3FF: 0xFA110, W-
+0x3FE: 0X00000, R-
+
+0x003: 0x00000, R-
+0x002: 0x00CAB, R-
+0x001: 0xCA110, WP
+0x000: 0xCA110, WP
+===================
+
+0xFA110:
+===================
+0x3FF: 0xFA110, WP
+0x3FE: 0x00000, R-
+
+0x003: 0x00000, R-
+0x002: 0x0B0CA, R-
+0X001: 0xCA110, R-
+0x000: 0xCA110, RP
+===================
+
+0xCA110:
+===================
+0x3FF: 0xFA110, WP
+0X3FE: 0x0C0CA, R-
+
+0x003: 0x0C0CA, R-
+0x002: 0x0B0CA, R-
+0x001: 0x7A11A, RP
+0x000: 0x0B0CA, RP
+===================
+
+Dar la traza de accesos a memoria física cuando ejecuta proc[4] y
+CR3 = proc[4].pgdir suponiendo que no hay fallos en la TLB. 
+Usar un renglón por sección salvo en el loop que es un renglón por iteración.
+
+Código anterior:
+00000000 <main>
+#PRELUDIO
+0:    lea    eax,0x401000       //eax = 0x401000, inicio del arreglo
+6:    lea    ecx,[eax+0xc]      //ecx = 0x401000 + 0xC = 0x40100C, final del arreglo
+9:    Nothing
+
+lea no carga en memoria, solo calcula una dirección y la guarda en 
+un registro.
+
+#LOOP:
+10:   mov    edx,[eax]          //Carga eax en el registro edx
+13:   xor    [eax+0x4],edx      //Realiza la XOR entre el siguiente valor de eax y edx 
+17:   add    eax,0x4            //Avanza al siguiente valor del arreglo 
+1a:   cmp    eax,ecx            //Compara si se llegó al final del arreglo 
+1c:   jne    10                 //En caso que no salta a la dirección 10 (loop).
+
+#EPÍLOGO
+1e:   mov    eax,0x0            //Asigna eax = 0
+23:   ret                       //Termina la función
+
+DATOS A TENER EN CUENTA:
+    *La TLB no falla (siempre hará TLB hit)
+    *Las letras en las direcciones significan:
+        RP = Lectura y presente (está cargada en memoria)
+        R- = Lectura y no presente (causa Page Fault)
+        WP = Escritura y presente (está cargada en memoria)
+        W- = Escritura y no presente (causa Page Fault)
+    *Las páginas son de 4KiB (4096 bytes)
+    *Sistema de 2 niveles (10,10,12) mapeados a (20,12):
+        En virtual:
+        10 bits para PD -> En hexa equivale a 2 digitos y mitad 
+        10 bits para PT -> En hexa equivale a 2 digitos y mitad 
+        12 bits para offset -> En hexa equivale a 3 digitos 
+
+        En físico:
+        20 bits para la dirección
+        12 bits para offset
+    *Traza del ejercicio anterior:
+
+        0x00000000 <main>:
+
+        #PRELUDIO: (Fetch)
+        0, 6, 9
+
+        #LOOP:
+        10: 0x401000, 13: 0x401004, 17, 1a, 1c
+        10: 0x401004, 13: 0x401008, 17, 1a, 1c
+        10: 0x401008, 13: 0x40100C, 17, 1a, 1c
+
+        #EPÍLOGO:
+        1e, 23
+
+
+CR3 -> Apunta al PD: 0xFA110
+0x00000000 en <main> ahi comienza nuestro programa.
+
+Luego la traza es (usando la del Ejercicio 2):
+Por comenzar en 0.
+
+#PRELUDIO:
+0:
+    0x00000000 => 32bits en 0
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000
+    Tomamos los primeros 10 bits (PDE):
+        0000000000 = 0x000
+    Buscamos en 0xFA110 0x000:
+        0x000: 0xCA110, RP (Nuestra PT, está presente)
+    Tomamos los siguientes 10 bits (PTE):
+        0000000000 = 0x000
+    Buscamos en 0xCA110 0x000:
+        0x000: 0x0B0CA, RP (Nuestra página, está presente)
+    Buscamos en 0x0B0CA el offset, tomando los últimos 12 bits:
+        000000000000 = 0x000
+    Por ende la 0x00000000 se mapea a la física 0x0B0CA000 (Se guarda en la TLB)
+
+6:
+    0x00000006:
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0110
+    (TLB HIT por PD, PT Y Page)
+    Buscamos en 0x0B0CA el offset, tomando los últimos 12 bits:
+        000000000110 = 0x006
+    Por ende la 0x00000006 se mapea a la física 0x0B0CA006
+
+9:
+    0x00000009:
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 1001
+    (TLB HIT POR PD, PT y Page)
+     Buscamos en 0x0B0CA el offset, tomando los últimos 12 bits:
+        000000001001 = 0x009
+    Por ende la 0x00000009 se mapea a la física 0x0B0CA009
+
+#LOOP:
+10:
+    0x00000010:
+    0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 0000
+    (TLB HIT POR PD, PT Y Page)
+     Buscamos en 0x0B0CA el offset, tomando los últimos 12 bits:
+        000000010000 = 0x010
+    Por ende la 0x00000010 se mapea a la física 0x0B0CA010
+
+    Acceso a Memoria:
+        0x00401000
+        0000 | 0000 | 0100 | 0000 | 0001 | 0000 | 0000 | 0000
+        Tomamos los primeros 10 bits (PDE):
+            0000000001 = 0x001
+            0X001: 0xCA110, R- (No está presente)
+
+========================== PAGE FAULT - FIN DE EJECUCIÓN. ==============================
+
+Por ende, la traza a memoria física con proc[4].pgdir:
+#PRELUDIO:
+0x0B0CA000, 0x0B0CA006, 0x0B0CA009
+#LOOP:
+0x0B0CA010: PF
+
+
+
+
+
+
+
+
+

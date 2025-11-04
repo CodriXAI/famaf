@@ -1,0 +1,187 @@
+===================== 1er PARCIAL S.O =====================
+
+Ejercicio 1:
+    Se compila el programa de abajo y se lo ejecuta en un
+    proceso. Indique cuántas letras 'a' deja en el archivo 'test.txt'
+    No hay nada raro con la creación o existencia previa del archivo
+    test.txt y todos los permisos están bien puestos.
+    Suponer que la syscall close(...) nunca devuelve error, o sea 
+    siempre devuelve 0.
+
+
+    int main(int argc, char **argv){
+
+        //open("test.txt", O_CREAT | O_WRONLY, S_IRUSR);                #0
+        //dup(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR));           #1
+        //close(dup(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR)));    #2
+        //dup(close(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR)));    #3
+        //close(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR));         #4
+        write(3, "a", 1);
+        write(4, "a", 1);
+        return 0;
+    }    
+
+
+Variaciones del programa                    |     # de 'a' en test.txt
+                                            |
+Solo saco el comentario de la Linea 0       |                 1
+                                            |
+Solo saco el comentario de la Linea 1       |                 2
+                                            |
+Solo saco el comentario de la Linea 2       |                 1
+                                            |
+Solo saco el comentario de la Linea 3       |                 0
+                                            |
+Solo saco el comentario de la Linea 4       |                 0
+
+
+Análisis previo:
+    Llamadas al sistema (Syscalls): OPEN, DUP, CLOSE, WRITE:
+        OPEN: Abre un archivo asignándole un FD
+        DUP: Duplica el contenido de un file descriptor específico 
+        y lo asigna al siguiente FD disponible
+        CLOSE: Cierra un FD liberándolo y dejandolo disponible
+        WRITE: Escribe en un FD específico (primer argumento)
+    Permisos:
+        O_WRONLY: Permiso de solo escritura
+        O_CREAT: Si no fue creado el archivo, lo crea
+        S_IRUSR: Permisos de lectura al propietario (user)
+    Detalles extra:
+        Los FD's 0,1 y 2 ya están reservados al iniciar el sistema:
+            0 -> stdin
+            1 -> stdout
+            2 -> stderr
+            3 -> Free 
+            ...
+        Las syscalls siempre se ejecutan de adentro para afuera
+        en caso de composiciones.
+
+Caso 0: Solo saco el comentario de la Linea 0
+    Habilitaría:
+        open("test.txt", O_CREAT | O_WRONLY, S_IRUSR);
+    Causa:
+        Abrir el archivo test.txt en el FD 3
+    FD Table:
+        0 -> stdin
+        1 -> stdout
+        2 -> stderr
+        3 -> test.txt
+    Luego:
+        write(3, "a", 1);
+            Encuentra el FD -> test.txt
+            Escribe 'a' en el FD 3
+            1 'a'
+
+        write(4, "a", 1);
+            FD vacío 
+            Escribe 'a' en el FD 4 => Failed 
+            0 'a'
+    TOTAL: 
+        1 'a'
+
+Caso 1: Solo saco el comentario de la Linea 1:
+    Habilitaria:
+        dup(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR));
+    Causa:
+        open abre el test.txt en el FD 3
+        dup toma ese FD 3 y lo duplica en el siguiente FD 4
+    FD Table:
+        0 -> stdin
+        1 -> stdout
+        2 -> stderr
+        3 -> test.txt
+        4 -> test.txt (dup)
+    Luego:
+        write(3, "a", 1);
+            Encuentra el FD -> test.txt
+            Escribe 'a' en el FD 3
+            1 'a'
+
+        write(4, "a", 1);
+            Encuentra el FD -> test.txt 
+            Escribe 'a' en el FD 4
+            1 'a'
+    TOTAL: 
+        2 'a'
+
+Caso 2: Solo saco el comentario de la Linea 2:
+    Habilitaria:
+        close(dup(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR)));
+    Causa:
+        Open abre el test.txt en el FD 3
+        Dup duplica el FD 3 en el FD 4
+        Close cierra el FD 4, liberándolo
+    FD Table:
+        0 -> stdin
+        1 -> stdout
+        2 -> stderr
+        3 -> test.txt
+        4 -> Free
+    Luego:
+        write(3, "a", 1);
+            Encuentra el FD -> test.txt
+            Escribe 'a' en el FD 3
+            1 'a'
+
+        write(4, "a", 1);
+            FD vacío -> Failed 
+            Escribe 'a' en el FD 4
+            0 'a'
+    TOTAL: 
+        1 'a'
+
+Caso 3: Solo saco el comentario de la Linea 3:
+    Habilitaria:
+        dup(close(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR)));
+    Causa:
+        Open abre test.txt en el FD 3
+        Close cierra el FD 3 liberándolo 
+        dup recibe 0, por ende se duplica la stdin en el FD 3
+    FD Table:
+        0 -> stdin
+        1 -> stdout
+        2 -> stderr
+        3 -> stdin (dup)
+        4 -> Free
+    Luego:
+        write(3, "a", 1);
+            Encuentra el FD -> stdin 
+            Escribe 'a' en el FD 3 => Error: No puede escribir
+            0 'a'
+
+        write(4, "a", 1);
+            FD vacío -> Failed 
+            Escribe 'a' en el FD 4
+            0 'a'
+    TOTAL: 
+        0 'a'
+
+Caso 4: Solo saco el comentario de la Linea 4:
+    Habilitaria:
+        close(open("test.txt", O_CREAT | O_WRONLY, S_IRUSR));
+    Causa:
+        open abre test.txt en el FD 3
+        close cierra el FD 3, liberándolo
+    FD Table:
+        0 -> stdin
+        1 -> stdout
+        2 -> stderr
+        3 -> Free
+        4 -> Free
+    Luego:
+        write(3, "a", 1);
+            Encuentra el FD -> Free
+            Escribe 'a' en el FD 3 => Failed
+            0 'a'
+
+        write(4, "a", 1);
+            Encuentra el FD -> Free
+            Escribe 'a' en el FD 4 => Failed
+            0 'a'
+    TOTAL: 
+        0 'a'
+
+        
+
+
+

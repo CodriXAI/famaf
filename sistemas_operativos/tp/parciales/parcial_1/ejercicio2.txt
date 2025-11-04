@@ -1,0 +1,133 @@
+===================== 1er PARCIAL S.O =====================
+
+Ejercicio 2:
+    Dado un esquema de paginación i386 de 32bits con tabla de páginas 
+    de 4KiB de 2 niveles que pasa de (10, 10 , 12) a (20, 12).
+
+    Tenemos un código C que hace un XOR cipher de un arreglo, y a su 
+    lado el desensamblado del código objeto generado por la compilación 
+    a intel de 32bits. La dirección de las asignaciones del ensamblador 
+    es la usual. (<-)
+
+Código C:
+
+# define N 4
+
+unsigned int a[N];
+
+int main(int argc, char **argv){
+
+    int i = 0;
+    for(i = 1; i<N; i++){   
+        a[i] ^= a[i-1];
+    }
+
+    return 0;
+}
+
+Donde a[i] ^= a[i-1]; significa:
+    Haceme un XOR entre el i-ésimo elemento del arreglo y el anterior.
+    (OR exclusivo).
+
+Código objeto desensamblado:
+
+0x00000000 <main>:
+#PRELUDIO
+ 0: 8d 05 00 01 40 00        lea    eax,0x401000
+ 6: 8d 48 0c                 lea    ecx,[eax+0xc]
+ 9: 0f 1f 80 00 00 00 00     nop    # NOP de 7 bytes para align
+
+#LOOP
+10: 67 8b 10                 mov    edx,[eax]
+13: 67 31 50 04              xor    [eax+0x4],edx
+17: 83 c0 04                 add    eax,0x4
+1a: 39 c8                    cmp    eax,ecx
+1c: 75 f2                    jne    10
+
+#EPÍLOGO
+1e: b8 00 00 00 00           mov    eax,0x0
+23: c3                       ret
+
+Donde los códigos como "8d 05 00 01 40 00" es el lenguaje máquina que 
+entiende la máquina (ensamblado) y a la derecha está su traducción
+(desensamblada).
+
+Ejecución del código assembler:
+0x00000000 <main>:
+#PRELUDIO
+0:    lea    eax,0x401000       //eax = 0x401000, inicio del arreglo
+6:    lea    ecx,[eax+0xc]      //ecx = 0x401000 + 0xC = 0x40100C, final del arreglo
+9:    Nothing
+
+lea no carga en memoria, solo calcula una dirección y la guarda en 
+un registro.
+
+#LOOP:
+10:   mov    edx,[eax]          //Carga eax en el registro edx
+13:   xor    [eax+0x4],edx      //Realiza la XOR entre el siguiente valor de eax y edx 
+17:   add    eax,0x4            //Avanza al siguiente valor del arreglo 
+1a:   cmp    eax,ecx            //Compara si se llegó al final del arreglo 
+1c:   jne    10                 //En caso que no salta a la dirección 10 (loop).
+
+#EPÍLOGO
+1e:   mov    eax,0x0            //Asigna eax = 0
+23:   ret                       //Termina la función
+
+Info importante:
+El arreglo a[N] está separado en 4 bytes por cada elemento (seguidos)
+(A modo de ejemplo)
+0: a[0]
+4: a[1]
+8: a[2]
+C: a[3]
+
+Por ende ahora sabiendo el flujo del código assembly, tenemos que:
+
+0x00000000 <main>:
+
+#PRELUDIO:
+0: eax = 0x401000
+6: ecx = 0x40100C
+9: Nop 
+
+#LOOP:
+10: edx = 0x401000           -> acceso a memoria reg eax = 0x401000
+13: XOR (0x401004, 0x401000) -> acceso a memoria reg eax + 0x4 = 0x401004
+17: eax + 0x4 = 0x401004
+1a: 0x401004 == 0x40100C ? NO
+1c: Loop a 10 (No son iguales)
+
+10: edx = 0x401004           -> acceso a memoria reg eax = 0x401004
+13: XOR (0x401008, 0x401004) -> acceso a memoria reg eax + 0x4 = 0x401008
+17: eax + 0x4 = 0x401008
+1a: 0x401008 == 0x40100C ? NO
+1c: Loop a 10 (No son iguales)
+
+10: edx = 0x401008           -> acceso a memoria reg eax = 0x401008
+13: XOR (0x40100C, 0x401008) -> acceso a memoria reg eax + 0x4 = 0x40100C
+17: eax + 0x4 = 0x40100C
+1a: 0x40100C == 0x40100C ? SI
+1c: No Loop a 10 (ya se cumplió el cmp)
+
+#EPÍLOGO:
+1e: eax = 0
+23: ret                      //Fin de función.
+
+
+Luego la traza del código es:
+
+0x00000000 <main>
+
+#PRELUDIO: (Fetch)
+0, 6, 9
+
+#LOOP:
+10: 0x401000, 13: 0x401004, 17, 1a, 1c
+10: 0x401004, 13: 0x401008, 17, 1a, 1c
+10: 0x401008, 13: 0x40100C, 17, 1a, 1c
+
+#EPÍLOGO:
+1e, 23
+
+
+
