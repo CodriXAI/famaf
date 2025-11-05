@@ -1,0 +1,188 @@
+===================== 1er PARCIAL S.O =====================
+
+Ejercicio 5:
+Planificar con Round Robin (quantum Q = 2) para los siguientes procesos
+MONOHILO que tienen mezcla entre cómputo CPU y espera por I/O.
+
+Suponga que hay 2 (dos) núcleos de ejecución, y es por eso que cada celda
+de tiempo está subdividida en dos partes, donde, por ejemplo, si una casilla
+está marcada como |A|B| significa que en un tiempo dado, A se ejecuta
+en un núcleo y simultáneamente B se ejecuta en el otro.
+
+AYUDA: Prestar atención entre el tiempo 3 y el tiempo 6
+
+Proceso         Inicio          CPU         IO         CPU
+
+   A               0             8           1          2
+
+   B               1             8           1          2
+
+   C               4             2
+
+
+
+T = 0:
+    Llega A en el CPU 1
+    Recibe CPU burst de 8, TcpuA = 8
+
+    A consume 1 -> 1 / 2 -> TcpuA = 7
+
+    Queue Running: [A],  Queue Ready: []
+
+    CPU1: A 
+    CPU2: -
+
+T = 1:
+    Llega B en el CPU 2
+    Recibe CPU burst de 8, TcpuB = 8
+
+    Queue Running: [A],  Queue Ready: [B]
+
+    A consume 1 -> 2 / 2 -> TcpuA = 6
+    Llega el quantum, A se pone al final de la cola.
+
+    Queue Running: [],  Queue Ready: [B,A]
+
+    CPU1: A 
+    CPU2: -
+
+T = 2:
+    Se ejecuta B en CPU 2, consume 1 -> 1 / 2 -> Tcpu = 7
+    A reanuda su ejecución (monohilo pero con 2 núcleos)
+    A consume 1 -> 1 / 2 -> Tcpu = 5
+
+    Queue Running: [A,B],  Queue Ready: []
+
+    CPU1: A 
+    CPU2: B 
+
+T = 3:
+    B consume 1 -> 2 / 2 -> Tcpu = 6
+    Llega el quantum, B se pone al final de la cola
+
+    Queue Running: [A],  Queue Ready: [B]
+
+    A CONSUME 1 -> 2 / 2 -> Tcpu = 4
+    Llega el quantum, A se pone al final de la cola
+
+    Queue Running: [],  Queue Ready: [B,A]
+
+    CPU1: A 
+    CPU2: B 
+    
+T = 4:
+    Llega C, se pone al final de la cola.
+    Recibe el cpu burst, TcpuC = 2
+
+    Queue Running: [],  Queue Ready: [B,A,C]
+
+    Se reejecuta B en CPU 1, consume 1 -> 1 / 2 -> TcpuB = 5
+    Se reejecuta A en CPU 2, consume 1 -> 1 / 2 -> TcpuA = 3
+
+    Queue Running: [B,A],  Queue Ready: [C]
+
+    CPU1: B 
+    CPU2: A
+
+T = 5:
+    B consume 1 -> 2 / 2 -> TcpuB = 4
+    Llega el quantum, pasa a ready 
+    Queue Running: [A],  Queue Ready: [C,B]
+    A consume 1 -> 2 / 2 -> TcpuA = 2 
+    Llega el quantum, pasa a ready 
+    Queue Running: [],  Queue Ready: [C,B,A]
+
+    CPU1: B 
+    CPU2: A
+
+T = 6:
+    C se ejecuta en el CPU 1, consume 1 -> 1 / 2 -> TcpuC = 1
+    B se ejecuta en el CPU 2, consume 1 -> 1 / 2 -> TcpuB = 3
+
+    Queue Running: [C,B],  Queue Ready: [A]
+
+    CPU1: C
+    CPU2: B
+
+T = 7:
+    C consume 1 -> 2 / 2, TcpuC = 0 -> TERMINÓ 
+    Queue Running: [B],  Queue Ready: [A]
+    B consume 1 -> 2 / 2, TcpuB = 2
+    Llega el quantum, pasa a ready.
+    Queue Running: [],  Queue Ready: [A,B]
+
+    CPU1: C
+    CPU2: B
+
+T = 8:
+    A se ejecuta en el CPU 1 -> consume 1 -> 1 / 2 -> TcpuA = 1
+    B se ejecuta en el CPU 2 -> consume 1 -> 1 / 2 -> TcpuB = 1 
+    Queue Running: [A,B],  Queue Ready: []
+
+    CPU1: A
+    CPU2: B
+
+T = 9:
+    A consume 1 -> 2 / 2 -> TcpuA = 0 
+    Se bloquea con un tiempo de 1 por IO
+    B consume 1 -> 2 / 2 -> TcpuB = 0
+    Se bloquea con un tiempo de 1 por IO
+
+    Queue Running: [],  Queue Ready: [],  Queue Block: [A,B]
+
+    CPU1: A
+    CPU2: B
+
+T = 10:
+    A le quedan 0 tiempos 
+    B le quedan 0 tiempos 
+
+    Queue Running: [],  Queue Ready: [],  Queue Block: [A,B]
+
+    CPU1: -
+    CPU2: -
+
+T = 11:
+    A se desbloquea
+    Recibe el cpu burst, TcpuA = 2
+    B se desbloquea
+    Recibe el cpu burst, TcpuB = 2
+
+    A se ejecuta en el CPU 1, consume 1 -> 1 / 2 -> TcpuA = 1
+    B se ejecuta en el CPU 2, consume 1 -> 1 / 2 -> TcpuB = 1
+
+    Queue Running: [A,B],  Queue Ready: [],  Queue Block: []
+
+    CPU1: A
+    CPU2: B
+
+
+T = 12:
+    A consume 1 -> 2 / 2 -> TcpuA = 0 -> TERMINÓ 
+    B consume 1 -> 2 / 2 -> TcpuB = 0 -> TERMINÓ 
+
+    Queue Running: [],  Queue Ready: [],  Queue Block: []
+
+    CPU1: A
+    CPU2: B
+
+T = 13:
+    CPU1: -
+    CPU2: -
+
+T = 14:
+    CPU1: -
+    CPU2: -
+
+T = 15:
+    CPU1: -
+    CPU2: -
+
+T = 16:
+    CPU1: -
+    CPU2: -
+
+Linea de tiempo final:
+
+| A |   | A |   | A | B | A | B | B | A | B | A | C | B | C | B | A | B | A | B |   |   | A | B | A | B |   |   |   |   |   |   |
+0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16
