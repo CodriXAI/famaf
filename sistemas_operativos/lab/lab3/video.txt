@@ -1,0 +1,13 @@
+Lista de cosas a mostrar en el video:
+
+Funcionalidad + Preguntas:
+Preguntas 1 y 4 juntas, Pregunta 2, Pregunta 3, Pregunta 5
+
+Funcionalidad:
+	* Montaje: Creación/Existencia de directorio y fs.log (Exhibición en modo debug) 
+	* Ocultamiento de /bb y /bb/fs.log
+	* Registro: Mostrar que fs.log guarda correctamente READS y WRITES (no escribe su propio
+	  registro)
+	* Persistencia: Remontar la imagen y chequear que todo ta bien
+	* Eliminación de Archivos
+	* Eliminación de Directorio (VACÍO) 

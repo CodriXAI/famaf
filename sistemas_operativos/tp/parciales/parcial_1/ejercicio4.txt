@@ -62,8 +62,10 @@ Tener en cuenta que:
     *Ahora estamos en proc[7] con proc[7].pgdir = 0xBE110
     *La TLB está vacía (propenso a realizar TLB MISS) y tiene capacidad de mapear todas las direcciones
     *Cuando se hace el page walk, hay que completar la tabla con direcciones de 3 digitos hexa.
+    *Los PDE y PTE son de 4 bytes, por ende cuando queramos hacer un page walk, multiplicaremos 
+    el offset por 4.
 
-0x00000000 zmain>:
+0x00000000 <main>:
 
 #PRELUDIO:
 0: (TLB MISS):
@@ -80,6 +82,12 @@ Tener en cuenta que:
     Con el offset:
         000000000000 = 0x000
     Finalmente 0x00000000 mapea en físico a 0x0B0CA000
+
+Page Walk: 
+    PDE: 0x000 * 4 = 0x000
+    PTE: 0x000 * 4 = 0x000
+    Offset: 0x000 * 4 = 0x000
+    0xBE110000, 0xCA110000, 0x0B0CA000
 
 TLB: [0x0B0CA]
 
@@ -128,6 +136,13 @@ TLB: [0x0B0CA]
     Por el offset:
         000000000000 = 0x000
     Finalmente el acceso a memoria 0x00401000 apunta al marco físico 0x7A11A000
+
+    Page walk:
+        Page Walk: 
+        PDE: 0x001 * 4 = 0x004
+        PTE: 0x001 * 4 = 0x004
+        Offset: 0x000 * 4 = 0x000
+        0xBE110004, 0xCA110004, 0x7A11A000
 
 TLB: [0x0B0CA, 0x7A11A]
 
@@ -285,18 +300,15 @@ TLB: [0x0B0CA, 0x7A11A]
 Finalmente la Traza en memoria física obtenida es:
 
 #PRELUDIO:
-0x0B0CA000, 0x0B0CA006, 0x0B0CA009
+0xBE110000: 0xCA110000: 0x0B0CA000, 0x0B0CA006, 0x0B0CA009
 
 #LOOP:
-0x0B0CA010: 0x7A11A000, 0x0B0CA013: 0x7A11A004, 0x0B0CA017, 0x0B0CA01A, 0x0B0CA01C
+0x0B0CA010: 0xBE110004: 0xCA110004: 0x7A11A000, 0x0B0CA013: 0x7A11A004, 0x0B0CA017, 0x0B0CA01A, 0x0B0CA01C
 0x0B0CA010: 0x7A11A004, 0x0B0CA013: 0x7A11A008, 0x0B0CA017, 0x0B0CA01A, 0x0B0CA01C
 0x0B0CA010: 0x7A11A008, 0x0B0CA013: 0x7A11A00C, 0x0B0CA017, 0x0B0CA01A, 0x0B0CA01C
 
 #EPÍLOGO:
 0x0BOCA01E, 0x0BOCA023
-    
-
-
 
     
 

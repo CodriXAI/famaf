@@ -1,0 +1,14 @@
+1.​ Cuando se ejecuta el programa con la opción -d, ¿qué se está mostrando en la
+pantalla?
+
+2.​ ¿Hay alguna manera de saber el nombre del archivo guardado en el cluster 157?
+¿Qué funciones del código utilizaría?
+
+3.​ ¿Dónde se guardan las entradas de directorio? ¿Cuántos archivos puede tener
+adentro un directorio en FAT32?
+
+4.​ Cuando se ejecuta un comando como cat archivo.txt, el sistema operativo,
+¿qué funciones de su código se ejecutan? ¿Cómo pueden saberlo?
+
+5.​ ¿Por qué tienen que escribir las entradas de directorio en el disco cada vez que
+las modifican, pero no tienen que guardar la tabla FAT?
