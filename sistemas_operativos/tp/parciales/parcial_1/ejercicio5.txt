@@ -47,14 +47,14 @@ T = 1:
     CPU2: -
 
 T = 2:
-    Se ejecuta B en CPU 2, consume 1 -> 1 / 2 -> Tcpu = 7
-    A reanuda su ejecución (monohilo pero con 2 núcleos)
+    Se ejecuta B en CPU 1, consume 1 -> 1 / 2 -> Tcpu = 7
+    A reanuda su ejecución en CPU 2 (monohilo pero con 2 núcleos)
     A consume 1 -> 1 / 2 -> Tcpu = 5
 
-    Queue Running: [A,B],  Queue Ready: []
+    Queue Running: [B,A],  Queue Ready: []
 
-    CPU1: A 
-    CPU2: B 
+    CPU1: B 
+    CPU2: A 
 
 T = 3:
     B consume 1 -> 2 / 2 -> Tcpu = 6
@@ -67,8 +67,8 @@ T = 3:
 
     Queue Running: [],  Queue Ready: [B,A]
 
-    CPU1: A 
-    CPU2: B 
+    CPU1: B 
+    CPU2: A 
     
 T = 4:
     Llega C, se pone al final de la cola.
