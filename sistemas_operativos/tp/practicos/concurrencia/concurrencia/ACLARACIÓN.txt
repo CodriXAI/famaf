@@ -1,0 +1,4 @@
+"En general, y salvo que explı́citamente se diga lo contrario, 
+consideraremos la atomicidad a nivel de sentencia."
+
+Para los ejercicios: {1,2,3 y 4}

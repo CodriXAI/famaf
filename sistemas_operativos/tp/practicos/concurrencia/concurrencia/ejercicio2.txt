@@ -1,0 +1,43 @@
+=== EJERCICIO 2 - PRACTICO 3 S.O ===
+
+Dados estos dos procesos en paralelo:
+
+{PRE: X = 0}   
+
+P0:
+    while(1){
+        x = x+1;
+        x = x-1;
+    }
+
+P1:
+    while(1){
+        x = x+1;
+        x = x-1;
+    }
+
+(a): ¿El multiprograma termina?
+
+(b): ¿Qué valores puede tomar X?
+
+
+(a): 
+    No termina, estamos en un bucle infinito en ambos procesos, y por más que se 
+    intercalen, la condición nunca se va a romper (como si fuera un while(true)).
+
+(b):
+    Recordar que: Se tiene en cuenta atomicidad por sentencia, osea operaciones complejas
+    como x = x + 1 o x = x - 1 se ejecutan enteras o se interrumpen.
+
+    Arrancamos con X = 0, luego:
+
+        * Si todo fluye "con normalidad" primero todo P0 y luego todo P1, podemos tener 
+        el siguiente flujo:
+        P0: x = x + 1; x = x - 1;  P1: x = x + 1; x = x - 1; Dando un estado parcial 
+        de X = {0}
+        * Podemos interrumpir una resta, pudiendo realizar solo el x = x + 1 y obteniendo 
+        el estado parcial de X = {1}
+        * También es posible interrumpir en ambas restas, logrando solo hacer el flujo de:
+        x = x + 1; x = x + 1; obteniendo un valor parcial posible de X = {2}
+        * No seria posible interrumpir solo dejando las restas, pués por orden de ejecución 
+        van si o si dsp de las sumas, a lo sumo volverían a un estado de 1 o 0.

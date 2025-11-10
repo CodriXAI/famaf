@@ -1,0 +1,218 @@
+=== EJERCICIO 1 - PRACTICO 3 S.O ===
+
+Dados estos 3 procesos en paralelo:
+
+{Pre X = 0}:
+
+P0:
+    a0 = x;         //a0 = 0
+    a0 = a0 + 1;    //a0 = 1
+    x = a0;         //x = 1
+
+P1:
+    x = x + 1;      //x = 1
+    x = x + 1;      //x = 2
+
+P2:
+    a2 = x;         //a2 = 0
+    a2 = a2 + 1;    //a2 = 1
+    x = a2;         //x = 1
+
+(a): ¿Qué valores finales puede tomar x?
+
+(b): Muestre para cada uno de los valores un escenario de 
+ejecución que los produzca. Es decir, numere las sentencias 
+y construya la secuencia en base a la numeración.
+
+(c): ¿Cuántos escenarios de ejecución hay? 
+¿Cuántos para cada valor final de x?
+
+(a y b): 
+    Como estamos en concurrencia y no hay ningún tipo de 
+    técnica para evitar race conditions, tenemos entonces que:
+
+    X = 1 si:
+        {PRE X = 0}
+        a0 = x;         //a0 lee 0
+        a2 = x;         //a2 lee 0
+        x = x + 1;      //x = 1
+        x = x + 1;      //x = 2
+        a0 = a0 + 1;    //a0 = 1
+        x = a0;         //x = 1
+        a2 = a2 + 1;    //a2 = 1
+        x = a0;         //x = 1
+        x = a2;         //x = 1
+    
+    X = 2 si:
+        {PRE X = 0}
+        x = x + 1;      //x = 1
+        a0 = x;         //a0 lee 1
+        a0 = a0 + 1;    //a0 = 2
+        x = a0;         //x = 2
+    
+    X = 3 si:
+        {PRE X = 0}
+        x = x + 1;      //x = 1
+        x = x + 1;      //x = 2
+        a0 = x;         //a0 lee 2
+        a0 = a0 + 1;    //a0 = 3
+        x = a0;         //x = 3
+    
+    X = 4 si:
+        {PRE X = 0}
+        x = x + 1;      //x = 1
+        x = x + 1;      //x = 2
+        a0 = x;         //a0 = 2
+        a0 = a0 + 1;    //a0 = 3
+        x = a0;         //x = 3
+        a2 = x;         //a2 lee 3
+        a2 = a2 + 1;    //a2 = 4
+        x = a2;         //x = 4
+
+    Los valores posibles que puede tomar X son X = {1,2,3,4}
+    
+(c):
+    ¿Cuántos escenarios posibles hay?
+
+    Si vamos por partes, primero podríamos calcular sin 
+    importar el orden de instrucciones cuántas ejecuciones 
+    se podrían hacer. En total en P0, P1 Y P2, son 8 
+    instrucciones:
+        Las cantidad de permutaciones que podemos obtener son:
+            8! = 40320
+        Sin embargo, eso es sin tener en cuenta el orden de 
+        ejecución. Porque ahí tenemos que ser más estrictos.
+
+        Por ejemplo en:
+            a0 = x;         //a0 = 0
+            a0 = a0 + 1;    //a0 = 1
+        a0 = a0 + 1 no se puede ejecutar antes que a0 = X
+
+        Por ende a esas combinaciones de 8! (Total) le tenemos que 
+        sacar las que evitan ese incorrecto orden:
+
+            8! / 3! * 2! * 3! = 40360 / 72 = 560
+
+        Esta es la cantidad de combinaciones que respetan el 
+        orden de ejecución:
+
+        Porque 3! son la cantidad de combinaciones que rompen en 
+        p0 el orden correcto, 2! lo mismo con p1 y 3! con p2 
+        Es decir que son 72 combinaciones que rompen el orden,
+        se las sacamos al total de 40360 y nos quedan las 560.
+
+    ¿Cuántos para cada valor final de x?
+
+        Sabemos que en total tenemos 560 formas que nos permiten 
+        respetar el orden. 
+
+        Podemos dividir las instrucciones entre:
+        Las de lectura (R), las de incremento (I) y las de escritura (W)
+        Nota: Las de lectura y escritura son entorno a x.
+
+        A = X => Lectura a X
+        X = A => Escritura en X 
+
+        Por cada proceso (R0, I0, W0,........, R2, I2, W2)
+
+        Donde
+
+        R:
+            a0 = x;  a2 = x;
+
+        I:
+            a0 = a0 + 1; a2 = a2 + 1; x = x + 1; x = x + 1;
+
+        W:
+            x = a0; x = a2;   
+
+
+        De esas 560, para:
+
+        Que X = 1:
+            * Aquí tiene que ocurrir solo 1 incremento.
+                (Tenemos 4 posibilidades de incremento)
+            * R0 debe leer 0 y W0 debe ser la última instrucción 
+            * O en simultáneo, R2 debe leer 0 y W2 ser la ultima.
+        
+            Fijamos que W0 sea la última instrucción (nos quedan 
+            7 instruciones más).
+            Respetando el orden:
+            
+            7! / 2! 2! 3! = 210 
+            
+            Donde 2! las R0 y I0, 2! las W1a, W1b, 3! las R2, I2, W2
+
+            Luego de esas 210 tenemos que ver:
+                Solo las que dejan a R0 leyendo 0 (porque Luego
+                deberíamos incrementar y escribir x)
+                Como R0 => a0 = x; entonces debe evitar ejecutarse 
+                antes de las siguientes instrucciones (I0, W1a, W1b, W2):
+                    
+                    Tenemos entonces 4 instrucciones en juego, y 6 posiciones 
+                    disponibles, la idea es que R0 siempre esté antes que 
+                    I0, W1a, W1b, W2. Entonces calculamos 6 - p, con p posiciones 
+                    en las que puede estar R0 antes que las otras. Por ende 
+                    deben haber al menos 4 posiciones despues de R0.
+                    6 - p >= 4, 6 - 4 >= p, 2 >= p 
+                    Esto implica que p = {0,1,2} es donde puede ir R0, viendo 
+                    todos los casos:
+
+                    Caso R0 en p = 0 (1ra):
+                        Quedan 6 posiciones, fijamos en una I0, luego las otras escrituras 
+                        Quedan distribuidas entre W1a, W1b (en ese orden)
+                        combinatoria 2 entre 5, es 10.
+
+                        6 * 10 = 60 posibilidades 
+                    
+                    Caso R0 en p = 1 (2da):
+                        Quedan 5 posiciones
+                        Fijamos una para I0 (5)
+                        Quedan W1a y W1b, combinada 2 entre 4 = 6
+                        5 * 6 = 30 posibilidades 
+
+                    Caso R0 en p = 2 (3ra):
+                        Quedan 4 posiciones
+                        Fijamos una para I0 (4)
+                        Quedan W1a y W1b, combinada 2 entre 3 = 3
+                        4 * 3 = 12 posibilidades 
+
+                    Sumamos:
+                        60 + 30 + 12 = 102 posibilidades para R0 primera y W0 final.
+
+                    Por simetría con R2 y W2:
+                        2 * 102 = 204 posibilidades para X = 1
+        
+        Que X = 2:
+            Es el más largo de todos (lo calcularemos por diferencia
+            de los demás casos).
+
+        Que X = 3:
+            * Deben haber 3 incrementos, y son 4 incrementos.
+                3 entre 4 son = 4 posibilidades
+            * Uno de los 4 se pisó o perdió
+
+            Es decir: 
+                Caso a0 = a0 + 1; perdido:
+                    
+(No wa a hacer el punto estrella .-. to hardcore)
+            
+
+
+
+
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+

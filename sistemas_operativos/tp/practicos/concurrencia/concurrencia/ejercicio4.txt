@@ -1,0 +1,95 @@
+=== EJERCICIO 4 - PRACTICO 3 S.O ===
+
+Considere los procesos P0 y P1 a continuación:
+
+----------------------------------------------------------------------------------------
+
+PRE: { n = 0 ∧ m = 0 }
+
+P0:
+    while(n<100){
+        n = n * 2;
+        m = n;
+    }
+
+P1:
+    while(n<100){
+        n = n + 1;
+        m = n;
+    }
+
+POST: { n = ? ^ m = ? }
+
+----------------------------------------------------------------------------------------
+
+(a) ¿A cuánto pueden diferir como máximo m y n durante la ejecución?
+
+(b) ¿En cuántas iteraciones termina? Indicar mı́nimo y máximo.
+
+(c) ¿Qué valores pueden tomar n y m en la Post? Justifique de manera rigurosa.
+
+Análisis:
+    * Ambos arrancan en 0 por la PRE n = 0 y m = 0
+    * El P0 en el while duplica n antes de asignarle a m
+    * El P1 en el while incrementa en 1 n antes de asignarle a m 
+    * Ambos tienen como guarda que n < 100
+    * Ambos hacen crecer n, ninguno lo disminuye
+
+(a):
+    Tendríamos que calcular { max : | n - m | }
+    El mayor salto se produce cuando pasamos la barrera de n < 100 al n >= 100
+    Porque ahí el m se queda congelado mientras que el n ya ha hecho el incremento.
+    Podremos notar que el máximo valor posible que podría aún permanecer en el bucle 
+    es un n,m = k con k = 99. Y es posible obtenerlo en esta secuencia.
+
+    Luego, Con el n en 99 (por ende m = 99), 
+    se podría ejecutar en P0 n = n * 2, ahi ya tendríamos n = 198
+    y antes de ejecutar su m = n; P1 interrumpe P0, y ejecuta n = n + 1, llevando 
+    el n = 199, en ese preciso momento, tenemos n = 199 y m = 99, por lo que 
+    la diferencia es de 100, la mayor que puede haber en ejecución.
+
+(b):
+    Deberiamos tener en cuenta estos casos dependiendo del Scheduler:
+
+    Si no existe fairness (riesgo de starvation):
+        P0:
+            Mínimo 0: Si se interrumpe constantemente P0 y solo se ejecuta P1,
+            suma el n hasta llegar hasta 100 y P0 no hace ejecuciones.
+
+            Máximo Infinito: n = 0 y m = 0 por PRE, luego si se ejecuta solo P0,
+            multiplica de forma infinita 0 * 2, quedando con n = 0 y nunca avanzando
+            para 100.
+        
+        P1:
+            Mínimo 0: Por el caso de P0 infinito.
+
+            Máximo 100: Sumando hasta llegar a 100.
+    
+    Si existe fairness (eventualmente todo se ejecuta):
+        P0:
+            Mínimo 0: Con P1 terminando toda su ejecución hasta 100
+
+            Máximo € + 7: Como eventualmente P1 se va a ejecutar, sacamos el riesgo de 
+            P0 infinito, lo que si previo a la ejecución de P1 vamos a tener una cant de
+            iteraciones P0 €, que puede variar, antes que cambiemos a P1, y luego 
+            al sumar una sola ejecución de P1, veremos que para llegar a 100 hace falta:
+            2 -> 4 -> 8 -> 16 -> 32 -> 64 -> *128*, son 7 iteraciones.
+        
+        P1:
+            Mínimo 1: Ambos P0 y P1 deben tener la chance de ejecutarse y P0 por si 
+            solo no llega a n > 100, depende de P1 para que pueda lograrlo 
+
+            Máximo 100: Puede ejecutarse todo P1 primero y ya llegar a 100.
+
+(c):
+    Sabemos que el valor mínimo que puede tomar n y m en post es 100 (al finalizar
+    las ejecuciones, m adquiere el valor de n Inevitablemente). Y el valor máximo 
+    por distancia del (a) es de 199. Entre medio podemos tener diferentes valores 
+    dependiendo la ejecución.
+
+    Debido a que P0 puede tener en cuenta los valores pares y en complemento con P1 los 
+    impares, podemos tener toda la lista de números del 100 hasta el 199
+
+    Por ende:
+
+    POST : { n = {100,101,....,199} ^ m = {100,101,....,199} }
