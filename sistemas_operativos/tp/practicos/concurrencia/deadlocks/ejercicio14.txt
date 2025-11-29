@@ -1,0 +1,192 @@
+=== EJERCICIO 14 - PRACTICO 3 S.O ===
+
+Considere los siguientes tres procesos que se ejecutan concurrentemente:
+
+P0:                         
+lock(printer);              
+lock(disk);
+unlock(disk);
+unlock(printer);
+
+P1:
+lock(printer);
+unlock(printer);
+lock(cd);
+lock(disk);
+unlock(disk);
+unlock(cd);
+
+P2:
+lock(cd);
+unlock(cd);
+lock(printer);
+lock(disk);
+lock(cd);
+unlock(cd);
+unlock(disk);
+unlock(printer);
+
+(a) Dé la planificación que lleva a un estado de deadlock.
+
+(b) Agregue semáforos de manera de evitar que los procesos entren en 
+deadlock. Trate de maximizar la concurrencia.
+
+(c) Como solución alternativa, modifique mı́nimamente el órden de los pedidos y liberaciones para
+que no haya riesgo de deadlock.
+
+
+Deadlock detectado:
+    En el momento que P1 hace:
+        lock(cd);
+        lock(disk);
+    Y en el momento que P2 hace:
+        lock(disk);
+        lock(cd);
+
+Veamos como llegamos a eso:
+
+(a): Planificación hacia el deadlock:
+
+    P1 Comienza:
+        lock(printer);      // Adquiere printer
+        unlock(printer);    // Lo libera, (todo bien)
+    P2 Interrumpe:
+        lock(cd);           // Adquiere cd 
+        unlock(cd);         // Lo libera, (todo bien)
+        lock(printer);      // Adquiere printer 
+        lock(disk);         // Adquiere disk 
+    P1 Interrumpe:
+        lock(cd);           // Adquiere cd 
+    P2 Interrumpe:
+        lock(cd);           // Lo tiene P1, debe esperar 
+    P1 Interrumpe:
+        lock(disk);         // Lo tiene P2, debe esperar 
+
+    Resultado: 
+        Deadlock entre P1 y P2, P0 no participa en esta
+        planificación.
+
+(b):
+    Agregando semáforos para evitar el Deadlock.
+    
+    La idea es poder solucionar el problema de P1 y P2, que entran 
+    en un bucle de solicitar un lock que tiene el otro.
+
+    Para ello vamos a establecer un ORDEN TOTAL para que no se adquieran 
+    los locks EN DISTINTO ORDEN.
+
+    Ejemplo del Orden (basado en P0):
+        
+        printer > cd > disk
+        
+        Es decir, primero printer luego cd y ultimo disk en orden de 
+        adquisisión
+
+    Nota: Si un lock es adquirido y liberado inmediatamente, en vano es 
+    colocar semáforos, porq ya se liberó.
+    
+    PROGRAMA FINAL CON SEMÁFOROS QUE EVITA DEADLOCK:
+
+    sem_printer = 1
+    sem_cd = 1
+    sem_disk = 1
+
+    P0:    
+    // Proteger en orden
+    wait(sem_printer);
+    wait(sem_disk);  
+
+    lock(printer);              
+    lock(disk);
+    unlock(disk);
+    unlock(printer);
+
+    // Sumo en los semáforos:
+    post(sem_printer);
+    post(sem_disk); 
+
+    P1:
+    // No le hace falta semáforos,se libera enseguida
+    lock(printer);
+    unlock(printer);
+
+    // Región a proteger
+    wait(sem_cd);
+    wait(sem_disk);
+
+    lock(cd);
+    lock(disk);
+    unlock(disk);
+    unlock(cd);
+
+    // Liberando
+    post(sem_cd);
+    post(sem_disk);
+
+    P2:
+
+    // No es necesario, se libera rápido
+    lock(cd);
+    unlock(cd);
+
+    // Área problemática - Esperar en orden.
+    wait(sem_printer);
+    wait(sem_cd);
+    wait(sem_disk);
+
+    lock(printer);
+    lock(disk);
+    lock(cd);
+
+    unlock(cd);
+    unlock(disk);
+    unlock(printer);
+
+    // Sumar al semáforo para que el resto pueda usar
+    post(sem_printer);
+    post(sem_cd);
+    post(sem_disk);
+
+    ¿Por qué evita el Deadlock? 
+    Notar que los semáforos ahora fuerzan a cada proceso a que se siga 
+    el orden jerárquico de adquisisión en base a los locks que utilice 
+    el proceso. 
+    
+    El problema radicaba en que en P1 y P2, se pedían los locks cd y disk 
+    en forma inversa, y por ende terminaban por bloquearse, los semáforos 
+    se aseguran que una vez hayan sido liberados por el proceso que primero 
+    haya adquirido el lock, se vayan cargando en el orden forzado.
+
+    De ahi que en P2 por ejemplo hayan 3 waits que garanticen que antes 
+    de llegar a la región crítica, ningún otro proceso quiera adquirirlos.
+    En caso que quieran, tendrán que esperar, se quedarán bloqueados.
+
+(c):
+    La opción más sencilla es, mover los locks de lugar xD
+
+P0:                         
+lock(printer);              
+lock(disk);
+unlock(disk);
+unlock(printer);
+
+P1:
+lock(printer);
+unlock(printer);
+lock(cd);
+lock(disk);
+unlock(disk);
+unlock(cd);
+
+P2:
+lock(cd);
+unlock(cd);
+lock(printer);
+
+// Intercambio, primero va cd 
+lock(cd);
+lock(disk);
+
+unlock(cd);
+unlock(disk);
+unlock(printer);

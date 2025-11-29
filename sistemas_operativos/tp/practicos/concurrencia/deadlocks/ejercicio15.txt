@@ -1,0 +1,9 @@
+=== EJERCICIO 15 - PRACTICO 3 S.O ===
+
+Asuma un sistema operativo donde periódicamente se mata algún proceso al 
+azar. ¿Puede haber deadlock en este contexto?
+
+Un deadlock requiere necesariamente un ciclo de espera entre procesos vivos.
+Si un proceso del ciclo muere y no libera sus recursos, ya 
+no hay "deadlock formal", pero sí puede quedar una espera indefinida o 
+bloqueo permanente.
