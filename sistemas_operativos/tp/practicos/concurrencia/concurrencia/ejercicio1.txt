@@ -25,7 +25,7 @@ ejecución que los produzca. Es decir, numere las sentencias
 y construya la secuencia en base a la numeración.
 
 (c): ¿Cuántos escenarios de ejecución hay? 
-¿Cuántos para cada valor final de x?
+Ej estrella: ¿Cuántos para cada valor final de x?
 
 (a y b): 
     Como estamos en concurrencia y no hay ningún tipo de 
@@ -101,7 +101,7 @@ y construya la secuencia en base a la numeración.
         Es decir que son 72 combinaciones que rompen el orden,
         se las sacamos al total de 40360 y nos quedan las 560.
 
-    ¿Cuántos para cada valor final de x?
+	Estrella: ¿Cuántos para cada valor final de x?
 
         Sabemos que en total tenemos 560 formas que nos permiten 
         respetar el orden. 

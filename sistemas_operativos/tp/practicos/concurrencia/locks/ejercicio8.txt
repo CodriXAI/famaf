@@ -1,0 +1,306 @@
+=== EJERCICIO 8 - PRACTICO 3 S.O ===
+
+El siguiente programa asegura exclusión mutua en las regiones crı́ticas:
+
+PRE: {t = 0 ∧ ¬c0 ∧ ¬c1}
+
+P0:
+1: while (1) {
+2:      {Región no crı́tica}
+3:      (c0,t) = (true,1)
+4:      while (t!=0 && c1);
+5:      {Región crı́tica}
+6:      c0 = false
+7: }
+
+P1:
+A: while (1) {
+B:     {Región no crı́tica}
+C:     (c1,t) = (true,0)
+D:     while (t!=1 && c0);
+E:     {Región crı́tica}
+F:     c1 = false
+G: }
+
+Las sentencias 3 y C son asignaciones múltiples que se realizan de manera atómica. 
+Por ejemplo, para el caso de la sentencia 3, las asignaciones c0 = true y t = 1 
+se realizarı́an en un solo paso de ejecución.
+Este protocolo es demasiado exigente en el sentido de que requiere la ejecución de 
+múltiples asignaciones en un sólo paso de ejecución 
+(¡se necesitarı́a implementar un mecanismo de exclusión mutua en sı́ mismo para 
+administrar esta atomicidad!). Analice cuál de las 4 posibles realizaciones de este
+protocolo de exclusión mutua —en el cual las asignaciones ya no son atómicas y 
+por lo tanto hay que darle un orden determinado— es correcta.
+
+
+==================================== Análisis =====================================
+
+P0:                                                         P1:
+    c0 = True, t = 1                                            c1 = true, t = 0
+    ¿t!=0 && c1?                                                ¿t!=1 && c0?
+    {Region critica}                                            {Region critica}                                                 
+    Se niega:                                                   Se niega:                                                  
+        c0 = false                                                  c1 = false                                                  
+
+Hagamos un caso de ejecución para ver si efectivamente hay exclusión mutua:
+(Suponiendo que las asignaciones múltiples son atómicas)
+
+Arranca P0:
+    c0 = true | t = 1
+Interrumpe P1:
+    c1 = true | t = 0
+Sigue P1:
+    ¿t!=1 && c0? Si 
+P1 en Spin hasta que interrumpe P0:
+    ¿t!=0 && c1? No (T es 0)
+Sigue P0:
+    c0 = false 
+Vuelve P1:
+    ¿t!=1 && c0? No (c0 es false)
+P1 deja de hacer spin:
+    c1 = false
+
+Bueno, pero ahora que pasa si lo ejecutamos a la vez a AMBOS:
+
+Se produce una race condition entre ambas asignaciones múltiples, debido a que 
+En P0: a t se le asigna 1     |     En P1: a t se le asigna 0
+
+Por ende, suponiendo que son atómicas, el que llegue primero va a tomar el valor
+y el otro se descartará.
+
+Ahora supongamos que ya no son atómicas las asignaciones múltiples. Eso implica 
+que tenemos 4 instrucciones distintas, 2 por proceso:
+
+P0: c0 = true ; t = 1
+P1: c1 = true ; t = 0
+
+Y acá si importa el orden de ejecución porque en el caso del valor de t (el 
+determinante), quedará declarado por la última instrucción que asigne valor a t.
+
+Los 4 casos disponibles:
+
+PRE: {t = 0 ∧ ¬c0 ∧ ¬c1}
+
+1:
+    P0:
+        c0 = True
+        t = 1
+    P1:
+        c1 = True
+        t = 0
+
+2:
+    P0:
+        t = 1
+        c0 = True
+    P1:
+        c1 = True
+        t = 0
+
+3:
+    P0:
+        c0 = True
+        t = 1
+    P1:
+        t = 0
+        c1 = True
+
+4:
+    P0:
+        t = 1
+        c0 = True
+    P1:
+        t = 0 
+        c1 = True
+        
+
+Caso 1:
+    Es peterson, se desmotrará por el absurdo luego de los otros.
+
+    Pero para dar contexto:
+
+    P0:
+        c0 = True
+        t = 1
+    P1:
+        c1 = True
+        t = 0
+
+    Partimos de: t = 0, c0,c1 = False
+
+    P0:
+        c0 = True 
+        t = 1
+        ¿t != 0 && c1? No (c1 es False)
+        Entra a la sección crítica 
+    P1:
+        c1 = True
+        t = 0
+        ¿t!=1 && c0? Si 
+        Spin 
+
+    Otro caso:
+    
+    Partimos de: t = 0, c0,c1 = False
+
+    P1:
+        c1 = True
+        t = 0
+        ¿t!=1 && c0? No (c0 es False)
+        Entra a la región critica 
+
+    P0:
+        c0 = True 
+        t = 1
+        ¿t != 0 && c1? Si 
+        Spin 
+
+    Intentando Romperlo:
+
+        Partimos de: t = 0, c0,c1 = False
+
+        P0:
+            c0 = True 
+        P1:
+            c1 = True 
+        P0:
+            t = 1
+        P1:
+            t = 0
+            ¿t!=1 && c0? Si 
+            Spin 
+        P0:
+            ¿t != 0 && c1? No 
+            Entra a la región crítica 
+
+        Partimos de: t = 0, c0,c1 = False
+
+        P1:
+            c1 = True 
+        P0:
+            c0 = True 
+        P1:
+            t = 0
+            ¿t!=1 && c0? Si 
+            Spin 
+        P0:
+            t = 1
+            ¿t != 0 && c1? No 
+            Entra a la región crítica 
+        
+Caso 2:
+    P0:
+        t = 1
+        c0 = True
+    P1:
+        c1 = True
+        t = 0
+
+    Partimos de: t = 0, c0,c1 = False
+
+    P0:
+        t = 1
+    P0:
+        ¿t!=0 && c1? No 
+        Entra a la sección crítica 
+    P1:
+        c1 = True     
+    P1:
+        t = 0
+        ¿t!=1 && c0? No 
+        Entra a la sección crítica 
+    P0:
+        c0 = True 
+    
+    NO hay exclusión mutua.
+
+Caso 3:
+    P0:
+        c0 = True
+        t = 1
+    P1:
+        t = 0
+        c1 = True
+    
+    Partimos de: t = 0, c0,c1 = False
+
+    P0:
+        c0 = True 
+    P1:
+        t = 0
+    P0:
+        t = 1 
+        ¿t != 0 && c1? No (c1 es False) 
+        Entra a la sección crítica 
+    P1:
+        c1 = True 
+        ¿t != 1 && c0? No
+        Entra a la sección crítica 
+    
+    No hay exclusión mutua.
+
+Caso 4:
+    P0:
+        t = 1
+        c0 = True
+    P1:
+        t = 0 
+        c1 = True
+    
+    Partimos de: t = 0, c0,c1 = False
+
+    P1:
+        t = 0 
+    P0:
+        t = 1
+        c0 = True 
+        ¿t!=0 && c1? No (c1 es false)
+        Entra a la sección crítica 
+    P1:
+        c1 = True
+        ¿t!= 1 && c0? No (t sigue valiendo 1)
+        Entra a la sección crítica 
+    
+    No hay exclusión mutua.
+
+
+Demostración del Caso 1 por el absurdo:
+
+Supongamos que ambos procesos, en el Caso 1, llegan a la región crítica.
+
+Esto implicaría que: 
+    Ambas flags (c0 y c1) tienen que estar en true (por orden de ejecución de instrucciones)
+    Luego la condición que hizo que ambas entraran en la sección crítica fue
+        Para P0: t != 0 negada => t = 1
+        Para P1: t != 1 negada => t = 0
+    Quiere decir que t = 0 y t = 1, Absurdo, no puede valer dos valores a la vez.
+
+    Esto contradice el hecho de que ambos procesos estaban en la sección crítica y 
+    por ende, existe exclusión mutua.
+
+¿Por qué no funciona esta implicancia en los otros casos?
+    Si ambos están compitiendo por entrar a la sección crítica, no podemos afirmar 
+    que cuando llegaron, ambas flags estén en true. Debido a este orden especifico
+    de que al menos un proceso ponga primero su turno antes que la bandera y luego
+    que pueda evaluar la región crítica, se puede encontrar con la bandera en False del 
+    otro (Ejemplo en el Caso 4).
+
+Conclusión:
+    Peterson (Caso 1):
+        Para que AMBOS procesos entren a la región crítica:
+            Las dos flags deben estar en False 
+            Eso no pasa, entonces dependen de los valores de T 
+            Pero T = 0 y T = 1 es imposible, Absurdo.
+            No hay forma de que AMBOS entren a la región crítica sin que al menos 
+            uno espere.
+
+    Demás métodos (Casos 2,3 y 4):
+        Ocurre que no se puede garantizar la protección con las flags antes 
+        de los turnos.
+
+        Resultado: Puede que un proceso vea la flag en False del otro recíprocamente 
+        por ende creen que el otro no está queriendo entrar, AMBOS terminan entrando 
+        a la región crítica.
+
+         
+      

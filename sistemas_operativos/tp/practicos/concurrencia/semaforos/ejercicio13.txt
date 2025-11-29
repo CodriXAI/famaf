@@ -1,0 +1,64 @@
+=== EJERCICIO 13 - PRACTICO 3 S.O ===
+
+¿Qué primitiva de sincronización implementa el código de abajo con 
+una variable de condición y un mutex?
+
+
+typedef struct __unknown_t {
+    int a;
+    pthread_cond_t b;
+    pthread_mutex_t c;
+} unknown_t;
+
+void unknown_0(unknown_t *u, int a) {
+    u->a = a;
+    cond_init(&u->b);
+    mutex_init(&u->c);
+}
+
+void unknown_A(unknown_t *u) {
+    mutex_lock(&u->c);
+    u->a++;
+    cond_signal(&u->b);
+    mutex_unlock(&u->c);
+}
+
+void unknown_B(unknown_t *u) {
+    mutex_lock(&u->c);
+    while (u->a <= 0)
+        cond_wait(&u->b, &u->c);
+    u->a--;
+    mutex_unlock(&u->c);
+}
+
+
+En la struct podemos ver que tenemos:
+    Un entero 'a' 
+    Una variable de condición 'b' 
+    Un mutex (lock) 'c'
+
+En las demás funciones estaremos llamando un puntero a dicha estructura 
+
+unknown_0 Solo parece inicializar todos los valores de la struct mediante 
+el puntero u que apunta a la misma:
+    Le pasamos el valor de a al u->a (En la estructura, el valor a)
+    Inicia la variable de condición b 
+    Inicia el lock 
+
+unknown_A Parece incrementar el valor de a de manera atómica y envia una 
+señal con la variable de condición b cada vez que lo hace 
+
+unknown_B lo interesante, verifica si a es 0 o negativo, en caso que lo 
+haga esperará hasta que b le dé una señal. Cuando lo haga (antes a incrementó)
+reverifica si con esos cambios a es cero o negativo, si lo es, vuelve a 
+esperar señales de b, sino sale y decrementa a.
+
+
+Esto sin duda alguna es la primitiva de un semáforo contador.
+
+Donde:
+
+unknown_t = sem_t
+unknown_0 = sem_init
+unknown_A = sem_post
+unknown_B = sem_wait 

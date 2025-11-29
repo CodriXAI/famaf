@@ -1,0 +1,184 @@
+=== EJERCICIO 11 - PRACTICO 3 S.O ===
+
+Agregar semáforos para sincronizar multiprogramas anteriores.
+
+(a) Modifique el programa del Ejercicio 1 agregando semáforos para que el 
+resultado del multiprograma sea determinista (es decir, que no dependa del 
+planificador) y devuelva el mı́nimo valor posible.
+
+(b) Sincronice los procesos del Ejercicio 4 con semáforos de manera que se 
+alternen entre P0 y P1 en cada iteración hasta el final de sus ejecuciones. 
+¿Qué valores toman n y m al finalizar?
+
+(a):
+
+Ejercicio 1:
+
+    PRE: {X = 0}
+
+    P0:
+        a0 = x;         //a0 = 0
+        a0 = a0 + 1;    //a0 = 1
+        x = a0;         //x = 1
+
+    P1:
+        x = x + 1;      //x = 1
+        x = x + 1;      //x = 2
+
+    P2:
+        a2 = x;         //a2 = 0
+        a2 = a2 + 1;    //a2 = 1
+        x = a2;         //x = 1
+    
+    Valor mínimo final posible: X = 1
+
+    Notar que las escrituras de P1 deberían ser sobreescritas de alguna manera 
+    Por ende lo último que se debería imprimir sería x = a0 y x = a2
+
+    PRE: {X = 0}
+
+    sem_p0_p2_r_done = 0 // Sincroniza la preparación previa de P0 y P2
+    sem_p1_w_allowed = 0 // Sincroniza la intervención de las sumas de P1 
+    
+    P0:
+        a0 = x;                     // a0 = 0
+        a0 = a0 + 1;                // a0 = 1
+        post(sem_p0_p2_r_done);     // Avisa que terminó un resultado 
+        wait(sem_p1_w_allowed);     // Antes de escribirlo, espera a P1 
+        x = a0;                     // Sobreescribe x = 1
+
+    P1:
+        wait(sem_p0_p2_r_done);     // Espera la preparación de P0/P2
+        wait(sem_p0_p2_r_done);     // Espera la preparación del otro
+        x = x + 1;                  // x = 1
+        x = x + 1;                  // x = 2
+        post(sem_p1_w_allowed);     // Le dice a P0/P2 que ya puede devolver
+        post(sem_p1_w_allowed);     // Le dice al otro que ya puede devolver
+
+    P2:
+        a2 = x;                     // a2 = 0
+        a2 = a2 + 1;                // a2 = 1
+        post(sem_p0_p2_r_done);     // Avisa que terminó otro resultado 
+        wait(sem_p1_w_allowed);     // Antes de escribirlo, espera a P1 
+        x = a2;                     // Sobreescribe x = 1
+
+
+(b):
+
+Ejercicio 4:
+
+    PRE: { n = 0 ∧ m = 0 }
+
+    P0:
+        while(n<100){
+            n = n * 2;
+            m = n;
+        }
+
+    P1:
+        while(n<100){
+            n = n + 1;
+            m = n;
+        }
+    
+    POST : { n = {100,101,....,199} ^ m = {100,101,....,199} } 
+
+    La idea es que se vayan alternando con el correr de las iteraciones.
+    Y que valores finales va a tomar n y m si hacemos esto.
+
+    Primero y principal, tenemos dos casos:
+
+    (I): Intercalar P0 | P1 | P0 | P1 | ......
+
+    (II): Intercalar P1 | P0 | P1 | P0 | ..... 
+
+
+    (I): P0 arranca primero.
+
+        PRE: { n = 0 ∧ m = 0 }
+
+        sem_p0 = 1
+        sem_p1 = 0
+
+        P0:
+            while(n<100){
+                wait(sem_p0);
+                n = n * 2;
+                m = n;
+                post(sem_p1);
+            }
+
+        P1:
+            while(n<100){
+                wait(sem_p1);
+                n = n + 1;
+                m = n;
+                post(sem_p0);
+            }
+
+    Posibles valores y valores finales de n y m con (I):
+
+    PRE : { n = 0 ^ m = 0}
+
+    P0: n = 0 * 2 = 0
+    P1: n = 0 + 1 = 1 
+    P0: n = 1 * 2 = 2
+    P1: n = 2 + 1 = 3
+    P0: n = 3 * 2 = 6
+    P1: n = 6 + 1 = 7
+    P0: n = 7 * 2 = 14 
+    P1: n = 14 + 1 = 15
+    P0: n = 15 * 2 = 30
+    P1: n = 30 + 1 = 31 
+    P0: n = 31 * 2 = 62
+    P1: n = 62 + 1 = 63
+    P0: n = 63 * 2 = 126 -> Verificó que n > 100, termina 
+    P1: n = 126 + 1 = 127 -> Verificó que n > 100, termina.
+
+    En todo este tiempo (m = n).
+
+    Por ende:
+    n = 127 y m = 127
+
+    (II): P1 arranca primero.
+
+        PRE: { n = 0 ∧ m = 0 }
+
+        sem_p0 = 0
+        sem_p1 = 1
+
+        P0:
+            while(n<100){
+                wait(sem_p0);
+                n = n * 2;
+                m = n;
+                post(sem_p1);
+            }
+
+        P1:
+            while(n<100){
+                wait(sem_p1);
+                n = n + 1;
+                m = n;
+                post(sem_p0);
+            }
+    
+    Posibles valores y valores finales de n y m con (II):
+
+    PRE : { n = 0 ^ m = 0}
+    
+    P1: n = 0 + 1 = 1
+    P0: n = 1 * 2 = 2
+    P1: n = 2 + 1 = 3
+    P0: n = 3 * 2 = 6
+    P1: n = 6 + 1 = 7
+    P0: n = 7 * 2 = 14
+    P1: n = 14 + 1 = 15
+    P0: n = 15 * 2 = 30
+    P1: n = 30 + 1 = 31 
+    P0: n = 31 * 2 = 62
+    P1: n = 62 + 1 = 63
+    P0: n = 63 * 2 = 126 -> Verificó que n > 100, termina 
+    P1: n = 126 + 1 = 127 -> Verificó que n > 100, termina.    
+
+    También queda con n = 127 y m = 127

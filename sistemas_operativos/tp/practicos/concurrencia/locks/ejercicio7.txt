@@ -1,0 +1,51 @@
+=== EJERCICIO 7 - PRACTICO 3 S.O ===
+
+Hacer una matriz de entradas booleanas para comparar todos los algoritmos 
+de exclusión mútua respecto a caracterı́sticas importantes.
+
+Algoritmos: (10) 
+CLI/STI, 
+Simple Flag, 
+Test-And-Set, 
+Dekker, 
+Peterson, 
+Compare-And-Swap, 
+LL-SC,
+Fetch-And-Add, 
+TS-With-Yield, 
+TS-With-Park.
+
+Caracterı́sticas: (7)
+¿Correcto?, 
+¿Justo?, 
+Desempeño, 
+¿Espera Ocupada?, 
+¿Soporte HW?, 
+¿Multicore?,
+¿Más de 2 procesos?
+
+Matriz booleana 10 x 7:
+
+
+Algoritmo          ¿Correcto?         ¿Justo?        Desempeño        ¿Espera Ocupada?/Busy Wait       ¿Soporte HW?        ¿Multicore?       ¿Más de 2 Procesos?             
+
+CLI/STI              False             False         MUY MALO                   False                     True                False                 False
+
+Simple Flag          False             False           MALO                     True                      False               False          True(Pero incorrecto)
+
+Test-And-Set         True              False          REGULAR                   True                True(TAS atómico)         True                  True     
+
+Dekker               True              True            MALO                     True                      False               True                  False
+
+Peterson             True              True           REGULAR                   True                      False               True                  False                       
+
+Compare-And-Swap     True              False           BUENO                    True                      False               True                  True 
+
+LL-SC                True              False           BUENO                    True                      True                True                  True 
+
+Fetch-And-Add        True              True          MUY BUENO                  True                True(FAA atómico)         True                  True 
+
+TS-With-Yield        True              False           BUENO                    True                      True                True                  True 
+
+TS-With-Park         True              True          MUY BUENO                  False                     True                True                  True                      
+

@@ -1,0 +1,169 @@
+Toma de notas de clase de Prácticos 11 de Nov. de 2025:
+
+Ejercicio 9 - Práctico 3 (Concurrencia):
+	Estudiar bien el problema de concurrencia.
+
+Ejercicio 14 - Práctico 3 (Concurrencia):
+	P0:
+	L(p)
+	L(d)
+	U(d)
+	U(p)
+	
+	P1:
+	L(p)
+	U(p)
+	L(c)
+	L(d)
+	U(d)
+	U(c)
+	
+	P2:
+	L(c)
+	U(c)
+	L(p)
+	L(d)
+	L(c)
+	U(c)
+	U(d)
+	U(p)
+
+	Esto es propenso a deadlock
+
+
+	Ejemplo de deadlock:
+		L(s1)    L(s2)
+		L(s2)    L(s1)
+			
+
+	Posible deadlock en el ejercicio:
+		P1:    P2:
+		L(c)   L(d)
+		L(d)   L(c)
+
+	Hay que encontrar la planificación.
+	P1: L(p) -> U(p) -> P2: L(c) -> U(c) ->  P1: L(c) -> P2: L(p) -> L(d)
+
+
+Ejercicio 3 (Paralelismo) - Practico 3 (Concurrencia):
+	
+	Estrategia de wolo: Evaluar cotas
+	
+	Tener cuidado con las pistas que puede dar en algun parcial / final. (Latencias,
+	velocidad en Ghz que puede dar alución a multitasking o multiprogramas)	
+
+	Investigar -O1 y -O0 y ver que significa a nivel compilación, paralelismo y secuenci	    al
+
+Ejercicio 10 (similar) Grafo de sincronización:
+
+A -> B -> C
+       -> D
+
+El grafo nos indica que no hay dependencia
+
+Para que se ejecute B debe terminar A y para que se ejecuten C y D debe terminar B
+
+Se plantean los bloques (A,B,C,D)
+	Y hay que implementarlo con semáforos:
+	(Cuidado con los deadlocks)	
+
+	S0 = 0 | S1 = 0 | S2 = 0 -> Indicando la inicialización.
+ 	
+A		B		C		D
+up(s0)		down(s0)	down(s1)	down(s2)
+		up(s1)
+		up(s2)
+
+s0 gestiona B
+s1 gestiona C
+s2 gestiona D
+
+Ejemplo mal:
+
+A		B		C		D
+up(s0)		down(s0)	down(s1)	down(s1)
+		up(s1)		up(s1)
+
+Esto está mal porque ocurre de manera secuencial (primero C, luego D) y no en paralelo.
+
+Ejemplo bien optimizando semáforos:
+
+A		B		C		D
+up(s0)		down(s0)	down(s1)	down(s1)	
+		up(s1)
+		up(s1)
+
+Termina A -> Habilita B con up(s0) -> B termina y se hace down(s0) -> Se habilitan
+C y D con up(s1), up(s2) -> Terminan de ejecutarse C y D y se hace down(s1), down(s2)
+
+Ejemplo más complejo:
+
+A -> B -> C -> E
+       -> D ->
+
+Utilizando: s0 = 0 | s1 = 0 | s2 = 0
+
+A		B		C		D		E
+up(s0)		down(s0)	down(s1)	down(s1)	down(s2)
+		up(s1)		up(s2)		up(s2)		down(s2)
+
+
+
+Ejercicio 8 - Práctico 3 (Exclusión mutua):
+	
+	OBS:
+    	   T = S = R = 4 -> Multiasignación atómica (C)
+
+
+	PRE: {¬C0, ¬C1 ^ t = 0}
+	While(1){
+		C0,t = true,1; -> Multiasignación atómica (Python)	
+		while(t != 0 && C1); -> Spinloop (loopea hasta que ocurra lo contrario
+		Critical Section
+		C0 = False;
+	}
+
+	
+	while(1){
+		c1,t = true,0;
+		while(t != 1 && c0);
+		critical section
+		c1 = false;
+	}
+
+
+Si ejecutásemos las dos multiasignaciones atómicas exactamente al mismo timepo, podemos
+tener dos valores posibles de t, por ende a nivel hardware se va a decidir si queda en 0 o 1
+
+Pero el ejercicio nos pide que tengamos que dividir estas multiasignaciones porque 
+es demasiado exigente, además de que se debe implementar exclusión mutua en si misma para 
+poder garantizar atomicidad.
+
+T = 1
+C0 = TRUE
+
+C0 = TRUE
+T = 1
+
+---------
+
+T = 0
+C1 = TRUE
+
+C1 = TRUE
+T = 1
+
+Tenemos cuatro posibilidades de poder realizar este programa
+
+Probar que solo funciona:
+c0 = true
+t = 1 
+
+Con
+
+c1 = true
+t = 0
+
+Finales: Va a tomar algoritmos de memoria (Peterson, Algoritmos que no funcionan)
+
+

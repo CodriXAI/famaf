@@ -1,0 +1,38 @@
+=== EJERCICIO 6 - PRACTICO 3 S.O ===
+
+Dar una secuencia de ejecución (escenario de ejecución) de las 
+sentencias de dos procesos P0 y P1 que corren el código de Simple Flag 
+donde ambos entran a la región crı́tica.
+
+typedef struct __lock_t { int flag; } lock_t;
+void init(lock_t *mutex) {
+    mutex->flag = 0;
+}
+
+void lock(lock_t *mutex) {
+    while (mutex->flag == 1)
+        ;
+    mutex->flag = 1;
+}
+
+void unlock(lock_t *mutex) {
+    mutex->flag = 0;
+}
+
+
+Secuencia de ejecución de P0 y P1 en simultáneo:
+
+1. Inicio:
+
+    init(): flag = 0
+
+2. Race condition:
+
+    P0: Hace lock(), ve flag = 0, entrando a la región crítica.
+
+    P1: Hace lock(), ve flag = 0, entra a la sección crítica.
+
+    P0 y P1: Cambia el flag a 1, es decir, ambos por separado creyeron 
+    que adquirieron el lock.
+
+    Resultado: Ambos entraron a la región crítica, se rompe concurrencia.

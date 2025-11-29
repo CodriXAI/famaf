@@ -1,0 +1,127 @@
+=== EJERCICIO 10 - PRACTICO 3 S.O ===
+
+Utilize semáforos para sincronizar los procesos como lo indican los 
+grafos de sincronización. Explicitar los valores iniciales de los semáforos
+
+
+(a):
+    A ----> B ----> C ----> D 
+
+(b):
+    A ----> B 
+    C ----> D 
+
+(c):
+   > B 
+  /     \
+ /       v
+A         D
+ \       ^
+  \    /
+   > C   
+
+(d):
+    
+    A 
+      \
+    B  -----> D
+      /
+    C 
+
+Implementaciones (Suponiendo que son Semáforos contadores).
+
+(a):
+
+sem_ab = 0
+sem_bc = 0
+sem_cd = 0
+
+Proceso A:
+    //A work
+    post(sem_ab);
+
+Proceso B:
+    wait(sem_ab);
+    //B work
+    post(sem_bc);
+
+Proceso C:
+    wait(sem_bc);
+    //C work
+    post(sem_cd);
+
+Proceso D:
+    wait(sem_cd);
+    //D work
+
+
+(b):
+sem_ab = 0
+sem_cd = 0
+
+Proceso A:
+    //A work
+    post(sem_ab);
+
+Proceso B:
+    wait(sem_ab);
+    //B work 
+
+Proceso C:
+    //C work 
+    post(sem_cd);
+
+Proceso D:
+    wait(sem_cd);
+    //D work 
+
+(c):
+
+sem_abc = 0
+sem_bcd = 0
+
+
+Proceso A:
+    //A works
+    post(sem_abc);
+    post(sem_abc);
+
+Proceso B:
+    wait(sem_abc);
+    //B work 
+    post(sem_bcd);
+
+Proceso C:
+    wait(sem_abc);
+    //C work 
+    post(sem_bcd);
+
+Proceso D:
+    wait(sem_bcd);
+    wait(sem_bcd);
+    //D work
+
+
+(d):
+
+sem_d = 0
+
+Proceso A:
+    //A work;
+    post(sem_d);
+
+Proceso B:
+    //B work 
+    post(sem_d);
+
+Proceso C:
+    //C work
+    post(sem_d);
+
+Proceso D:
+    wait(sem_d);
+    wait(sem_d);
+    wait(sem_d);
+    //D work
+
+

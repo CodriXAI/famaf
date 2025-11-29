@@ -1,0 +1,130 @@
+=== EJERCICIO 12 - PRACTICO 3 S.O ===
+
+Explicar que hace este programa para cada una de las siguientes 
+combinaciones de valores iniciales de los semáforos: 
+(E, F) = {(0, 0), (0, 1), (1, 0), (1, 1)}.
+
+
+sem_t empty;
+sem_t full;
+
+void *ping(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&empty);
+        printf("Ping\n");
+        sem_post(&full);
+    }
+}
+
+void *pong(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&full);
+        printf("Pong\n");
+        sem_post(&empty);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    // ...
+    sem_init(&empty, 0, E);
+    sem_init(&full, 0, F);
+    // ...
+}
+
+
+Análisis de casos:
+
+(E,F) = (0,0):
+    Esto implica que:
+        sem_t empty = 0;
+        sem_t full = 0;
+    
+    En ping:
+        wait(empty) -> Como empty = 0, se bloquea
+    En pong:
+        wait(full) -> Como full = 0, se bloquea
+    
+    Resultado: Deadlock -> Bloqueo de ping y pong porq uno está 
+    esperando al otro.
+
+(E,F) = (1,0):
+    Esto implica que:
+        sem_t empty = 1;
+        sem_t full = 0;
+    
+    En ping:
+        wait(empty) -> Como empty = 1, consume 1, queda empty = 0
+        print(ping) -> Ping 
+        post(full) -> Como full = 0, suma 1, queda full = 1
+    En pong:
+        wait(full) -> Espera a full, luego del post continua, full = 0
+        printf(pong) -> Pong 
+        post(empty) -> Como empty = 0, suma 1, queda empty = 1
+     ....
+    Sucesivamente
+    Hasta que i llegue a Loops - 1
+
+    Resultado:
+    Ping
+    Pong
+    Ping
+    Pong
+    ...
+
+(E,F) = (0,1):
+    Esto implica que:
+        sem_t empty = 0;
+        sem_t full = 1;
+    
+    En ping:
+        wait(empty) -> Como empty = 0, se bloquea, espera un post  
+    En pong:
+        wait(full) -> Como full = 1, consume 1, queda full = 0
+        printf(pong) -> Pong 
+        post(empty) -> Como empty = 0, suma 1, queda empty = 1
+    En ping:
+        -> Sale del wait consumiendo 1, queda empty = 0 
+        print(ping) -> Ping
+        post(full) -> Como full = 0, suma 1, queda full = 1
+    ....
+    Sucesivamente
+    Hasta que i llegue a Loops - 1
+
+    Resultado:
+    Pong
+    Ping
+    Pong
+    Ping
+    ...
+
+(E,F) = (1,1):
+    Esto implica que:
+        sem_t empty = 1;
+        sem_t full = 1;
+    
+    Resultado: Indeterminismo de quien empieza (depende del scheduler).
+
+    Puede ser:
+    Ping 
+    Pong 
+    ...
+
+    O bien:
+    Pong
+    Ping
+    ...
+
+    Pero no hay forma de saberlo.
+
+    ¿Hay race condition? 
+        No una grave que altere el comportamiento
+        Ejemplo: Dos pings o dos pongs seguidos.
+
+        Lo que si hay es no determinismo al inicio del programa.
+
+    ¿Afecta en algo que un semáforo llegue a tener valor 2?
+        No, debido a que hay solo un post por semáforo, por ende 
+        lo único que ocurre es un comportamiento extraño al inicio.
+        Luego se estabiliza.

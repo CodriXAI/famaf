@@ -1,0 +1,23 @@
+Teniendo en cuenta que:
+	Para solucionar el caso de que sem_open devuelva un -i negativo
+	
+	Si se supone que cada vez que se está abriendo un semáforo por proceso
+	debe elegir uno que está libre. ¿Por qué nos interesaría devolver un -i?
+	
+	Podría ser mejor idea devolver un 0 de sem_open (error) para indicar que ese
+	semáforo no puede ser utilizado (refcount en este caso no tendría sentido aumentarlo)
+
+
+	Con respecto a como devolver -1 indicando que está libre:
+
+	Actualmente si el semáforo si esta libre devuelve i, que sería, en el arreglo de 
+	semáforos, el i-ésimo semáforo que encontró no inicializado.
+
+	Por cuestiones de diseño, sem_open debería devolver -1, sin embargo si devolvemos -1
+	¿Que hacemos con dicho valor? De alguna manera debemos obtener el ID.
+
+	Las ideas (son solo hipotéticas son):
+		Tener otra función que en base al -1 que tire sem_open opere y haga algo
+		(inicializar por ejemplo)
+
+		

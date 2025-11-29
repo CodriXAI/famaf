@@ -1,0 +1,126 @@
+=== EJERCICIO 9 - PRACTICO 3 S.O ===
+
+Para el siguiente código que intenta implementar productor/consumidor, 
+buscar una falla instanciando dos consumidores y un productor C1 , C2 , P1.
+Dar una secuencia de lı́neas que provoca una condición no-deseada.
+
+int loops;
+cond_t empty, fill;
+mutex_t mutex;
+
+void *producer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        pthread_mutex_lock(&mutex);
+        if (count == 1)
+            pthread_cond_wait(&empty, &mutex);
+        put(i);
+        pthread_cond_signal(&fill);
+        pthread_mutex_unlock(&mutex);
+    }
+}
+
+void *consumer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        pthread_mutex_lock(&mutex);
+        if (count == 0)
+            pthread_cond_wait(&fill, &mutex);
+        int tmp = get();
+        pthread_cond_signal(&empty);
+        pthread_mutex_unlock(&mutex);
+        printf("%d\n", tmp);
+    }
+}
+
+En este caso, la falla principal es utilizar solo ifs para verificar el 
+estado del buffer en el cuál se fijan las condiciones los 
+productores/consumidores. Debido a lo siguiente:
+
+Puede ocurrir un despertar espurio tanto en el consumidor como en el 
+productor, y como ya entro en el if, asume que dicha condición sigue ocurriendo 
+Por ende no re-verifica la condición del buffer y continua, pudiendo provocar 
+comportamientos indefinidos, o inesperados.
+
+Ejemplo con 1 Productos y 2 Consumidores:
+(P, C1, C2)
+
+Con dos cond var: empty (las manda los consumidores) y fill (las manda los 
+productores).
+
+Suponiendo que arrancamos con count = 0.
+
+Tanto P, C1, C2 están activos.
+
+Teniendo en cuenta que invariante es que count >= 0
+
+C1 entra a consumir:
+    * Adquiere el lock 
+    * ¿Count == 0? Si, hace wait(fill) espera a que se llene, se duerme 
+    * Queda en sleep 
+
+C2 entra a consumir:
+    * Adquiere el lock 
+    * ¿Count == 0? Si, hace wait(fill) espera a que se llene, se duerme 
+    * Queda en sleep 
+
+P entra en acción:
+    * Adquiere el lock 
+    * ¿Count == 1? No => Está vacío el buffer.
+    * Produce con put() => Ahora count = 1
+    * Envía signal(fill), el buffer está lleno 
+    * Libera el lock 
+
+Elije despertar a uno de los dos Consumidores, digamos C1 (es arbitrario).
+
+C1 se despierta:
+    * No reverifica el estado de count (por if)
+    * Continua a consumir con get()
+    * Manda signal(empty), el buffer está vacío
+        * Como P no estaba esperando esa signal, se descarta
+    * Libera el lock 
+
+C2 se despierta espuriamente (de la nada, posible en POSIX):
+    * No reverifica el estado de count (por if)
+    * Continua a consumir con get(), count ya estaba en 0, consume basura
+        * O peor aún, deja a count = -1 rompiendo invariante 
+    * Manda signal(empty), el buffer está vacío
+        * Como P no estaba esperando esa signal, se descarta
+    * Libera el lock
+
+Si alguno de los Consumidores quiere volver a consumir en las siguientes 
+iteraciones se duermen. Supongamos no vuelven a intentar consumir 
+
+P:
+    * Adquiere el lock 
+    * ¿Count == 1? No 
+    * Produce con put(), count = 0
+    * Manda signal(fill), ningun consumidor esperando, se pierde 
+        * Notar que ya hay inconsistencia, count = 0 rompe todo.
+    * Libera el lock 
+
+P (Siguiente iteración):
+    * Adquiere el lock 
+    * ¿Count == 1? No 
+    * Produce con put(), count = 1
+    * Manda signal(fill), ningun consumidor esperando, se pierde 
+    * Libera el lock
+
+P (Siguiente iteración):
+    * Adquiere el lock 
+    * ¿Count == 1? Si 
+    * Hace wait(empty), y se duerme esperando 
+
+Luego, como ni C1 ni C2 están esperando, se rompe el ciclo de 
+Productor/Consumidor.
+
+Resultado: Productor dormido para siempre y consumidores no funcionales.
+
+
+
+En resumen:
+
+Sin una reverificación de las condiciones del estado del buffer, se presta 
+a inconsistencias y a que se rompa el ciclo de Productor Consumidor. Porque 
+se están asumiendo condiciones que no se saben si en ese momento siguen siendo 
+válidas.

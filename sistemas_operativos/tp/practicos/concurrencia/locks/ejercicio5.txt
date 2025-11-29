@@ -1,0 +1,81 @@
+=== EJERCICIO 5 - PRACTICO 3 S.O ===
+
+La modificación en el punto (b) del Ejercicio 3 introduce cambios en los 
+posibles valores finales, utilice locks para que vuelvan a devolver los 
+mismos valores del punto (a).
+
+(3a):
+
+-------------------------------------------------------------------------
+
+PRE : {cont ^ x = 1 ^ y = 2}
+Con cont en True.
+
+P0:
+    while(cont && x < 20){
+        x = x * y;
+    }
+
+P1:
+    y = y + 2;
+    cont = false;
+
+POST: {¬cont ^ x = {1,2,4,8,16,32,64} ^ y = 4}
+
+-------------------------------------------------------------------------
+
+(3b):
+
+-------------------------------------------------------------------------
+
+PRE : {cont ^ x = 1 ^ y = 2}
+Con cont en True.
+
+P0:
+    while(cont && x < 20){
+        x = x * y;
+    }
+
+P1:
+    y = y + 1;
+    y = y + 1;
+    cont = false;
+
+POST: {¬cont ^ x = {1,2,3,4,6,8,9,12,16,18,24,27,32,36,48,54,64} ^ y = 4}
+
+-------------------------------------------------------------------------
+
+La idea base es que POST 3b = POST 3a usando locks.
+
+Lo más trivial es garantizar atomicidad entre los dos y = y + 1 en P1.
+
+Sin embargo y para asegurarse de que el valor de y sea leido correctamente en
+p0, se sugiere realizar una lectura segura del lock en caso de que suceda algo.
+(Puede estar leyendo y = 3 en x = x * y de alguna manera)
+
+Finalmente quedaría:
+
+PRE : {cont ^ x = 1 ^ y = 2}
+Con cont en True.
+
+P0:
+    while(cont && x < 20){
+        //Garantizo lectura segura
+        lock(L);
+        int tmp = y; 
+        unlock(L);
+
+        x = x * tmp;
+    }
+
+P1:
+    //Vuelvo atómico nuevamente y = y + 2
+    lock(L);
+    y = y + 1;
+    y = y + 1;
+    unlock(L);
+    cont = false;
+
+POST: {¬cont ^ x = {1,2,4,8,16,32,64} ^ y = 4}
+
+
