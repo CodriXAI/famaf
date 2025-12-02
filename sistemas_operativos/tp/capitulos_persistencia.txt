@@ -1,0 +1,6 @@
+Persistencia:
+36, 37, 39, 40, 41, 42
+
+Para el final entran tb:
+38 y 43
+

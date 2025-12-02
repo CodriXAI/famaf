@@ -1,0 +1,22 @@
+= EJERCICIO 1 - PARCIAL 2 =
+
+Escribir la Inicialización y las tres componentes del multiprograma para que haya 
+riesgo de DEADLOCK en las tres componentes. Solo usar down de semáforos y sus valores 
+iniciales, no es necesario hacerles up...total tiene riesgo de DEADLOCK.
+
+Inicialización: i = 0, sem_p0 = 1, sem_p1 = 1, sem_p2 = 1
+
+P0:
+    down(sem_p0);
+    down(sem_p1);
+    i = i + 1;
+
+P1:
+    down(sem_p1);
+    down(sem_p2);
+    i = i + 2;
+
+P2:
+    down(sem_p2);
+    down(sem_p0);
+    i = i + 3;

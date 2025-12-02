@@ -1,0 +1,43 @@
+= EJERCICIO 2 - PARCIAL 2 =
+
+El siguiente es una implementación del Problema de la Región Crítica (E.W Dijkstra 1959)
+que contiene algunos errores.
+
+Inicialización: !flag[0] && !flag[1] && turn = 0.
+
+P0:
+A: turn = 1 
+B: flag[0] = true
+C: while(flag[1] && turn == 1)
+D: - CS -
+E: flag[0] = false
+
+P1:
+1: turn = 0
+2: flag[1] = true 
+3: while(flag[0] && turn == 0)
+4: - CS -
+5: flag[1] = false
+
+(a): Dar una planificación lo más corta posible que muestra que NO se resuelve el 
+Problema de Región Crítica.
+
+    A, 1, 2, 3, -CS-, B, C, -CS-
+
+(b): Modificar el programa in-situ (en el lugar) para arreglar el desperfecto:
+
+    Intercambiar A <-> B y 1 <-> 2 (Peterson)
+
+    P0:
+    A: flag[0] = true
+    B: turn = 1
+    C: while(flag[1] && turn == 1)
+    D: - CS -
+    E: flag[0] = false
+
+    P1:
+    1: flag[1] = true 
+    2: turn = 0
+    3: while(flag[0] && turn == 0)
+    4: - CS -
+    5: flag[1] = false

@@ -1,0 +1,149 @@
+= EJERCICIO 3 - PARCIAL 2 =
+
+TOMALO CON PINZAS, hay una baaanda de posibilidades.
+
+Para el siguiente multiprograma donde la atomicidad es linea a linea
+
+
+Inicialización i = 0
+
+
+P0:
+
+
+while(i < 32){
+
+i = i + 1;
+
+}
+
+
+P1:
+
+
+while(i < 32){
+
+i = i + i
+
+}
+
+P2:
+
+
+while(i < 32){
+
+i = i * i
+
+}
+
+
+Dar todos los valores finales de i de menor a mayor 
+
+Evaluación de los límites:
+
+Para P0 solo: El límite antes de finalizar es i = 31 
+pues una iteración más lleva a 32.
+
+Para P1 solo: El límite antes de finalizar es i = 16 (empezando con i = 1)
+pues una iteración más lleva a 32.
+
+Para P2 solo: El límite antes de finalizar es i = 16 (empezando con i = 2)
+pues una iteración más lleva 256.
+
+De aquí, los únicos valores finales que sacamos son:
+i = 32, 256.
+
+Permutaciones de a 2 (con límites):
+P0 <-> P1:
+
+    P0 llega a 31 siempre, ahora:
+        Si sigue P0 y dsp P1, hace: 31+1 = 32 -> 32 * 2 = 64, es posible
+        Si sigue P1 y dsp P0, hace 31*2 = 62 -> 62 + 1 = 63, es posible
+
+i = 32, 63, 64, 256
+
+P0 <-> P2:
+    P0 llega a 31 siempre, ahora:
+        Si sigue P0 y dsp P2, hace: 31 + 1 = 32 -> 32² = 1024, es posible.
+        Si sigue P2 y dsp P0 hace: 31² = 961 -> 961 + 1 = 962, es posible.
+
+P1 <-> P2:
+    P1 llega a 16 siempre (suponiendo que arranca con i = 1), ahora:
+        Si sigue P1 y dsp P2, hace: 16 + 16 = 32 -> 32² = 1024, ya lo tenemos 
+        Si sigue P2 y dsp P1, hace 16² = 256 -> 256 + 256 = 512, es posible
+
+i = 32, 63, 64, 256, 512, 962, 1024
+
+Valores intermedios entre esas permutaciones (más que 32):
+P0 <-> P1:
+    P0 llega hasta (17..31), P1 hace 2(17..31), resultados:
+        17 * 2 = 34
+        18 * 2 = 36
+        19 * 2 = 38
+        20 * 2 = 40
+        21 * 2 = 42
+        22 * 2 = 44
+        23 * 2 = 46
+        ...
+        30 * 2 = 60
+        31 * 2 = 62
+
+i = ([32..62] tq sean pares), 63, 64, 256, 512, 962, 1024
+
+P0 <-> P2:
+        6² = 36 (ya está)
+        7² = 49 -> NUEVO 
+        9² = 81 -> NUEVO
+        10² = 100 -> NUEVO 
+        ...
+        31² = 961
+
+P1 <-> P2 (límite):
+    i = 31, P1 luego P2:
+        31*2 = 62 -> 62² = 3844
+    i = 31, P2 luego P1:
+        31² = 961 -> 961 * 2 = 1922
+
+Permutaciones de los 3 (límites):
+
+P0 -> P1 -> P2:
+    P0 llega a i = 31+1 antes de verificar, i = 32 
+    P1 llega a i = Entra con i = 31 al while, luego por P0: 32*2 
+    antes de verificar, i = 64 
+    P2 llega a i = Entra con i = 31 al while, luego por P1: 64² antes de verificar, i = 4096
+    MÁXIMO
+
+P1 -> P2 -> P0:
+    P1 llega hasta i = 16
+    P2 eleva al cuadrado 16² = 256
+    P0 suma 1 256+1 = 257
+
+    P1 llega hasta i = 8
+    P2 eleva al cuadrado 8² = 64 
+    P0 suma 1 64 + 1 = 65
+
+P2 -> P1 -> P0:
+    P2 eleva al cuadrado hasta 256
+    P1 multiplica por 2 256 + 256 = 512 
+    P0 suma 1 512 + 1 = 513
+
+    P2 eleva al cuadrado hasta 16 
+    P1 multiplica por 2, 16 + 16 = 32
+    P0 suma 1, 32 + 1 = 33
+
+P0 ​→ P2 ​→ P1​: 32² = ​1024×2 = ​2048
+
+P1​ → P0 ​→ P2​: 62+1 =​ 63² = ​3969
+
+P1​→P2​→P0​: 62² = ​3844+1 = ​3845
+
+P2​→P0​→P1​: 961+1 = ​962² = ​1924
+
+P2​→P1​→P0​: 961 * 2 = ​1922+1 = ​1923
+
+i = ([32..62] tq sean pares), [7..31]², 33, 63, 65, 257, 512, 513, 962, 1024, 
+1922, ​1923, ​1924, ​2048, 3844, ​3845, ​3969, 4096
+
+Me cansé :c
+
+

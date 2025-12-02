@@ -1,0 +1,70 @@
+=== EJERCICIO 1 - PRACTICO 4 S.O ===
+
+El disco Seagate Exos 7E8 de 8 TiB e intefaz SAS tiene una 
+velocidad de rotación de 7200 RPM, 4.16 ms de latencia de búsqueda y 
+215 MiB/s de tasa de transferencia.
+
+(a) Indicar cuantos ms tarda en dar una vuelta completa.
+
+(b) Indicar la tasa de transferencia de lectura al azar de bloques de 
+4096 bytes.
+
+Tenemos que:
+    
+    rotation: 7200RPM 
+
+    seek (latencia de búsqueda): 4.16ms
+
+    transfer: 215 MiB/s 
+
+
+(a): 
+    Cuando nos piden una vuelta COMPLETA, y el disco tarda 7200 RPM 
+    (por minuto) lo qu edebemos hacer es pasar a ms la velocidad de rotación.
+
+    1 minuto = 60 segundos 
+    60 segundos = 60 * 1000 = 60000 ms (milisegundos)
+
+    60000 / 7200 (Para saber cuánto en ms) = aprox 8.33ms en dar una vuelta 
+    completa.
+
+(b):
+    Tasa de transferencia de lectura al azar (acceso aleatorio):
+    En bloques de 4096 bytes = 4KiB
+
+    Fórmula para acceso al azar:
+    Tasa de Transfer = seek + rotación_promedio + transfer
+
+    Seek, lo tenemos en 4.16ms 
+    rotación promedio (generalmente es la mitad) = aprox 4.16ms
+
+    Ahora calculamos el transfer para 4 KiB a 215 MiB/s.
+    
+    transfer en bloques de 4KiB:
+
+    1MiB = 1024KiB => 4 / 1024 = 0.00390625 MiB 
+
+    transfer(s) = 0.00390625 MiB  /  215 MiB/s = 0.0000181686 s 
+
+    transfer (ms) = 0.00000181686 * 1000 =  0.01817 ms (esa es la velocidad)
+
+    Como tenemos ahora todo a ms:
+
+    Tasa de Transfer = seek + rotación_promedio + transfer
+                     = 4.16ms + 4.16ms +  0.01817ms aprox 8.33817ms
+
+    Ahora pasandolo a segundos:
+    8.33817 / 1000 = 0.00833817 s 
+    Luego para 4096 bytes por segundo:
+    4096 /  0.00833817 = aprox  491234.8873 aprox 491234 bytes/s
+    aprox 479.7 KiB/s (491.234 / 1024)
+
+    Y en MiB:
+    491234 / 1024² = 0.4684772491 MiB/s aprox = 0.468MiB/s
+
+    Tasa = 0.468MiB/s 
+
+
+    
+
+

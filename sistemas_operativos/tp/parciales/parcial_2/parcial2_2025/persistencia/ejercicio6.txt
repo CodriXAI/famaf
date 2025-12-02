@@ -1,0 +1,87 @@
+= EJERCICIO 6 - PARCIAL 2 =
+
+Completar la columna con la permutación de 0..3 que 
+haga coincidir los discos con su velocidad de 
+transferencia.
+
+NO USAR FLECHAS PARA UNIR
+¡No hay trampa!, es una permutación, todos los valores
+están y ninguno se repite.
+
+-------------------------------------------------------
+
+Características del HDD 
+nombre, rotación, seek time, transferencia pico (max)
+
+__ Netbook 2.5'', 4500 RPM, 10ms, 110MB/s (a)
+
+__ Seagate Mach.2, 7200 RPM, 4ms, 500MB/s (b)
+ 
+__ Diskette, 300 RPM, 50ms, 50KB/s        (c)
+
+__ Ultrastar, 15000 RPM, 3.4ms, 198MB/s   (d)
+
+-------------------------------------------------------
+
+
+-------------------------------------------------------
+Velocidad 
+R/O Random [4KB], R/O Sequential [1MB]
+0   17.53KB/s   0.05MB/s 
+1   239.49KB/s  38.82MB/s 
+2   738.04KB/s  95.69MB/s 
+3   489.33KB/s  98.36MB/s 
+-------------------------------------------------------
+
+
+Lo sacaremos por intuición asi no nos metemos en fórmulas:
+
+Podemos ver que de los 4, el peor es el Diskette, que tiene 300 RPM, 50ms de 
+seek(mover el brazo) y 50KB/s de lectura. Es mucho mas lento comparado a los 
+otros. Por ende, buscamos en velocidad el más lento, es el 0.
+
+Diskette -> 0
+
+El siguiente más lento es el Netbook 2.5", con 4500 RPM (lento), 10ms gira 
+MUY lento el brazo y 110MB/s de lectura. Podemos ver que la segunda velocidad más 
+lenta es la 1, asi que unimos ahi.
+
+Netbook 2.5" -> 1
+
+La más peleada es entre Seagate Mach.2 y Ultrastar.
+Podemos decidir esto por el RANDOM, por sentido común nos fijamos que el Ultrastar 
+es rapidísimo, hace 15000 RPM (mas del doble que el Seagate) y el brazo lo mueve 
+tmb rapidisimo 3.4ms, y si bien lee 198MB/s, al hacerlo tan rapido puede llegar a 
+leer datos al azar super facil.
+
+El seagate no está mal en velocidad, con unos 7200 RPM gira bastante bien el 
+brazo 4ms, pero su lectura de 500MB/s lo hace mejor para secuencial.
+
+Por ende más lento. Asi que por diferencia del RANDOM que es más de velocidad, tenemos 
+que 2 va con ultrastar y 3 va con seagate por descarte.
+
+-------------------------------------------------------
+
+Características del HDD 
+nombre, rotación, seek time, transferencia pico (max)
+
+1  Netbook 2.5'', 4500 RPM, 10ms, 110MB/s (a)
+
+3  Seagate Mach.2, 7200 RPM, 4ms, 500MB/s (b)
+ 
+0  Diskette, 300 RPM, 50ms, 50KB/s        (c)
+
+2  Ultrastar, 15000 RPM, 3.4ms, 198MB/s   (d)
+
+-------------------------------------------------------
+
+
+-------------------------------------------------------
+Velocidad 
+R/O Random [4KB], R/O Sequential [1MB]
+0   17.53KB/s   0.05MB/s 
+1   239.49KB/s  38.82MB/s 
+2   738.04KB/s  95.69MB/s 
+3   489.33KB/s  98.36MB/s 
+-------------------------------------------------------
+

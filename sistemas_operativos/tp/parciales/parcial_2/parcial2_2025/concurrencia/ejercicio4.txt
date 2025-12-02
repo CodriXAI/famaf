@@ -1,0 +1,61 @@
+= EJERCICIO 4 - PARCIAL 2 =
+
+Para el multiprograma anterior, sincronizar con semáforos para que de 
+siempre el VALOR MÁXIMO. 
+No se puede cambiar la computation proper, es decir solo se pueden agregar 
+semáforos down/up en cualquier parte de las componentes e ifs solo si 
+hacen up/down de semáforos. No se aceptan riesgos de deadlocks.
+
+
+Inicialización i = 0, sem_go = 0,  sem_readys = 0, sem_turn_p1 = 0, sem_turn_p2 = 0
+
+
+P0:
+while(i < 32){
+    // Antes de hacerse 32, debe dejar pasar a P1 y P2, y chequear
+    // que estén listos.
+    if(i = 31){
+        up(sem_go);
+        up(sem_go);
+
+        down(sem_readys);
+        down(sem_readys);
+    }
+
+    // Ya puede finalizar, hacerse 32.
+    i = i + 1;
+
+    if(i = 32){
+        // Y solo llamar a P1
+        up(sem_turn_p1);
+    }
+}
+
+
+P1:
+while(i < 32){
+    // Pasa, le dice que ya pasó a P0 y espera a su turno
+    down(sem_go);
+    up(sem_readys);
+    down(sem_turn_p1);
+
+    i = i + i;
+
+    if(i = 64){
+        up(sem_turn_p2);
+    }
+
+}
+
+
+P2:
+while(i < 32){
+    // Pasa, le dice que ya pasó a P0 y espera a su turno
+    down(sem_go);
+    up(sem_readys);
+    down(sem_turn_p2);
+
+    i = i * i;
+}
+
+
