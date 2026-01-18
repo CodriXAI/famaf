@@ -1,0 +1,25 @@
+Ejercicio 7 — Reconstruir bitmaps
+
+Te dan los inodos existentes (ocupados):
+
+0, 1, 5, 6, 7
+
+Y los bloques ocupados:
+
+2, 3, 4, 8, 9, 10
+
+Tamaño del FS: 16 inodos, 16 bloques
+
+Armar:
+
+i-bitmap
+
+d-bitmap
+
+i-bitmap:
+    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
+    1 1 0 0 0 1 1 1 0 0 0  0  0  0  0  0  
+
+d-bitmap:
+    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
+    0 0 1 1 1 0 0 0 1 1 1  0  0  0  0  0  

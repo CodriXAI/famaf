@@ -1,0 +1,56 @@
+Datos:
+
+5400 RPM 
+5.6ms de seek
+150 MiB/s de Transfer MÁX
+
+(a) Cuántos ms tarda en dar una vuelta completa:
+    
+    60000 ms / 5400 RPM aprox 11.11ms velocidad de rotación
+
+(b) Indicar tasa de transfer de lectura AL AZAR bloques de 
+16MiB
+
+    Azar = t_rot_avg + t_seek + t_transfer
+
+    t_rot_avg = 11.11 / 2 aprox 5.55ms
+
+    t_transfer = 16MiB / 150MiB s aprox 0.1066 s 
+    Pasamos a ms = 0.1066 * 1000 = 106.6ms
+
+    t_azar = 5.55ms + 5.6ms + 106.6ms aprox 117.75ms
+
+    Pasamos a segundos 117.75 / 1000 aprox 0.11775
+
+    Para la tasa hacemos bloque / tiempo de t_azar: 
+    16MiB / 0.11775 s  aprox 135.88MiB/s
+
+(c) Tasa de transfer al azar en bloques de 128MiB será 
+mayor o menor que la anterior
+
+    Azar = t_rot_avg + t_seek + t_transfer
+
+         = 5.55ms + 5.6 + ???
+
+    t_transfer = 128MiB / 150MiB/s aprox 0.8533 s 
+    Pasamos a ms = 0.8533 * 1000 = 853.3ms
+
+    t_azar = = 5.55ms + 5.6ms + 853.3ms = 864.45ms
+    Pasamos a segundos 864.45ms 
+    864.45 / 1000 = 0.86445 s
+
+    128MiB / 0.86445 s aprox 148.07 MiB/s
+
+    Conclusión, es un poco mayor esta tasa.
+    Debido a que tiene que leer más datos en la misma
+    cantidad de tiempo.
+
+
+(d) Pasamos la velocidad de rotacion a segundos:
+11.11ms -> 11.11/1000 = 0.01111 s
+150MiBs * 0.01111 s aprox 1.66MiB por pista.
+
+
+
+
+

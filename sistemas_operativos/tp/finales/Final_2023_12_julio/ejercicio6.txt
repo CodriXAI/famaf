@@ -1,0 +1,76 @@
+= EJERCICIO 6 - FINAL 12 JULIO 2023 = 
+
+En un filesystem de tipo UNIX con 12 bloques Directos, 1 bloque indirecto, 
+1 bloque doble indirecto y un bloque triple indirecto. 
+Cada bloque es de 4 KiB y los indices de bloques son de 32 bits.
+Dos posiblidades para formatear el disco:
+
+(a) Tabla de inodos de 1024 entradas.
+(b) Tabla de inodos de 2^20 entradas.
+
+Completar la siguiente tabla con KiB, MiB, GiB o TiB segun corresponda, 
+suponiendo que cada entrada de la inode table ocupa 128 bytes y que la data region 
+esta al maximo posible usando todos los indices.
+
+(Tabla Adjunta)
+
+Datos Relevantes:
+
+    * 4KiB por bloque 
+    * 4 bytes por puntero
+    * Por entrada de inode table hay 128 bytes 
+    * Data Region está al máximo utilizando todos los índices
+
+Para 1024 inodos:
+
+    i-bmap: 
+        Cada bit representa un inodo, como hay 1024
+        se utilizan 1024 bits o 128 bytes.
+
+        Como cada bloque son 4KiB, este ocupa 1 solo bloque 
+    
+    d-bmap:
+        Cada bit es para un bloque de Datos
+        (Debemos saber la cantidad de bloques que hay)
+
+        1 074 791 436 bloques de data region
+
+    
+    inode table:
+        Tenemos 1024 inodos, cada entrada pesa 128 bytes
+        1024 * 128 bytes = 131072 bytes o también 128KiB
+        
+        128Kib / 4Kib = 32
+
+        => 32 bloques
+
+    data region:
+        Como ocupa al máximo posible usando todos los indices
+
+        Entonces calculamos:
+
+        12 punteros directos 
+        1 indirecto => 1 bloque de punteros directos 
+            1 bloque son 4KiB => 4096 bytes 
+            Cada puntero ocupa 4 bytes 
+            4096 / 4 = 1024 punteros
+        1 indirecto doble => 1024² => 1048576 punteros 
+        1 indirecto triple => 1024³ => 1073741824 punteros
+
+        Sumando todos los punteros me da un valor de:
+            1 074 791 436 bloques
+        Si queremos ver el tamaño sería (en bytes):
+              1 074 791 436 × 4096 bytes 
+              = 4402 345 721 856 bytes 
+        Pasandolo a KiB, MiB, GiB, TiB:
+            4402 345 721 856 / 1024 =
+                4299 165 744 KiB
+            4299 165 744 / 1024 =
+                4 198 404 MiB (Aprox)
+            4 198 404 / 1024 =
+                4100 GiB (aprox) =
+            4100 / 1024 = 4TiB (aprox)
+
+
+
+

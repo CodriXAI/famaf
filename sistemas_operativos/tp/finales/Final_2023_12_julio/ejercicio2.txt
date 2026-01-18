@@ -1,0 +1,212 @@
+= EJERCICIO 2 - FINAL 12 JULIO 2023 = 
+
+Datos:
+
+Esquema de paginación RISC-V con páginas de 4KiB de 
+3 niveles (9,9,9,12) -> (44,12)
+
+39 bits por dirección virtual, las cuales:
+9 -> Nivel 2 (Page Directory Pointer Table)
+9 -> Nivel 1 (Page Directories)
+9 -> Nivel 0 (Page Tables)
+12 -> Offset (Páginas)
+
+El satp apunta a: 0x00000000FE0
+
+Asumimos que si nos dan una dirección tipo:
+
+0x1000 -> Es que hay 0s a la izquierda para completar los 
+39 bits
+
+Ejemplo:
+
+0x1000 => 0x0000001000
+
+(a): Traducir de virtual a física las direcciones:
+
+Partimos que satp apunta a 0x00000000FE0 para buscar.
+
+Dirección Virtual 0x0000:
+    Pasamos a los 39 bits:
+       000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000
+    Tomamos primeros 9 bits para Page Dir Pointer Table:
+        000000000 = 0x000
+    Tomamos segundos 9 bits para Page Dir:
+        000000000 = 0x000
+    Tomamos terceros 9 bits para Page Table:
+        000000000 = 0x000
+    Tomamos los últimos 12 bits para offset:
+        000000000000 = 0x000
+    
+    Usamos el registro de paginación para hacer el page walk:
+
+    0x00000000FE0 (PDPT):
+        0x000 -> 0x00000000FEA -> Tiene todos los permisos 
+    0x00000000FEA (PD):
+        0x000 -> 0x000000AD0BE -> Tiene todos los permisos 
+    0x000000AD0BE (PT):
+        0x000 -> 0x0000000ABAD -> Es válida y solo escritura
+    Concatenamos 0x0000000ABAD con el offset:
+        0x0000000ABAD000 => 0xABAD000
+    
+    0x0000 a Física => 0xABAD000
+
+Dirección virtual 0x1000:
+    Pasamos a los 39 bits:
+        000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0001 | 0000 | 0000 | 0000
+
+    Tomamos primeros 9 bits para Page Dir Pointer Table:
+        000000000 = 0x000
+    Tomamos segundos 9 bits para Page Dir:
+        000000000 = 0x000
+    Tomamos terceros 9 bits para Page Table:
+        000000001 = 0x001
+    Tomamos los últimos 12 bits para offset:
+        000000000000 = 0x000
+    
+    Usamos el registro de paginación para hacer el page walk:
+
+    0x00000000FE0 (PDPT):
+        0x000 -> 0x00000000FEA -> Tiene todos los permisos 
+    0x00000000FEA (PD):
+        0x000 -> 0x000000AD0BE -> Tiene todos los permisos 
+    0x000000AD0BE (PT):
+        0x001 -> 0x000CAFECAFE ->> No tiene ningún permiso
+
+    Page Fault.
+
+    0x1000 a física => Page Fault.
+
+Dirección virtual 0x2000:
+    Pasamos a los 39 bits:
+        000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0010 | 0000 | 0000 | 0000
+
+    Tomamos primeros 9 bits para Page Dir Pointer Table:
+        000000000 = 0x000
+    Tomamos segundos 9 bits para Page Dir:
+        000000000 = 0x000
+    Tomamos terceros 9 bits para Page Table:
+        000000010 = 0x002
+    Tomamos los últimos 12 bits para offset:
+        000000000000 = 0x000
+    
+    Usamos el registro de paginación para hacer el page walk:
+
+    0x00000000FE0 (PDPT):
+        0x000 -> 0x00000000FEA -> Tiene todos los permisos 
+    0x00000000FEA (PD):
+        0x000 -> 0x000000AD0BE -> Tiene todos los permisos 
+    0x000000AD0BE (PT):
+        0x002 -> 0x00000DECADA -> Es válida 
+    Concatenamos 0x00000DECADA con el offset:
+        0x00000DECADA000 => 0xDECADA000
+
+     0x2000 a Física => 0xDECADA000
+
+Dirección virtual 0x3000:
+    Pasamos a los 39 bits:
+        000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0011 | 0000 | 0000 | 0000
+
+    Tomamos primeros 9 bits para Page Dir Pointer Table:
+        000000000 = 0x000
+    Tomamos segundos 9 bits para Page Dir:
+        000000000 = 0x000
+    Tomamos terceros 9 bits para Page Table:
+        000000011 = 0x003
+    Tomamos los últimos 12 bits para offset:
+        000000000000 = 0x000    
+
+    0x00000000FE0 (PDPT):
+        0x000 -> 0x00000000FEA -> Tiene todos los permisos 
+    0x00000000FEA (PD):
+        0x000 -> 0x000000AD0BE -> Tiene todos los permisos 
+    0x000000AD0BE (PT):
+        0x003 -> 0x00000D1AB10 -> No es válida.
+    
+    0x3000 a física => Page Fault.
+
+
+(b): Traducir la dirección física 0xDECADA980 a TODAS LAS VIRTUALES que 
+la apuntan.
+
+0xDECADA980 desglosada:
+    Tiene un offset de 0x980
+    Se encuentra en:
+
+    0x00000000FE0 (PDPT):
+        0x000 -> 0x00000000FEA -> Tiene todos los permisos
+        0x001 -> 0x00000000FEA -> Tiene todos los permisos
+        0x002 -> 0x00000000FEA -> Tiene todos los permisos   
+    0x00000000FEA (PD):
+        0x000 -> 0x000000AD0BE -> Tiene todos los permisos 
+        0x001 -> 0x000000AD0BE -> Tiene todos los permisos 
+        0x002 -> 0x000000AD0BE -> Tiene todos los permisos 
+    (PD puede ser 0x000, 0x001, 0x002)
+    0x000000AD0BE (PT):
+        0x002 -> 0x00000DECADA -> Es válida 
+    Concatenamos 0x00000DECADA con el offset 0x980:
+        0x00000DECADA980 => 0xDECADA000
+
+    Por PDPT y PD tenemos 3 * 3 = 9 Direcciones virtuales posibles.
+
+    Calculandolas (en Hexa)
+
+        Lvl 2 = 0: 0x000 -> 000 | 0000 | 00
+            Lvl 1 = 0: 0x000 -> 00 | 0000 | 000 
+                Lvl 0 = 2; 0x002 -> 0 | 0000 | 0010
+                    Offset 980 -> 1001 | 1000 | 0000:
+                        0x0000002980
+            Lvl 1 = 1: 0x001 -> 00 | 0000 | 001
+                Lvl 0 = 2; 0x002 -> 0 | 0000 | 0010
+                    Offset 980 -> 1001 | 1000 | 0000
+                        0x0000202980
+            Lvl 1 = 2: 0x002 -> 00 | 0000 | 010
+                Lvl 0 = 2; 0x002 -> 0 | 0000 | 0010
+                    Offset 980 -> 1001 | 1000 | 0000:
+                        0x0000402980
+        Lvl 2 = 1: 0x001 -> 000 | 0000 | 01
+            Lvl 1 = 0: 0x000 -> 00 | 0000 | 000
+                Lvl 0 = 2; 0x002 -> 0 | 0000 | 0010
+                    Offset 980 -> 1001 | 1000 | 0000:
+                        0x0040002980
+            Lvl 1 = 1: 0x001 -> 00 | 0000 | 010
+                Lvl 0 = 2; 0x002 -> 0 | 0000 | 0010
+                    Offset 980 -> 1001 | 1000 | 0000:
+                        0x0040202980
+            Lvl 1 = 2: 0x002 -> 00 | 0000 | 100
+                Lvl 0 = 2; 0x002 -> 0 | 0000 | 0010
+                    Offset 980 -> 1001 | 1000 | 0000:
+                        0x0040402980
+        Lvl 2 = 2: 0x002 -> 000 | 0000 | 10
+            Lvl 1 = 0: 0x000 -> 00 | 0000 | 000
+                Lvl 0 = 2: 0x002 -> 0 | 0000 | 0010
+                    Offset 980: 1001 | 1000 | 0000
+                        0x0080002980
+            Lvl 1 = 1: 0x001 -> 00 | 0000 | 001
+                Lvl 0 = 2: 0x002 -> 0 | 0000 | 0010
+                    Offset 980: 1001 | 1000 | 0000
+                        0x0080202980
+            Lvl 1 = 2: 0x002 -> 00 | 0000 | 010
+                Lvl 0 = 2: 0x002 -> 0 | 0000 | 0010
+                    Offset 980: 1001 | 1000 | 0000
+                        0x0080402980
+
+        Resultado de direcciones virtuales:
+
+        0x0000002980
+        0x0000202980
+        0x0000402980
+
+        0x0040002980
+        0x0040202980
+        0x0040402980
+
+        0x0080002980
+        0x0080202980
+        0x0080402980
+
+        Estructura seguida para respetar 39 bits de Direcciones virtuales:
+
+        000 | 0000 | 00     00 | 0000 | 000     0 | 0000 | 0000         | 0000 | 0000 | 0000
+             LVL 2              LVL 1             LVL 0                     OFFSET
+   

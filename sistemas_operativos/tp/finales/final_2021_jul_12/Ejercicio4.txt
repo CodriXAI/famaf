@@ -1,0 +1,51 @@
+El incremento no es atómico.
+
+Tenemos 4 casos con el semáforo s = {0,1,2,3}
+
+X es compartida.
+
+Primer caso:
+
+PRE: X = 0 ^ s = 0
+
+Como s es 0, todos los procesos al hacer down(s) se bloquearán
+quedando finalmente en una espera infinita.
+
+POST: X = 0
+
+
+Segundo caso:
+
+PRE: X = 0  ^ s = 1
+Funciona como un lock, en el cuál un proceso hace down(s)
+primero, decrementando s a 0, luego si los otros interrumpen
+se bloquearán hasta que el proceso que hizo down(s) haga (up) y
+despierte a un proceso, (ojo, no incrementa el semáforo a 1)
+
+Por ende los valores posibles de X son:
+
+POST: X = 3
+
+
+
+Tercer Caso:
+
+PRE: X = 0 ^ s = 2
+Puede ocurrir que 2 procesos se puedan sobrepisar, ya que 
+el incremento NO es atómico se divide en 3 partes (load, operate, store)
+
+Por ende como se pueden llegar a pisar entre sí, un incremento 
+puede perder su escritura (store) siendo reemplazado por otro
+
+POST: X = {2,3}
+
+
+Cuarto Caso:
+
+PRE: X = 0 ^ s = 3
+
+Ocurre el caos, todos los procesos se pueden sobrepisar,
+dando como resultado que se puedan perder 2 incrementos en 
+el camino.
+
+POST: X = {1,2,3}

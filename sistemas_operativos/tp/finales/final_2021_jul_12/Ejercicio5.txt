@@ -1,0 +1,94 @@
+(a): Mostrar un escenario de ejecución con N = 5
+Tq: Salida del multiprograma sea:
+a = [0,1,0,1,0]
+
+P0: Hace al a[i] = 0
+
+P1: Hace al a[j] = 1
+
+Tenemos que empezar con 0 en el arreglo.
+
+Escenario de ejecución:
+
+Arrancamos con:
+
+a = [2,2,2,2,2]
+
+Se ejecuta una iteración de P1
+a = [1,2,2,2,2]
+j = 1
+Se interrumpe y se ejecuta una iteración de P0
+a = [0,2,2,2,2]
+i = 1
+Se ejecuta otra iteración de P0
+a = [0,0,2,2,2]
+i = 2
+Se interrumpe y se ejecuta una iteración de P1
+a = [0,1,2,2,2]
+j = 2
+Se ejecuta otra iteración de P1
+a = [0,1,1,2,2]
+j = 3
+Se interrumpe y se ejecuta una iteración de P0
+a = [0,1,0,2,2]
+i = 3
+Se ejecuta otra iteración de P0
+a = [0,1,0,0,2]
+i = 4
+Se interrumpe y se ejecuta una iteración de P1 
+a = [0,1,0,1,2]
+j = 4
+Se ejecuta otra iteración de P1 
+a = [0,1,0,1,1]
+j = 5
+Termina
+Se ejecuta P0 
+a = [0,1,0,1,0]
+i = 5
+Termina
+
+(b): Mostrar un escenario de ejecución con N = 4
+Tq: Salida del multiprograma sea:
+a = [0,0,2,2]
+
+Tenemos que empezar con 0 en el arreglo.
+
+Escenario de ejecución:
+
+Arrancamos con:
+
+a = [2,2,2,2]
+Se ejecuta P0
+a = [0,2,2,2]
+i = 1
+Se ejecuta P0 
+a = [0,0,2,2]
+i = 2
+
+Pero es necesario terminar el multiprograma, esa salida es 
+IMPOSIBLE puesto que al menos debe terminar un proceso, y ambos 
+si o si reemplazan a la posición del arreglo con 0 o 1.
+
+
+(c) Expresar todos los valores posibles de salida de arreglo a 
+para la figura 2.
+
+Tenemos:
+    2 semáforos s y t 
+        s en 0 y t en 1
+    El arreglo con todos los elementos en 2
+
+    a = [2,2,2,2.....,2,2]
+
+    i,j = 0
+
+Si P0 elije arrancar primero, se va a bloquear porque s = 0
+Y tendrá que esperar a que P1 haga su escritura para que luego 
+le haga el post a P0, y ahi pueda sobreescribir lo de P1.
+
+Si P1 quiere volver a iterar, se va a bloquear y tendrá que esperar 
+a P0 para el post.
+
+Por ende como P0 siempre escribe último, la salida de a siempre será:
+
+a = [0,0,0,0,0,....,0,0]

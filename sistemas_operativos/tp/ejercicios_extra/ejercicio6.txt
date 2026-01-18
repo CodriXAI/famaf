@@ -1,0 +1,24 @@
+Ejercicio 6 — Convertir offset → puntero
+
+Bloque de 1 KB.
+Archivo abierto. 
+Offset del usuario: 9400 bytes.
+
+El inodo tiene:
+
+10 directos
+1 indirecto simple
+
+Calcular:
+
+(a): ¿En qué bloque lógico cae el offset?
+    Tenemos 1KB por bloque, son 1024 bytes.
+    9400 / 1024 = Contando desde 0 es el bloque 9  
+
+(b): ¿Ese bloque es directo o indirecto?
+    Tenemos 10 punteros directos que apuntan a los bloques (0..9)
+    Por ende es un bloque directo
+
+(c): ¿Qué posición dentro del bloque es?
+    9400 - 9 * 1024 = 9400 - 9216 = 184 bytes ->  Posicion
+   

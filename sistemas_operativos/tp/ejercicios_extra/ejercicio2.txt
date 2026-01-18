@@ -1,0 +1,24 @@
+Ejercicio 2 — Bitmap e inodos
+
+Con el siguiente i-bitmap:
+
+1 1 0 0 0 1 0 0
+
+
+y el siguiente d-bitmap:
+
+0 0 1 1 1 0 1 1
+
+
+(a): ¿Cuántos inodos están libres?
+    Tenemos 5 inodos libres 
+
+(b): ¿Cuántos bloques de datos están ocupados?
+    Hay 5 bloques de datos ocupados 
+
+(c): ¿Qué inodo libre tiene el menor índice?
+    El inodo 2 (si partimos desde el 0)
+
+(d): ¿Qué bloque libre tiene el menor índice?
+    El bloque 0 (si partimos desde el 0)
+

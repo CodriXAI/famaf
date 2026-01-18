@@ -1,0 +1,52 @@
+Input:
+$ ./a.out ./a.out ./a.out ./a.out ./a.out 
+./a.out ./a.out
+
+Datos:
+argc = 7
+argv = {"./a.out","./a.out","./a.out",
+"./a.out","./a.out","./a.out","./a.out", NULL}
+
+Programa 1:
+    Se resta 1 en el arg counter => argc = 6
+    Si aún es positivo el arg counter 6 > 0
+    Suma uno al argv  (intuyo que se desplaza un lugar
+    ahora argv[0] es el segundo "./a.out" o la 
+    posición 1 del arreglo de char *)
+
+    Hace execvp(argv[0], argv) -> Ejecuta el segundo 
+    ./a.out del argv
+
+    Retorna 0
+
+    En resumen: Solo elimina el primer argumento y 
+    ejecuta el segundo actual del argv.
+
+
+Programa 2:
+    Si el argc es a lo sumo 1, termina.
+    Caso contrario, se realiza un fork()
+        Tenemos proceso Hijo y Padre
+    
+    AMBOS PROCESOS:
+        Establecen la última posición del arreglo 
+        en NULL (elimina la última).
+
+        Actualiza justamente el argc ya que se eliminó
+        el último elemento del arreglo.
+
+    Si el fork falló: Sale con error.
+
+    Proceso HIJO:
+        Recursión a main
+    
+    Proceso PADRE:
+        Ejecuta el primer argv
+    
+
+    Resumen, el programa va ejecutando todos los 
+    ./a.out de la izquierda (Padre), eliminando siempre el 
+    último ./a.out actual, esto se gestiona en procesos 
+    hijos
+
+

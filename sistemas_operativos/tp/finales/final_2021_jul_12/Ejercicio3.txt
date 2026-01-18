@@ -1,0 +1,229 @@
+Esquema (10,10,12) -> 2 niveles:
+
+PD -> PT 
+
+CR3: 0x0C01A
+
+(a):
+    Pasar de Virtual a Física:
+
+    0x00000BAD:
+
+        0000 | 0000 | 0000 | 0000 | 0000 | 1011 | 1010 | 1101
+
+        Tomamos primeros 10 bits:
+        0000000000 -> PD => 0x000 => 0x0C0CA (P)
+
+        Tomamos segundos 10 bits:
+        0000000000 => PT => 0x000 => 0x0C01A (P)
+
+        Tomamos ultimos 12 bits:
+        101110101101 => 0ffset => 0xBAD  
+        
+        Dirección Física:
+        0x0C01ABAD
+
+    0x00001BE1:
+
+        0000 | 0000 | 0000 | 0000 | 0001 | 1011 | 1110 | 0001
+
+        Tomamos primeros 10 bits:
+        0000000000 -> PD => 0x000 => 0x0C0CA (P)
+
+        Tomamos segundos 10 bits:
+        0000000001 => PT => 0x001 => 0x0C0CA (P)
+
+        Tomamos ultimos 12 bits:
+        101111100001 => 0ffset => 0xBE1 
+        
+        Dirección Física:
+        0x0C0CABE1
+    
+    0x00400BA1:
+
+        0000 | 0000 | 0100 | 0000 | 0000 | 1011 | 1010 | 0001
+
+        Tomamos primeros 10 bits:
+        0000000001 -> PD => 0x001 => 0x0C01A (P)
+
+        Tomamos segundos 10 bits:
+        0000000000 => PT => 0x000 => 0x0C0CA (P)
+
+        Tomamos ultimos 12 bits:
+        101110100001 => 0ffset => 0xBA1 
+        
+        Dirección Física:
+        0x0C0CABA1
+    
+    0x00401BE5:
+
+        0000 | 0000 | 0100 | 0000 | 0001 | 1011 | 1110 | 0101
+
+        Tomamos primeros 10 bits:
+        0000000001 -> PD => 0x001 => 0x0C01A (P)
+
+        Tomamos segundos 10 bits:
+        0000000001 => PT => 0x001 => 0x0C01A (P)
+
+        Tomamos ultimos 12 bits:
+        101111100101 => 0ffset => 0xBE5 
+        
+        Dirección Física:
+        0x0C01ABE5
+
+
+(b):
+
+    Pasar de Física a TODAS las virtuales:
+
+    0x0C0CABAD:
+
+        Offset => BAD 
+
+        PT => 0x0C0CA (0x001 o 0x3FF)
+        
+        PD => 0x0C0CA (0x000 o 0x3FE), 0x0CO1A (0x001, 0x3FF)
+
+        8 Direcciones virtuales posibles:
+
+        0x000 con 0x001:
+
+            0000 | 0000 | 00  00 | 0000 | 0001  BAD 
+
+            0x00001BAD
+
+        0x000 con 0x3FF:
+
+            0000 | 0000 | 00   11 | 1111 | 1111  BAD 
+
+            0x003FFBAD
+        
+        0x3FE con 0x001:
+            11 | 1111 | 1110   00 | 0000 | 0001   BAD
+
+            Re acomodado:
+                1111 | 1111 | 1000 | 0000 | 0001 BAD
+
+            Dirección Virtual:
+                0xFF801BAD
+        
+        0x3FE con 0x3FF:
+
+            11 | 1111 | 1110   11 | 1111 | 1111  BAD 
+        
+            Re acomodado:
+            1111 | 1111 | 1011 | 1111 | 1111  BAD
+
+            Dirección Virtual:
+            0xFFBFFBAD
+        
+        0x001 con 0x000:
+            0000 | 0000 | 01  00 | 0000 | 0000 BAD 
+
+            Dirección Virtual:
+            0x00400BAD
+        
+        0x001 con 0x3FE:
+            0000 | 0000 | 01  11 | 1111 | 1110  BAD 
+
+            Dirección Virtual:
+            0x007FEBAD
+        
+        0x3FF con 0x000:
+            11 | 1111 | 1111  00 | 0000 | 0000 BAD 
+
+            Re acomodamos:
+            1111 | 1111 | 1100 | 0000 | 0000 BAD 
+
+            Dirección Virtual:
+            0xFFC00BAD
+        
+        0x3FF con 0x3FE:
+            11 | 1111 | 1111  11 | 1111 | 1110  BAD 
+
+            Re acomodamos:
+            1111 | 1111 | 1111 | 1111 | 1110  BAD
+
+            Dirección Virtual:
+            0xFFFFEBAD
+    
+    0x0C01ABE5:
+
+        Offset siempre es BE5
+
+        Vemos las posibilidades de caer en 0x0C01A:
+
+        En 0x0C01A tenemos:
+
+        0x001   ->  (0x001, 0x3FF)
+        0x3FF   ->  (0x001, 0x3FF)
+
+        0x000   ->  (0x000, 0x3FE)
+        0x3FE   ->  (0x000, 0x3FE)
+
+        8 Direcciones virtuales:
+
+        0x001 con 0x001:
+
+            0000 | 0000 | 01  00 | 0000 | 0001  BE5 
+
+            Dirección Virtual:
+            0x00401BE5
+        
+        0x001 con 0x3FF:
+            0000 | 0000 | 01  11 | 1111 | 1111 BE5 
+
+            Dirección Virtual:
+            0x007FFBE5
+
+        0x3FF con 0x001:
+            11 | 1111 | 1111  00 | 0000 | 0001 BE5 
+
+            Re acomodamos:
+            1111 | 1111 | 1100 | 0000 | 0001  BE5
+
+            Dirección Virtual:
+            0xFFC01BE5
+        
+        0x3FF con 0x3FF:
+            11 | 1111 | 1111  11 | 1111 | 1111  BE5 
+
+            Re acomodamos:
+            1111 | 1111 | 1111 | 1111 | 1111  BE5 
+
+            Dirección virtual:
+            0xFFFFFBE5
+        
+        0x000 con 0x000:
+            0000 | 0000 | 00  00 | 0000 | 0000  BE5 
+
+            Dirección virtual:
+            0x00000BE5
+        
+        0x000 con 0x3FE:
+            0000 | 0000 | 00  11 | 1111 | 1110  BE5 
+
+            Dirección Virtual:
+            0x003FEBE5
+        
+        0x3FE con 0x000:
+            11 | 1111 | 1110  00 | 0000 | 0000 BE5 
+
+            Re acomodando:
+            1111 | 1111 | 1000 | 0000 | 0000 BE5 
+
+            Dirección Virtual:
+            0xFF800BE5
+        
+        0x3FE con 0x3FE:
+            11 | 1111 | 1110   11 | 1111 | 1110 BE5 
+
+            Re acomodando:
+            1111 | 1111 | 1011 | 1111 | 1110 BE5 
+
+            Dirección Virtual:
+            0xFFDFEBE5
+    
+    Tanto 0xDEADBEEF como 0xDABBAD00 en este esquema no son 
+    direcciones físicas mapeables.
+        

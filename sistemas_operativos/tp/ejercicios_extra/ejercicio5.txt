@@ -1,0 +1,55 @@
+Ejercicio 5 — Armar layout completo
+
+Datos:
+
+Tamaño de bloque: 4 KB
+Hay 256 inodos
+Un inodo mide 128 bytes
+Cantidad total de bloques del FS: 4096
+
+Calcular:
+
+(tamaño y cantidad de bloques)
+i-bitmap 
+inode-table
+d-bitmap
+data-region
+
+Dibujar un layout simple tipo:
+
+[ superblock ]
+[ i-bitmap   ]
+[ inode-table]
+[ d-bitmap   ]
+[ data-region ................ ]
+
+i-bmap:
+    Tamaño:
+        1 bit por inodo,
+        256 inodos, 256 bits => a bytes => 256 / 8 = 32 bytes
+    Cant de bloques:
+        1 bloque 
+
+inode-table:
+    Tamaño:
+        Hay 256 inodos, cada uno de 128 bytes
+            256 * 128 bytes = 32768 bytes = (a KB) = 32KB 
+    Cant de bloques:
+        Cada bloque es de 4KB -> Requiere 8 bloques.
+
+
+data-region:
+    Tamaño:
+        4098 * 4KB =  16392 KB => (a MB) => aprox 16MB
+    Cant de bloques:
+        4096 - 1 bloque (superblock) - 1 bloque (i-bmap) - 1 bloque (d-bmap)
+        - 8 bloques (inode-table) = 4096 - 11 = 4085 bloques 
+
+d-bmap:
+    Tamaño:
+        Es 1 bit por bloque de datos (necesitamos saber bloques de data-
+        region)
+        4085 bits, y en bytes eso se traduce a 510 bytes
+    Cant de bloques:
+        1 bloque (no es pesado)
+    

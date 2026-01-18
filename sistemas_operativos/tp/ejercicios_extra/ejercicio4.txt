@@ -1,0 +1,19 @@
+Ejercicio 4 — Dado un inode, calcular el tamaño del archivo
+
+Supongamos que un inodo tiene:
+
+3 punteros directos ocupados
+Su indirecto simple apunta a un bloque con 6 punteros válidos
+
+No usa indirecto doble
+
+Tamaño de bloque: 4 KB
+
+Calcular el tamaño del archivo.
+
+3 punteros directos, cada uno apunta a un bloque 
+
+Un indirecto con 6 punteros directos, cada uno apuntando a un bloque 
+
+(3+6) * 4KB => 9 * 4KB = 36KB de tamaño de archivo.
+

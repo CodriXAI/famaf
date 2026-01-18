@@ -1,0 +1,113 @@
+= EJERCICIO 3 - FINAL 12 JULIO 2023 = 
+
+Usar el esquema del ejercicio 2 y escribir la 
+traza de memoria física completa incluyendo
+instrucciones y datos:
+
+(Ajunto imagen)
+
+El código de la imagen computa la suma prefijo en
+el mismo arreglo.
+
+El arreglo está en el segmento ELF .bss
+
+Empieza en 0x2FC0 y termina en 0x3008 EXCLUSIVE
+
+Es decir [0x2FC0, 0X3008)
+
+Sus elementos son unsigned long por ende cada elemento 
+del array soy de 8 bytes y tiene 9 elementos por lo tanto.
+
+#PRELUDE:
+634: // Guarda el final del arreglo &a[9] en a2
+
+636: // Guarda la 2da posición del arreglo en a5
+
+#LOOP:
+
+638: // a4 se guarda la posición actual (i-esima), arranca por la segunda
+
+63a: // a3 se guarda la posición anterior
+
+63e: // en a4 se suma posición actual + anterior 
+
+640: // La posición actual del arreglo se reemplaza por la suma 
+
+642: // Avanzamos a la siguiente posición 
+
+644: // Verificamos que no se haya llegado a la última posición 
+
+#EPILOGUE:
+648: // Termina el programa
+
+
+Ejemplo:
+
+a = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+Tras el programa:
+
+a[1] = 0 + 1 = 1
+a[2] = 1 + 2 = 3
+a[3] = 3 + 3 = 6
+a[4] = 6 + 4 = 10
+a[5] = 10 + 5 = 15
+a[6] = 15 + 6 = 21
+a[7] = 21 + 7 = 28
+a[8] = 28 + 8 = 36
+Fin 
+
+a = [0,1,3,6,10,15,21,28,36]
+
+Para hacer la traza de memoria física en este programa:
+Usando el Esquema de 3 niveles anterior:
+
+#PROLOGUE:
+
+0x0000000634:
+    PDPT -> 0 -> FEA
+        PD -> 0 -> ADOBE
+            PT -> 0 -> ABAD -> Permiso
+                Offset 634 => 0xABAD634
+
+0x0000000636:
+    PDPT -> 0 -> FEA
+        PD -> 0 -> ADOBE
+            PT -> 0 -> ABAD -> Permiso
+                Offset 634 => 0xABAD636
+
+#LOOP:
+0x0000000638:
+    Primer acceso:
+
+    PDPT -> 0 -> FEA
+        PD -> 0 -> ADOBE
+            PT -> 0 -> ABAD -> Permiso
+                Offset 634 => 0xABAD638
+    
+    Segundo acceso:
+        Debe acceder a 0x2FC8
+        0x0000002FC8:
+            PDPT -> 0 -> FEA
+                PD -> 0 -> ADOBE
+                    PT -> 2 -> DECADA -> Permiso
+                        Offset FC8 -> 0xDECADAFC8
+
+0x000000063a:
+    Primer acceso:
+
+    PDPT -> 0 -> FEA
+        PD -> 0 -> ADOBE
+            PT -> 0 -> ABAD -> Permiso
+                Offset 63a => 0xABAD63a
+
+    Segundo acceso:
+        Debe acceder a 0X2FC0
+        0x0000002FC0:
+            PDPT -> 0 -> FEA
+                PD -> 0 -> ADOBE
+                    PT -> 2 -> DECADA -> Permiso
+                        Offset FC0 -> 0xDECADAFC0
+
+.... Continua pero es largazo xD
+

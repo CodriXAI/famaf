@@ -1,0 +1,51 @@
+Tenemos un file system con:
+
+12 punteros directos
+
+1 indirecto
+
+1 doble indirecto
+
+Bloques de 4KiB 
+
+Y números de bloque ocupan 24 bits (Punteros?)
+    Son de 3 bytes en teoría
+
+Punteros por bloque:
+
+Tenemos bloques de 4096 bytes y cada puntero ocupa 3 bytes 
+
+4096 / 3 aprox 1365.33 (usaremos 1365 punteros)
+
+Por ende cada bloque ocupará 1365 punteros (osea bloques) (Nuestro N)
+
+En nuestro file system tenemos:
+
+12 + 1365 + 1365² = 1.864.602 bloques/punteros
+
+(a): La capacidad máxima de la data-region en este FS es:
+
+Podemos redireccionar un máximo de 2²⁴ bloques (porq los 
+punteros son de 24 bits)
+
+Y como cada bloque está distribuido en 4KiB tenemos que:
+2²⁴ * 4KiB = 16777216 * 4 = 67108864KiB
+
+67108864 / 2²⁰ = 64GiB de capacidad de data-region.
+
+(b): Capacidad máxima de un archivo.
+
+(12 + 1365 + 1365²) * 4KiB = 7458408KiB
+
+7458408 / 2²⁰ aprox 7.11GiB de tamaño de archivo.
+
+(c): De bloque directo a indirecto:
+
+Se tienen que agotar los 12 punteros directos:
+
+12 * 4KiB = 48KiB, a partir de aquí se pasa al indirecto.
+
+    De bloque indirecto a indirecto doble:
+
+(12 + 1365) * 4KiB = 5508KiB = 5508 / 2¹⁰ = 5.37MiB 
+a partir de ahí se pasa al indirecto doble.

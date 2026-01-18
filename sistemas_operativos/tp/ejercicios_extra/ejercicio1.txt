@@ -1,0 +1,29 @@
+Ejercicio 1 — (calcular tamaños y bloques)
+
+Un sistema de archivos tiene:
+
+Tamaño de bloque: 1 KB
+Cantidad de inodos: 128
+Cada inodo mide 64 bytes
+Cantidad total de bloques del FS: 1024
+
+Pedidos:
+
+(a): ¿Cuánto ocupa la inode table?
+    128 inodos * 64 bytes = 8192 bytes => 8KB de inode table
+
+(b): ¿Cuántos bloques ocupa el i-bitmap?
+    Cada bloque es 1KB, Es un bit por inodo, son 128 nodos, 128 bits pasados 
+    a bytes 128 / 8 =  16 bytes, lit 1 bloquecito
+
+(c): ¿Cuántos bloques ocupa el d-bitmap?
+    1 Bloque 
+
+(d): ¿Cuántos bloques quedan para la data-region?
+
+    Necesito saber cuantos bloques ocupa la inode-table:
+        8 bloques
+
+    Tenemos 1024 bloques en el FS, luego se utiliza 1 Bloque para el 
+    superblock, 1 bloque para la i-bmap, 8 bloques de inode-table 
+    1 bloque para la d-bmap 1024 - 11 = 1013 bloques para la data-region.

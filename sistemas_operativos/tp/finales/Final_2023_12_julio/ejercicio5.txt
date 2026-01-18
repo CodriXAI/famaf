@@ -1,0 +1,68 @@
+= EJERCICIO 5 - FINAL 12 JULIO 2023 = 
+
+Llenar el cuadro de create /foo/bar explicando brevemente porque se hace 
+cada acción 
+
+(Con imagen adjunta al directorio)
+
+Se asume que para hacer create /foo/bar, el directorio o path 
+/foo debe existir (Detalle obvio, pero muy necesario).
+
+// Etapa de creación y conexión del path:
+
+1. root-inode -> read:
+    Necesitamos localizar el directorio root para poder acceder 
+    a sus datos.
+
+2. root-data -> read:
+    Accedemos para ver el contenido de root con sus dentries.
+
+3. foo-inode -> read:
+    Ahora accedemos a donde está ubicado el path /foo por su inodo
+
+4. foo-data -> read:
+    Leemos el contenido de /foo para asegurarnos que no existe 
+    /foo/bar aún
+
+5. inode-bitmap -> read:
+    Para buscar un inodo que esté libre
+
+6. inode-bitmap -> write:
+    Se lo asignamos para /foo/bar 
+
+7. foo-data -> write:
+    Actualizamos el directorio padre de bar, ahora con el 
+    archivo /foo/bar agregado
+
+8. bar-inode -> read:
+    Inicializamos el inodo
+
+9. bar-inode -> write:
+    Escribe los metadatos dentro del inodo
+
+10. foo-inode -> write:
+    Actualizamos la información del inodo padre de /foo 
+
+// Etapa de inyección de los datos de /foo/bar 
+
+11. bar-inode -> read:
+    Ubicamos donde está /foo/bar 
+
+12. d-bmap -> read:
+    Buscamos un bloque libre 
+
+13. d-bmap -> write:
+    Lo marcamos como ocupado, este bloque será una parte de la 
+    información de /foo/bar 
+
+14. bar-data[0] -> write:
+    Escribimos el primer bloque de datos de /foo/bar en la 
+    data-region.
+
+15. bar-inode -> write:
+    Actualizamos el inodo con la nueva información.
+
+// Seguimos los mismos pasos para bar-data[1] y bar-data[2]
+// completando la escritura de /foo/bar y la creación del mismo.
+
+ 

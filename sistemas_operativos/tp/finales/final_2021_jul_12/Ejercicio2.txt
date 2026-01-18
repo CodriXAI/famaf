@@ -1,0 +1,58 @@
+Ejercicio 2. Mostrar la secuencia de accesos a la memoria f´ısica que se produce al ejecutar este programa
+assembler x86_32, donde Basecode = 0x1000, Boundscode = 0x100, Basedata = 0x2000, Boundsdata = 0x10
+La versi´on original de este c´odigo sali´o en el n´umero de abril de 1967 de Cosmopolitan.
+0: mov $0x0,%edx            // Carga el inmediato 0 en edx
+6: mov 0x0(%edx),%ecx       // Carga el edx+offset 0x0 en ecx 
+12: mov 0x4(%edx),%eax      // Carga el edx+offset 0x4 en eax 
+18: add $0x8,%edx           // Suma el inmediato 0x8 en edx 
+21: add (%edx),%ecx         // Suma el valor del registro edx a ecx 
+23: add $0x4,%edx           // Suma el inmediato 0x4 en edx
+26: sub $0x1,%eax           // Resta el inmediato 0x1 en eax 
+29: jne 21                  // Se pregunta si eax != 0
+
+0x0: .long 0x0
+0x4: .long 0x4
+0x8: .long 0x3
+0xC: .long 0x7
+0x10: .long 0x2
+0x14: .long 0x1
+0x18: .long 0x5
+
+
+
+Intuyo que el acceso completo es:
+
+0x1000, 
+0x1006, 
+(0x2000), 
+0x100C (eax = 4), 
+(0x2004),
+0x1012,
+
+//Primer "loop indirecto" 
+0x1015, 
+(0x2008), 
+0x1017, 
+0x101A, (4-1 = 3) 
+0x101D (3 != 0, salto a 21), 
+
+//Segundo loop:
+0x1015, 
+(0x200C), 
+0x1017,
+0x101A (3-1 = 2) 
+0x101D (2 != 0, salto a 21)
+
+//Tercer loop:
+0x1015, 
+(0x2010),
+0x1017,
+0x101A (2-1 = 1) 
+0x101D (1 != 0, salto a 21) 
+
+//Ultimo loop:
+0x1015, 
+(0x2014),
+0x1017,
+0x101A (1-1 = 0) 
+0x101D (0 == 0, Termino) 

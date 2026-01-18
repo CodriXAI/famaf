@@ -1,0 +1,24 @@
+Ejercicio 3 — Tamaño máximo de archivo (muy práctico)
+
+Un inodo tiene los siguientes punteros:
+
+10 directos
+1 indirecto simple
+1 indirecto doble
+
+Tamaño de bloque: 512 bytes
+Cada puntero ocupa 4 bytes
+
+(a): ¿Cuántos punteros entran en un bloque?
+    512 / 4 = 128 punteros 
+
+(b): ¿Cuántos bloques puede direccionar el indirecto simple?
+    128 bloques (es un puntero que apunta a un bloque de 128 punteros; Cada
+    uno a un bloque)
+
+(c): ¿Cuántos puede direccionar el doble?
+    128² = 16384 bloques 
+
+(d): ¿Cuál es el tamaño máximo del archivo?
+    (10 + 128 + 128²) * 512 bytes = 8388746 bytes 
+    => (a KB) => 8192KB aprox => (a MB) 8 MB
