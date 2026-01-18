@@ -24,6 +24,10 @@ A continuación, una lista de las materias que están incluidas en este reposito
 - **Introducción a la Lógica y la Computación**
 - **Sistemas Operativos**
 
+ ### Tercer Año
+- **Paradigmas de Programación**
+- **Matemática Discreta II**
+
 > 💡 Los apuntes pueden estar en formato PDF, PNG, JPG, según la materia.
 
 ### Cada carpeta contiene:
