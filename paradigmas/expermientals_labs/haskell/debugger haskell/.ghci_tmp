@@ -1,0 +1,18 @@
+-- 1. No mostrar mensajes de carga
+:set prompt "\e[1;36mhdebug > \e[0m"
+
+-- 2. Definimos el comando que dibuja la UI
+-- Borra, imprime cabecera azul, muestra código, cabecera verde y fuerza variables
+:def ui \_ -> return ":!clear; echo -e \"\e[1;44m\e[1;37m  CODE VIEW  \e[0m \e[90m/home/cristian/FAMAF/paradigmas/expermientals_labs/haskell/test1.hs\e[0m\"; :list; echo -e \"\n\e[1;42m\e[1;37m  VARIABLES (FORCED)  \e[0m\"; :force"
+
+-- 3. Hacemos que CADA VEZ que el debugger pare, se ejecute nuestra UI
+:set stop :ui
+
+-- 4. Alias para comandos rápidos
+:def n \_ -> return ":step"
+:def s \_ -> return ":step"
+
+-- 5. Preparación inicial
+:break main
+:ui
+putStrLn "\e[1;36mPresioná ENTER para arrancar el main o escribí comandos...\e[0m"
