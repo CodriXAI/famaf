@@ -1,2 +1,0 @@
-git log --format='%aN' | sort -u | while read name; do echo -e "\n>>> $name <<<"; git log --author="$name" --pretty=tformat: --numstat | awk '{a+=$1; d+=$2} END {printf "  + Líneas añadidas: %s\n  - Líneas borradas: %s\n  = Total neto: %s\n", a, d, a-d}'; done
-
