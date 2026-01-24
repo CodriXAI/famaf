@@ -1,7 +1,10 @@
+module Main where
+
+g :: Int -> Int
+g x = x * 2
+
+f :: Int -> Int
+f x = g x + 1
+
 main :: IO ()
-main = do
-    putStrLn "Hello, Debugger!"
-    let x = 10
-    let y = 20
-    print (x + y)
-    putStrLn "Done."
+main = print (f 5)

@@ -133,21 +133,33 @@ class HaskellDebuggerUI:
         clean_output = "\n".join(filtered_lines)
 
         # Check for position update ONLY if we see "Stopped" or similar
+        position_found = False
         if any(x in clean_output for x in ["Stopped in", "line", ".hs:"]):
              self.update_position(clean_output)
-             
-             # If we didn't update (maybe the output was just "Stopped in Main"), ask :where
-             # But we need to be careful not to spam :where
-             pass
+             # If we successfully parsed a line number, we can assume we found the position
+             # But update_position doesn't return success/fail. Let's assume if it matched patterns it worked.
+             # Actually, let's check if self.current_line changed or if the text looks definitive.
+             if "Stopped at" in clean_output or ".hs:" in clean_output:
+                 position_found = True
 
-        # Always ask :where if we ran a movement command
-        if any(x in cmd for x in [":step", ":steplocal", ":continue", "main", ":back", ":trace"]):
+        # Always ask :where if we ran a movement command AND didn't find position yet
+        # This prevents "Not stopped at a breakpoint" if the previous command already finished or provided info
+        if not position_found and any(x in cmd for x in [":step", ":steplocal", ":continue", "main", ":back", ":trace"]):
              os.write(self.master_fd, b":where\n")
              time.sleep(0.1)
              extra = self.read_all_available(0.2)
              clean_extra = re.sub(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])', '', extra)
-             clean_output += "\n" + clean_extra
-             self.update_position(clean_extra)
+             
+             # If :where fails (e.g. not stopped), we shouldn't append it blindly if it's just an error message
+             if "Not stopped at a breakpoint" not in clean_extra:
+                 clean_output += "\n" + clean_extra
+                 self.update_position(clean_extra)
+             else:
+                 # If we are not stopped, it usually means execution finished or we lost control
+                 # We can append it to logs so user knows, but let's make it friendlier
+                 clean_output += "\n> Execution Finished (or not stopped at breakpoint)."
+                 self.current_line = -1 # Clear highlight
+                 self.refresh_ui()
 
         return clean_output
 
@@ -343,6 +355,11 @@ class HaskellDebuggerUI:
                         self.breakpoints.clear()
                         self.current_line = 1
                         self.execute_command(":reload")
+                        
+                        # Clear logs on reload
+                        with open(self.log_file, "w", encoding='utf-8') as f: f.write("")
+                        with open(self.var_file, "w", encoding='utf-8') as f: f.write("")
+                        
                         with open(self.log_file, "a", encoding='utf-8') as f:
                             f.write("> File reloaded. State reset.\n")
                         self.input_buffer = ""
