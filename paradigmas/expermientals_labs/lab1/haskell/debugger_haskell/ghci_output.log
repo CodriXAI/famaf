@@ -1,0 +1,69 @@
+> b 4
+Breakpoint 0 activated at /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:4:13-19
+> main
+Stopped in Main.main.y, /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:4:13-19
+_result :: Integer = _
+x :: Integer = _
+CallStack (from -prof):
+[/home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:4:13-19] 
+> s
+Stopped in Main.sumaG, /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:1:11-16
+_result :: Integer = _
+r :: Integer = 5
+CallStack (from -prof):
+[/home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:1:11-16] 
+> s
+15
+> s
+not stopped at a breakpoint
+> c
+not stopped at a breakpoint
+> main
+15
+> s
+not stopped at a breakpoint
+> Breakpoints cleared.
+> b 5
+Breakpoint 1 activated at /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:5:5-11
+> main
+15
+> s
+not stopped at a breakpoint
+> Breakpoints cleared.
+> b 3
+Breakpoint 2 activated at /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:3:13
+> File reloaded. State reset.
+> b 5
+Breakpoint 3 activated at /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:5:5-11
+> main
+Stopped in Main.main, /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:5:5-11
+_result :: IO () = _
+y :: Integer = _
+CallStack (from -prof):
+[/home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:5:5-11] 
+> File reloaded. State reset.
+> b 4
+Breakpoint 4 activated at /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:4:13-19
+> main
+Stopped in Main.main.y, /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:4:13-19
+_result :: Integer = _
+x :: Integer = _
+CallStack (from -prof):
+[/home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:4:13-19] 
+> s
+Stopped in Main.sumaG, /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:1:11-16
+_result :: a = _
+r :: a = _
+CallStack (from -prof):
+[/home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:1:11-16] 
+> s
+Stopped in Main.main.x, /home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:3:13
+_result :: Integer = _
+CallStack (from -prof):
+[/home/cristian/FAMAF/paradigmas/expermientals_labs/lab1/haskell/test1.hs:3:13] 
+> s
+15
+> s
+not stopped at a breakpoint
+> Breakpoints cleared.
+> File reloaded. State reset.

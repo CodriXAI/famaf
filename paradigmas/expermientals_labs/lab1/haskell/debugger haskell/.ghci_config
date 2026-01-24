@@ -1,8 +1,0 @@
-:set prompt "\e[1;36mhdebug > \e[0m"
-:def ui \_ -> return ":!clear; echo -e \"\e[1;44m\e[1;37m  CODE VIEW  \e[0m \e[90m/home/cristian/FAMAF/paradigmas/expermientals_labs/haskell/test1.hs\e[0m\"; :list; echo -e \"\n\e[1;42m\e[1;37m  VARIABLES  \e[0m\"; :force"
-:set stop :ui
-:def s \_ -> return ":step"
--- Forzamos el primer dibujo
-:ui
-:break main
-main
