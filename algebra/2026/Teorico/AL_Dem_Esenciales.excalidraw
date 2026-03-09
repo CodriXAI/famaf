@@ -127,11 +127,11 @@
       "index": "bB6",
       "roundness": null,
       "seed": 268156655,
-      "version": 518,
-      "versionNonce": 1648623007,
+      "version": 618,
+      "versionNonce": 698830128,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Dado V un espacio vectorial sobre un cuerpo k, demostrar que W es SUBESPACIO  ",
@@ -164,11 +164,11 @@
       "index": "bB8",
       "roundness": null,
       "seed": 195397167,
-      "version": 291,
-      "versionNonce": 1172662831,
+      "version": 391,
+      "versionNonce": 555965904,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1770237787667,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Demostración de Subespacio Vectorial",
@@ -203,11 +203,11 @@
         "type": 3
       },
       "seed": 264623567,
-      "version": 271,
-      "versionNonce": 518676959,
+      "version": 371,
+      "versionNonce": 2074486576,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false
     },
@@ -231,11 +231,11 @@
       "index": "bBA",
       "roundness": null,
       "seed": 1944966689,
-      "version": 1252,
-      "versionNonce": 1881198079,
+      "version": 1352,
+      "versionNonce": 379003856,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "¿Cómo se analiza? \nNotar que solo nos piden probar que W es un SUBESPACIO, por ende necesitamos\nsaber que es lo que es un subespacio y qué propiedades esenciales cumple.\n\nSubespacio vectorial o subespacio W es un conjunto NO vacío que hereda las \npropiedades de un Espacio Vectorial, pero para resumir los 8 axiomas, basta con que\ndicho subespacio cumpla con 3 propiedades fundamentales:\n\n1) W ≠ ∅ => El vector nulo 0 ∈ W\n\n2) Sean u,v elementos ∈ W => \n(u + v) ∈ W (Es cerrado por la suma)\n\n3) Sea u ∈ W un elemento del subespacio y λ ∈ K un escalar => \nλu ∈ W (Es cerrado por producto por escalar)\n\nSi se cumplen las 3 propiedades, diremos que el conjunto dado es subespacio.",
@@ -268,11 +268,11 @@
       "index": "bBB",
       "roundness": null,
       "seed": 1767239393,
-      "version": 329,
-      "versionNonce": 66369055,
+      "version": 429,
+      "versionNonce": 481935664,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Ejemplo Real:",
@@ -307,11 +307,11 @@
         "type": 2
       },
       "seed": 173891535,
-      "version": 388,
-      "versionNonce": 559323711,
+      "version": 488,
+      "versionNonce": 1973561808,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false
     },
@@ -335,11 +335,11 @@
       "index": "bBE",
       "roundness": null,
       "seed": 1060311375,
-      "version": 404,
-      "versionNonce": 1562835551,
+      "version": 504,
+      "versionNonce": 1279925040,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Sea el Espacio Vectorial V = R³ y W= { (x,y,z) ∈ R³ : x − 2y + z = 0 }\nProbar que W es subespacio",
@@ -374,11 +374,11 @@
         "type": 2
       },
       "seed": 1028423969,
-      "version": 385,
-      "versionNonce": 1547064959,
+      "version": 485,
+      "versionNonce": 157052880,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "points": [
@@ -417,11 +417,11 @@
       "index": "bBG",
       "roundness": null,
       "seed": 1677663393,
-      "version": 607,
-      "versionNonce": 1430597279,
+      "version": 707,
+      "versionNonce": 482293040,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Primero que nada, ¿qué debemos probar?, que W es subespacio, automáticamenete\nse nos viene la definición:\n¿Vector nulo está en W?, ¿Es cerrado por suma?, ¿Es cerrado en producto por escalar?",
@@ -454,11 +454,11 @@
       "index": "bBI",
       "roundness": null,
       "seed": 1028887201,
-      "version": 328,
-      "versionNonce": 1392771775,
+      "version": 428,
+      "versionNonce": 2044589520,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Copiamos el conjunto W:",
@@ -491,11 +491,11 @@
       "index": "bBJ",
       "roundness": null,
       "seed": 686944481,
-      "version": 316,
-      "versionNonce": 907236063,
+      "version": 416,
+      "versionNonce": 327225136,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "W = { (x,y,z) ∈ R³ : x − 2y + z = 0 }",
@@ -528,11 +528,11 @@
       "index": "bBK",
       "roundness": null,
       "seed": 735123343,
-      "version": 1688,
-      "versionNonce": 1996726015,
+      "version": 1788,
+      "versionNonce": 742308816,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Queremos probar que W es subespacio, entonces por definición:\n\n1) 0 ∈ W:\n    0 = (0,0,0) en contexto de R³\n    Para que (0,0,0) ∈ W => \n    0 - 2 * 0 + 0 = 0\n    0 = 0\n    Demostrado\n\n2) Cerrado por suma:\n    Sean u,v ∈ W => u + v ∈ W\n    \n    u = (ux, uy, uz) ^ v = (vx, vy, vz) en contexto de R³\n    Como ambos están en W =>\n    ux - 2 * uy + uz = 0 ^ vx - 2 * vy + vz = 0 {Hipótesis}\n\n    u + v = (ux, uy, uz) + (vx, vy, vz) = (ux + vx, uy + vy, uz + vz)  en contexto de R³\n\n    Para que pertenezcan a W =>\n    (ux + vx) - 2 * (uy + vy) + (uz + vz) = 0\n    {Distributiva}\n    ux + vx - 2uy - 2vy + uz + vz = 0\n    {Conmutatividad + Asociatividad}\n    (ux - 2uy + uz) + (vx - 2vy + vz) = 0\n    {Hipótesis} \n    0 + 0 = 0\n    Demostrado\n    u + v ∈ W\n\n3) Cerrado por producto por escalar:\n    Sea u ∈ W y λ ∈ K un escalar => λu ∈ W\n    \n    u = (ux, uy, uz) en contexto de R³, luego como pertenece a W =>\n    ux - 2 * uy + uz = 0 {Hipótesis}\n    \n    λu = λ * (ux, uy, uz) = (λ * ux, λ * uy, λ * uz), y para que pertenezca a W =>\n    \n    λux - 2 * λuy + λuz = 0\n    {Factor común λ}\n    λ * (ux - 2uy + uz) = 0\n    {Hipótesis}\n    λ * 0 = 0\n    {Absorvente de producto}\n    0 = 0\n    Demostrado\n    λu ∈ W\n\nLuego por 1), 2) y 3), W es subespacio.",
@@ -565,11 +565,11 @@
       "index": "bBM",
       "roundness": null,
       "seed": 1271239297,
-      "version": 135,
-      "versionNonce": 676685599,
+      "version": 235,
+      "versionNonce": 1224190256,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "TIPS:",
@@ -604,11 +604,11 @@
         "type": 2
       },
       "seed": 1167862945,
-      "version": 169,
-      "versionNonce": 947465023,
+      "version": 269,
+      "versionNonce": 580305360,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false
     },
@@ -632,11 +632,11 @@
       "index": "bBO",
       "roundness": null,
       "seed": 1081417551,
-      "version": 252,
-      "versionNonce": 1942973279,
+      "version": 352,
+      "versionNonce": 143328048,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "text": "Señales de alerta (trampas típicas)\n\n    Condiciones no lineales:\n        xy = 0\n        ∥v∥ = 1, \n        x2 + y2 = 1\n    \n    Constantes ≠ 0:\n    \n        x + y = 1 → el cero no pertenece\n    \n    “O” implícito:\n    \n        xy = 0 ⇒ x = 0 o y = 0\n    \n    Desigualdades / valores absolutos\n    \n    Probar escalares negativos o grandes\n\nBuenas señales (casi siempre subespacio)\n\n    Ecuaciones lineales homogéneas:\n    \n        ax + by + cz = 0\n    \n    Núcleo e imagen de aplicaciones lineales\n    \n    Conjuntos generados (span)",
@@ -669,11 +669,11 @@
       "index": "bBP",
       "roundness": null,
       "seed": 22937409,
-      "version": 212,
-      "versionNonce": 557680991,
+      "version": 312,
+      "versionNonce": 1543374800,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174773,
       "link": null,
       "locked": false,
       "name": "Dem Subespacios"
@@ -698,11 +698,11 @@
       "index": "bBQ",
       "roundness": null,
       "seed": 1401642945,
-      "version": 429,
-      "versionNonce": 1185458047,
+      "version": 513,
+      "versionNonce": 433346352,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174487,
       "link": null,
       "locked": false,
       "text": "Transformaciones Lineales:\nNúcleo e Imagen como Subespacios Vectoriales",
@@ -737,11 +737,11 @@
         "type": 3
       },
       "seed": 881024833,
-      "version": 295,
-      "versionNonce": 1061511071,
+      "version": 379,
+      "versionNonce": 1571025872,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false
     },
@@ -765,11 +765,11 @@
       "index": "bBV",
       "roundness": null,
       "seed": 1728180367,
-      "version": 430,
-      "versionNonce": 1339429823,
+      "version": 514,
+      "versionNonce": 899805488,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "text": "Sea T : V -> W  una Transformación Lineal, probar que: Nu(T) e Im(T) son subespacios\n\n",
@@ -804,11 +804,11 @@
         "type": 2
       },
       "seed": 1251450575,
-      "version": 255,
-      "versionNonce": 1350255583,
+      "version": 339,
+      "versionNonce": 1653930448,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "points": [
@@ -849,11 +849,11 @@
         "type": 2
       },
       "seed": 1319780367,
-      "version": 248,
-      "versionNonce": 1095069695,
+      "version": 332,
+      "versionNonce": 2024557360,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "points": [
@@ -892,11 +892,11 @@
       "index": "bBY",
       "roundness": null,
       "seed": 623560609,
-      "version": 2017,
-      "versionNonce": 1278547999,
+      "version": 2101,
+      "versionNonce": 1869955024,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "text": "¿Cómo se analiza?\nBueno, notemos que es un ejercicio de demostración que involucra T.Ls y subespacios.\nPor ende debemos tener en cuenta propiedades y definiciones de estas dos áreas\nrelacionadas.\n\nPara T.Ls tenemos las propiedades Algebraicas:\n\n    Nulidad:\n        T(0) = 0\n\n    Linealidad:\n        T(A+B) = T(A) + T(B)\n        T(aB) = a T(B)\n    \n    Dada una T.L T: V -> W    \n\n    Nu(T) = { v en V : T(v) = 0 }\n    Im(T) = { w en W: existe un v en V tq w = T(v) }\n\nPara subespacios: \n    Vector Nulo, Cerrado por Suma, por Escalar.\n\nEntonces como necesitamos probar que Nu(T) e Im(T) son SUBESPACIOS\n\nNecesitamos hacer valer las propiedades de subespacio, Teniendo como herramientas las \npropiedades de T.L    ",
@@ -929,11 +929,11 @@
       "index": "bBa",
       "roundness": null,
       "seed": 558615073,
-      "version": 268,
-      "versionNonce": 121289791,
+      "version": 352,
+      "versionNonce": 1566270768,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "text": "1) Nu(T) es subespacio:\n    \n    Por definición:\n        Nu(T) = {v en V : T(v) = 0}\n\n    Veamos si cumple las propiedades de subespacio:\n\n    ¿ Vector Nulo en Nu(T) ?\n        \n        => 0 en Nu(T) \n        => T(0) = 0\n        Luego por definición nulidad de T.L\n        Demostrado: 0 en Nu(T)\n\n    Sean u,v elementos en Nu(T), λ escalar en K\n    \n    => T(u) = 0 ^ T(v) = 0\n\n    ¿ u + v pertenecen a Nu(T) ?\n\n        => T(u+v) = 0\n        {Linealidad}\n            T(u) + T(v) = 0\n        {u,v en Nu(T)}\n            0 + 0 = 0\n        Demostrado u + v en Nu(T)\n    \n    ¿ λu pertenece a Nu(T) ?\n    \n        => T(λu) = 0\n            {Linealidad}\n            λ T(u) = 0\n            {u en Nu(T)}\n            λ * 0 = 0\n            {Absorbente de producto}\n            0 = 0\n            Demostrado λu en Nu(T)\n\n    Luego como cumple con las propiedades, Nu(T) es subespacio. ",
@@ -952,7 +952,7 @@
       "x": 3304.669892099062,
       "y": 833.4223269126558,
       "width": 1540.449951171875,
-      "height": 2340,
+      "height": 2385,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -966,20 +966,20 @@
       "index": "bBb",
       "roundness": null,
       "seed": 1316333775,
-      "version": 1667,
-      "versionNonce": 1983306847,
+      "version": 1822,
+      "versionNonce": 1838768456,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075363707,
       "link": null,
       "locked": false,
-      "text": "1) Im(T) es subespacio:\n\n    Por definición:\n        Im(T) = { w en W : existe v en V tq T(v) = w }\n\n    CLAVE: Acordarse que todo elemento de W se puede expresar\n    como T(v)\n\n    Mismo caso, tendremos que ver que se validen las 3 propiedades:\n        Vector Nulo, Cerrado por suma, Cerrado por producto por escalar \n\n    ¿ Vector Nulo en Im(T) ?\n    => que existe un v en V tq T(v) = 0\n        Luego T(0) = 0 por propiedad\n        Demostrado 0 en Im(T)\n\n    Sean y1,y2 en Im(T), λ escalar en K:\n\n    => existen v1, v2 en V tq:\n        \n        y1 = T(v1) ^ y2 = T(v2)\n\n    ¿ y1 + y2 en Im(T) ?\n    \n            y1 + y2\n        {y1, y2 en Im(T)}\n        => T(v1) + T(v2)\n        {Linealidad de T}\n        => T(v1 + v2)\n\n        Luego por V Espacio Vectorial, v1 + v2 está en V y es un elemento\n        Por ende existe un v en V con v = v1 + v2 tq T(v1 + v2) = y1 + y2\n\n        Demostrado que y1 + y2 en Im(T)\n\n   ¿ λy1 en Im(T) ?\n        \n            λy1\n        {y1 en Im(T)}\n        => λ T(v1)\n        {Linealidad de T}\n        => T(λv1)\n        \n        Luego por V Espacio Vectorial, λv1 está en V y es un elemento\n        Por ende existe un v en V con v = λv1 tq T(λv1) = λy1\n\n        Demostrado que λy1 en Im(T)\n\n  Como demostramos las propiedades de Subespacio concluimos que Im(T) es subespacio\n        \n\n    ",
+      "text": "1) Im(T) es subespacio:\n\n    Por definición:\n        Im(T) = { w en W : existe v en V tq T(v) = w }\n\n    CLAVE: Acordarse que todo elemento de W se puede expresar\n    como T(v) si existe un v en V\n\n    Mismo caso, tendremos que ver que se validen las 3 propiedades:\n        Vector Nulo, Cerrado por suma, Cerrado por producto por escalar \n\n    ¿ Vector Nulo en Im(T) ?\n    => que existe un v en V tq T(v) = 0\n        0 pertenece a V por ende usamos v = 0.\n        Luego T(0) = 0 por propiedad\n        Demostrado 0 en Im(T)\n\n    Sean y1,y2 en Im(T), λ escalar en K:\n\n    => existen v1, v2 en V tq:\n        \n        y1 = T(v1) ^ y2 = T(v2)\n\n    ¿ y1 + y2 en Im(T) ?\n    \n            y1 + y2\n        {y1, y2 en Im(T)}\n        => T(v1) + T(v2)\n        {Linealidad de T}\n        => T(v1 + v2)\n\n        Luego por V Espacio Vectorial, v1 + v2 está en V y es un elemento\n        Por ende existe un v en V con v = v1 + v2 tq T(v1 + v2) = y1 + y2\n\n        Demostrado que y1 + y2 en Im(T)\n\n   ¿ λy1 en Im(T) ?\n        \n            λy1\n        {y1 en Im(T)}\n        => λ T(v1)\n        {Linealidad de T}\n        => T(λv1)\n        \n        Luego por V Espacio Vectorial, λv1 está en V y es un elemento\n        Por ende existe un v en V con v = λv1 tq T(λv1) = λy1\n\n        Demostrado que λy1 en Im(T)\n\n  Como demostramos las propiedades de Subespacio concluimos que Im(T) es subespacio\n        \n\n    ",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "1) Im(T) es subespacio:\n\n    Por definición:\n        Im(T) = { w en W : existe v en V tq T(v) = w }\n\n    CLAVE: Acordarse que todo elemento de W se puede expresar\n    como T(v)\n\n    Mismo caso, tendremos que ver que se validen las 3 propiedades:\n        Vector Nulo, Cerrado por suma, Cerrado por producto por escalar \n\n    ¿ Vector Nulo en Im(T) ?\n    => que existe un v en V tq T(v) = 0\n        Luego T(0) = 0 por propiedad\n        Demostrado 0 en Im(T)\n\n    Sean y1,y2 en Im(T), λ escalar en K:\n\n    => existen v1, v2 en V tq:\n        \n        y1 = T(v1) ^ y2 = T(v2)\n\n    ¿ y1 + y2 en Im(T) ?\n    \n            y1 + y2\n        {y1, y2 en Im(T)}\n        => T(v1) + T(v2)\n        {Linealidad de T}\n        => T(v1 + v2)\n\n        Luego por V Espacio Vectorial, v1 + v2 está en V y es un elemento\n        Por ende existe un v en V con v = v1 + v2 tq T(v1 + v2) = y1 + y2\n\n        Demostrado que y1 + y2 en Im(T)\n\n   ¿ λy1 en Im(T) ?\n        \n            λy1\n        {y1 en Im(T)}\n        => λ T(v1)\n        {Linealidad de T}\n        => T(λv1)\n        \n        Luego por V Espacio Vectorial, λv1 está en V y es un elemento\n        Por ende existe un v en V con v = λv1 tq T(λv1) = λy1\n\n        Demostrado que λy1 en Im(T)\n\n  Como demostramos las propiedades de Subespacio concluimos que Im(T) es subespacio\n        \n\n    ",
+      "originalText": "1) Im(T) es subespacio:\n\n    Por definición:\n        Im(T) = { w en W : existe v en V tq T(v) = w }\n\n    CLAVE: Acordarse que todo elemento de W se puede expresar\n    como T(v) si existe un v en V\n\n    Mismo caso, tendremos que ver que se validen las 3 propiedades:\n        Vector Nulo, Cerrado por suma, Cerrado por producto por escalar \n\n    ¿ Vector Nulo en Im(T) ?\n    => que existe un v en V tq T(v) = 0\n        0 pertenece a V por ende usamos v = 0.\n        Luego T(0) = 0 por propiedad\n        Demostrado 0 en Im(T)\n\n    Sean y1,y2 en Im(T), λ escalar en K:\n\n    => existen v1, v2 en V tq:\n        \n        y1 = T(v1) ^ y2 = T(v2)\n\n    ¿ y1 + y2 en Im(T) ?\n    \n            y1 + y2\n        {y1, y2 en Im(T)}\n        => T(v1) + T(v2)\n        {Linealidad de T}\n        => T(v1 + v2)\n\n        Luego por V Espacio Vectorial, v1 + v2 está en V y es un elemento\n        Por ende existe un v en V con v = v1 + v2 tq T(v1 + v2) = y1 + y2\n\n        Demostrado que y1 + y2 en Im(T)\n\n   ¿ λy1 en Im(T) ?\n        \n            λy1\n        {y1 en Im(T)}\n        => λ T(v1)\n        {Linealidad de T}\n        => T(λv1)\n        \n        Luego por V Espacio Vectorial, λv1 está en V y es un elemento\n        Por ende existe un v en V con v = λv1 tq T(λv1) = λy1\n\n        Demostrado que λy1 en Im(T)\n\n  Como demostramos las propiedades de Subespacio concluimos que Im(T) es subespacio\n        \n\n    ",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -1003,11 +1003,11 @@
       "index": "bBc",
       "roundness": null,
       "seed": 71174287,
-      "version": 148,
-      "versionNonce": 1291450495,
+      "version": 232,
+      "versionNonce": 1360478000,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "text": "TIPS:",
@@ -1042,11 +1042,11 @@
         "type": 2
       },
       "seed": 1386813121,
-      "version": 189,
-      "versionNonce": 1900318879,
+      "version": 273,
+      "versionNonce": 1583582160,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false
     },
@@ -1070,11 +1070,11 @@
       "index": "bBf",
       "roundness": null,
       "seed": 2076014287,
-      "version": 639,
-      "versionNonce": 1019684031,
+      "version": 723,
+      "versionNonce": 1413994800,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "text": "Siempre acordarse las herramientas que tenemos a mano:\n\nPropiedades, definiciones, para partir.\n\nY a donde necesitamos llegar, en este caso a que \nNu(T) e Im(T) son Subespacios.\nEn caso de que la tesis tenga tmb propiedades o \ndefiniciones, usarlas para hacer el cierre\n\nEn este caso, las 3 propiedades de subespacio\n",
@@ -1107,11 +1107,11 @@
       "index": "bBg",
       "roundness": null,
       "seed": 702480065,
-      "version": 202,
-      "versionNonce": 480445823,
+      "version": 286,
+      "versionNonce": 1470206416,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1769992554632,
+      "updated": 1773075174488,
       "link": null,
       "locked": false,
       "name": "Dem Nu(T), Im(T) subespacios"
@@ -1678,8 +1678,8 @@
       "index": "bBx",
       "roundness": null,
       "seed": 938730145,
-      "version": 2234,
-      "versionNonce": 111128724,
+      "version": 2249,
+      "versionNonce": 1562146365,
       "isDeleted": false,
       "boundElements": [
         {
@@ -1687,16 +1687,16 @@
           "type": "arrow"
         }
       ],
-      "updated": 1770850653935,
+      "updated": 1773004104170,
       "link": null,
       "locked": false,
-      "text": "¿Cómo analizarlo?\nEste programa es de los más importantes, y prestar mucha atención porq\na partir de este se pueden demostrar muchos otros teoremas más derivados.\n\nAquí están involucrados los temas de:\nSubespacios - T.Ls - Bases - Conjunto Generador - Conjunto L.I\n\nComo el Teorema nos habla de una igualdad de dimensiones entre el Espacio\nVectorial V, el Subespacio Ker(T) e Im(T), hacemos referencia directa a sus bases.\n\nFijemonos que nos dice que la dimension de V es IGUAL a la SUMA de las dimensiones\nde Ker(T) e Im(T), por ende deberiamos probar entonces que la base de V se puede\nexpresar como una base que esta conformada por las bases del Nu(T) e Im(T).\nVeamos como:\n\nDem:\n\nSabemos que Nu(T) es subespacio de V, esto quiere decir que dicho Nu(T) tiene una \nbase que lo genera. Llamemos B0 a la base del Nu(T) tq:\n\n    B0 = {v1, v2, ..., vk}\n\n    Con dim(Nu(T)) = k por lo anterior\n\nLuego, como Nu(T) es subespacio de V, significa que podemos extender B0 a una Base\nde V, con vectores que no pertenecen al Núcleo, llamemosle Bv tq: \n\n    Bv = {v1, v2, ..., vk, vk+1, ..., vn}\n\n    Con dim(V) = n, por lo anterior\n\nConsiderando que los vectores v1, v2, ..., vk son Base de Nu(T) entonces esto quiere decir que:\n    \n    T(v1) = T(v2) = .... = T(vk) = 0             (Debido a que viven en Nu(T))\n\nProbemos entonces que T(vk+1), ... , T(vn) (Con vk+1, ... , vn no pertenecientes al núcleo) forman base de Im(T):\n\nPor la definición de Bv, todo elemento v en V se debería poder escribir de la siguiente forma: \n         ",
+      "text": "¿Cómo analizarlo?\nEste teorema es de los más importantes, y prestar mucha atención porq\na partir de este se pueden demostrar muchos otros teoremas más derivados.\n\nAquí están involucrados los temas de:\nSubespacios - T.Ls - Bases - Conjunto Generador - Conjunto L.I\n\nComo el Teorema nos habla de una igualdad de dimensiones entre el Espacio\nVectorial V, el Subespacio Ker(T) e Im(T), hacemos referencia directa a sus bases.\n\nFijemonos que nos dice que la dimension de V es IGUAL a la SUMA de las dimensiones\nde Ker(T) e Im(T), por ende deberiamos probar entonces que la base de V se puede\nexpresar como una base que esta conformada por las bases del Nu(T) e Im(T).\nVeamos como:\n\nDem:\n\nSabemos que Nu(T) es subespacio de V, esto quiere decir que dicho Nu(T) tiene una \nbase que lo genera. Llamemos B0 a la base del Nu(T) tq:\n\n    B0 = {v1, v2, ..., vk}\n\n    Con dim(Nu(T)) = k por lo anterior\n\nLuego, como Nu(T) es subespacio de V, significa que podemos extender B0 a una Base\nde V, con vectores que no pertenecen al Núcleo, llamemosle Bv tq: \n\n    Bv = {v1, v2, ..., vk, vk+1, ..., vn}\n\n    Con dim(V) = n, por lo anterior\n\nConsiderando que los vectores v1, v2, ..., vk son Base de Nu(T) entonces esto quiere decir que:\n    \n    T(v1) = T(v2) = .... = T(vk) = 0             (Debido a que viven en Nu(T))\n\nProbemos entonces que T(vk+1), ... , T(vn) (Con vk+1, ... , vn no pertenecientes al núcleo) forman base de Im(T):\n\nPor la definición de Bv, todo elemento v en V se debería poder escribir de la siguiente forma: \n         ",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "¿Cómo analizarlo?\nEste programa es de los más importantes, y prestar mucha atención porq\na partir de este se pueden demostrar muchos otros teoremas más derivados.\n\nAquí están involucrados los temas de:\nSubespacios - T.Ls - Bases - Conjunto Generador - Conjunto L.I\n\nComo el Teorema nos habla de una igualdad de dimensiones entre el Espacio\nVectorial V, el Subespacio Ker(T) e Im(T), hacemos referencia directa a sus bases.\n\nFijemonos que nos dice que la dimension de V es IGUAL a la SUMA de las dimensiones\nde Ker(T) e Im(T), por ende deberiamos probar entonces que la base de V se puede\nexpresar como una base que esta conformada por las bases del Nu(T) e Im(T).\nVeamos como:\n\nDem:\n\nSabemos que Nu(T) es subespacio de V, esto quiere decir que dicho Nu(T) tiene una \nbase que lo genera. Llamemos B0 a la base del Nu(T) tq:\n\n    B0 = {v1, v2, ..., vk}\n\n    Con dim(Nu(T)) = k por lo anterior\n\nLuego, como Nu(T) es subespacio de V, significa que podemos extender B0 a una Base\nde V, con vectores que no pertenecen al Núcleo, llamemosle Bv tq: \n\n    Bv = {v1, v2, ..., vk, vk+1, ..., vn}\n\n    Con dim(V) = n, por lo anterior\n\nConsiderando que los vectores v1, v2, ..., vk son Base de Nu(T) entonces esto quiere decir que:\n    \n    T(v1) = T(v2) = .... = T(vk) = 0             (Debido a que viven en Nu(T))\n\nProbemos entonces que T(vk+1), ... , T(vn) (Con vk+1, ... , vn no pertenecientes al núcleo) forman base de Im(T):\n\nPor la definición de Bv, todo elemento v en V se debería poder escribir de la siguiente forma: \n         ",
+      "originalText": "¿Cómo analizarlo?\nEste teorema es de los más importantes, y prestar mucha atención porq\na partir de este se pueden demostrar muchos otros teoremas más derivados.\n\nAquí están involucrados los temas de:\nSubespacios - T.Ls - Bases - Conjunto Generador - Conjunto L.I\n\nComo el Teorema nos habla de una igualdad de dimensiones entre el Espacio\nVectorial V, el Subespacio Ker(T) e Im(T), hacemos referencia directa a sus bases.\n\nFijemonos que nos dice que la dimension de V es IGUAL a la SUMA de las dimensiones\nde Ker(T) e Im(T), por ende deberiamos probar entonces que la base de V se puede\nexpresar como una base que esta conformada por las bases del Nu(T) e Im(T).\nVeamos como:\n\nDem:\n\nSabemos que Nu(T) es subespacio de V, esto quiere decir que dicho Nu(T) tiene una \nbase que lo genera. Llamemos B0 a la base del Nu(T) tq:\n\n    B0 = {v1, v2, ..., vk}\n\n    Con dim(Nu(T)) = k por lo anterior\n\nLuego, como Nu(T) es subespacio de V, significa que podemos extender B0 a una Base\nde V, con vectores que no pertenecen al Núcleo, llamemosle Bv tq: \n\n    Bv = {v1, v2, ..., vk, vk+1, ..., vn}\n\n    Con dim(V) = n, por lo anterior\n\nConsiderando que los vectores v1, v2, ..., vk son Base de Nu(T) entonces esto quiere decir que:\n    \n    T(v1) = T(v2) = .... = T(vk) = 0             (Debido a que viven en Nu(T))\n\nProbemos entonces que T(vk+1), ... , T(vn) (Con vk+1, ... , vn no pertenecientes al núcleo) forman base de Im(T):\n\nPor la definición de Bv, todo elemento v en V se debería poder escribir de la siguiente forma: \n         ",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -1811,20 +1811,20 @@
       "index": "bC0",
       "roundness": null,
       "seed": 651407041,
-      "version": 462,
-      "versionNonce": 841156884,
+      "version": 464,
+      "versionNonce": 1098510365,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1770850653935,
+      "updated": 1773004338086,
       "link": null,
       "locked": false,
-      "text": "Una base es un conjunto maximal\nLINEALMENTE INDEPENDIENTE.\nSi agregaramos más elementos del\nnúcleo para extender la base.\nContradictoriamente se vuelve un \nconjunto L.I, por ende absurdo.",
+      "text": "Una base es un conjunto maximal\nLINEALMENTE INDEPENDIENTE.\nSi agregaramos más elementos del\nnúcleo para extender la base.\nContradictoriamente se vuelve un \nconjunto L.D, por ende absurdo.",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Una base es un conjunto maximal\nLINEALMENTE INDEPENDIENTE.\nSi agregaramos más elementos del\nnúcleo para extender la base.\nContradictoriamente se vuelve un \nconjunto L.I, por ende absurdo.",
+      "originalText": "Una base es un conjunto maximal\nLINEALMENTE INDEPENDIENTE.\nSi agregaramos más elementos del\nnúcleo para extender la base.\nContradictoriamente se vuelve un \nconjunto L.D, por ende absurdo.",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -9094,7 +9094,7 @@
       "type": "text",
       "x": -1206.6803312622615,
       "y": 7737.391419751169,
-      "width": 1442.36669921875,
+      "width": 1534.9000244140625,
       "height": 225,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -9109,20 +9109,20 @@
       "index": "bDF",
       "roundness": null,
       "seed": 475204623,
-      "version": 492,
-      "versionNonce": 941516180,
+      "version": 567,
+      "versionNonce": 880042621,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1770850653936,
+      "updated": 1773004771859,
       "link": null,
       "locked": false,
-      "text": "=> ai * vi está en Nu(T) para i = k+1, ... , n, pero Nu(T) = span {v1, ... , vk}\nY Bv = {v1, ... , vk, vk+1, ... vn} es L.I, entonces la UNICA forma de que una\ncombinación lineal entre vk+1, ... , vn esté en el Núcleo de T es NECESARIAMENTE\nque:\n        ak+1 = ... = an = 0 ",
+      "text": "=> ai * vi está en Nu(T) para i = k+1, ... , n, pero Nu(T) = span {v1, ... , vk}\nY Bv = {v1, ... , vk, vk+1, ... vn} es L.I, entonces la UNICA forma de que una\ncombinación lineal entre vk+1, ... , vn esté en el Núcleo de T es NECESARIAMENTE\nque:\n        ak+1 = ... = an = 0        (Pues los vectores vk+1, ... , vn NO pertenecen al Núcleo)",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "=> ai * vi está en Nu(T) para i = k+1, ... , n, pero Nu(T) = span {v1, ... , vk}\nY Bv = {v1, ... , vk, vk+1, ... vn} es L.I, entonces la UNICA forma de que una\ncombinación lineal entre vk+1, ... , vn esté en el Núcleo de T es NECESARIAMENTE\nque:\n        ak+1 = ... = an = 0 ",
+      "originalText": "=> ai * vi está en Nu(T) para i = k+1, ... , n, pero Nu(T) = span {v1, ... , vk}\nY Bv = {v1, ... , vk, vk+1, ... vn} es L.I, entonces la UNICA forma de que una\ncombinación lineal entre vk+1, ... , vn esté en el Núcleo de T es NECESARIAMENTE\nque:\n        ak+1 = ... = an = 0        (Pues los vectores vk+1, ... , vn NO pertenecen al Núcleo)",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -9443,20 +9443,20 @@
       "index": "bDQ",
       "roundness": null,
       "seed": 968214100,
-      "version": 1237,
-      "versionNonce": 164345132,
+      "version": 1249,
+      "versionNonce": 1170026717,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1770850656271,
+      "updated": 1773005722184,
       "link": null,
       "locked": false,
-      "text": "¿Cómo se analiza?\nPartimos de que nuevamente tenemos un si y solo si, por ende vamos a tener que demostrar\nnuevamente 2 propiedades. Ida (=>) y vuelta (<=)\n\nIda (=>): Asumimos que V y W son isomorfos, y hay que llegar que dim(V) = dim(W)\n\nVuelta (<=): Asumimos que dim(V) = dim(W) y hay que llegar a que V y W son Isomorfos\n\nPara ambas deberemos recordar que significa principalemente un isomorfismo.\nSignifica que existe una T.L T : V -> W tal que T:\n    * Sea Lineal\n        Sean u,v en V y \"e\" escalar, se cumple que T(u+v) = T(u) + T(v) y T(e * u) = e * T(u)\n    * Sea Inyectiva\n        T(u) = T(v) => u = v \n        Nu(T) = {0} (Ya demostrado arriba)\n    * Sea sobreyectiva\n        Im(T) = W\n\n    Osea que T sea Transformación Lineal Biyectiva.\n\nLuego se reduce a un problema de T.Ls con propiedades de bases, linealidad, subespacios, \ndimensiones, etc.",
+      "text": "¿Cómo se analiza?\nPartimos de que nuevamente tenemos un si y solo si, por ende vamos a tener que demostrar\nnuevamente 2 propiedades. Ida (=>) y vuelta (<=)\n\nIda (=>): Asumimos que V y W son isomorfos, y hay que llegar que dim(V) = dim(W)\n\nVuelta (<=): Asumimos que dim(V) = dim(W) y hay que llegar a que V y W son Isomorfos\n\nPara ambas deberemos recordar que significa principalemente un isomorfismo.\nSignifica que EXISTE una T.L T : V -> W tal que T:\n    * Sea Lineal\n        Sean u,v en V y \"e\" escalar, se cumple que T(u+v) = T(u) + T(v) y T(e * u) = e * T(u)\n    * Sea Inyectiva\n        T(u) = T(v) => u = v \n        Nu(T) = {0} (Ya demostrado arriba)\n    * Sea sobreyectiva\n        Im(T) = W\n\n    Osea que T sea Transformación Lineal Biyectiva.\n\nLuego se reduce a un problema de T.Ls con propiedades de bases, linealidad, subespacios, \ndimensiones, etc.",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "¿Cómo se analiza?\nPartimos de que nuevamente tenemos un si y solo si, por ende vamos a tener que demostrar\nnuevamente 2 propiedades. Ida (=>) y vuelta (<=)\n\nIda (=>): Asumimos que V y W son isomorfos, y hay que llegar que dim(V) = dim(W)\n\nVuelta (<=): Asumimos que dim(V) = dim(W) y hay que llegar a que V y W son Isomorfos\n\nPara ambas deberemos recordar que significa principalemente un isomorfismo.\nSignifica que existe una T.L T : V -> W tal que T:\n    * Sea Lineal\n        Sean u,v en V y \"e\" escalar, se cumple que T(u+v) = T(u) + T(v) y T(e * u) = e * T(u)\n    * Sea Inyectiva\n        T(u) = T(v) => u = v \n        Nu(T) = {0} (Ya demostrado arriba)\n    * Sea sobreyectiva\n        Im(T) = W\n\n    Osea que T sea Transformación Lineal Biyectiva.\n\nLuego se reduce a un problema de T.Ls con propiedades de bases, linealidad, subespacios, \ndimensiones, etc.",
+      "originalText": "¿Cómo se analiza?\nPartimos de que nuevamente tenemos un si y solo si, por ende vamos a tener que demostrar\nnuevamente 2 propiedades. Ida (=>) y vuelta (<=)\n\nIda (=>): Asumimos que V y W son isomorfos, y hay que llegar que dim(V) = dim(W)\n\nVuelta (<=): Asumimos que dim(V) = dim(W) y hay que llegar a que V y W son Isomorfos\n\nPara ambas deberemos recordar que significa principalemente un isomorfismo.\nSignifica que EXISTE una T.L T : V -> W tal que T:\n    * Sea Lineal\n        Sean u,v en V y \"e\" escalar, se cumple que T(u+v) = T(u) + T(v) y T(e * u) = e * T(u)\n    * Sea Inyectiva\n        T(u) = T(v) => u = v \n        Nu(T) = {0} (Ya demostrado arriba)\n    * Sea sobreyectiva\n        Im(T) = W\n\n    Osea que T sea Transformación Lineal Biyectiva.\n\nLuego se reduce a un problema de T.Ls con propiedades de bases, linealidad, subespacios, \ndimensiones, etc.",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -9614,20 +9614,20 @@
       "index": "bDV",
       "roundness": null,
       "seed": 1133813460,
-      "version": 1574,
-      "versionNonce": 762902956,
+      "version": 1708,
+      "versionNonce": 1607641651,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1770850656271,
+      "updated": 1773005879556,
       "link": null,
       "locked": false,
-      "text": "Demostración Vuelta (<=):  dim(V) = dim(W) => V ≅ W\n\nTenemos que dim(V) = dim(W), y como ambos son Espacios Vectoriales de dimension finita,\nentonces podemos encontrar una base para cada espacio vectorial Bv, Bw tq:\n\nBv = {v1, ... , vn} ^ Bw = {w1, ..., wn} (Notar que estrictamente tienen la misma dimension)\n\nCon dim(Bv) = dim(Bw) = n\n\nPara que sean isomorfos, debe existir una T.L T : V -> W que cumpla:\n    * Linealidad\n    * Inyectiva\n    * Sobreyectiva\n\nPor ende:\n    T(vi) = wi para todo i = 1, ... , n\n\nLinealidad:\n    Podemos extender linealmente de la siguiente manera:\n    \n    ",
+      "text": "Demostración Vuelta (<=):  dim(V) = dim(W) => V ≅ W\n\nTenemos que dim(V) = dim(W), y como ambos son Espacios Vectoriales de dimension finita,\nentonces podemos encontrar una base para cada espacio vectorial Bv, Bw tq:\n\nBv = {v1, ... , vn} ^ Bw = {w1, ..., wn} (Notar que estrictamente tienen la misma dimension)\n\nCon dim(Bv) = dim(Bw) = n\n\nPara que sean isomorfos, debe existir una T.L T : V -> W que cumpla:\n    * Linealidad\n    * Inyectiva\n    * Sobreyectiva\n\nPor ende, definiremos una Transformación Lineal T tal que:\n    T(vi) = wi para todo i = 1, ... , n         (Es decir, hay un mapeo entre las bases)\n\nLinealidad:\n    Podemos extender linealmente de la siguiente manera para todo v en V:\n    \n    ",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Demostración Vuelta (<=):  dim(V) = dim(W) => V ≅ W\n\nTenemos que dim(V) = dim(W), y como ambos son Espacios Vectoriales de dimension finita,\nentonces podemos encontrar una base para cada espacio vectorial Bv, Bw tq:\n\nBv = {v1, ... , vn} ^ Bw = {w1, ..., wn} (Notar que estrictamente tienen la misma dimension)\n\nCon dim(Bv) = dim(Bw) = n\n\nPara que sean isomorfos, debe existir una T.L T : V -> W que cumpla:\n    * Linealidad\n    * Inyectiva\n    * Sobreyectiva\n\nPor ende:\n    T(vi) = wi para todo i = 1, ... , n\n\nLinealidad:\n    Podemos extender linealmente de la siguiente manera:\n    \n    ",
+      "originalText": "Demostración Vuelta (<=):  dim(V) = dim(W) => V ≅ W\n\nTenemos que dim(V) = dim(W), y como ambos son Espacios Vectoriales de dimension finita,\nentonces podemos encontrar una base para cada espacio vectorial Bv, Bw tq:\n\nBv = {v1, ... , vn} ^ Bw = {w1, ..., wn} (Notar que estrictamente tienen la misma dimension)\n\nCon dim(Bv) = dim(Bw) = n\n\nPara que sean isomorfos, debe existir una T.L T : V -> W que cumpla:\n    * Linealidad\n    * Inyectiva\n    * Sobreyectiva\n\nPor ende, definiremos una Transformación Lineal T tal que:\n    T(vi) = wi para todo i = 1, ... , n         (Es decir, hay un mapeo entre las bases)\n\nLinealidad:\n    Podemos extender linealmente de la siguiente manera para todo v en V:\n    \n    ",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -17493,6 +17493,73 @@
       "locked": false
     },
     {
+      "id": "OcjCI0yENUFLhhL4iIeKU",
+      "type": "text",
+      "x": 4891.3951308636315,
+      "y": 4090.3647691827136,
+      "width": 1205.449951171875,
+      "height": 270,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": "K5HLO-Hy7uG0ttDnNPnht",
+      "index": "bEpV",
+      "roundness": null,
+      "seed": 691970557,
+      "version": 401,
+      "versionNonce": 17889683,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1773005808298,
+      "link": null,
+      "locked": false,
+      "text": "Una buena analogía puede ser la de Grafos Isomorfos, donde tener \nla misma cantidad de vértices NO es motivo suficiente para decir que\nson isomorfos, también importan las conexiones, y como existan dos\nGrafos \"diferentes\" pero con mismas conexiones y misma cantidad de\nvértices, entonces, como EXISTE AL MENOS un mapeo, entonces\nhay isomorfismo",
+      "fontSize": 36,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Una buena analogía puede ser la de Grafos Isomorfos, donde tener \nla misma cantidad de vértices NO es motivo suficiente para decir que\nson isomorfos, también importan las conexiones, y como existan dos\nGrafos \"diferentes\" pero con mismas conexiones y misma cantidad de\nvértices, entonces, como EXISTE AL MENOS un mapeo, entonces\nhay isomorfismo",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "YUnU23Lbw80qfN96Vlxk0",
+      "type": "rectangle",
+      "x": 4865.6451308636315,
+      "y": 4070.9897691827136,
+      "width": 1272,
+      "height": 322,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": "K5HLO-Hy7uG0ttDnNPnht",
+      "index": "bEpl",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 712503507,
+      "version": 82,
+      "versionNonce": 2102062963,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1773005816429,
+      "link": null,
+      "locked": false
+    },
+    {
       "id": "K5HLO-Hy7uG0ttDnNPnht",
       "type": "frame",
       "x": 2847.038974045796,
@@ -18126,154 +18193,6 @@
       "lineHeight": 1.25
     },
     {
-      "id": "QKxJuCSdUGnpjFqmaW_HT",
-      "type": "text",
-      "x": 7398.048797776179,
-      "y": 5284.91685167062,
-      "width": 1746.0833740234375,
-      "height": 90,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bF7",
-      "roundness": null,
-      "seed": 534904972,
-      "version": 434,
-      "versionNonce": 641430708,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "Si aplicamos T a cada vj formando T(vj) con j = 1,...,n, es decir, la imágen de cada vector de la base\nBv, como se mapea a W, entonces podemos escribir a T(vj) en términos de la base Bw tq:",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "Si aplicamos T a cada vj formando T(vj) con j = 1,...,n, es decir, la imágen de cada vector de la base\nBv, como se mapea a W, entonces podemos escribir a T(vj) en términos de la base Bw tq:",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "ME-QswoqVSt-b_maFB3Sn",
-      "type": "text",
-      "x": 7696.8404847878965,
-      "y": 5423.250185003955,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bF8",
-      "roundness": null,
-      "seed": 1470254772,
-      "version": 245,
-      "versionNonce": 82469004,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "7JLcbS5kHf_dNywsULQjD",
-      "type": "text",
-      "x": 7580.507151454563,
-      "y": 5414.916851670623,
-      "width": 1186.1500244140625,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bF9",
-      "roundness": null,
-      "seed": 869401140,
-      "version": 364,
-      "versionNonce": 1574092340,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "T(vj) = a1jw1 + ... + amjwm, con a1j, ... , amj escalares con j = 1, ... ,n",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "T(vj) = a1jw1 + ... + amjwm, con a1j, ... , amj escalares con j = 1, ... ,n",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "RLEMLWFYaNQurxjFkMnET",
-      "type": "text",
-      "x": 7361.358321585701,
-      "y": 5547.702565956334,
-      "width": 134.48333740234375,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFA",
-      "roundness": null,
-      "seed": 222951052,
-      "version": 217,
-      "versionNonce": 744910604,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "Partimo",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "Partimo",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
       "id": "jYWBSUccDQ8Zeibfp4BHW",
       "type": "text",
       "x": 7034.501178728558,
@@ -18381,80 +18300,6 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "[T(v)]Bw = [T]Bv,Bw * [v] Bv",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "ZU1IhrOi2wePc3vY78fuk",
-      "type": "text",
-      "x": 7410.129762364164,
-      "y": 5921.916851670617,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFE",
-      "roundness": null,
-      "seed": 1357931956,
-      "version": 10,
-      "versionNonce": 336010252,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "1o8n4h30J1Iv9_Br98eN8",
-      "type": "text",
-      "x": 7405.84404807845,
-      "y": 5907.631137384905,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFF",
-      "roundness": null,
-      "seed": 2046186804,
-      "version": 10,
-      "versionNonce": 1754364596,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -20347,7 +20192,7 @@
       "type": "text",
       "x": 7070.694869478849,
       "y": 6729.684265073786,
-      "width": 1706.9666748046875,
+      "width": 2028.0333251953125,
       "height": 90,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -20362,94 +20207,20 @@
       "index": "bFc",
       "roundness": null,
       "seed": 392372108,
-      "version": 1038,
-      "versionNonce": 337333428,
+      "version": 1152,
+      "versionNonce": 1570355357,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1771119762978,
+      "updated": 1773011052461,
       "link": null,
       "locked": false,
-      "text": "Como necesitamos ver que T(v) se pueden reorganizar las sumatorias en términos de la base Bw, \ndebemos encontrar la C.L de los elementos wj de Bw.",
+      "text": "Como necesitamos ver T(v) en términos de los wj, se pueden reorganizar las sumatorias en términos de la base Bw, \ndebemos encontrar la C.L de los elementos wj de Bw. (Esto para poder comprobar la igualdad para T(v) en Bw)",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Como necesitamos ver que T(v) se pueden reorganizar las sumatorias en términos de la base Bw, \ndebemos encontrar la C.L de los elementos wj de Bw.",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "Gt-0K6J2OeZH8Pz1oIKfK",
-      "type": "text",
-      "x": 7459.57115640291,
-      "y": 6829.645615565399,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1971c2",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFd",
-      "roundness": null,
-      "seed": 1233070988,
-      "version": 10,
-      "versionNonce": 1348570292,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "CMYH5a6p3I7f0T_0CE4P-",
-      "type": "text",
-      "x": 7435.772520064773,
-      "y": 6782.048342889122,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFe",
-      "roundness": null,
-      "seed": 831927180,
-      "version": 180,
-      "versionNonce": 164743308,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
+      "originalText": "Como necesitamos ver T(v) en términos de los wj, se pueden reorganizar las sumatorias en términos de la base Bw, \ndebemos encontrar la C.L de los elementos wj de Bw. (Esto para poder comprobar la igualdad para T(v) en Bw)",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -21949,55 +21720,6 @@
       "lineHeight": 1.25
     },
     {
-      "id": "mlaY-iMyyYbXEOsXwTeoU",
-      "type": "line",
-      "x": 8197.033148947019,
-      "y": 7233.105699599077,
-      "width": 39.40247830330645,
-      "height": 216.15073812099672,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFs",
-      "roundness": {
-        "type": 2
-      },
-      "seed": 818526604,
-      "version": 298,
-      "versionNonce": 21962252,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          -24.767272076363952,
-          104.69801377735712
-        ],
-        [
-          14.6352062269425,
-          216.15073812099672
-        ]
-      ],
-      "startBinding": null,
-      "endBinding": null,
-      "startArrowhead": null,
-      "endArrowhead": null,
-      "polygon": false
-    },
-    {
       "id": "RWeYt1XwbmYBvU0fC4g-t",
       "type": "text",
       "x": 8010.48280503053,
@@ -22033,92 +21755,6 @@
       "originalText": "λi aji",
       "autoResize": true,
       "lineHeight": 1.25
-    },
-    {
-      "id": "bTvtsTA4jzEp7RKVGB803",
-      "type": "text",
-      "x": 8329.977174726584,
-      "y": 7306.281730733788,
-      "width": 99.05000305175781,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFu",
-      "roundness": null,
-      "seed": 1392101004,
-      "version": 234,
-      "versionNonce": 139951244,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "a1j wj",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "a1j wj",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "NifjUm428fAR0_JcMWpSA",
-      "type": "line",
-      "x": 8444.077578555738,
-      "y": 7230.364435997033,
-      "width": 39.40247830330645,
-      "height": 216.15073812099672,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bFv",
-      "roundness": {
-        "type": 2
-      },
-      "seed": 261690636,
-      "version": 383,
-      "versionNonce": 1750426164,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          24.767272076363952,
-          104.69801377735712
-        ],
-        [
-          -14.6352062269425,
-          216.15073812099672
-        ]
-      ],
-      "startBinding": null,
-      "endBinding": null,
-      "startArrowhead": null,
-      "endArrowhead": null,
-      "polygon": false
     },
     {
       "id": "WEPjvKXQbj-52ALXwMP-X",
@@ -22400,117 +22036,6 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "[T(v)]Bw  =",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "JP9Zo-mfyH8pJT2fnUpnh",
-      "type": "text",
-      "x": 8247.800641970709,
-      "y": 7576.116588085229,
-      "width": 18.933332443237305,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bG3",
-      "roundness": null,
-      "seed": 2032697612,
-      "version": 475,
-      "versionNonce": 1703454772,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "n",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "n",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "a11AIL5-FplKxOTuTsfBf",
-      "type": "text",
-      "x": 8233.800641970709,
-      "y": 7740.116588085229,
-      "width": 54.74999999999986,
-      "height": 33.86597938144321,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bG4",
-      "roundness": null,
-      "seed": 621576076,
-      "version": 522,
-      "versionNonce": 316417292,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "i = 1",
-      "fontSize": 27.092783505154582,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "i = 1",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "WfwZ3fooDQJAWmTkMZ6Su",
-      "type": "text",
-      "x": 8328.373005811489,
-      "y": 7657.977395544499,
-      "width": 81.88333129882812,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bG5",
-      "roundness": null,
-      "seed": 1626123788,
-      "version": 495,
-      "versionNonce": 875397556,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "λi aji",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "λi aji",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -24202,43 +23727,6 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "[v]Bv = ",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "KQwervwfF8AGnVwekUsLe",
-      "type": "text",
-      "x": 8739.590933470376,
-      "y": 8360.262570055545,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "wtoYBggReLR8qiHndCB0t",
-      "index": "bGN",
-      "roundness": null,
-      "seed": 1923039924,
-      "version": 10,
-      "versionNonce": 242595636,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1771119746851,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -26436,6 +25924,43 @@
       "locked": false
     },
     {
+      "id": "xshyMeASkooWW0dS5q34i",
+      "type": "text",
+      "x": 8853.645130863631,
+      "y": 8992.989769182714,
+      "width": 237.71665954589844,
+      "height": 135,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": "wtoYBggReLR8qiHndCB0t",
+      "index": "bGqV",
+      "roundness": null,
+      "seed": 1182825011,
+      "version": 78,
+      "versionNonce": 574056083,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1773011292566,
+      "link": null,
+      "locked": false,
+      "text": "Mismo\nresultado que\n[T(v)]Bw",
+      "fontSize": 36,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Mismo\nresultado que\n[T(v)]Bw",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
       "id": "wtoYBggReLR8qiHndCB0t",
       "type": "frame",
       "x": 6846.736383364107,
@@ -26487,7 +26012,7 @@
       "version": 299,
       "versionNonce": 352559303,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -26526,7 +26051,7 @@
       "version": 174,
       "versionNonce": 1770123239,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false
@@ -26554,7 +26079,7 @@
       "version": 265,
       "versionNonce": 866736903,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -26630,7 +26155,7 @@
       "version": 147,
       "versionNonce": 2002093383,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false
@@ -26658,7 +26183,7 @@
       "version": 396,
       "versionNonce": 1629701223,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -26734,7 +26259,7 @@
       "version": 150,
       "versionNonce": 1705809575,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false
@@ -26762,7 +26287,7 @@
       "version": 127,
       "versionNonce": 156314055,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -26799,7 +26324,7 @@
       "version": 188,
       "versionNonce": 1832278247,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -26873,7 +26398,7 @@
       "version": 343,
       "versionNonce": 644123431,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -26892,8 +26417,8 @@
       "type": "text",
       "x": -2034.0666562955357,
       "y": 11081.10890199389,
-      "width": 1155.0333251953125,
-      "height": 360,
+      "width": 1395.25,
+      "height": 405,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -26907,30 +26432,30 @@
       "index": "bH4",
       "roundness": null,
       "seed": 1827291527,
-      "version": 394,
-      "versionNonce": 1209437767,
+      "version": 522,
+      "versionNonce": 1741838909,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772674172091,
+      "boundElements": [],
+      "updated": 1773011618962,
       "link": null,
       "locked": false,
-      "text": "Como T es un operador lineal => V = W => V = V, luego\n    dim V = dim Nu(T) + dim Im(T)\n    dim V = 0 + dim Im(T)\n    dim V = dim Im(T)\n\nSi dim V = dim Im(T) => V = Im(T) (podrían compartir misma base)\n\nLuego como Im(T) = V => T es Sobreyectiva",
+      "text": "Como T es un operador lineal => V = W => V = V, luego\n    dim V = dim Nu(T) + dim Im(T) -> Teorema de la dimensión\n    dim V = 0 + dim Im(T) -> T es inyectiva => Nu(T) = {0}\n    dim V = dim Im(T) -> Por Álgebra\n\nSi dim V = dim Im(T) => V = Im(T) (podrían compartir misma base) SOLO porque\ntratamos con un OPERADOR LINEAL.\n\nLuego como Im(T) = V =>  T es Sobreyectiva",
       "fontSize": 36,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Como T es un operador lineal => V = W => V = V, luego\n    dim V = dim Nu(T) + dim Im(T)\n    dim V = 0 + dim Im(T)\n    dim V = dim Im(T)\n\nSi dim V = dim Im(T) => V = Im(T) (podrían compartir misma base)\n\nLuego como Im(T) = V => T es Sobreyectiva",
+      "originalText": "Como T es un operador lineal => V = W => V = V, luego\n    dim V = dim Nu(T) + dim Im(T) -> Teorema de la dimensión\n    dim V = 0 + dim Im(T) -> T es inyectiva => Nu(T) = {0}\n    dim V = dim Im(T) -> Por Álgebra\n\nSi dim V = dim Im(T) => V = Im(T) (podrían compartir misma base) SOLO porque\ntratamos con un OPERADOR LINEAL.\n\nLuego como Im(T) = V =>  T es Sobreyectiva",
       "autoResize": true,
       "lineHeight": 1.25
     },
     {
       "id": "hY4M9uDPbafdrvIp5NEpe",
       "type": "rectangle",
-      "x": -1587.2491959780752,
-      "y": 11384.323187708174,
-      "width": 342.5,
-      "height": 67.5,
+      "x": -1570.3176479776948,
+      "y": 11428.226448652546,
+      "width": 333.0074030390549,
+      "height": 65.62919621937579,
       "angle": 0,
       "strokeColor": "#2f9e44",
       "backgroundColor": "transparent",
@@ -26946,11 +26471,11 @@
         "type": 3
       },
       "seed": 644867335,
-      "version": 133,
-      "versionNonce": 1725640039,
+      "version": 190,
+      "versionNonce": 435551635,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772674172091,
+      "boundElements": [],
+      "updated": 1773011639350,
       "link": null,
       "locked": false
     },
@@ -27053,7 +26578,7 @@
       "version": 183,
       "versionNonce": 549827271,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -27096,7 +26621,7 @@
       "version": 176,
       "versionNonce": 389136871,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -27172,7 +26697,7 @@
       "version": 134,
       "versionNonce": 895071271,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false
@@ -27202,7 +26727,7 @@
       "version": 90,
       "versionNonce": 1887344455,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -27247,7 +26772,7 @@
       "version": 103,
       "versionNonce": 928650855,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -27259,6 +26784,51 @@
         [
           210,
           1.428571428570649
+        ]
+      ],
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": false
+    },
+    {
+      "id": "Hjk21Pu85Ik-vu4GOYFPG",
+      "type": "line",
+      "x": -1984.4274347881685,
+      "y": 10135.27274451347,
+      "width": 445.5348497359462,
+      "height": 2.54591342706226,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": "iTb5MypN4WKrvTeTTGC33",
+      "index": "bHBt",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1279912819,
+      "version": 59,
+      "versionNonce": 673280019,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1773011396697,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          445.5348497359462,
+          -2.54591342706226
         ]
       ],
       "startBinding": null,
@@ -27290,7 +26860,7 @@
       "version": 216,
       "versionNonce": 471985575,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674172091,
       "link": null,
       "locked": false,
@@ -27316,11 +26886,11 @@
       "index": "bHD",
       "roundness": null,
       "seed": 1950293351,
-      "version": 532,
-      "versionNonce": 1473830473,
+      "version": 560,
+      "versionNonce": 846510896,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1772674177110,
+      "updated": 1773075132825,
       "link": null,
       "locked": false,
       "text": "Demostración de la Suma Directa\nentre subespacios",
@@ -27386,7 +26956,7 @@
       "version": 207,
       "versionNonce": 2140679465,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27423,7 +26993,7 @@
       "version": 212,
       "versionNonce": 120280551,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27462,7 +27032,7 @@
       "version": 203,
       "versionNonce": 1414176777,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -27490,7 +27060,7 @@
       "version": 538,
       "versionNonce": 1664483591,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27527,7 +27097,7 @@
       "version": 95,
       "versionNonce": 334214889,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27566,114 +27136,10 @@
       "version": 282,
       "versionNonce": 989743143,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false
-    },
-    {
-      "id": "_LikrGAkmmngXIipvfi5b",
-      "type": "text",
-      "x": 359.61191513303584,
-      "y": 10610.45017183515,
-      "width": 230.28334045410156,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bHL",
-      "roundness": null,
-      "seed": 1482901159,
-      "version": 82,
-      "versionNonce": 822538697,
-      "isDeleted": true,
-      "boundElements": null,
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "Subespacio U",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "Subespacio U",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "E6ZavIKfXZPbEaRpdBZwO",
-      "type": "ellipse",
-      "x": 810.2369151330358,
-      "y": 10514.20017183515,
-      "width": 256.25,
-      "height": 240,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bHM",
-      "roundness": {
-        "type": 2
-      },
-      "seed": 1453222503,
-      "version": 128,
-      "versionNonce": 2087758663,
-      "isDeleted": true,
       "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
-    },
-    {
-      "id": "V3KH1YqDYI9AZFWst8fb3",
-      "type": "text",
-      "x": 1093.220244905985,
-      "y": 10599.20017183515,
-      "width": 230.28334045410156,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bHN",
-      "roundness": null,
-      "seed": 534485863,
-      "version": 129,
-      "versionNonce": 1085788329,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "Subespacio U",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "Subespacio U",
-      "autoResize": true,
-      "lineHeight": 1.25
     },
     {
       "id": "rHCTfRLzQcsvfEf3SFs0N",
@@ -27728,7 +27194,7 @@
       "version": 100,
       "versionNonce": 682218377,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27802,7 +27268,7 @@
       "version": 148,
       "versionNonce": 219708009,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27839,7 +27305,7 @@
       "version": 106,
       "versionNonce": 1251048615,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27878,7 +27344,7 @@
       "version": 85,
       "versionNonce": 2127512905,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -27906,7 +27372,7 @@
       "version": 575,
       "versionNonce": 212422599,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -27945,7 +27411,7 @@
       "version": 214,
       "versionNonce": 1764340777,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -28027,7 +27493,7 @@
       "version": 84,
       "versionNonce": 1075005193,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -28092,7 +27558,7 @@
       "version": 115,
       "versionNonce": 1845984745,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -28103,43 +27569,6 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Bu∩w : {v1, ... , vk} => dim(Bu∩w) = k ",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "YAa9htdqQN_PuyKPhls4B",
-      "type": "text",
-      "x": 334.992867513988,
-      "y": 11376.72398135896,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1971c2",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bHa",
-      "roundness": null,
-      "seed": 360283273,
-      "version": 6,
-      "versionNonce": 1990619431,
-      "isDeleted": true,
-      "boundElements": null,
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -28277,7 +27706,7 @@
       "version": 177,
       "versionNonce": 2406697,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674243244,
       "link": null,
       "locked": false,
@@ -28290,36 +27719,6 @@
       "originalText": "(Podrían NO tener misma \ncant de elementos)",
       "autoResize": true,
       "lineHeight": 1.25
-    },
-    {
-      "id": "iNAH7fTa_i1g2DPHthqVS",
-      "type": "rectangle",
-      "x": 993.3182643393848,
-      "y": 11681.343028978008,
-      "width": 454,
-      "height": 109,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bHf",
-      "roundness": {
-        "type": 3
-      },
-      "seed": 1158807433,
-      "version": 136,
-      "versionNonce": 1493131079,
-      "isDeleted": true,
-      "boundElements": null,
-      "updated": 1772674244607,
-      "link": null,
-      "locked": false
     },
     {
       "id": "ZqrOJIVu9VZ0a75z-ZS64",
@@ -28344,7 +27743,7 @@
       "version": 471,
       "versionNonce": 1719832199,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -28383,7 +27782,7 @@
       "version": 127,
       "versionNonce": 597213545,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -28487,7 +27886,7 @@
       "version": 96,
       "versionNonce": 1293408455,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -28515,7 +27914,7 @@
       "version": 140,
       "versionNonce": 327433001,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -28591,7 +27990,7 @@
       "version": 146,
       "versionNonce": 1803873801,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -28695,7 +28094,7 @@
       "version": 94,
       "versionNonce": 1490393639,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -28725,7 +28124,7 @@
       "version": 94,
       "versionNonce": 2089140169,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -28753,7 +28152,7 @@
       "version": 357,
       "versionNonce": 1200471367,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -28766,36 +28165,6 @@
       "originalText": "¿Son Linealmente Independientes?\nPara que esto ocurra se debería cumplir que exista ai, bj, cl tq: ",
       "autoResize": true,
       "lineHeight": 1.25
-    },
-    {
-      "id": "PzxpP_iPl7zd3qDNo5EUd",
-      "type": "rectangle",
-      "x": 250.33549181105604,
-      "y": 13050.203290512118,
-      "width": 1576.0537012209102,
-      "height": 69.84438367645635,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bHt",
-      "roundness": {
-        "type": 3
-      },
-      "seed": 1266313895,
-      "version": 98,
-      "versionNonce": 254598825,
-      "isDeleted": true,
-      "boundElements": null,
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false
     },
     {
       "id": "_CMUVUOqyo7OaZOZ0ejNu",
@@ -28820,7 +28189,7 @@
       "version": 319,
       "versionNonce": 1427991591,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674311998,
       "link": null,
       "locked": false,
@@ -29536,7 +28905,7 @@
       "version": 120,
       "versionNonce": 1326141255,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674311998,
       "link": null,
       "locked": false,
@@ -29573,7 +28942,7 @@
       "version": 121,
       "versionNonce": 328191591,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674311998,
       "link": null,
       "locked": false,
@@ -29610,7 +28979,7 @@
       "version": 115,
       "versionNonce": 1299671431,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674311998,
       "link": null,
       "locked": false,
@@ -29647,7 +29016,7 @@
       "version": 122,
       "versionNonce": 436117671,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674311998,
       "link": null,
       "locked": false,
@@ -30526,796 +29895,6 @@
       "lineHeight": 1.25
     },
     {
-      "id": "GOQAy9JWl0g_DGGDOdhbY",
-      "type": "freedraw",
-      "x": 671.0464595334524,
-      "y": 13172.974321036385,
-      "width": 99.1021346599806,
-      "height": 105.36121684903082,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "3vb1EVaq40Z5sUGNd_KVB",
-      "index": "bI4",
-      "roundness": null,
-      "seed": 1909856489,
-      "version": 279,
-      "versionNonce": 1552746281,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772673298560,
-      "link": null,
-      "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          0,
-          -1.0431803648425557
-        ],
-        [
-          -1.0431803648419304,
-          -1.0431803648425557
-        ],
-        [
-          -1.0431803648419304,
-          -3.129541094525848
-        ],
-        [
-          -1.0431803648419304,
-          -4.172721459366585
-        ],
-        [
-          -1.0431803648419304,
-          -5.215901824209141
-        ],
-        [
-          -1.0431803648419304,
-          -6.259082189051696
-        ],
-        [
-          -1.0431803648419304,
-          -7.302262553892433
-        ],
-        [
-          -1.0431803648419304,
-          -9.388623283577544
-        ],
-        [
-          -1.0431803648419304,
-          -10.431803648418281
-        ],
-        [
-          -1.0431803648419304,
-          -11.474984013260837
-        ],
-        [
-          -1.0431803648419304,
-          -12.518164378103393
-        ],
-        [
-          -1.0431803648419304,
-          -13.56134474294413
-        ],
-        [
-          -3.1295410945257345,
-          -13.56134474294413
-        ],
-        [
-          -6.259082189051412,
-          -13.56134474294413
-        ],
-        [
-          -8.345442918735216,
-          -13.56134474294413
-        ],
-        [
-          -9.38862328357709,
-          -12.518164378103393
-        ],
-        [
-          -11.474984013260894,
-          -12.518164378103393
-        ],
-        [
-          -14.604525107786628,
-          -12.518164378103393
-        ],
-        [
-          -16.690885837470432,
-          -11.474984013260837
-        ],
-        [
-          -19.82042693199611,
-          -11.474984013260837
-        ],
-        [
-          -21.906787661679914,
-          -11.474984013260837
-        ],
-        [
-          -23.993148391363718,
-          -10.431803648418281
-        ],
-        [
-          -26.079509121047522,
-          -10.431803648418281
-        ],
-        [
-          -30.25223058041513,
-          -10.431803648418281
-        ],
-        [
-          -33.38177167494081,
-          -10.431803648418281
-        ],
-        [
-          -36.51131276946654,
-          -10.431803648418281
-        ],
-        [
-          -39.64085386399222,
-          -10.431803648418281
-        ],
-        [
-          -41.727214593676024,
-          -10.431803648418281
-        ],
-        [
-          -44.85675568820176,
-          -10.431803648418281
-        ],
-        [
-          -47.986296782727436,
-          -10.431803648418281
-        ],
-        [
-          -51.11583787725317,
-          -10.431803648418281
-        ],
-        [
-          -54.24537897177885,
-          -10.431803648418281
-        ],
-        [
-          -57.374920066304526,
-          -10.431803648418281
-        ],
-        [
-          -60.50446116083026,
-          -10.431803648418281
-        ],
-        [
-          -64.67718262019787,
-          -10.431803648418281
-        ],
-        [
-          -67.80672371472355,
-          -10.431803648418281
-        ],
-        [
-          -71.97944517409115,
-          -10.431803648418281
-        ],
-        [
-          -75.10898626861689,
-          -10.431803648418281
-        ],
-        [
-          -77.19534699830069,
-          -10.431803648418281
-        ],
-        [
-          -80.32488809282637,
-          -10.431803648418281
-        ],
-        [
-          -84.49760955219398,
-          -10.431803648418281
-        ],
-        [
-          -88.67033101156159,
-          -10.431803648418281
-        ],
-        [
-          -91.79987210608726,
-          -10.431803648418281
-        ],
-        [
-          -93.88623283577107,
-          -10.431803648418281
-        ],
-        [
-          -95.97259356545487,
-          -10.431803648418281
-        ],
-        [
-          -98.05895429513868,
-          -10.431803648418281
-        ],
-        [
-          -99.1021346599806,
-          -10.431803648418281
-        ],
-        [
-          -99.1021346599806,
-          -9.388623283577544
-        ],
-        [
-          -97.0157739302968,
-          -8.345442918734989
-        ],
-        [
-          -94.929413200613,
-          -7.302262553892433
-        ],
-        [
-          -92.8430524709292,
-          -6.259082189051696
-        ],
-        [
-          -90.75669174124539,
-          -5.215901824209141
-        ],
-        [
-          -88.67033101156159,
-          -4.172721459366585
-        ],
-        [
-          -86.58397028187778,
-          -2.0863607296832924
-        ],
-        [
-          -82.41124882251017,
-          -1.0431803648425557
-        ],
-        [
-          -81.36806845766824,
-          0
-        ],
-        [
-          -79.28170772798444,
-          2.0863607296832924
-        ],
-        [
-          -76.15216663345876,
-          4.172721459368404
-        ],
-        [
-          -74.06580590377496,
-          5.215901824209141
-        ],
-        [
-          -70.93626480924928,
-          7.302262553894252
-        ],
-        [
-          -67.80672371472355,
-          8.345442918734989
-        ],
-        [
-          -64.67718262019787,
-          9.388623283577544
-        ],
-        [
-          -62.590821890514064,
-          10.4318036484201
-        ],
-        [
-          -60.50446116083026,
-          11.474984013260837
-        ],
-        [
-          -59.46128079598833,
-          13.56134474294413
-        ],
-        [
-          -57.374920066304526,
-          14.604525107786685
-        ],
-        [
-          -54.24537897177885,
-          17.734066202312533
-        ],
-        [
-          -52.159018242095044,
-          18.77724656715509
-        ],
-        [
-          -50.07265751241124,
-          19.820426931995826
-        ],
-        [
-          -49.02947714756937,
-          21.906787661680937
-        ],
-        [
-          -46.94311641788556,
-          22.949968026521674
-        ],
-        [
-          -45.89993605304363,
-          25.036328756206785
-        ],
-        [
-          -43.81357532335983,
-          26.079509121047522
-        ],
-        [
-          -41.727214593676024,
-          27.122689485890078
-        ],
-        [
-          -38.597673499150346,
-          29.20905021557337
-        ],
-        [
-          -36.51131276946654,
-          30.252230580415926
-        ],
-        [
-          -34.42495203978274,
-          31.295410945256663
-        ],
-        [
-          -33.38177167494081,
-          33.381771674941774
-        ],
-        [
-          -32.338591310098934,
-          34.42495203978251
-        ],
-        [
-          -31.295410945257004,
-          36.51131276946762
-        ],
-        [
-          -30.25223058041513,
-          36.51131276946762
-        ],
-        [
-          -29.209050215573257,
-          36.51131276946762
-        ],
-        [
-          -30.25223058041513,
-          36.51131276946762
-        ],
-        [
-          -31.295410945257004,
-          37.55449313430836
-        ],
-        [
-          -33.38177167494081,
-          38.597673499150915
-        ],
-        [
-          -35.46813240462461,
-          39.64085386399165
-        ],
-        [
-          -37.554493134308416,
-          39.64085386399165
-        ],
-        [
-          -38.597673499150346,
-          40.68403422883421
-        ],
-        [
-          -40.68403422883415,
-          40.68403422883421
-        ],
-        [
-          -41.727214593676024,
-          41.72721459367676
-        ],
-        [
-          -42.770394958517954,
-          42.7703949585175
-        ],
-        [
-          -44.85675568820176,
-          43.813575323360055
-        ],
-        [
-          -46.94311641788556,
-          45.89993605304335
-        ],
-        [
-          -47.986296782727436,
-          46.9431164178859
-        ],
-        [
-          -50.07265751241124,
-          49.029477147569196
-        ],
-        [
-          -52.159018242095044,
-          50.07265751241175
-        ],
-        [
-          -53.202198606936975,
-          51.11583787725249
-        ],
-        [
-          -55.28855933662072,
-          53.2021986069376
-        ],
-        [
-          -56.33173970146265,
-          55.28855933662089
-        ],
-        [
-          -57.374920066304526,
-          56.33173970146345
-        ],
-        [
-          -59.46128079598833,
-          58.41810043114674
-        ],
-        [
-          -61.547641525672134,
-          60.50446116083003
-        ],
-        [
-          -62.590821890514064,
-          62.590821890515144
-        ],
-        [
-          -64.67718262019787,
-          64.67718262019844
-        ],
-        [
-          -66.76354334988167,
-          66.76354334988173
-        ],
-        [
-          -68.84990407956548,
-          69.89308444440758
-        ],
-        [
-          -70.93626480924928,
-          71.97944517409087
-        ],
-        [
-          -73.02262553893308,
-          73.02262553893343
-        ],
-        [
-          -74.06580590377496,
-          74.06580590377598
-        ],
-        [
-          -75.10898626861689,
-          76.15216663345927
-        ],
-        [
-          -76.15216663345876,
-          77.19534699830183
-        ],
-        [
-          -77.19534699830069,
-          79.28170772798512
-        ],
-        [
-          -78.23852736314257,
-          80.32488809282586
-        ],
-        [
-          -79.28170772798444,
-          81.36806845766841
-        ],
-        [
-          -80.32488809282637,
-          83.4544291873517
-        ],
-        [
-          -81.36806845766824,
-          85.54078991703682
-        ],
-        [
-          -82.41124882251017,
-          86.58397028187755
-        ],
-        [
-          -83.45442918735205,
-          87.62715064672011
-        ],
-        [
-          -83.45442918735205,
-          88.67033101156267
-        ],
-        [
-          -83.45442918735205,
-          90.75669174124596
-        ],
-        [
-          -81.36806845766824,
-          90.75669174124596
-        ],
-        [
-          -79.28170772798444,
-          90.75669174124596
-        ],
-        [
-          -76.15216663345876,
-          90.75669174124596
-        ],
-        [
-          -74.06580590377496,
-          90.75669174124596
-        ],
-        [
-          -70.93626480924928,
-          90.75669174124596
-        ],
-        [
-          -67.80672371472355,
-          90.75669174124596
-        ],
-        [
-          -65.72036298503974,
-          91.7998721060867
-        ],
-        [
-          -63.63400225535594,
-          91.7998721060867
-        ],
-        [
-          -60.50446116083026,
-          91.7998721060867
-        ],
-        [
-          -58.418100431146456,
-          91.7998721060867
-        ],
-        [
-          -55.28855933662072,
-          91.7998721060867
-        ],
-        [
-          -53.202198606936975,
-          91.7998721060867
-        ],
-        [
-          -50.07265751241124,
-          91.7998721060867
-        ],
-        [
-          -46.94311641788556,
-          91.7998721060867
-        ],
-        [
-          -44.85675568820176,
-          91.7998721060867
-        ],
-        [
-          -41.727214593676024,
-          91.7998721060867
-        ],
-        [
-          -39.64085386399222,
-          91.7998721060867
-        ],
-        [
-          -37.554493134308416,
-          90.75669174124596
-        ],
-        [
-          -35.46813240462461,
-          90.75669174124596
-        ],
-        [
-          -32.338591310098934,
-          90.75669174124596
-        ],
-        [
-          -30.25223058041513,
-          90.75669174124596
-        ],
-        [
-          -28.165869850731326,
-          90.75669174124596
-        ],
-        [
-          -26.079509121047522,
-          90.75669174124596
-        ],
-        [
-          -25.03632875620565,
-          89.7135113764034
-        ],
-        [
-          -22.949968026521844,
-          89.7135113764034
-        ],
-        [
-          -20.86360729683804,
-          89.7135113764034
-        ],
-        [
-          -18.777246567154236,
-          89.7135113764034
-        ],
-        [
-          -16.690885837470432,
-          89.7135113764034
-        ],
-        [
-          -15.647705472628502,
-          89.7135113764034
-        ],
-        [
-          -14.604525107786628,
-          89.7135113764034
-        ],
-        [
-          -12.518164378102824,
-          89.7135113764034
-        ],
-        [
-          -10.43180364841902,
-          89.7135113764034
-        ],
-        [
-          -9.38862328357709,
-          89.7135113764034
-        ],
-        [
-          -10.43180364841902,
-          89.7135113764034
-        ],
-        [
-          -10.43180364841902,
-          87.62715064672011
-        ],
-        [
-          -9.38862328357709,
-          86.58397028187755
-        ],
-        [
-          -8.345442918735216,
-          84.49760955219426
-        ],
-        [
-          -8.345442918735216,
-          82.41124882251097
-        ],
-        [
-          -8.345442918735216,
-          80.32488809282586
-        ],
-        [
-          -6.259082189051412,
-          79.28170772798512
-        ],
-        [
-          -5.215901824209482,
-          76.15216663345927
-        ],
-        [
-          -5.215901824209482,
-          74.06580590377598
-        ],
-        [
-          -4.172721459367608,
-          73.02262553893343
-        ],
-        [
-          -4.172721459367608,
-          70.93626480925013
-        ],
-        [
-          -3.1295410945257345,
-          69.89308444440758
-        ],
-        [
-          -2.086360729683804,
-          68.84990407956502
-        ],
-        [
-          -2.086360729683804,
-          67.80672371472428
-        ],
-        [
-          -2.086360729683804,
-          66.76354334988173
-        ],
-        [
-          -3.1295410945257345,
-          66.76354334988173
-        ],
-        [
-          -3.1295410945257345,
-          66.76354334988173
-        ]
-      ],
-      "pressures": [],
-      "simulatePressure": true
-    },
-    {
-      "id": "QN9BKzDVaX4UxGWf1e7JG",
-      "type": "text",
-      "x": 592.8079321703099,
-      "y": 13279.378718250253,
-      "width": 75.76667022705078,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bI5",
-      "roundness": null,
-      "seed": 1733628873,
-      "version": 85,
-      "versionNonce": 1838447719,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "j = 1",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "j = 1",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "vQqpJ5yjITCiFMkpbA5Jq",
-      "type": "text",
-      "x": 688.7805257357647,
-      "y": 13184.449305049642,
-      "width": 61.86666488647461,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "3vb1EVaq40Z5sUGNd_KVB",
-      "index": "bI6",
-      "roundness": null,
-      "seed": 217166505,
-      "version": 79,
-      "versionNonce": 1141447655,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772673298560,
-      "link": null,
-      "locked": false,
-      "text": "bjuj",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "bjuj",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
       "id": "egIn7iricDXaPO6KvVcOt",
       "type": "freedraw",
       "x": 749.9226534968459,
@@ -32165,7 +30744,7 @@
       "version": 120,
       "versionNonce": 442452967,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674311998,
       "link": null,
       "locked": false,
@@ -32202,7 +30781,7 @@
       "version": 161,
       "versionNonce": 2070521095,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674311998,
       "link": null,
       "locked": false,
@@ -32231,7 +30810,7 @@
       "version": 128,
       "versionNonce": 1095573897,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -34801,72 +33380,6 @@
       "lineHeight": 1.25
     },
     {
-      "id": "CVX9J7t5BAu8hx2cTed_I",
-      "type": "text",
-      "x": 1019.0127857789244,
-      "y": 13461.049942448846,
-      "width": 58.099998474121094,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bIS",
-      "roundness": null,
-      "seed": 927759591,
-      "version": 123,
-      "versionNonce": 76834151,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "= 0",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "= 0",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "9W-qc6rsyFXhj9il7073m",
-      "type": "frame",
-      "x": 288.78653038959345,
-      "y": 13383.854595450544,
-      "width": 809.5079631173152,
-      "height": 242.01784464332013,
-      "angle": 0,
-      "strokeColor": "#bbb",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 0,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "index": "bIT",
-      "roundness": null,
-      "seed": 1654278151,
-      "version": 159,
-      "versionNonce": 1051063721,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772673556600,
-      "link": null,
-      "locked": false,
-      "name": "Sumatoria K - N - M"
-    },
-    {
       "id": "YULAZU8M6lKwO8iBQCpvy",
       "type": "text",
       "x": 611.5795868567209,
@@ -34889,7 +33402,7 @@
       "version": 145,
       "versionNonce": 157042825,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -34926,7 +33439,7 @@
       "version": 122,
       "versionNonce": 2144411783,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -34939,1018 +33452,6 @@
       "originalText": "Luego, tendremos que, por estas divisiones:",
       "autoResize": true,
       "lineHeight": 1.25
-    },
-    {
-      "id": "-5vtmMSMdSo0BGi2tFDRO",
-      "type": "freedraw",
-      "x": 311.92535413077644,
-      "y": 13803.052581550235,
-      "width": 444.50378673282967,
-      "height": 59.99956056659903,
-      "angle": 0,
-      "strokeColor": "#1971c2",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bIW",
-      "roundness": null,
-      "seed": 1528779751,
-      "version": 250,
-      "versionNonce": 2041859945,
-      "isDeleted": true,
-      "boundElements": null,
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          0,
-          0.8450642333318683
-        ],
-        [
-          0,
-          1.6901284666655556
-        ],
-        [
-          0,
-          3.3802569333292922
-        ],
-        [
-          0,
-          5.070385399994848
-        ],
-        [
-          0,
-          6.7605138666585844
-        ],
-        [
-          0,
-          9.295706566656008
-        ],
-        [
-          1.6901284666647598,
-          9.295706566656008
-        ],
-        [
-          1.6901284666647598,
-          10.140770799987877
-        ],
-        [
-          2.5351926999971397,
-          10.985835033321564
-        ],
-        [
-          3.3802569333294628,
-          11.830899266653432
-        ],
-        [
-          4.225321166661843,
-          11.830899266653432
-        ],
-        [
-          5.0703853999942226,
-          12.6759634999853
-        ],
-        [
-          5.9154496333266025,
-          13.521027733318988
-        ],
-        [
-          7.605578099991362,
-          13.521027733318988
-        ],
-        [
-          9.295706566656122,
-          14.366091966650856
-        ],
-        [
-          10.985835033320882,
-          15.211156199982725
-        ],
-        [
-          11.830899266653262,
-          16.056220433314593
-        ],
-        [
-          13.521027733318022,
-          16.90128466664828
-        ],
-        [
-          15.211156199982725,
-          16.90128466664828
-        ],
-        [
-          16.056220433315104,
-          17.74634889998015
-        ],
-        [
-          17.746348899979864,
-          17.74634889998015
-        ],
-        [
-          19.436477366644624,
-          17.74634889998015
-        ],
-        [
-          21.126605833309384,
-          17.74634889998015
-        ],
-        [
-          23.661798533306523,
-          17.74634889998015
-        ],
-        [
-          25.351926999971283,
-          17.74634889998015
-        ],
-        [
-          27.887119699968366,
-          17.74634889998015
-        ],
-        [
-          30.422312399965506,
-          18.591413133312017
-        ],
-        [
-          35.492697799959785,
-          19.436477366645704
-        ],
-        [
-          39.71801896662163,
-          19.436477366645704
-        ],
-        [
-          43.09827589995115,
-          19.436477366645704
-        ],
-        [
-          45.63346859994829,
-          19.436477366645704
-        ],
-        [
-          48.16866129994537,
-          19.436477366645704
-        ],
-        [
-          50.70385399994251,
-          19.436477366645704
-        ],
-        [
-          54.08411093327203,
-          19.436477366645704
-        ],
-        [
-          56.61930363326917,
-          19.436477366645704
-        ],
-        [
-          59.15449633326631,
-          19.436477366645704
-        ],
-        [
-          61.68968903326339,
-          19.436477366645704
-        ],
-        [
-          64.22488173326053,
-          19.436477366645704
-        ],
-        [
-          67.60513866659005,
-          19.436477366645704
-        ],
-        [
-          70.14033136658719,
-          19.436477366645704
-        ],
-        [
-          75.21071676658141,
-          19.436477366645704
-        ],
-        [
-          78.59097369991093,
-          19.436477366645704
-        ],
-        [
-          81.97123063324045,
-          19.436477366645704
-        ],
-        [
-          84.50642333323754,
-          19.436477366645704
-        ],
-        [
-          87.88668026656705,
-          19.436477366645704
-        ],
-        [
-          92.11200143322895,
-          19.436477366645704
-        ],
-        [
-          95.49225836655842,
-          19.436477366645704
-        ],
-        [
-          98.02745106655556,
-          19.436477366645704
-        ],
-        [
-          101.40770799988508,
-          19.436477366645704
-        ],
-        [
-          104.7879649332146,
-          19.436477366645704
-        ],
-        [
-          107.32315763321168,
-          19.436477366645704
-        ],
-        [
-          110.7034145665412,
-          19.436477366645704
-        ],
-        [
-          113.23860726653834,
-          19.436477366645704
-        ],
-        [
-          117.46392843320018,
-          19.436477366645704
-        ],
-        [
-          120.8441853665297,
-          19.436477366645704
-        ],
-        [
-          124.22444229985922,
-          19.436477366645704
-        ],
-        [
-          128.44976346652106,
-          19.436477366645704
-        ],
-        [
-          132.67508463318296,
-          19.436477366645704
-        ],
-        [
-          136.90040579984486,
-          19.436477366645704
-        ],
-        [
-          141.1257269665067,
-          19.436477366645704
-        ],
-        [
-          144.50598389983622,
-          19.436477366645704
-        ],
-        [
-          147.88624083316574,
-          19.436477366645704
-        ],
-        [
-          152.1115619998276,
-          19.436477366645704
-        ],
-        [
-          155.4918189331571,
-          19.436477366645704
-        ],
-        [
-          158.87207586648663,
-          19.436477366645704
-        ],
-        [
-          164.78752549981323,
-          19.436477366645704
-        ],
-        [
-          169.01284666647513,
-          19.436477366645704
-        ],
-        [
-          173.23816783313697,
-          19.436477366645704
-        ],
-        [
-          176.6184247664665,
-          19.436477366645704
-        ],
-        [
-          179.998681699796,
-          19.436477366645704
-        ],
-        [
-          183.37893863312553,
-          19.436477366645704
-        ],
-        [
-          186.759195566455,
-          20.281541599977572
-        ],
-        [
-          190.9845167331169,
-          21.12660583330944
-        ],
-        [
-          194.3647736664464,
-          21.12660583330944
-        ],
-        [
-          198.59009483310825,
-          21.12660583330944
-        ],
-        [
-          201.97035176643783,
-          21.12660583330944
-        ],
-        [
-          204.5055444664349,
-          21.12660583330944
-        ],
-        [
-          208.73086563309676,
-          21.12660583330944
-        ],
-        [
-          211.26605833309395,
-          21.12660583330944
-        ],
-        [
-          214.64631526642347,
-          21.12660583330944
-        ],
-        [
-          218.026572199753,
-          21.12660583330944
-        ],
-        [
-          221.4068291330825,
-          21.12660583330944
-        ],
-        [
-          223.9420218330796,
-          21.12660583330944
-        ],
-        [
-          227.3222787664091,
-          21.12660583330944
-        ],
-        [
-          229.8574714664062,
-          21.97167006664131
-        ],
-        [
-          232.3926641664034,
-          21.97167006664131
-        ],
-        [
-          234.92785686640048,
-          22.816734299974996
-        ],
-        [
-          237.46304956639756,
-          22.816734299974996
-        ],
-        [
-          239.99824226639475,
-          23.661798533306865
-        ],
-        [
-          242.53343496639184,
-          24.506862766638733
-        ],
-        [
-          244.2235634330566,
-          25.35192699997242
-        ],
-        [
-          245.91369189972136,
-          27.042055466636157
-        ],
-        [
-          248.44888459971844,
-          27.887119699968025
-        ],
-        [
-          250.1390130663832,
-          28.732183933301712
-        ],
-        [
-          251.82914153304796,
-          29.57724816663358
-        ],
-        [
-          252.6742057663804,
-          30.42231239996545
-        ],
-        [
-          254.36433423304516,
-          31.267376633297317
-        ],
-        [
-          255.20939846637748,
-          32.112440866631005
-        ],
-        [
-          256.0544626997099,
-          32.95750509996287
-        ],
-        [
-          256.89952693304224,
-          33.80256933329474
-        ],
-        [
-          257.7445911663747,
-          34.64763356662843
-        ],
-        [
-          258.589655399707,
-          36.337762033292165
-        ],
-        [
-          259.4347196330393,
-          38.02789049995772
-        ],
-        [
-          260.27978386637176,
-          38.87295473328959
-        ],
-        [
-          261.1248480997041,
-          39.71801896662146
-        ],
-        [
-          261.1248480997041,
-          41.40814743328701
-        ],
-        [
-          261.9699123330365,
-          42.25321166661888
-        ],
-        [
-          263.6600407997013,
-          43.94334013328444
-        ],
-        [
-          264.5051050330336,
-          44.788404366616305
-        ],
-        [
-          264.5051050330336,
-          46.47853283328004
-        ],
-        [
-          265.35016926636604,
-          47.32359706661373
-        ],
-        [
-          265.35016926636604,
-          48.1686612999456
-        ],
-        [
-          267.0402977330308,
-          48.1686612999456
-        ],
-        [
-          267.0402977330308,
-          49.013725533277466
-        ],
-        [
-          267.8853619663631,
-          47.32359706661373
-        ],
-        [
-          267.8853619663631,
-          45.63346859994817
-        ],
-        [
-          268.73042619969556,
-          43.09827589995075
-        ],
-        [
-          270.4205546663602,
-          41.40814743328701
-        ],
-        [
-          271.26561889969264,
-          39.71801896662146
-        ],
-        [
-          271.26561889969264,
-          38.02789049995772
-        ],
-        [
-          272.11068313302496,
-          36.337762033292165
-        ],
-        [
-          272.9557473663574,
-          35.4926977999603
-        ],
-        [
-          273.8008115996897,
-          34.64763356662843
-        ],
-        [
-          275.4909400663545,
-          34.64763356662843
-        ],
-        [
-          276.3360042996869,
-          33.80256933329474
-        ],
-        [
-          277.18106853301924,
-          32.95750509996287
-        ],
-        [
-          278.0261327663517,
-          32.112440866631005
-        ],
-        [
-          279.71626123301644,
-          30.42231239996545
-        ],
-        [
-          281.4063896996811,
-          30.42231239996545
-        ],
-        [
-          282.2514539330135,
-          28.732183933301712
-        ],
-        [
-          283.9415823996783,
-          27.887119699968025
-        ],
-        [
-          285.63171086634304,
-          27.042055466636157
-        ],
-        [
-          287.3218393330078,
-          26.19699123330429
-        ],
-        [
-          289.01196779967256,
-          26.19699123330429
-        ],
-        [
-          290.7020962663373,
-          26.19699123330429
-        ],
-        [
-          292.39222473300197,
-          26.19699123330429
-        ],
-        [
-          293.2372889663344,
-          26.19699123330429
-        ],
-        [
-          294.92741743299916,
-          26.19699123330429
-        ],
-        [
-          295.7724816663315,
-          26.19699123330429
-        ],
-        [
-          297.46261013299625,
-          26.19699123330429
-        ],
-        [
-          299.152738599661,
-          26.19699123330429
-        ],
-        [
-          300.84286706632577,
-          26.19699123330429
-        ],
-        [
-          303.37805976632296,
-          26.19699123330429
-        ],
-        [
-          305.0681882329876,
-          26.19699123330429
-        ],
-        [
-          306.75831669965237,
-          26.19699123330429
-        ],
-        [
-          308.44844516631713,
-          26.19699123330429
-        ],
-        [
-          310.1385736329819,
-          26.19699123330429
-        ],
-        [
-          311.82870209964665,
-          26.19699123330429
-        ],
-        [
-          315.20895903297617,
-          26.19699123330429
-        ],
-        [
-          316.8990874996409,
-          26.19699123330429
-        ],
-        [
-          319.434280199638,
-          26.19699123330429
-        ],
-        [
-          321.9694728996352,
-          25.35192699997242
-        ],
-        [
-          324.5046655996323,
-          25.35192699997242
-        ],
-        [
-          326.19479406629705,
-          24.506862766638733
-        ],
-        [
-          329.57505099962657,
-          24.506862766638733
-        ],
-        [
-          331.26517946629133,
-          24.506862766638733
-        ],
-        [
-          332.9553079329561,
-          24.506862766638733
-        ],
-        [
-          334.64543639962085,
-          23.661798533306865
-        ],
-        [
-          336.3355648662856,
-          22.816734299974996
-        ],
-        [
-          338.02569333295025,
-          22.816734299974996
-        ],
-        [
-          340.56088603294745,
-          22.816734299974996
-        ],
-        [
-          342.2510144996122,
-          22.816734299974996
-        ],
-        [
-          344.7862071996093,
-          22.816734299974996
-        ],
-        [
-          347.3213998996065,
-          21.97167006664131
-        ],
-        [
-          349.01152836627125,
-          21.97167006664131
-        ],
-        [
-          351.54672106626833,
-          21.97167006664131
-        ],
-        [
-          354.0819137662654,
-          21.97167006664131
-        ],
-        [
-          356.6171064662626,
-          21.97167006664131
-        ],
-        [
-          359.1522991662597,
-          21.97167006664131
-        ],
-        [
-          360.84242763292445,
-          21.97167006664131
-        ],
-        [
-          362.5325560995892,
-          21.12660583330944
-        ],
-        [
-          364.222684566254,
-          21.12660583330944
-        ],
-        [
-          365.91281303291873,
-          21.12660583330944
-        ],
-        [
-          367.6029414995835,
-          21.12660583330944
-        ],
-        [
-          370.1381341995806,
-          21.12660583330944
-        ],
-        [
-          371.82826266624534,
-          21.12660583330944
-        ],
-        [
-          374.3634553662424,
-          21.12660583330944
-        ],
-        [
-          376.0535838329072,
-          21.12660583330944
-        ],
-        [
-          377.74371229957194,
-          21.12660583330944
-        ],
-        [
-          381.12396923290146,
-          21.12660583330944
-        ],
-        [
-          384.504226166231,
-          21.12660583330944
-        ],
-        [
-          387.8844830995605,
-          21.12660583330944
-        ],
-        [
-          390.4196757995576,
-          21.12660583330944
-        ],
-        [
-          392.9548684995548,
-          21.12660583330944
-        ],
-        [
-          395.49006119955186,
-          21.12660583330944
-        ],
-        [
-          398.02525389954894,
-          21.12660583330944
-        ],
-        [
-          400.56044659954614,
-          21.12660583330944
-        ],
-        [
-          403.0956392995432,
-          21.12660583330944
-        ],
-        [
-          404.785767766208,
-          21.12660583330944
-        ],
-        [
-          406.47589623287274,
-          21.12660583330944
-        ],
-        [
-          408.1660246995375,
-          20.281541599977572
-        ],
-        [
-          409.85615316620226,
-          20.281541599977572
-        ],
-        [
-          412.39134586619934,
-          20.281541599977572
-        ],
-        [
-          414.0814743328641,
-          20.281541599977572
-        ],
-        [
-          415.77160279952886,
-          20.281541599977572
-        ],
-        [
-          416.6166670328613,
-          19.436477366645704
-        ],
-        [
-          418.30679549952595,
-          18.591413133312017
-        ],
-        [
-          419.9969239661907,
-          18.591413133312017
-        ],
-        [
-          421.68705243285547,
-          17.74634889998015
-        ],
-        [
-          423.3771808995202,
-          17.74634889998015
-        ],
-        [
-          424.22224513285266,
-          17.74634889998015
-        ],
-        [
-          425.067309366185,
-          17.74634889998015
-        ],
-        [
-          425.9123735995174,
-          16.90128466664828
-        ],
-        [
-          427.6025020661822,
-          16.056220433314593
-        ],
-        [
-          428.4475662995145,
-          16.056220433314593
-        ],
-        [
-          429.29263053284683,
-          15.211156199982725
-        ],
-        [
-          430.9827589995116,
-          14.366091966650856
-        ],
-        [
-          431.827823232844,
-          13.521027733318988
-        ],
-        [
-          432.67288746617635,
-          12.6759634999853
-        ],
-        [
-          433.5179516995088,
-          12.6759634999853
-        ],
-        [
-          435.20808016617354,
-          12.6759634999853
-        ],
-        [
-          435.20808016617354,
-          11.830899266653432
-        ],
-        [
-          436.05314439950587,
-          10.985835033321564
-        ],
-        [
-          436.05314439950587,
-          10.140770799987877
-        ],
-        [
-          436.8982086328383,
-          9.295706566656008
-        ],
-        [
-          437.7432728661706,
-          8.45064233332414
-        ],
-        [
-          438.58833709950306,
-          8.45064233332414
-        ],
-        [
-          439.4334013328354,
-          7.605578099992272
-        ],
-        [
-          440.2784655661677,
-          6.7605138666585844
-        ],
-        [
-          441.12352979950015,
-          5.915449633326716
-        ],
-        [
-          441.12352979950015,
-          4.2253211666629795
-        ],
-        [
-          441.96859403283247,
-          4.2253211666629795
-        ],
-        [
-          441.96859403283247,
-          3.3802569333292922
-        ],
-        [
-          441.96859403283247,
-          1.6901284666655556
-        ],
-        [
-          443.65872249949723,
-          1.6901284666655556
-        ],
-        [
-          443.65872249949723,
-          0.8450642333318683
-        ],
-        [
-          443.65872249949723,
-          0
-        ],
-        [
-          443.65872249949723,
-          -0.8450642333318683
-        ],
-        [
-          443.65872249949723,
-          -1.6901284666637366
-        ],
-        [
-          443.65872249949723,
-          -2.535192699997424
-        ],
-        [
-          443.65872249949723,
-          -3.3802569333292922
-        ],
-        [
-          443.65872249949723,
-          -4.2253211666611605
-        ],
-        [
-          443.65872249949723,
-          -5.070385399994848
-        ],
-        [
-          443.65872249949723,
-          -5.915449633326716
-        ],
-        [
-          444.50378673282967,
-          -6.7605138666585844
-        ],
-        [
-          444.50378673282967,
-          -7.605578099990453
-        ],
-        [
-          444.50378673282967,
-          -8.45064233332414
-        ],
-        [
-          444.50378673282967,
-          -9.295706566656008
-        ],
-        [
-          444.50378673282967,
-          -10.140770799987877
-        ],
-        [
-          443.65872249949723,
-          -10.140770799987877
-        ],
-        [
-          443.65872249949723,
-          -10.985835033321564
-        ],
-        [
-          442.8136582661649,
-          -10.985835033321564
-        ],
-        [
-          441.12352979950015,
-          -10.985835033321564
-        ],
-        [
-          441.12352979950015,
-          -10.985835033321564
-        ]
-      ],
-      "pressures": [],
-      "simulatePressure": true
     },
     {
       "id": "dMm82HfdCOYlcOsRo0pdH",
@@ -35975,7 +33476,7 @@
       "version": 269,
       "versionNonce": 1711896487,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -36897,43 +34398,6 @@
       "simulatePressure": true
     },
     {
-      "id": "hbTQGOfXGqPFD5PS5RTdT",
-      "type": "text",
-      "x": 427.6991540973119,
-      "y": 13893.4744545168,
-      "width": 14.399999618530273,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1971c2",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bIY",
-      "roundness": null,
-      "seed": 526972519,
-      "version": 6,
-      "versionNonce": 1932032585,
-      "isDeleted": true,
-      "boundElements": null,
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
       "id": "E71pYwX27WUW6rSV6Upif",
       "type": "freedraw",
       "x": 370.6562197638732,
@@ -36956,7 +34420,7 @@
       "version": 88,
       "versionNonce": 225045191,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -37096,7 +34560,7 @@
       "version": 72,
       "versionNonce": 1184123177,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -37172,7 +34636,7 @@
       "version": 123,
       "versionNonce": 1385101799,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -37452,7 +34916,7 @@
       "version": 200,
       "versionNonce": 493042697,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -38120,7 +35584,7 @@
       "version": 95,
       "versionNonce": 1250239751,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -38284,7 +35748,7 @@
       "version": 71,
       "versionNonce": 1737544425,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -38352,7 +35816,7 @@
       "version": 134,
       "versionNonce": 885582887,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -41149,72 +38613,6 @@
       "lineHeight": 1.25
     },
     {
-      "id": "SsPFrhtnrTtaMKkuUBFg1",
-      "type": "text",
-      "x": 2021.9044063455071,
-      "y": 13656.728581963112,
-      "width": 58.099998474121094,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bIu",
-      "roundness": null,
-      "seed": 1183901927,
-      "version": 183,
-      "versionNonce": 902863337,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "= 0",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "= 0",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "id": "8U0QyTFwZgU3rB2YJXyRp",
-      "type": "frame",
-      "x": 1291.6781509561763,
-      "y": 13579.533234964807,
-      "width": 809.5079631173152,
-      "height": 242.01784464332013,
-      "angle": 0,
-      "strokeColor": "#bbb",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 0,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "index": "bIv",
-      "roundness": null,
-      "seed": 1718694919,
-      "version": 219,
-      "versionNonce": 637032647,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772673678527,
-      "link": null,
-      "locked": false,
-      "name": "Sumatoria K - N - M"
-    },
-    {
       "id": "VfqaghPNuaZ4BN_m1hcjL",
       "type": "line",
       "x": 1018.5219655204244,
@@ -41239,7 +38637,7 @@
       "version": 128,
       "versionNonce": 1082987815,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -41282,7 +38680,7 @@
       "version": 55,
       "versionNonce": 710374601,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -41319,7 +38717,7 @@
       "version": 254,
       "versionNonce": 1620957255,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -42203,7 +39601,7 @@
       "version": 78,
       "versionNonce": 1660941225,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -42335,7 +39733,7 @@
       "version": 63,
       "versionNonce": 1139357543,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -42407,7 +39805,7 @@
       "version": 104,
       "versionNonce": 871732873,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -42643,7 +40041,7 @@
       "version": 186,
       "versionNonce": 1622913671,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -43255,7 +40653,7 @@
       "version": 86,
       "versionNonce": 1609817449,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -43423,7 +40821,7 @@
       "version": 62,
       "versionNonce": 802277799,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -43495,7 +40893,7 @@
       "version": 102,
       "versionNonce": 1179011145,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false,
@@ -43727,7 +41125,7 @@
       "version": 279,
       "versionNonce": 38022503,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674392660,
       "link": null,
       "locked": false,
@@ -43853,36 +41251,6 @@
       "lineHeight": 1.25
     },
     {
-      "id": "-CYkEFs1GBkv3W7FVftmc",
-      "type": "rectangle",
-      "x": 301.5331961802898,
-      "y": 14432.710912682194,
-      "width": 1236.2545121087992,
-      "height": 170.63174477013672,
-      "angle": 0,
-      "strokeColor": "#2f9e44",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bJA",
-      "roundness": {
-        "type": 3
-      },
-      "seed": 19171465,
-      "version": 42,
-      "versionNonce": 9877255,
-      "isDeleted": true,
-      "boundElements": null,
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false
-    },
-    {
       "id": "MRwRI42mauc0WCraUiM18",
       "type": "rectangle",
       "x": 200.36007692394185,
@@ -43907,7 +41275,7 @@
       "version": 108,
       "versionNonce": 43606249,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -43987,43 +41355,6 @@
       "lineHeight": 1.25
     },
     {
-      "id": "sKBhR5X4r-_fI5VP13IM3",
-      "type": "text",
-      "x": 405.3496781276782,
-      "y": 14853.553320359066,
-      "width": 729.933349609375,
-      "height": 45,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": "9GP-kpsjcEnjK0WBDBrEi",
-      "index": "bJE",
-      "roundness": null,
-      "seed": 1106513129,
-      "version": 229,
-      "versionNonce": 1973150023,
-      "isDeleted": true,
-      "boundElements": [],
-      "updated": 1772674177110,
-      "link": null,
-      "locked": false,
-      "text": "dim(U + W) = dim U + dim W - dim(U ∩ W) ",
-      "fontSize": 36,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "dim(U + W) = dim U + dim W - dim(U ∩ W) ",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
       "id": "5ZqewfmVeghzySUfYAQ-o",
       "type": "rectangle",
       "x": 362.0611413435688,
@@ -44048,7 +41379,7 @@
       "version": 117,
       "versionNonce": 730004137,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674177110,
       "link": null,
       "locked": false
@@ -44078,7 +41409,7 @@
       "version": 60,
       "versionNonce": 1195416009,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674248614,
       "link": null,
       "locked": false
@@ -44108,7 +41439,7 @@
       "version": 65,
       "versionNonce": 1982206921,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674395003,
       "link": null,
       "locked": false
@@ -44136,7 +41467,7 @@
       "version": 179,
       "versionNonce": 2140766345,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772674184374,
       "link": null,
       "locked": false,
