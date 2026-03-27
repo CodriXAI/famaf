@@ -1,0 +1,51 @@
+Network N = (V, E, c);
+
+// Algoritmo que soluciona el problema de la caja negra:
+
+maxFlowNetwork (Network N) ret: Flujo_Total {
+    // Recorrido de la Network:
+
+    for edge (u,v) en E del Network:
+
+        // Caso 1: LOOPS
+        if (u == v):
+            killLoops(u,v);  // Elimina Rebundancia en la Network;
+        
+        // Caso 2: Múltiples lados iguales:
+        if (existen más edges (u,v) en E):
+            collapse(u,v);   // Junta todos los lados y suma las capacidades
+
+        // Caso 3: Lados Antiparalelos:
+        if (existe (v,u) en E):
+            makeBridge(v,u);
+            // Creará un nodo aux en V 
+            // Elimina (v,u)
+            // Agrega (v, aux) y (aux, u) en E con la capacidad c(v,u)
+
+    // Pasarle la Network modificada a la caja negra:
+    networkClean = (V', E', c');
+    result_caja_negra = Caja_Negra(networkClean);
+
+    // Como interpretar estos resultados:
+    Flujo_Total = result_caja_negra.maxvalue
+
+    for (u,v) lado en E del Network:
+
+        Si (u,v) fue colapsado:
+            // El flujo se reparte en uno solo:
+            f_original(u,v) = flujo del lado colapsado en Network
+
+        Sino: Si (u,v) se transformó por makeBridge (antes era (v,u)):
+            // El flujo que pasó por el puente es el original
+            f_original(u,v) = result_caja_negra.flujo(u,Aux)
+        
+        Sino:
+            f_original(u,v) = Resultado_Caja_Negra.flujo(u, v)
+
+        ret Flujo_Total ^ f_original
+}
+
+
+Donde Flujo_Total es el calculado por caja negra y el f_original es la 
+interpretación (respuesta)
+
