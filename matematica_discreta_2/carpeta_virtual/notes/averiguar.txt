@@ -1,0 +1,16 @@
+Ford-Fulkerson
+Porque Termina (demostracion)
+Greedy en Flujos con caminos dirigidos (y caminos aumentantes que es ford-fulkerson)
+Interpretacion de Camino Aumentante y Camino Dirigido
+Prueba de que con el camino aumentante sigue siendo flujo
+Teorema de que flujo entero al aplicarle ford-fulkerson SIGUE siendo entero
+Teorema de la Integralidad (con demostracion)
+Definicion de Corte y como acota el flujo
+Definicion de S con union y que existe un camino aumentante y que SI s es corte entonces el valor de f es la capacidad del s (con demostracion)
+Averiguar la definicion de f(s, s barra)
+	Aparentemente el s barra son aquellos que no pertenecen a s
+Hacer los practicos intercalados (Practico 2 y 3 en simultaneo, todos)
+Consecuencia del lema del s union y camino aumentante que demuestra que Ford-Fulkerson es correcto
+Teorema MaxFlow MinCut (Demostracion)
+Edmond-Karp (el algoritmo termina con complejidad polinomial
+	EK = FF + BFS
