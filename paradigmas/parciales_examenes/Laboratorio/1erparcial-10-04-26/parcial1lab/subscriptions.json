@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Programming",
+    "url": "https://www.reddit.com/r/programming/.json?count=10&before=1set2gu",
+    "before": "1set2gu",
+    "count": 10
+  },
+  {
+    "name": "Scala",
+    "url": "https://www.reddit.com/r/scala/.json?count=10&before=1sf58v3",
+    "before": "1sf58v3",
+    "count": 10
+  },
+  {
+    "name": "Learn Python",
+    "url": "https://www.reddit.com/r/learnpython/.json?count=10&before=1set2gu"
+  },
+  {
+    "name": "Subreddit que no existe",
+    "url": "https://www.reddit.com/r/lalalalalalala/.json?count=10&before=1sf58v3",
+    "before": "1sf58v3",
+    "count": 10
+  }
+]
