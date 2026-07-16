@@ -129,4 +129,101 @@ $O(n²) + O(n)$ x [$O(n²)$ + ($O(n²)$ x $O(n)$)]
 
 $O(n²) + O(n³)$ + $O(n⁴)$ ~ $O(n⁴)$
 
-**(Me falta ver la estrategia para O(n³) pero eso la dejo para otro día)**
+## Complejidad O(n³) - Costo Cambio de Matriz ~ O(n²) (O(CM) = O(n)) (versión optimizada)
+
+>El objetivo que tiene esta "optimización" es poder bajar el costo de cada $CM$ (Cambio de Matriz) de **$O(n²)$ a $O(n)$**
+
+**Justificación:**
+Ya vimos que inicialmente tenemos que:
+
+$O(n²) + O(n)$ x [$O(n²)$ + ($CM$ x $T$)] 
+
+= $O(n²) + O(n)$ x $O(n²)$ + $O(n)$ x ($O(CM)$ x $O(T)$)
+
+= $O(n²) + O(n³)$ + $O(n)$ x ($O(CM)$ x $O(n)$)
+
+= $O(n³)$ + $O(n²)$ x $O(CM)$
+
+Luego, para que toda la complejidad de Húngaro sea O(n³), obligatoriamente necesitamos que:
+
+$O(CM)$ = $O(n)$
+
+### Logrando que O(CM) tenga costo lineal
+---
+
+Recordemos que para hacer un CM necesitamos hacer dos cosas:
+
+1. Calcular $m$
+
+2. Restar/Sumar $m$ en $S$ y $Γ(S)$ respectivamente
+
+#### ¿Cómo calcular m en O(n)?
+Sabiendo que **m = min{Cx,v | x $\in$ S, v $\in$ $\overline{\Gamma(S)}$}** 
+
+Deberemos usar el truco de que **mínimo de minimos ES MÍNIMO**
+
+Definiremos un array **mS[v] = min{Cx,v | x $\in$ S}** donde **mS[v]** nos indica el **mínimo de elementos de la columna v que están en filas de S**
+
+Entonces redefiniendo m como:
+
+**m = min{min({Cx,v | x $\in$ S}) | v $\in$ $\overline{\Gamma(S)}$}**
+
+y usando la definición de **mS[v]** nos queda que:
+
+**m = min{mS[v] | v $\in$ $\overline{\Gamma(S)}$}**
+
+De esta forma (asumiendo que conocemos los mS[v]) podemos calcular m en $O(n)$ pero, ¿Qué ocurre con el cálculo de mS[v]? Sigue siendo **$O(n²)$**
+
+#### Calculando mS eficientemente
+La idea no es sumar más complejidad al Algoritmo, por lo que el "Truco" aquí será aprovechar otra instancia del Algoritmo cuya complejidad ya conocemos que es $O(n²)$ y allí sumar el cálculo del **mS**
+
+Esta instancia no es otra que la de fijarse en **vecinos de las filas agregada a S**, al momento de buscar vecinos para intentar extender el matching, recorremos las filas en busca de 0s, por cada fila recorrer sus elementos cuesta $O(n)$ como podríamos llegar a tener $n$ filas en este proceso, entonces el proceso general cuesta $O(n²)$, además si el elemento que estamos viendo no es 0, estaríamos "perdiendo tiempo", el cuál podemos aprovechar para ir calculando o actualizando el **mS**
+
+Seguimos entonces, en dicha instancia estos pasos:
+
+* Inicializar **mS** con elementos muy grandes
+
+* Por cada fila x $\in$ S revisamos:
+    * Debemos ver si $Cx,v$ es 0 para encontrar vecinos
+    * En simultáneo comparamos $Cx,v$ con $mS[v]$
+    * if $Cx,v < mS[v]$, entonces actualizamos mS[v]
+    * Esta actualización es $O(1)$ y nos mantiene siempre con el mínimo elemento
+
+* Habremos aprovechado en una sola instancia $O(n²)$ buscar **vecinos de las filas agregadas a S** y **actualizar/calcular mS**, dejando el cálculo de m en $O(n)$
+
+**Observación:** 
+
+Gracias al **mS[v]** podemos saber instantáneamente cuales v $\in$ $\Gamma(S)$ y cuáles v $\in$ $\overline{\Gamma(S)}$, como los $\Gamma(S)$ son **VECINOS** de $S$, es decir, las columnas que tienen un 0 en alguna fila de $S$, entonces podemos decir directamente que:
+
+**v $\in$ $\overline{\Gamma(S)}$ si y solo si mS[v] $\ne$ 0**, luego:
+
+**m = min{mS[v] | v $\in$ $\overline{\Gamma(S)}$}** 
+
+= **m = min{mS[v] | mS[v] $\ne$ 0}**
+
+#### ¿Cómo restar/sumar m en O(n)?
+El secreto está en dejar de restar/sumar m por elemento y empezar a hacerlo por **fila/columna en abstracto**, ¿Cómo? mediante arrays nuevamente.
+
+Sea RF[x] array que indica cuánto hay que restarle a la fila x y SC[v] array que indica cuánto hay que sumarle a la columna v, en vez de cambiar todos los elementos, simplemente actualizaremos los arrays, lo que cuesta $O(n)$
+
+**Aun así y con los arrays actualizados, ¿Y para hacer el cálculo?**
+Si la matriz no se actualiza, no aparecen 0s, entonces no podemos buscar extender el matching.
+
+Para ello, haremos lo siguiente:
+
+* En vez de buscar 0s de la forma: **C[x][v] == 0**
+* Buscaremos **C[x][v] - RF[x] + SC[v] == 0**
+
+En general lo que hacemos es:
+* Calcular **temp = C[x][v] - RF[X] + SC[v]**
+* Y luego usar dicho temp para comparar y actualizar el mS[v]
+
+Con estos trucos, logramos obtener un CM en $O(n)$, luego:
+
+= $O(n³)$ + $O(n²)$ x $O(CM)$
+
+= $O(n³)$ + $O(n²)$ x $O(n)$
+
+= $O(n³)$ + $O(n³)$ = $O(n³)$
+
+# Q.E.D (Quod Erat Desmontradum)
