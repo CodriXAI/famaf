@@ -48,8 +48,8 @@ prueba de la complejidad del Algoritmo, por lo tanto esta base estructural vendr
         * Por ende el subtotal queda como $O(n * m)$
     
     * **Recorrido de vértices con PODAR**
-        * Sea PV la fase de hacer un **PODAR**, chequea si el vértice tiene **lados salientes**
-        * Cada ejecución de PV recorre los n niveles, osea cuesta $O(n)$
+        * Sea PV la fase de hacer un **PODAR**, chequea si los vértices del camino tienen **lados salientes**
+        * Cada ejecución de PV recorre los n niveles (n, n-1, ..., 0), osea cuesta $O(n)
         * Se ejecuta un PV por camino encontrado (y uno inicial), como hay m caminos ~ $O(m)$
         * Por ende el subtotal queda también como $O(n * m)$
 
