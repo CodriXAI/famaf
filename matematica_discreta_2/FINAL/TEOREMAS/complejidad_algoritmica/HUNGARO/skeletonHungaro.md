@@ -50,7 +50,7 @@ puntos a los cuáles queremos llegar.
 Revisar las columnas, si uno construye bien la estructura de datos, será $O(1)$ pues al revisar la columna sólo queremos ver si esta “libre ”o no, y si no está libre, cuál es la fila matcheada con
 esa columna, pero obviamente esto lo podemos tener guardado de forma tal que revisarlo sea $O(1)$
 
-Cada vez que etiquetamos a un vértice (lo cuál se puede hacer una sola vez por etapa) se deben revisar sus $n$ vecinos en busca de 0s que puedan extender el matching, luego como existen $n$ vértices entonces la complejidad total que obtenemos es de **$n$ x $O(n)$ ~ $O(n²)$** (Donde $O(n)$ proviene de revisar las filas en búsqueda de lados para extender el matching).
+Cada vez que etiquetamos a una fila (lo cuál se puede hacer una sola vez por etapa) se deben revisar sus $n$ vecinos (columnas) en busca de 0s que puedan extender el matching, luego como existen $n$ filas entonces la complejidad total que obtenemos es de **$n$ x $O(n)$ ~ $O(n²)$** (Donde $O(n)$ proviene de revisar las columnas en búsqueda de lados para extender el matching).
 
 **Observación**: Si dependiera solo exclusivamente de estos pasos, la complejidad nos quedaría como:
 
