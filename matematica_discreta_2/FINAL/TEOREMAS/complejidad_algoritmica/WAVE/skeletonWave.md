@@ -42,15 +42,17 @@ sin tener que probarlo nosotros mismos, y eso haremos.
 
 * **Subparte S:** Serán los **Lados que se Saturan en un $FB(x)$ -> Ola hacia adelante**
 
-* **Subparte P:** Serán los **Lados que Permanecen en un $FB(x)$ -> Ola hacia adelante**
+* **Subparte FP (P):** Serán los **Lados que Permanecen en un $FB(x)$ -> Ola hacia adelante**
 
 * **Subparte V:** Serán los **Lados que se Vacían en un $BB(x)$ -> Ola hacia atrás**
 
-* **Subparte Q:** Serán los **Lados que se Quedan con flujo en un $BB(x)$ -> Ola hacia atrás**
+* **Subparte BP (Q):** Serán los **Lados que se Quedan con flujo en un $BB(x)$ -> Ola hacia atrás**
+
+>**OBS:** Puse FP = P | BP = Q, puesto que, al parecer Penazzi utiliza FP y BP para identificar las partes
 
 Averiguando la complejidad de cada Subparte obtendremos el **costo del Flujo Bloqueante**, entonces:
 
-**$S + P + V + Q$ ~ $O(n²)$**
+**$S + FP + V + BP$ ~ $O(n²)$**
 
 ### Paso 2 - Calculando las complejidades de las Subpartes:
 ---
@@ -64,7 +66,7 @@ Averiguando la complejidad de cada Subparte obtendremos el **costo del Flujo Blo
 
 **Resultado:** $S \le m \implies O(m)$ y $V \le m \implies O(m)$.
 
-### Subparte P (Permanece - NO se satura) ~ O(n²):
+### Subparte FP (Permanece - NO se satura) ~ O(n²):
 * Si un lado al pasar por $FB(x)$ NO se satura es porque el flujo remanente en $x$ se acabó ($D(x) = 0$), lo que hace **detener inmediatamente** el $FB(x) \implies$ existe **A LO SUMO 1 LADO TIPO P** en cada llamada a $FB(x)$.
 
 * En cada **ola hacia adelante**, los vértices internos se procesan **A LO SUMO UNA VEZ**, por lo que hay un máximo de $n-2$ llamadas a FB. (Se descartan **el source y sink**).
@@ -76,7 +78,7 @@ Averiguando la complejidad de cada Subparte obtendremos el **costo del Flujo Blo
 
     * Es decir **$O(n)$ x $O(n)$ ~ $O(n²)$**
 
-### Subparte Q (Queda Flujo - NO se vacía) ~ O(n²):
+### Subparte BP (Queda Flujo - NO se vacía) ~ O(n²):
 * Exactamente 'dual' a P, si un lado al pasar por $BB(x)$ NO se vacía es porque **x al hacer $BB(x)$ "se saldó la deuda", es decir, hubo un nodo en $M(x)$ que le vació el flujo de más a x**
 
 * Por dualidad de P, hay un máximo de $n-2$ llamadas a BB y hay **$n$ olas**, pues por cada Ola hacia adelante existe una Ola hacia atrás **(SALVO LA ÚLTIMA)**.
