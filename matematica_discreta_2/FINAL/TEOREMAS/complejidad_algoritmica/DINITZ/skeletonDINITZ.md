@@ -104,7 +104,7 @@ y borra el lado que generó dicho conflicto.
 
     * Como cada NA tiene a lo sumo $n$ niveles, entonces hay $O(n)$ As por secuencia:
          * **Coste 1ra secuencia: $O(n) * O(1) + O(1) = O(n)$**
-         * **Coste 2da secuencia: $O(n) * O(1) + O(1) = O(n)$**
+         * **Coste 2da secuencia: $O(n) * O(1) + O(n) = O(n)$**
     
 * **Cantidad de Secuencias:**
     * Cada operación **R** elimina exactamente un lado del NA
