@@ -27,6 +27,13 @@ A continuación, una lista de las materias que están incluidas en este reposito
  ### Tercer Año
 - **Paradigmas de Programación**
 - **Matemática Discreta II**
+- **Ingeniería del Software I**
+- **Bases de Datos**
+ 
+ ### Optativas/Extras
+Ubicadas en el directorio **OPTATIVAS_TALLERES**
+- **Inteligencia Artificial**
+- **Computación Cuántica**
 
 > 💡 Los apuntes pueden estar en formato PDF, PNG, JPG, según la materia.
 
