@@ -1,23 +1,45 @@
+# ==========================================
+# 1. REGLAS GLOBALES (Bloqueo de pesados)
+# ==========================================
+# Archivos multimedia y documentos grandes
+*.pdf
+*.mp4
+*.zip
+*.img
+*.jar
+*.exe
+
+# Carpetas de compilación e IDEs (Scala, C, Rust, Python, etc.)
+target/
+**/target/
+build/
+bin/
 .bsp/
 .metals/
 .scala-build/
 .vscode/
+.venv/
+__pycache__/
+
+# ==========================================
+# 2. CARPETAS Y TRAMITES PERSONALES
+# ==========================================
 tramites/
 becas/
+
+# ==========================================
+# 3. MATERIAS Y RECURSOS ESPECÍFICOS
+# ==========================================
+# Sistemas Operativos
 sistemas_operativos/lab/lab1/so25lab1g15/
-sistemas_operativos/notes/tp/ostep-code/
-sistemas_operativos/tp/ostep-code/
 sistemas_operativos/lab/lab2/so25lab2g15/
 sistemas_operativos/lab/lab2/so25lab2g15_juli/
+sistemas_operativos/lab/lab2/so25lab2g15_fix_last/
 sistemas_operativos/lab/lab3/so25lab3g15/
 sistemas_operativos/lab/so25lab3g15_with_all_branches/
-sistemas_operativos/lab/lab2/so25lab2g15_fix_last/
-matematica_discreta_2/practicos/verano_2026/discreta_2_sol.pdf
-matematica_discreta_2/Filminas/
+sistemas_operativos/notes/tp/ostep-code/
+sistemas_operativos/tp/ostep-code/
+
+# Paradigmas de Programación
 paradigmas/labs_exp/lab1/kickstart/
 paradigmas/verano_2026/labs_exp/lab1/paradigmas-lab-1/
-paradigmas/laboratorio/lab1/
-paradigmas/laboratorio/lab2/
-paradigmas/laboratorio/lab3/
-compu_cuantica/algoritmo_estado_bell/.venv/
-compu_cuantica/Recursos/
