@@ -5,3 +5,5 @@
 
 ### Listado de Terminologías Relevantes:
 >Las que NO son mencionadas por filminas o libros pero SI por la profe en clase.
+
+En las expresiones regulares al momento de detallar en los DFD, los * en los corchetes indican que puede o no ocurrir la expresión, mientras que los + en los corchetes indican que al menos debe ocurrir una sola vez
